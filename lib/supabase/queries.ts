@@ -68,6 +68,22 @@ export async function getProjectById(id: string) {
   return data;
 }
 
+export async function getProjectByToken(token: string) {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase
+    .from('projects')
+    .select('*')
+    .eq('feedback_token', token)
+    .single();
+
+  if (error) {
+    return null; // Token invalid or project not found
+  }
+
+  return data;
+}
+
 export async function createProject(project: {
   name: string;
   client_name: string;
@@ -220,6 +236,34 @@ export async function getFeedbacksByProjectId(projectId: string) {
   }
 
   return data || [];
+}
+
+export async function createFeedback(feedback: {
+  project_id: string;
+  client_name: string;
+  client_email?: string;
+  nps_score: number;
+  comment?: string;
+}) {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase
+    .from('feedbacks')
+    .insert(feedback)
+    .select()
+    .single();
+
+  if (error) {
+    throw new Error(`Failed to create feedback: ${error.message}`);
+  }
+
+  // Update project feedback_status to 'received'
+  await supabase
+    .from('projects')
+    .update({ feedback_status: 'received' })
+    .eq('id', feedback.project_id);
+
+  return data;
 }
 
 // ============================================

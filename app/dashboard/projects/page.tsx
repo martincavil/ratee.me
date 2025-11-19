@@ -14,6 +14,7 @@ export default function ProjectsPage() {
   const [isNewModalOpen, setIsNewModalOpen] = useState(false);
   const [editingProject, setEditingProject] = useState<Project | null>(null);
   const [deletingProject, setDeletingProject] = useState<Project | null>(null);
+  const [sendingFeedback, setSendingFeedback] = useState<string | null>(null);
 
   useEffect(() => {
     fetchProjects();
@@ -44,6 +45,31 @@ export default function ProjectsPage() {
     setEditingProject(null);
     setDeletingProject(null);
     fetchProjects();
+  };
+
+  const handleSendFeedback = async (projectId: string) => {
+    if (!confirm('Send feedback request to client?')) return;
+
+    setSendingFeedback(projectId);
+
+    try {
+      const response = await fetch(`/api/projects/${projectId}/send-feedback`, {
+        method: 'POST',
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        alert('Feedback request sent successfully!');
+        fetchProjects(); // Refresh to update status
+      } else {
+        alert(data.error || 'Failed to send feedback request');
+      }
+    } catch (error) {
+      alert('An unexpected error occurred');
+    } finally {
+      setSendingFeedback(null);
+    }
   };
 
   return (
@@ -192,6 +218,15 @@ export default function ProjectsPage() {
                     </span>
                   </td>
                   <td className="px-6 py-4 text-right text-sm space-x-2">
+                    {project.feedback_status === 'not_sent' && project.client_email && (
+                      <button
+                        onClick={() => handleSendFeedback(project.id)}
+                        disabled={sendingFeedback === project.id}
+                        className="text-green-600 hover:text-green-800 font-medium disabled:opacity-50"
+                      >
+                        {sendingFeedback === project.id ? 'Sending...' : 'Send Feedback'}
+                      </button>
+                    )}
                     <button
                       onClick={() => setEditingProject(project)}
                       className="text-primary hover:text-primary/80 font-medium"
