@@ -96,14 +96,14 @@ export function WaitlistForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder={t.placeholder}
-            className="flex-1 px-4 py-3 rounded-lg border border-border focus:border-accent focus:ring-2 focus:ring-accent-light outline-none transition-all text-text-primary bg-white font-inter"
+            className="flex-1 px-4 py-3 rounded-lg border border-border focus:border-accent focus:ring-2 focus:ring-accent-light outline-none transition-all text-content-primary bg-white font-inter"
             disabled={status === 'loading'}
             required
           />
           <button
             type="submit"
             disabled={status === 'loading'}
-            className="px-6 py-3 bg-accent text-white rounded-lg font-inter font-semibold hover:bg-accent-dark transition-all hover:scale-105 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 whitespace-nowrap"
+            className="px-6 py-3 bg-[#10B981] text-white rounded-lg font-inter font-semibold hover:bg-[#047857] transition-all hover:scale-105 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 whitespace-nowrap"
           >
             {status === 'loading' ? t.loading : t.button}
           </button>

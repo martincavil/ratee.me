@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useLanguage } from '@/lib/i18n';
+import { useLanguage } from "@/lib/i18n";
 
 export function Problem() {
   const { text, lang } = useLanguage();
@@ -37,7 +37,10 @@ export function Problem() {
 
             <div className="space-y-4">
               {text.problem.description.map((paragraph, index) => (
-                <p key={index} className="text-lg text-gray-600 leading-relaxed">
+                <p
+                  key={index}
+                  className="text-lg text-gray-600 leading-relaxed"
+                >
                   {paragraph}
                 </p>
               ))}
@@ -45,7 +48,7 @@ export function Problem() {
 
             <div className="pt-6 border-t border-gray-200">
               <p className="text-gray-500 italic">
-                {lang === 'fr'
+                {lang === "fr"
                   ? "Son familier? C'est exactement pour ça qu'on a créé ratee.me."
                   : "Sound familiar? That's exactly why we built ratee.me."}
               </p>

@@ -38,7 +38,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" className={`${sora.variable} ${inter.variable}`}>
-      <body className="font-inter bg-bg-primary text-text-primary antialiased">
+      <body className="font-inter bg-bg-primary text-content-primary antialiased">
         {children}
       </body>
     </html>

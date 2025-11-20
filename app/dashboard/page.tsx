@@ -89,10 +89,10 @@ export default async function DashboardPage() {
 
       {/* Welcome Header */}
       <div className="mb-8">
-        <h1 className="font-sora text-3xl font-bold text-text-primary">
+        <h1 className="font-sora text-3xl font-bold text-content-primary">
           Welcome back, {profile?.name}! 👋
         </h1>
-        <p className="font-inter text-text-secondary mt-2">
+        <p className="font-inter text-content-secondary mt-2">
           Here's what's happening with your client feedback
         </p>
       </div>

@@ -63,10 +63,10 @@ export default function PricingPage() {
           <Link href="/" className="font-sora text-2xl font-bold text-accent mb-8 inline-block">
             ratee.me
           </Link>
-          <h1 className="font-sora text-4xl font-bold text-text-primary mb-4">
+          <h1 className="font-sora text-4xl font-bold text-content-primary mb-4">
             Des prix transparents
           </h1>
-          <p className="font-inter text-xl text-text-secondary">
+          <p className="font-inter text-xl text-content-secondary">
             Choisissez le plan qui correspond a vos besoins
           </p>
         </div>
@@ -91,19 +91,19 @@ export default function PricingPage() {
 
               {/* Plan Info */}
               <div className="text-center mb-6">
-                <h2 className="font-inter text-lg font-semibold text-text-tertiary mb-1">
+                <h2 className="font-inter text-lg font-semibold text-content-tertiary mb-1">
                   {plan.heading}
                 </h2>
-                <h3 className="font-sora text-2xl font-bold text-text-primary mb-2">
+                <h3 className="font-sora text-2xl font-bold text-content-primary mb-2">
                   {plan.name}
                 </h3>
-                <p className="font-inter text-text-secondary text-sm">{plan.description}</p>
+                <p className="font-inter text-content-secondary text-sm">{plan.description}</p>
               </div>
 
               {/* Price */}
               <div className="text-center mb-6">
-                <span className="font-sora text-5xl font-bold text-text-primary">€{plan.price}</span>
-                <span className="font-inter text-text-tertiary ml-1">{plan.period}</span>
+                <span className="font-sora text-5xl font-bold text-content-primary">€{plan.price}</span>
+                <span className="font-inter text-content-tertiary ml-1">{plan.period}</span>
               </div>
 
               {/* Features */}
@@ -142,8 +142,8 @@ export default function PricingPage() {
                         feature.included
                           ? 'highlight' in feature && feature.highlight
                             ? 'text-accent font-medium'
-                            : 'text-text-secondary'
-                          : 'text-text-tertiary'
+                            : 'text-content-secondary'
+                          : 'text-content-tertiary'
                       }`}
                     >
                       {feature.text}
@@ -158,7 +158,7 @@ export default function PricingPage() {
                 className={`block w-full py-3 px-6 rounded-lg font-inter font-semibold text-center transition-all ${
                   plan.popular
                     ? 'bg-accent text-white hover:bg-accent-dark'
-                    : 'bg-bg-secondary text-text-primary hover:bg-accent-light'
+                    : 'bg-bg-secondary text-content-primary hover:bg-accent-light'
                 }`}
               >
                 {plan.cta}
@@ -166,7 +166,7 @@ export default function PricingPage() {
 
               {/* Note */}
               {plan.note && (
-                <p className="text-center font-inter text-xs text-text-tertiary mt-3">
+                <p className="text-center font-inter text-xs text-content-tertiary mt-3">
                   {plan.note}
                 </p>
               )}
@@ -176,7 +176,7 @@ export default function PricingPage() {
 
         {/* FAQ Link */}
         <div className="text-center mt-12">
-          <p className="font-inter text-text-secondary">
+          <p className="font-inter text-content-secondary">
             Des questions?{' '}
             <Link href="/#faq" className="text-accent hover:underline font-medium">
               Consultez la FAQ

@@ -67,12 +67,12 @@ export function SendFeedbackModal({ isOpen, onClose, project, onSuccess }: SendF
             </svg>
           </div>
 
-          <h2 className="font-sora text-xl font-bold text-text-primary mb-2">
+          <h2 className="font-sora text-xl font-bold text-content-primary mb-2">
             Email envoyé !
           </h2>
 
-          <p className="font-inter text-text-secondary mb-6">
-            La demande de feedback a été envoyée à <span className="font-medium text-text-primary">{project.client_email}</span>
+          <p className="font-inter text-content-secondary mb-6">
+            La demande de feedback a été envoyée à <span className="font-medium text-content-primary">{project.client_email}</span>
           </p>
 
           <button
@@ -102,11 +102,11 @@ export function SendFeedbackModal({ isOpen, onClose, project, onSuccess }: SendF
           </svg>
         </div>
 
-        <h2 className="font-sora text-xl font-bold text-text-primary mb-2">
+        <h2 className="font-sora text-xl font-bold text-content-primary mb-2">
           Envoyer la demande de feedback ?
         </h2>
 
-        <p className="font-inter text-text-secondary mb-4">
+        <p className="font-inter text-content-secondary mb-4">
           Un email sera envoyé au client pour demander son avis sur le projet.
         </p>
 
@@ -118,13 +118,13 @@ export function SendFeedbackModal({ isOpen, onClose, project, onSuccess }: SendF
               </span>
             </div>
             <div>
-              <p className="font-inter font-medium text-text-primary">{project.client_name}</p>
-              <p className="font-inter text-sm text-text-secondary">{project.client_email}</p>
+              <p className="font-inter font-medium text-content-primary">{project.client_name}</p>
+              <p className="font-inter text-sm text-content-secondary">{project.client_email}</p>
             </div>
           </div>
           <div className="mt-3 pt-3 border-t border-border">
-            <p className="font-inter text-sm text-text-tertiary">Projet</p>
-            <p className="font-inter font-medium text-text-primary">{project.name}</p>
+            <p className="font-inter text-sm text-content-tertiary">Projet</p>
+            <p className="font-inter font-medium text-content-primary">{project.name}</p>
           </div>
         </div>
 
@@ -139,7 +139,7 @@ export function SendFeedbackModal({ isOpen, onClose, project, onSuccess }: SendF
             type="button"
             onClick={handleClose}
             disabled={loading}
-            className="flex-1 px-4 py-3 border border-border rounded-lg font-inter font-medium text-text-primary hover:bg-bg-secondary transition-colors disabled:opacity-50"
+            className="flex-1 px-4 py-3 border border-border rounded-lg font-inter font-medium text-content-primary hover:bg-bg-secondary transition-colors disabled:opacity-50"
           >
             Annuler
           </button>

@@ -15,9 +15,11 @@ const config: Config = {
         'bg-secondary': '#FAFAF8',
 
         // Text colors
-        'text-primary': '#1D1D1E',
-        'text-secondary': '#666666',
-        'text-tertiary': '#999999',
+        content: {
+          primary: '#1D1D1E',
+          secondary: '#666666',
+          tertiary: '#999999',
+        },
 
         // Accent (Emerald Green)
         accent: {

@@ -29,6 +29,17 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Text selection */
+::selection {
+  background-color: #D1F5E8;
+  color: #065F46;
+}
+
+::-moz-selection {
+  background-color: #D1F5E8;
+  color: #065F46;
+}
+
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
@@ -75,13 +86,23 @@ p {
 
 /* Links */
 a {
-  color: var(--accent);
   text-decoration: none;
-  transition: opacity 0.2s ease;
 }
 
-a:hover {
-  opacity: 0.8;
+/* Floating animation */
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  25% {
+    transform: translateY(-20px) translateX(10px);
+  }
+  50% {
+    transform: translateY(-10px) translateX(-10px);
+  }
+  75% {
+    transform: translateY(-30px) translateX(5px);
+  }
 }
 
 /* Input Styles */

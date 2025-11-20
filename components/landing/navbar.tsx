@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useLanguage } from '@/lib/i18n';
-import Link from 'next/link';
-import { useState, useEffect } from 'react';
-import type { User } from '@/types/database';
+import { useLanguage } from "@/lib/i18n";
+import Link from "next/link";
+import { useState, useEffect } from "react";
+import type { User } from "@/types/database";
 
 export function LandingNavbar() {
   const { lang, setLang, text } = useLanguage();
@@ -15,7 +15,7 @@ export function LandingNavbar() {
     // Fetch current user if authenticated
     async function fetchUser() {
       try {
-        const response = await fetch('/api/auth/me');
+        const response = await fetch("/api/auth/me");
         if (response.ok) {
           const data = await response.json();
           if (data.success && data.data?.user) {
@@ -33,8 +33,8 @@ export function LandingNavbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
@@ -42,13 +42,16 @@ export function LandingNavbar() {
       <div
         className={`max-w-6xl mx-auto transition-all duration-300 ${
           scrolled
-            ? 'bg-white/60 backdrop-blur-xl shadow-lg rounded-full px-6 border border-white/20'
-            : 'bg-white px-6'
+            ? "bg-white/60 backdrop-blur-xl shadow-lg rounded-full px-6"
+            : "bg-white px-6"
         }`}
       >
         <div className="flex items-center justify-between h-14">
           {/* Logo */}
-          <Link href="/" className="font-sora text-xl font-bold text-text-primary">
+          <Link
+            href="/"
+            className="font-sora text-xl font-bold text-content-primary"
+          >
             ratee.me
           </Link>
 
@@ -61,21 +64,21 @@ export function LandingNavbar() {
             {/* Language toggle */}
             <div className="flex items-center gap-1 bg-bg-secondary rounded-full p-1">
               <button
-                onClick={() => setLang('fr')}
+                onClick={() => setLang("fr")}
                 className={`px-3 py-1 rounded-full text-sm font-inter font-medium transition-all ${
-                  lang === 'fr'
-                    ? 'bg-white text-text-primary shadow-sm'
-                    : 'text-text-tertiary hover:text-accent'
+                  lang === "fr"
+                    ? "bg-white text-content-primary shadow-sm"
+                    : "text-content-tertiary hover:text-accent"
                 }`}
               >
                 🇫🇷 FR
               </button>
               <button
-                onClick={() => setLang('en')}
+                onClick={() => setLang("en")}
                 className={`px-3 py-1 rounded-full text-sm font-inter font-medium transition-all ${
-                  lang === 'en'
-                    ? 'bg-white text-text-primary shadow-sm'
-                    : 'text-text-tertiary hover:text-accent'
+                  lang === "en"
+                    ? "bg-white text-content-primary shadow-sm"
+                    : "text-content-tertiary hover:text-accent"
                 }`}
               >
                 🇬🇧 EN
@@ -85,7 +88,7 @@ export function LandingNavbar() {
             {user ? (
               <Link
                 href="/dashboard"
-                className="flex items-center gap-2 font-inter text-sm font-medium text-text-primary hover:text-accent transition-colors"
+                className="flex items-center gap-2 font-inter text-sm font-medium text-content-primary hover:text-accent transition-colors"
               >
                 <div className="w-8 h-8 rounded-full bg-accent-light flex items-center justify-center">
                   <span className="text-accent font-semibold text-xs">
@@ -113,7 +116,7 @@ export function LandingNavbar() {
             className="md:hidden p-2 rounded-lg hover:bg-bg-secondary"
           >
             <svg
-              className="w-6 h-6 text-text-primary"
+              className="w-6 h-6 text-content-primary"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -141,13 +144,22 @@ export function LandingNavbar() {
         {mobileMenuOpen && (
           <div className="md:hidden py-4 border-t border-border">
             <div className="flex flex-col gap-4">
-              <MobileNavLink href="#features" onClick={() => setMobileMenuOpen(false)}>
+              <MobileNavLink
+                href="#features"
+                onClick={() => setMobileMenuOpen(false)}
+              >
                 {text.nav.features}
               </MobileNavLink>
-              <MobileNavLink href="#pricing" onClick={() => setMobileMenuOpen(false)}>
+              <MobileNavLink
+                href="#pricing"
+                onClick={() => setMobileMenuOpen(false)}
+              >
                 {text.nav.pricing}
               </MobileNavLink>
-              <MobileNavLink href="#demo" onClick={() => setMobileMenuOpen(false)}>
+              <MobileNavLink
+                href="#demo"
+                onClick={() => setMobileMenuOpen(false)}
+              >
                 {text.nav.demo}
               </MobileNavLink>
 
@@ -155,26 +167,26 @@ export function LandingNavbar() {
                 <div className="flex items-center gap-2 mb-4">
                   <button
                     onClick={() => {
-                      setLang('fr');
+                      setLang("fr");
                       setMobileMenuOpen(false);
                     }}
                     className={`px-4 py-2 rounded-full text-sm font-inter font-medium ${
-                      lang === 'fr'
-                        ? 'bg-accent text-white'
-                        : 'bg-bg-secondary text-text-secondary'
+                      lang === "fr"
+                        ? "bg-accent text-white"
+                        : "bg-bg-secondary text-content-secondary"
                     }`}
                   >
                     🇫🇷 Français
                   </button>
                   <button
                     onClick={() => {
-                      setLang('en');
+                      setLang("en");
                       setMobileMenuOpen(false);
                     }}
                     className={`px-4 py-2 rounded-full text-sm font-inter font-medium ${
-                      lang === 'en'
-                        ? 'bg-accent text-white'
-                        : 'bg-bg-secondary text-text-secondary'
+                      lang === "en"
+                        ? "bg-accent text-white"
+                        : "bg-bg-secondary text-content-secondary"
                     }`}
                   >
                     🇬🇧 English
@@ -193,7 +205,7 @@ export function LandingNavbar() {
                   <>
                     <Link
                       href="/auth/login"
-                      className="block w-full px-5 py-3 bg-bg-secondary text-text-primary text-center rounded-full font-inter font-semibold mb-3"
+                      className="block w-full px-5 py-3 bg-bg-secondary text-content-primary text-center rounded-full font-inter font-semibold mb-3"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       {text.nav.login}
@@ -217,15 +229,21 @@ export function LandingNavbar() {
 }
 
 // Desktop nav link with underline animation
-function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
+function NavLink({
+  href,
+  children,
+}: {
+  href: string;
+  children: React.ReactNode;
+}) {
   return (
-    <a
+    <Link
       href={href}
-      className="relative font-inter text-sm font-medium text-text-primary hover:text-accent transition-colors group"
+      className="relative font-inter text-sm font-medium text-content-primary hover:text-accent transition-colors duration-300 group"
     >
       {children}
-      <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full" />
-    </a>
+      <span className="absolute left-0 -bottom-1 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-300 ease-out" />
+    </Link>
   );
 }
 
@@ -240,12 +258,12 @@ function MobileNavLink({
   children: React.ReactNode;
 }) {
   return (
-    <a
+    <Link
       href={href}
-      className="font-inter text-text-secondary hover:text-accent font-medium"
+      className="font-inter text-content-primary hover:text-accent font-medium"
       onClick={onClick}
     >
       {children}
-    </a>
+    </Link>
   );
 }
