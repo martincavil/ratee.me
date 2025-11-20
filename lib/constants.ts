@@ -3,6 +3,11 @@ export const APP_DESCRIPTION = 'Automate client feedback collection with NPS tra
 
 export const API_URL = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
 
+// Admin emails - these users have full access to admin pages
+export const ADMIN_EMAILS = [
+  'martincavil.dev@gmail.com',
+] as const;
+
 export const PROJECT_STATUS = {
   IN_PROGRESS: 'in_progress',
   DELIVERED: 'delivered',

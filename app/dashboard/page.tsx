@@ -1,27 +1,98 @@
 import Link from 'next/link';
-import { getUserProfile } from '@/lib/supabase/auth';
+import { getUserProfile, getUser } from '@/lib/supabase/auth';
 import { getProjects, getFeedbacks, getBadgeStats } from '@/lib/supabase/queries';
 import { ROUTES } from '@/lib/constants';
 import { timeAgo } from '@/lib/utils';
+import { createClient } from '@/lib/supabase/server';
 
 export default async function DashboardPage() {
   const profile = await getUserProfile();
+  const user = await getUser();
 
-  // Fetch stats in parallel
-  const [projectsData, feedbacksData, badgeStats] = await Promise.all([
+  // Fetch stats and subscription in parallel
+  const supabase = await createClient();
+  const [projectsData, feedbacksData, badgeStats, subscriptionData] = await Promise.all([
     getProjects({ limit: 5 }).catch(() => ({ projects: [], total: 0 })),
     getFeedbacks({ limit: 5 }).catch(() => ({ feedbacks: [], total: 0, stats: { avg_nps: 0, total_feedbacks: 0, nps_distribution: { detractors: 0, passives: 0, promoters: 0 } } })),
     getBadgeStats().catch(() => ({ avg_nps: 0, total_feedbacks: 0, last_feedback_date: null, total_detractors: 0, total_passives: 0, total_promoters: 0 })),
+    user ? supabase.from('subscriptions').select('*').eq('user_id', user.id).single() : Promise.resolve({ data: null }),
   ]);
+
+  const subscription = subscriptionData.data;
+  const isOnTrial = subscription?.trial_until && new Date(subscription.trial_until) > new Date();
+  const daysLeft = isOnTrial
+    ? Math.ceil((new Date(subscription.trial_until).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))
+    : 0;
+
+  // Determine banner type
+  const showFreeBanner = !subscription || subscription.plan === 'free';
+  const showTrialBanner = isOnTrial;
+  const showProBanner = subscription?.plan === 'pro' && !isOnTrial;
 
   return (
     <div>
+      {/* Free Plan Banner */}
+      {showFreeBanner && (
+        <div className="bg-info-light border border-info/20 rounded-lg p-4 mb-6">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <span className="text-xl">📦</span>
+              <div>
+                <p className="font-inter text-info font-medium">
+                  Vous êtes en plan <strong>FREE</strong> (1 projet/mois)
+                </p>
+                <p className="font-inter text-info/80 text-sm">
+                  Upgrade pour projets illimités + email automation
+                </p>
+              </div>
+            </div>
+            <a
+              href="/pricing"
+              className="px-4 py-2 bg-accent text-white text-sm font-inter font-medium rounded-lg hover:bg-accent-dark"
+            >
+              Upgrade
+            </a>
+          </div>
+        </div>
+      )}
+
+      {/* Trial Banner */}
+      {showTrialBanner && (
+        <div className="bg-accent-light border border-accent/20 rounded-lg p-4 mb-6">
+          <div className="flex items-center gap-3">
+            <span className="text-2xl">✨</span>
+            <div>
+              <p className="font-inter text-accent-dark font-medium">
+                Vous êtes en <strong>PRO (30j gratuit)</strong> - {daysLeft} jours restants
+              </p>
+              <p className="font-inter text-accent-700 text-sm">
+                Email automation activée - profitez-en!
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Active PRO Banner */}
+      {showProBanner && (
+        <div className="bg-accent-50 border border-accent/20 rounded-lg p-4 mb-6">
+          <div className="flex items-center gap-3">
+            <span className="text-xl">✅</span>
+            <div>
+              <p className="font-inter text-accent font-medium">
+                Vous êtes en plan <strong>PRO</strong> - Automations activées
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Welcome Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">
+        <h1 className="font-sora text-3xl font-bold text-text-primary">
           Welcome back, {profile?.name}! 👋
         </h1>
-        <p className="text-gray-600 mt-2">
+        <p className="font-inter text-text-secondary mt-2">
           Here's what's happening with your client feedback
         </p>
       </div>
@@ -142,7 +213,7 @@ export default async function DashboardPage() {
                 <p className="text-gray-500 mb-4">No projects yet</p>
                 <Link
                   href={ROUTES.PROJECTS}
-                  className="inline-flex items-center px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90 font-medium"
+                  className="inline-flex items-center px-4 py-2 bg-emerald-500 text-white rounded-md hover:bg-emerald-600 font-medium"
                 >
                   Create your first project
                 </Link>

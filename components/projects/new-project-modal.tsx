@@ -3,6 +3,18 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createProjectSchema, type CreateProjectInput } from '@/lib/validators';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 
 interface NewProjectModalProps {
   isOpen: boolean;
@@ -21,8 +33,6 @@ export function NewProjectModal({ isOpen, onClose }: NewProjectModalProps) {
   const [errors, setErrors] = useState<Partial<Record<keyof CreateProjectInput, string>>>({});
   const [loading, setLoading] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
-
-  if (!isOpen) return null;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -74,7 +84,7 @@ export function NewProjectModal({ isOpen, onClose }: NewProjectModalProps) {
         description: '',
         delivery_date: '',
       });
-    } catch (error) {
+    } catch {
       setApiError('An unexpected error occurred');
     } finally {
       setLoading(false);
@@ -82,95 +92,81 @@ export function NewProjectModal({ isOpen, onClose }: NewProjectModalProps) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-        <div className="p-6 border-b border-gray-200">
-          <h2 className="text-2xl font-bold">New Project</h2>
-        </div>
+    <Dialog open={isOpen} onOpenChange={onClose}>
+      <DialogContent className="max-w-2xl">
+        <DialogHeader>
+          <DialogTitle>New Project</DialogTitle>
+          <DialogDescription>
+            Create a new project to start collecting feedback
+          </DialogDescription>
+        </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="p-6 space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Project Name *
-            </label>
-            <input
-              type="text"
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="name">Project Name *</Label>
+            <Input
+              id="name"
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary ${
-                errors.name ? 'border-red-500' : 'border-gray-300'
-              }`}
               placeholder="Website Redesign"
+              className={errors.name ? 'border-red-500' : ''}
             />
-            {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
+            {errors.name && <p className="text-sm text-red-600">{errors.name}</p>}
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Client Name *
-            </label>
-            <input
-              type="text"
+          <div className="space-y-2">
+            <Label htmlFor="client_name">Client Name *</Label>
+            <Input
+              id="client_name"
               name="client_name"
               value={formData.client_name}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary ${
-                errors.client_name ? 'border-red-500' : 'border-gray-300'
-              }`}
               placeholder="Acme Corp"
+              className={errors.client_name ? 'border-red-500' : ''}
             />
-            {errors.client_name && <p className="mt-1 text-sm text-red-600">{errors.client_name}</p>}
+            {errors.client_name && <p className="text-sm text-red-600">{errors.client_name}</p>}
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Client Email
-            </label>
-            <input
+          <div className="space-y-2">
+            <Label htmlFor="client_email">Client Email</Label>
+            <Input
               type="email"
+              id="client_email"
               name="client_email"
               value={formData.client_email}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary ${
-                errors.client_email ? 'border-red-500' : 'border-gray-300'
-              }`}
               placeholder="john@acme.com"
+              className={errors.client_email ? 'border-red-500' : ''}
             />
-            {errors.client_email && <p className="mt-1 text-sm text-red-600">{errors.client_email}</p>}
+            {errors.client_email && <p className="text-sm text-red-600">{errors.client_email}</p>}
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Description
-            </label>
-            <textarea
+          <div className="space-y-2">
+            <Label htmlFor="description">Description</Label>
+            <Textarea
+              id="description"
               name="description"
               value={formData.description}
               onChange={handleChange}
               rows={3}
-              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary ${
-                errors.description ? 'border-red-500' : 'border-gray-300'
-              }`}
               placeholder="Brief project description..."
+              className={errors.description ? 'border-red-500' : ''}
             />
-            {errors.description && <p className="mt-1 text-sm text-red-600">{errors.description}</p>}
+            {errors.description && <p className="text-sm text-red-600">{errors.description}</p>}
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Delivery Date *
-            </label>
-            <input
+          <div className="space-y-2">
+            <Label htmlFor="delivery_date">Delivery Date *</Label>
+            <Input
               type="date"
+              id="delivery_date"
               name="delivery_date"
               value={formData.delivery_date}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary ${
-                errors.delivery_date ? 'border-red-500' : 'border-gray-300'
-              }`}
+              className={errors.delivery_date ? 'border-red-500' : ''}
             />
-            {errors.delivery_date && <p className="mt-1 text-sm text-red-600">{errors.delivery_date}</p>}
+            {errors.delivery_date && <p className="text-sm text-red-600">{errors.delivery_date}</p>}
           </div>
 
           {apiError && (
@@ -179,24 +175,16 @@ export function NewProjectModal({ isOpen, onClose }: NewProjectModalProps) {
             </div>
           )}
 
-          <div className="flex justify-end space-x-3 pt-4">
-            <button
-              type="button"
-              onClick={onClose}
-              className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 font-medium"
-            >
+          <DialogFooter>
+            <Button type="button" variant="outline" onClick={onClose}>
               Cancel
-            </button>
-            <button
-              type="submit"
-              disabled={loading}
-              className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
-            >
+            </Button>
+            <Button type="submit" disabled={loading}>
               {loading ? 'Creating...' : 'Create Project'}
-            </button>
-          </div>
+            </Button>
+          </DialogFooter>
         </form>
-      </div>
-    </div>
+      </DialogContent>
+    </Dialog>
   );
 }

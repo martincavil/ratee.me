@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
-import { ROUTES } from '@/lib/constants';
+import { ROUTES, ADMIN_EMAILS } from '@/lib/constants';
 
 /**
  * Get the current authenticated user (Server Components only)
@@ -102,4 +102,28 @@ export async function signOut() {
   const supabase = await createClient();
   await supabase.auth.signOut();
   redirect(ROUTES.LOGIN);
+}
+
+/**
+ * Check if the current user is an admin
+ * Returns true if user email is in ADMIN_EMAILS list
+ */
+export async function isAdmin() {
+  const user = await getUser();
+  if (!user?.email) return false;
+  return ADMIN_EMAILS.includes(user.email as typeof ADMIN_EMAILS[number]);
+}
+
+/**
+ * Require admin access - redirects to dashboard if not admin
+ * Use in Server Components for admin pages
+ */
+export async function requireAdmin() {
+  const user = await requireAuth();
+
+  if (!user.email || !ADMIN_EMAILS.includes(user.email as typeof ADMIN_EMAILS[number])) {
+    redirect(ROUTES.DASHBOARD);
+  }
+
+  return user;
 }

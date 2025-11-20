@@ -5,6 +5,7 @@ import { formatDate } from '@/lib/utils';
 import { NewProjectModal } from '@/components/projects/new-project-modal';
 import { EditProjectModal } from '@/components/projects/edit-project-modal';
 import { DeleteProjectDialog } from '@/components/projects/delete-project-dialog';
+import { SendFeedbackModal } from '@/components/projects/send-feedback-modal';
 import type { Project } from '@/types/database';
 
 export default function ProjectsPage() {
@@ -14,7 +15,7 @@ export default function ProjectsPage() {
   const [isNewModalOpen, setIsNewModalOpen] = useState(false);
   const [editingProject, setEditingProject] = useState<Project | null>(null);
   const [deletingProject, setDeletingProject] = useState<Project | null>(null);
-  const [sendingFeedback, setSendingFeedback] = useState<string | null>(null);
+  const [feedbackProject, setFeedbackProject] = useState<Project | null>(null);
 
   useEffect(() => {
     fetchProjects();
@@ -44,32 +45,8 @@ export default function ProjectsPage() {
     setIsNewModalOpen(false);
     setEditingProject(null);
     setDeletingProject(null);
+    setFeedbackProject(null);
     fetchProjects();
-  };
-
-  const handleSendFeedback = async (projectId: string) => {
-    if (!confirm('Send feedback request to client?')) return;
-
-    setSendingFeedback(projectId);
-
-    try {
-      const response = await fetch(`/api/projects/${projectId}/send-feedback`, {
-        method: 'POST',
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
-        alert('Feedback request sent successfully!');
-        fetchProjects(); // Refresh to update status
-      } else {
-        alert(data.error || 'Failed to send feedback request');
-      }
-    } catch (error) {
-      alert('An unexpected error occurred');
-    } finally {
-      setSendingFeedback(null);
-    }
   };
 
   return (
@@ -79,7 +56,7 @@ export default function ProjectsPage() {
         <h1 className="text-3xl font-bold">Projects</h1>
         <button
           onClick={() => setIsNewModalOpen(true)}
-          className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90 font-medium"
+          className="px-4 py-2 bg-emerald-500 text-white rounded-md hover:bg-emerald-600 font-medium"
         >
           + New Project
         </button>
@@ -92,7 +69,7 @@ export default function ProjectsPage() {
             onClick={() => setFilter('all')}
             className={`px-4 py-2 rounded-md font-medium ${
               filter === 'all'
-                ? 'bg-primary text-white'
+                ? 'bg-emerald-500 text-white'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >
@@ -102,7 +79,7 @@ export default function ProjectsPage() {
             onClick={() => setFilter('in_progress')}
             className={`px-4 py-2 rounded-md font-medium ${
               filter === 'in_progress'
-                ? 'bg-primary text-white'
+                ? 'bg-emerald-500 text-white'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >
@@ -112,7 +89,7 @@ export default function ProjectsPage() {
             onClick={() => setFilter('delivered')}
             className={`px-4 py-2 rounded-md font-medium ${
               filter === 'delivered'
-                ? 'bg-primary text-white'
+                ? 'bg-emerald-500 text-white'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >
@@ -122,7 +99,7 @@ export default function ProjectsPage() {
             onClick={() => setFilter('archived')}
             className={`px-4 py-2 rounded-md font-medium ${
               filter === 'archived'
-                ? 'bg-primary text-white'
+                ? 'bg-emerald-500 text-white'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >
@@ -220,11 +197,10 @@ export default function ProjectsPage() {
                   <td className="px-6 py-4 text-right text-sm space-x-2">
                     {project.feedback_status === 'not_sent' && project.client_email && (
                       <button
-                        onClick={() => handleSendFeedback(project.id)}
-                        disabled={sendingFeedback === project.id}
-                        className="text-green-600 hover:text-green-800 font-medium disabled:opacity-50"
+                        onClick={() => setFeedbackProject(project)}
+                        className="text-green-600 hover:text-green-800 font-medium"
                       >
-                        {sendingFeedback === project.id ? 'Sending...' : 'Send Feedback'}
+                        Send Feedback
                       </button>
                     )}
                     <button
@@ -266,6 +242,15 @@ export default function ProjectsPage() {
           isOpen={true}
           onClose={handleModalClose}
           project={deletingProject}
+        />
+      )}
+
+      {feedbackProject && (
+        <SendFeedbackModal
+          isOpen={true}
+          onClose={handleModalClose}
+          project={feedbackProject}
+          onSuccess={fetchProjects}
         />
       )}
     </div>
