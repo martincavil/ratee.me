@@ -5,8 +5,57 @@ import { WaitlistForm } from "./waitlist-form";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
+const screensContent = {
+  en: [
+    {
+      id: "collect",
+      title: "Collect",
+      description: "Automated NPS surveys at perfect timing",
+      href: "#features",
+      color: "from-accent-100 to-accent-50",
+    },
+    {
+      id: "analyze",
+      title: "Analyze",
+      description: "Real-time dashboard with actionable insights",
+      href: "#demo",
+      color: "from-accent-50 to-white",
+    },
+    {
+      id: "improve",
+      title: "Showcase",
+      description: "Display your credibility with embeddable badges",
+      href: "#pricing",
+      color: "from-white to-accent-50",
+    },
+  ],
+  fr: [
+    {
+      id: "collect",
+      title: "Collecte",
+      description: "Enquêtes NPS automatisées au bon moment",
+      href: "#features",
+      color: "from-accent-100 to-accent-50",
+    },
+    {
+      id: "analyze",
+      title: "Analyse",
+      description: "Dashboard temps réel avec insights actionnables",
+      href: "#demo",
+      color: "from-accent-50 to-white",
+    },
+    {
+      id: "improve",
+      title: "Affiche",
+      description: "Montre ta crédibilité avec des badges intégrables",
+      href: "#pricing",
+      color: "from-white to-accent-50",
+    },
+  ],
+};
+
 export function Hero() {
-  const { text } = useLanguage();
+  const { text, lang } = useLanguage();
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
@@ -20,32 +69,10 @@ export function Hero() {
     return () => clearInterval(interval);
   }, [isPaused]);
 
-  const screens = [
-    {
-      id: "collect",
-      title: "Collectez",
-      description: "Envoyez des enquêtes NPS personnalisées",
-      href: "#features",
-      color: "from-accent-100 to-accent-50",
-    },
-    {
-      id: "analyze",
-      title: "Analysez",
-      description: "Visualisez vos scores en temps réel",
-      href: "#demo",
-      color: "from-accent-50 to-white",
-    },
-    {
-      id: "improve",
-      title: "Améliorez",
-      description: "Identifiez les axes d'amélioration",
-      href: "#pricing",
-      color: "from-white to-accent-50",
-    },
-  ];
+  const screens = screensContent[lang];
 
   return (
-    <section className="min-h-screen flex items-center pt-24 pb-16 px-4 sm:px-6 lg:px-8 bg-bg-primary">
+    <section className="min-h-screen flex items-center pt-24 pb-16 px-4 sm:px-6 lg:px-8 bg-bg-primary overflow-hidden">
       <div className="max-w-7xl mx-auto w-full">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left: Text Content */}
@@ -71,11 +98,11 @@ export function Hero() {
           >
             {/* Floating geometric shapes */}
             <div
-              className="absolute -top-20 -right-32 w-96 h-96 rounded-20 blur-xl z-0 pointer-events-none"
+              className="hidden md:flex absolute -top-20 -right-32 w-96 h-96 rounded-20 blur-xl z-0 pointer-events-none"
               style={{
                 backgroundColor: "#6EDCC6",
                 opacity: 0.5,
-                animation: "float-slow 8s ease-in-out infinite",
+                animation: "float-fast 8s ease-in-out infinite",
               }}
             />
             <div
@@ -83,7 +110,15 @@ export function Hero() {
               style={{
                 backgroundColor: "#34D399",
                 opacity: 0.4,
-                animation: "float-slow 10s ease-in-out infinite reverse",
+                animation: "float-fast 10s ease-in-out infinite reverse",
+              }}
+            />
+            <div
+              className="hidden lg:flex absolute top-1/3 -right-20 w-48 h-48 rounded-full blur-lg z-0 pointer-events-none"
+              style={{
+                backgroundColor: "#10B981",
+                opacity: 0.3,
+                animation: "float-fast 6s ease-in-out infinite",
               }}
             />
             {screens.map((screen, index) => {
@@ -120,7 +155,7 @@ export function Hero() {
                     border border-white/50
                     shadow-xl
                     p-6
-                    h-[280px]
+                    h-[400px]
                     transition-all duration-300
                     group-hover:shadow-2xl
                     group-hover:border-accent/30
@@ -153,38 +188,212 @@ export function Hero() {
                       <div className="space-y-3">
                         {index === 0 && (
                           <>
-                            <div className="h-3 bg-white/80 rounded w-3/4"></div>
-                            <div className="h-3 bg-white/60 rounded w-1/2"></div>
-                            <div className="h-10 bg-accent/20 rounded-lg mt-4"></div>
+                            {/* Feedback Form Mockup */}
+                            <div className="bg-white rounded-lg p-3 border border-gray-200 shadow-sm">
+                              <div className="text-center mb-3">
+                                <div className="font-inter text-[10px] text-content-tertiary mb-1">
+                                  {lang === "fr"
+                                    ? "Sur une échelle de 0 à 10"
+                                    : "On a scale of 0 to 10"}
+                                </div>
+                                <div className="font-inter text-xs font-medium text-content-primary">
+                                  {lang === "fr"
+                                    ? "Recommanderiez-vous nos services ?"
+                                    : "How likely are you to recommend us?"}
+                                </div>
+                              </div>
+                              <div className="flex gap-0.5 mb-3">
+                                {[...Array(11)].map((_, i) => (
+                                  <div
+                                    key={i}
+                                    className={`flex-1 h-7 rounded text-[9px] flex items-center justify-center font-bold transition-all ${
+                                      i === 9
+                                        ? "bg-emerald-500 text-white scale-110 shadow-md"
+                                        : i === 10
+                                        ? "bg-emerald-100 text-emerald-600"
+                                        : i >= 7
+                                        ? "bg-amber-100 text-amber-600"
+                                        : "bg-gray-100 text-gray-400"
+                                    }`}
+                                  >
+                                    {i}
+                                  </div>
+                                ))}
+                              </div>
+                              <div className="bg-gray-50 rounded p-2 mb-2">
+                                <div className="font-inter text-[9px] text-content-tertiary italic">
+                                  {lang === "fr"
+                                    ? '"Service excellent, très réactif..."'
+                                    : '"Excellent service, very responsive..."'}
+                                </div>
+                              </div>
+                              <div className="h-7 bg-accent rounded flex items-center justify-center cursor-pointer hover:bg-accent-dark transition-colors">
+                                <span className="font-inter text-[10px] text-white font-semibold">
+                                  {lang === "fr"
+                                    ? "Envoyer mon avis"
+                                    : "Submit Feedback"}
+                                </span>
+                              </div>
+                            </div>
                           </>
                         )}
                         {index === 1 && (
-                          <div className="flex items-end gap-2 h-24">
-                            {[40, 65, 45, 80, 55, 70].map((h, i) => (
-                              <div
-                                key={i}
-                                className="flex-1 bg-accent/40 rounded-t"
-                                style={{ height: `${h}%` }}
-                              />
-                            ))}
-                          </div>
-                        )}
-                        {index === 2 && (
-                          <div className="grid grid-cols-2 gap-3">
-                            <div className="bg-white/80 rounded-lg p-3">
-                              <div className="font-sora text-xl font-bold text-accent">
-                                +12%
+                          <>
+                            {/* Dashboard Stats Mockup */}
+                            <div className="grid grid-cols-2 gap-2 mb-2">
+                              <div className="bg-white rounded-lg p-2 border border-gray-200 shadow-sm">
+                                <div className="flex items-center justify-between">
+                                  <div>
+                                    <div className="font-inter text-[8px] text-content-tertiary">
+                                      {lang === "fr" ? "Projets" : "Projects"}
+                                    </div>
+                                    <div className="font-sora text-base font-bold text-content-primary">
+                                      12
+                                    </div>
+                                  </div>
+                                  <div className="w-5 h-5 bg-blue-100 rounded flex items-center justify-center">
+                                    <svg
+                                      className="w-3 h-3 text-blue-600"
+                                      fill="none"
+                                      viewBox="0 0 24 24"
+                                      stroke="currentColor"
+                                    >
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                                      />
+                                    </svg>
+                                  </div>
+                                </div>
                               </div>
-                              <div className="font-inter text-xs text-content-tertiary">
-                                ce mois
+                              <div className="bg-white rounded-lg p-2 border border-gray-200 shadow-sm">
+                                <div className="flex items-center justify-between">
+                                  <div>
+                                    <div className="font-inter text-[8px] text-content-tertiary">
+                                      NPS
+                                    </div>
+                                    <div className="font-sora text-base font-bold text-accent">
+                                      8.7
+                                    </div>
+                                  </div>
+                                  <div className="w-5 h-5 bg-accent/10 rounded flex items-center justify-center">
+                                    <svg
+                                      className="w-3 h-3 text-accent"
+                                      fill="currentColor"
+                                      viewBox="0 0 20 20"
+                                    >
+                                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                    </svg>
+                                  </div>
+                                </div>
                               </div>
                             </div>
-                            <div className="bg-white/80 rounded-lg p-3">
-                              <div className="font-sora text-xl font-bold text-content-primary">
-                                85
+                            {/* NPS Distribution */}
+                            <div className="bg-white rounded-lg p-2 border border-gray-200 shadow-sm">
+                              <div className="font-inter text-[8px] text-content-tertiary mb-2">
+                                {lang === "fr"
+                                  ? "Distribution NPS"
+                                  : "NPS Distribution"}
                               </div>
-                              <div className="font-inter text-xs text-content-tertiary">
-                                NPS
+                              <div className="flex items-center gap-2">
+                                <div className="flex-1">
+                                  <div className="flex h-3 rounded-full overflow-hidden">
+                                    <div className="bg-accent w-[65%]"></div>
+                                    <div className="bg-warning w-[25%]"></div>
+                                    <div className="bg-error w-[10%]"></div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="flex justify-between mt-1">
+                                <span className="font-inter text-[7px] text-accent font-medium">
+                                  18 {lang === "fr" ? "clients" : "clients"}
+                                </span>
+                                <span className="font-inter text-[7px] text-warning font-medium">
+                                  6 {lang === "fr" ? "passifs" : "passives"}
+                                </span>
+                                <span className="font-inter text-[7px] text-error font-medium">
+                                  2{" "}
+                                  {lang === "fr" ? "détracteurs" : "detractors"}
+                                </span>
+                              </div>
+                            </div>
+                            {/* Recent Feedback */}
+                            <div className="bg-white rounded-lg p-2 border border-gray-200 shadow-sm">
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-1.5">
+                                  <div className="w-4 h-4 bg-gray-200 rounded-full"></div>
+                                  <span className="font-inter text-[8px] font-medium">
+                                    Hugo D.
+                                  </span>
+                                </div>
+                                <span className="px-1.5 py-0.5 bg-accent/10 text-accent text-[8px] font-bold rounded">
+                                  9/10
+                                </span>
+                              </div>
+                            </div>
+                          </>
+                        )}
+                        {index === 2 && (
+                          <div className="space-y-2">
+                            {/* Badge Preview */}
+                            <div className="bg-white rounded-lg p-3 border-2 border-accent shadow-sm text-center">
+                              <div className="font-inter text-[9px] text-content-tertiary mb-1">
+                                {lang === "fr"
+                                  ? "Satisfaction Client"
+                                  : "Client Satisfaction"}
+                              </div>
+                              <div className="font-sora text-3xl font-bold text-accent mb-0.5">
+                                8.7
+                              </div>
+                              <div className="font-inter text-[8px] text-content-tertiary mb-2">
+                                {lang === "fr"
+                                  ? "Score NPS moyen"
+                                  : "Average NPS Score"}
+                              </div>
+                              <div className="flex justify-center gap-0.5 mb-2">
+                                {[...Array(5)].map((_, i) => (
+                                  <svg
+                                    key={i}
+                                    className={`w-2.5 h-2.5 ${
+                                      i < 4 ? "text-warning" : "text-gray-200"
+                                    } fill-current`}
+                                    viewBox="0 0 20 20"
+                                  >
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                  </svg>
+                                ))}
+                              </div>
+                              <div className="font-inter text-[7px] text-content-tertiary">
+                                26 feedbacks
+                              </div>
+                              <div className="mt-2 pt-2 border-t border-gray-100">
+                                <span className="font-inter text-[7px] text-content-tertiary">
+                                  Powered by{" "}
+                                  <span className="font-medium text-accent">
+                                    ratee.me
+                                  </span>
+                                </span>
+                              </div>
+                            </div>
+                            {/* Embed Code Preview */}
+                            <div className="bg-gray-900 rounded-lg p-2">
+                              <div className="font-mono text-[7px] text-gray-400">
+                                <span className="text-pink-400">&lt;div</span>{" "}
+                                <span className="text-green-400">class</span>=
+                                <span className="text-yellow-300">
+                                  "ratee-badge"
+                                </span>
+                                <span className="text-pink-400">&gt;</span>
+                              </div>
+                              <div className="flex items-center justify-between mt-1">
+                                <span className="font-inter text-[7px] text-gray-500">
+                                  {lang === "fr" ? "Code embed" : "Embed code"}
+                                </span>
+                                <span className="px-1 py-0.5 bg-white/10 rounded text-[7px] text-white font-medium">
+                                  {lang === "fr" ? "Copier" : "Copy"}
+                                </span>
                               </div>
                             </div>
                           </div>
@@ -195,7 +404,7 @@ export function Hero() {
                     {/* Hover indicator */}
                     <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
                       <span className="font-inter text-xs text-accent font-medium">
-                        En savoir plus →
+                        {lang === "fr" ? "En savoir plus →" : "Learn more →"}
                       </span>
                     </div>
                   </div>

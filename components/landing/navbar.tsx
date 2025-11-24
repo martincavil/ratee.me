@@ -38,19 +38,20 @@ export function LandingNavbar() {
   }, []);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 px-4 py-3">
+    <nav className="fixed top-0 left-0 right-0 z-50 md:px-4 md:py-3">
       <div
         className={`max-w-6xl mx-auto transition-all duration-300 ${
           scrolled
-            ? "bg-white/60 backdrop-blur-xl shadow-lg rounded-full px-6"
-            : "bg-white px-6"
-        }`}
+            ? "bg-white/60 backdrop-blur-xl shadow-lg md:rounded-full px-6"
+            : "px-6"
+        } bg-white md:bg-transparent`}
       >
         <div className="flex items-center justify-between h-14">
           {/* Logo */}
+          {/* Add logo and keep text */}
           <Link
             href="/"
-            className="font-sora text-xl font-bold text-content-primary"
+            className="font-sora text-3xl font-semibold text-content-primary"
           >
             ratee.me
           </Link>
@@ -81,7 +82,7 @@ export function LandingNavbar() {
                     : "text-content-tertiary hover:text-accent"
                 }`}
               >
-                🇬🇧 EN
+                🇺🇸 EN
               </button>
             </div>
 
@@ -170,9 +171,9 @@ export function LandingNavbar() {
                       setLang("fr");
                       setMobileMenuOpen(false);
                     }}
-                    className={`px-4 py-2 rounded-full text-sm font-inter font-medium ${
+                    className={`py-2 rounded-full text-sm font-inter font-medium ${
                       lang === "fr"
-                        ? "bg-accent text-white"
+                        ? "bg-accent"
                         : "bg-bg-secondary text-content-secondary"
                     }`}
                   >
@@ -183,20 +184,20 @@ export function LandingNavbar() {
                       setLang("en");
                       setMobileMenuOpen(false);
                     }}
-                    className={`px-4 py-2 rounded-full text-sm font-inter font-medium ${
+                    className={`py-2 rounded-full text-sm font-inter font-medium ${
                       lang === "en"
-                        ? "bg-accent text-white"
+                        ? "bg-accent"
                         : "bg-bg-secondary text-content-secondary"
                     }`}
                   >
-                    🇬🇧 English
+                    🇺🇸 English
                   </button>
                 </div>
 
                 {user ? (
                   <Link
                     href="/dashboard"
-                    className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-accent text-white text-center rounded-full font-inter font-semibold"
+                    className=" w-full py-3 text-accent rounded-full font-inter font-semibold"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {user.name}

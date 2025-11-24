@@ -27,6 +27,11 @@
 /* Base Styles */
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
 }
 
 /* Text selection */
@@ -102,6 +107,21 @@ a {
   }
   75% {
     transform: translateY(-30px) translateX(5px);
+  }
+}
+
+@keyframes float-fast {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px) scale(1);
+  }
+  25% {
+    transform: translateY(-30px) translateX(20px) scale(1.05);
+  }
+  50% {
+    transform: translateY(-15px) translateX(-15px) scale(0.95);
+  }
+  75% {
+    transform: translateY(-40px) translateX(10px) scale(1.02);
   }
 }
 
