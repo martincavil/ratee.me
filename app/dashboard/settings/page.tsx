@@ -1,8 +1,11 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { updateProfileSchema, type UpdateProfileInput } from '@/lib/validators';
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useLanguage } from "@/lib/i18n";
+import { ROUTES } from "@/lib/constants";
+import { updateProfileSchema, type UpdateProfileInput } from "@/lib/validators";
+import { Spinner } from "@/components/ui/spinner";
 
 interface UserProfile {
   id: string;
@@ -14,15 +17,18 @@ interface UserProfile {
 
 export default function SettingsPage() {
   const router = useRouter();
+  const { text } = useLanguage();
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [formData, setFormData] = useState<UpdateProfileInput>({
-    full_name: '',
-    company_name: '',
-    avatar_url: '',
+    full_name: "",
+    company_name: "",
+    avatar_url: "",
   });
-  const [errors, setErrors] = useState<Partial<Record<keyof UpdateProfileInput, string>>>({});
+  const [errors, setErrors] = useState<
+    Partial<Record<keyof UpdateProfileInput, string>>
+  >({});
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [apiError, setApiError] = useState<string | null>(null);
 
@@ -33,22 +39,22 @@ export default function SettingsPage() {
   const fetchProfile = async () => {
     setLoading(true);
     try {
-      const response = await fetch('/api/auth/me');
+      const response = await fetch("/api/auth/me");
       const data = await response.json();
 
       if (data.success && data.data.user) {
         const user = data.data.user;
         setProfile(user);
         setFormData({
-          full_name: user.full_name || '',
-          company_name: user.company_name || '',
-          avatar_url: user.avatar_url || '',
+          full_name: user.full_name || "",
+          company_name: user.company_name || "",
+          avatar_url: user.avatar_url || "",
         });
       } else {
-        setApiError('Failed to load profile');
+        setApiError("Failed to load profile");
       }
     } catch (error) {
-      setApiError('An unexpected error occurred');
+      setApiError("An unexpected error occurred");
     } finally {
       setLoading(false);
     }
@@ -85,24 +91,24 @@ export default function SettingsPage() {
     setSaving(true);
 
     try {
-      const response = await fetch('/api/user/profile', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("/api/user/profile", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
       const data = await response.json();
 
       if (!data.success) {
-        setApiError(data.error || 'Failed to update profile');
+        setApiError(data.error || "Failed to update profile");
         return;
       }
 
       setProfile(data.data.user);
-      setSuccessMessage('Profile updated successfully!');
+      setSuccessMessage(text.settings.form.successMessage);
       setTimeout(() => setSuccessMessage(null), 3000);
     } catch (error) {
-      setApiError('An unexpected error occurred');
+      setApiError("An unexpected error occurred");
     } finally {
       setSaving(false);
     }
@@ -110,103 +116,117 @@ export default function SettingsPage() {
 
   const handleSignOut = async () => {
     try {
-      await fetch('/api/auth/logout', { method: 'POST' });
-      router.push('/login');
+      await fetch("/api/auth/logout", { method: "POST" });
+      router.push(ROUTES.LOGIN);
     } catch (error) {
-      console.error('Logout failed:', error);
+      console.error("Logout failed:", error);
     }
   };
 
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
-        <p className="text-gray-500">Loading profile...</p>
+        <Spinner className="w-8 h-8 text-emerald" />
       </div>
     );
   }
 
   return (
-    <div className="max-w-4xl">
-      <h1 className="text-3xl font-bold mb-6">Settings</h1>
+    <div>
+      <h1 className="text-2xl! font-bold text-content-primary font-sora mb-6">
+        {text.settings.title}
+      </h1>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
         {/* Profile Form */}
-        <div className="lg:col-span-2 bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-semibold mb-6">Profile Information</h2>
+        <div className="lg:col-span-3 bg-white rounded-lg border border-border p-6">
+          <h2 className="text-xl! font-semibold text-content-primary font-sora mb-6">
+            {text.settings.sections.profile}
+          </h2>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Email
+              <label className="block text-sm font-medium text-content-primary mb-1">
+                {text.settings.form.email.label}
               </label>
               <input
                 type="email"
-                value={profile?.email || ''}
+                value={profile?.email || ""}
                 disabled
-                className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50 text-gray-500 cursor-not-allowed"
+                className="w-full px-3 py-2 border border-border rounded-md bg-bg-secondary text-content-tertiary cursor-not-allowed text-sm"
               />
-              <p className="mt-1 text-xs text-gray-500">Email cannot be changed</p>
+              <p className="mt-1 text-xs text-content-tertiary">
+                {text.settings.form.email.helper}
+              </p>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Full Name *
+              <label className="block text-sm font-medium text-content-primary mb-1">
+                {text.settings.form.fullName.label}
               </label>
               <input
                 type="text"
                 name="full_name"
                 value={formData.full_name}
                 onChange={handleChange}
-                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary ${
-                  errors.full_name ? 'border-red-500' : 'border-gray-300'
+                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-emerald text-sm ${
+                  errors.full_name ? "border-error" : "border-border"
                 }`}
               />
-              {errors.full_name && <p className="mt-1 text-sm text-red-600">{errors.full_name}</p>}
+              {errors.full_name && (
+                <p className="mt-1 text-xs text-error">{errors.full_name}</p>
+              )}
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Company Name
+              <label className="block text-sm font-medium text-content-primary mb-1">
+                {text.settings.form.companyName.label}
               </label>
               <input
                 type="text"
                 name="company_name"
                 value={formData.company_name}
                 onChange={handleChange}
-                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary ${
-                  errors.company_name ? 'border-red-500' : 'border-gray-300'
+                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-emerald text-sm ${
+                  errors.company_name ? "border-error" : "border-border"
                 }`}
               />
-              {errors.company_name && <p className="mt-1 text-sm text-red-600">{errors.company_name}</p>}
+              {errors.company_name && (
+                <p className="mt-1 text-xs text-error">{errors.company_name}</p>
+              )}
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Avatar URL
+              <label className="block text-sm font-medium text-content-primary mb-1">
+                {text.settings.form.avatarUrl.label}
               </label>
               <input
                 type="url"
                 name="avatar_url"
                 value={formData.avatar_url}
                 onChange={handleChange}
-                placeholder="https://example.com/avatar.jpg"
-                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary ${
-                  errors.avatar_url ? 'border-red-500' : 'border-gray-300'
+                placeholder="https://exemple.com/avatar.jpg"
+                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-emerald text-sm ${
+                  errors.avatar_url ? "border-error" : "border-border"
                 }`}
               />
-              {errors.avatar_url && <p className="mt-1 text-sm text-red-600">{errors.avatar_url}</p>}
-              <p className="mt-1 text-xs text-gray-500">Optional: URL to your profile picture</p>
+              {errors.avatar_url && (
+                <p className="mt-1 text-xs text-error">{errors.avatar_url}</p>
+              )}
+              <p className="mt-1 text-xs text-content-tertiary">
+                {text.settings.form.avatarUrl.helper}
+              </p>
             </div>
 
             {successMessage && (
-              <div className="p-3 bg-green-50 border border-green-200 rounded-md">
-                <p className="text-sm text-green-600">{successMessage}</p>
+              <div className="p-3 bg-emerald-light border border-emerald/20 rounded-md">
+                <p className="text-sm text-emerald-dark">{successMessage}</p>
               </div>
             )}
 
             {apiError && (
-              <div className="p-3 bg-red-50 border border-red-200 rounded-md">
-                <p className="text-sm text-red-600">{apiError}</p>
+              <div className="p-3 bg-error-light border border-error/20 rounded-md">
+                <p className="text-sm text-error">{apiError}</p>
               </div>
             )}
 
@@ -214,55 +234,67 @@ export default function SettingsPage() {
               <button
                 type="submit"
                 disabled={saving}
-                className="w-full px-4 py-2 bg-emerald-500 text-white rounded-md hover:bg-emerald-600 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+                className="w-full px-4 py-2 bg-emerald text-white rounded-md hover:bg-emerald-dark disabled:opacity-50 disabled:cursor-not-allowed font-medium text-sm transition-colors"
               >
-                {saving ? 'Saving...' : 'Save Changes'}
+                {saving ? text.settings.form.saving : text.settings.form.save}
               </button>
             </div>
           </form>
         </div>
 
         {/* Account Actions */}
-        <div className="space-y-6">
+        <div className="lg:col-span-2 flex flex-col gap-4 justify-between">
           {/* Account Info */}
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-lg font-semibold mb-4">Account</h2>
+          <div className="bg-white rounded-lg border border-border p-5">
+            <h2 className="text-xl! font-semibold text-content-primary font-sora mb-4">
+              {text.settings.sections.account}
+            </h2>
             <div className="space-y-3">
               <div>
-                <p className="text-sm text-gray-600">Account ID</p>
-                <p className="text-sm font-mono text-gray-900 break-all">{profile?.id.substring(0, 8)}...</p>
+                <p className="text-xs text-content-secondary">
+                  {text.settings.account.accountId}
+                </p>
+                <p className="text-xs font-mono text-content-primary break-all">
+                  {profile?.id.substring(0, 8)}...
+                </p>
               </div>
               <div>
-                <p className="text-sm text-gray-600">Status</p>
-                <span className="inline-flex items-center px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">
-                  Active
+                <p className="text-xs text-content-secondary">
+                  {text.settings.account.status.label}
+                </p>
+                <span className="inline-flex items-center px-2 py-1 text-xs font-medium rounded-full bg-emerald-light text-emerald-dark">
+                  {text.settings.account.status.active}
                 </span>
               </div>
             </div>
           </div>
 
           {/* Sign Out */}
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-lg font-semibold mb-4">Session</h2>
+          <div className="bg-white rounded-lg border border-border p-5">
+            <h2 className="text-xl! font-semibold text-content-primary font-sora mb-4">
+              {text.settings.sections.session}
+            </h2>
             <button
               onClick={handleSignOut}
-              className="w-full px-4 py-2 bg-gray-900 text-white rounded-md hover:bg-gray-800 font-medium"
+              className="w-full px-4 py-2 bg-content-primary text-white rounded-md hover:bg-content-secondary font-medium text-sm transition-colors"
             >
-              Sign Out
+              {text.settings.session.signOut}
             </button>
           </div>
 
           {/* Danger Zone */}
-          <div className="bg-white rounded-lg shadow p-6 border-2 border-red-200">
-            <h2 className="text-lg font-semibold text-red-600 mb-2">Danger Zone</h2>
-            <p className="text-sm text-gray-600 mb-4">
-              Once you delete your account, there is no going back. All your projects and feedbacks will be permanently deleted.
+          <div className="bg-white rounded-lg border-2 border-error/30 p-5">
+            <h2 className="text-xl! font-semibold text-error font-sora mb-2">
+              {text.settings.sections.dangerZone}
+            </h2>
+            <p className="text-xs text-content-secondary mb-4">
+              {text.settings.dangerZone.description}
             </p>
             <button
-              onClick={() => alert('Account deletion coming soon')}
-              className="w-full px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 font-medium"
+              onClick={() => alert(text.settings.dangerZone.comingSoon)}
+              className="w-full px-4 py-2 bg-error text-white rounded-md hover:bg-error/80 font-medium text-sm transition-colors"
             >
-              Delete Account
+              {text.settings.dangerZone.deleteAccount}
             </button>
           </div>
         </div>

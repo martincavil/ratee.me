@@ -1,6 +1,11 @@
+'use client';
+
 import Link from 'next/link';
+import { useLanguage } from '@/lib/i18n';
 
 export default function FeedbackNotFound() {
+  const { text } = useLanguage();
+
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-2xl mx-auto text-center">
@@ -25,22 +30,21 @@ export default function FeedbackNotFound() {
 
         {/* Header */}
         <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
-          Invalid Feedback Link
+          {text.feedbackNotFound.title}
         </h1>
 
         <p className="text-xl text-gray-600 mb-8">
-          This feedback link is invalid or has expired.
+          {text.feedbackNotFound.subtitle}
         </p>
 
         {/* Message */}
         <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-8">
           <p className="text-gray-700 leading-relaxed mb-4">
-            The feedback link you're trying to access doesn't exist or is no longer valid.
+            {text.feedbackNotFound.description}
           </p>
 
           <p className="text-gray-600">
-            If you believe this is an error, please contact the person who sent you this
-            link.
+            {text.feedbackNotFound.contact}
           </p>
         </div>
 
@@ -50,11 +54,11 @@ export default function FeedbackNotFound() {
             href="/"
             className="inline-block px-8 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition-all hover:shadow-lg"
           >
-            Go to ratee.me Homepage
+            {text.feedbackNotFound.cta}
           </Link>
 
           <p className="text-sm text-gray-500">
-            Powered by{' '}
+            {text.feedbackNotFound.poweredBy}{' '}
             <a
               href="https://ratee.me"
               className="text-primary font-semibold hover:underline"

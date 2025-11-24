@@ -1,10 +1,11 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { ROUTES } from '@/lib/constants';
-import type { User } from '@/types/database';
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
+import { ROUTES } from "@/lib/constants";
+import { useLanguage } from "@/lib/i18n";
+import type { User } from "@/types/database";
 
 interface NavbarProps {
   user: User;
@@ -13,30 +14,34 @@ interface NavbarProps {
 export function Navbar({ user }: NavbarProps) {
   const pathname = usePathname();
   const router = useRouter();
+  const { lang, setLang, text } = useLanguage();
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   const handleLogout = async () => {
     setIsLoggingOut(true);
     try {
-      await fetch('/api/auth/logout', { method: 'POST' });
+      await fetch("/api/auth/logout", { method: "POST" });
       router.push(ROUTES.LOGIN);
       router.refresh();
     } catch (error) {
-      console.error('Logout failed:', error);
+      console.error("Logout failed:", error);
       setIsLoggingOut(false);
     }
   };
 
   const navLinks = [
-    { href: ROUTES.DASHBOARD, label: 'Dashboard' },
-    { href: ROUTES.PROJECTS, label: 'Projects' },
-    { href: ROUTES.FEEDBACKS, label: 'Feedbacks' },
-    { href: ROUTES.BADGE, label: 'Badge' },
+    {
+      href: ROUTES.DASHBOARD,
+      label: text.navbar.dashboard,
+    },
+    { href: ROUTES.PROJECTS, label: text.navbar.projects },
+    { href: ROUTES.FEEDBACKS, label: text.navbar.feedbacks },
+    { href: ROUTES.BADGE, label: text.navbar.badge },
   ];
 
   return (
-    <nav className="bg-white shadow-sm border-b border-gray-200">
+    <nav className="bg-white shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           {/* Left side: Logo + Nav Links */}
@@ -56,8 +61,8 @@ export function Navbar({ user }: NavbarProps) {
                     href={link.href}
                     className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors ${
                       isActive
-                        ? 'border-primary text-gray-900'
-                        : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                        ? "border-primary text-gray-900"
+                        : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
                     }`}
                   >
                     {link.label}
@@ -73,7 +78,7 @@ export function Navbar({ user }: NavbarProps) {
               {/* User Button */}
               <button
                 onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                className="flex items-center space-x-3 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg px-3 py-2 hover:bg-gray-50 transition-colors"
+                className="flex items-center space-x-3 focus:bg-gray-50  rounded-lg px-3 py-2 hover:bg-gray-50 transition-colors"
               >
                 {/* Avatar */}
                 <div className="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center font-medium">
@@ -93,7 +98,7 @@ export function Navbar({ user }: NavbarProps) {
                 {/* Dropdown Icon */}
                 <svg
                   className={`w-4 h-4 text-gray-500 transition-transform ${
-                    isUserMenuOpen ? 'rotate-180' : ''
+                    isUserMenuOpen ? "rotate-180" : ""
                   }`}
                   fill="none"
                   strokeLinecap="round"
@@ -134,17 +139,52 @@ export function Navbar({ user }: NavbarProps) {
                     <Link
                       href={ROUTES.SETTINGS}
                       onClick={() => setIsUserMenuOpen(false)}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+                      className="block px-4 py-2 text-sm text-content-primary hover:bg-bg-secondary transition-colors"
                     >
-                      Settings
+                      {text.navbar.settings}
                     </Link>
+
+                    {/* Language Selector */}
+                    <div className="px-4 py-2 border-t border-border">
+                      <div className="text-xs text-content-secondary mb-2">
+                        {text.navbar.language}
+                      </div>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => {
+                            setLang("fr");
+                            setIsUserMenuOpen(false);
+                          }}
+                          className={`flex-1 px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
+                            lang === "fr"
+                              ? "bg-emerald text-white"
+                              : "bg-bg-secondary text-content-secondary hover:bg-border"
+                          }`}
+                        >
+                          🇫🇷 FR
+                        </button>
+                        <button
+                          onClick={() => {
+                            setLang("en");
+                            setIsUserMenuOpen(false);
+                          }}
+                          className={`flex-1 px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
+                            lang === "en"
+                              ? "bg-emerald text-white"
+                              : "bg-bg-secondary text-content-secondary hover:bg-border"
+                          }`}
+                        >
+                          🇺🇸 EN
+                        </button>
+                      </div>
+                    </div>
 
                     <button
                       onClick={handleLogout}
                       disabled={isLoggingOut}
-                      className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full text-left px-4 py-2 text-sm text-error hover:bg-error-light transition-colors disabled:opacity-50 disabled:cursor-not-allowed border-t border-border"
                     >
-                      {isLoggingOut ? 'Logging out...' : 'Log out'}
+                      {isLoggingOut ? text.navbar.loggingOut : text.navbar.logout}
                     </button>
                   </div>
                 </>
@@ -163,8 +203,8 @@ export function Navbar({ user }: NavbarProps) {
                 href={link.href}
                 className={`block pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors ${
                   isActive
-                    ? 'border-primary bg-blue-50 text-primary'
-                    : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
+                    ? "border-primary bg-blue-50 text-primary"
+                    : "border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800"
                 }`}
               >
                 {link.label}

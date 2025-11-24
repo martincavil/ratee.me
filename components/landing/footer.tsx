@@ -16,14 +16,14 @@ export function Footer() {
             <Link href="/" className="text-xl font-bold text-white mb-3 block">
               ratee.me
             </Link>
-            <p className="text-sm text-gray-400 leading-relaxed">
+            <p className="text-sm text-gray-400! leading-relaxed">
               {text.footer.tagline}
             </p>
           </div>
 
           {/* Product links */}
           <div>
-            <h3 className="font-semibold text-white text-sm mb-3">
+            <h3 className="font-semibold text-white! text-sm! mb-3">
               {text.footer.product.title}
             </h3>
             <ul className="space-y-2">
@@ -42,7 +42,7 @@ export function Footer() {
 
           {/* Company links */}
           <div>
-            <h3 className="font-semibold text-white text-sm mb-3">
+            <h3 className="font-semibold text-white! text-sm! mb-3">
               {text.footer.company.title}
             </h3>
             <ul className="space-y-2">
@@ -61,7 +61,7 @@ export function Footer() {
 
           {/* Legal links */}
           <div>
-            <h3 className="font-semibold text-white text-sm mb-3">
+            <h3 className="font-semibold text-white! text-sm! mb-3">
               {text.footer.legal.title}
             </h3>
             <ul className="space-y-2">

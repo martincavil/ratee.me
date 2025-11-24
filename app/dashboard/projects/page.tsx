@@ -1,17 +1,20 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { formatDate } from '@/lib/utils';
-import { NewProjectModal } from '@/components/projects/new-project-modal';
-import { EditProjectModal } from '@/components/projects/edit-project-modal';
-import { DeleteProjectDialog } from '@/components/projects/delete-project-dialog';
-import { SendFeedbackModal } from '@/components/projects/send-feedback-modal';
-import type { Project } from '@/types/database';
+import { useState, useEffect } from "react";
+import { formatDate } from "@/lib/utils";
+import { useLanguage } from "@/lib/i18n";
+import { NewProjectModal } from "@/components/projects/new-project-modal";
+import { EditProjectModal } from "@/components/projects/edit-project-modal";
+import { DeleteProjectDialog } from "@/components/projects/delete-project-dialog";
+import { SendFeedbackModal } from "@/components/projects/send-feedback-modal";
+import { Spinner } from "@/components/ui/spinner";
+import type { Project } from "@/types/database";
 
 export default function ProjectsPage() {
+  const { text } = useLanguage();
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState<string>('all');
+  const [filter, setFilter] = useState<string>("all");
   const [isNewModalOpen, setIsNewModalOpen] = useState(false);
   const [editingProject, setEditingProject] = useState<Project | null>(null);
   const [deletingProject, setDeletingProject] = useState<Project | null>(null);
@@ -24,9 +27,8 @@ export default function ProjectsPage() {
   const fetchProjects = async () => {
     setLoading(true);
     try {
-      const url = filter === 'all'
-        ? '/api/projects'
-        : `/api/projects?status=${filter}`;
+      const url =
+        filter === "all" ? "/api/projects" : `/api/projects?status=${filter}`;
 
       const response = await fetch(url);
       const data = await response.json();
@@ -35,7 +37,7 @@ export default function ProjectsPage() {
         setProjects(data.data.projects);
       }
     } catch (error) {
-      console.error('Failed to fetch projects:', error);
+      console.error("Failed to fetch projects:", error);
     } finally {
       setLoading(false);
     }
@@ -53,167 +55,191 @@ export default function ProjectsPage() {
     <div>
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-3xl font-bold">Projects</h1>
+        <h1 className="text-2xl! font-bold text-content-primary font-sora">
+          {text.projects.title}
+        </h1>
         <button
           onClick={() => setIsNewModalOpen(true)}
-          className="px-4 py-2 bg-emerald-500 text-white rounded-md hover:bg-emerald-600 font-medium"
+          className="px-4 py-2 bg-emerald text-white rounded-md hover:bg-emerald-dark font-medium text-sm transition-colors"
         >
-          + New Project
+          + {text.projects.newProject}
         </button>
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-lg shadow mb-6 p-4">
+      <div className="bg-white rounded-lg border border-border mb-6 p-4">
         <div className="flex space-x-2">
           <button
-            onClick={() => setFilter('all')}
-            className={`px-4 py-2 rounded-md font-medium ${
-              filter === 'all'
-                ? 'bg-emerald-500 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+            onClick={() => setFilter("all")}
+            className={`px-3 py-2 rounded-md font-medium text-sm transition-colors ${
+              filter === "all"
+                ? "bg-emerald text-white"
+                : "bg-bg-secondary text-content-secondary hover:bg-border"
             }`}
           >
-            All
+            {text.projects.filters.all}
           </button>
           <button
-            onClick={() => setFilter('in_progress')}
-            className={`px-4 py-2 rounded-md font-medium ${
-              filter === 'in_progress'
-                ? 'bg-emerald-500 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+            onClick={() => setFilter("in_progress")}
+            className={`px-3 py-2 rounded-md font-medium text-sm transition-colors ${
+              filter === "in_progress"
+                ? "bg-emerald text-white"
+                : "bg-bg-secondary text-content-secondary hover:bg-border"
             }`}
           >
-            In Progress
+            {text.projects.filters.inProgress}
           </button>
           <button
-            onClick={() => setFilter('delivered')}
-            className={`px-4 py-2 rounded-md font-medium ${
-              filter === 'delivered'
-                ? 'bg-emerald-500 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+            onClick={() => setFilter("delivered")}
+            className={`px-3 py-2 rounded-md font-medium text-sm transition-colors ${
+              filter === "delivered"
+                ? "bg-emerald text-white"
+                : "bg-bg-secondary text-content-secondary hover:bg-border"
             }`}
           >
-            Delivered
+            {text.projects.filters.delivered}
           </button>
           <button
-            onClick={() => setFilter('archived')}
-            className={`px-4 py-2 rounded-md font-medium ${
-              filter === 'archived'
-                ? 'bg-emerald-500 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+            onClick={() => setFilter("archived")}
+            className={`px-3 py-2 rounded-md font-medium text-sm transition-colors ${
+              filter === "archived"
+                ? "bg-emerald text-white"
+                : "bg-bg-secondary text-content-secondary hover:bg-border"
             }`}
           >
-            Archived
+            {text.projects.filters.archived}
           </button>
         </div>
       </div>
 
       {/* Projects Table */}
-      <div className="bg-white rounded-lg shadow overflow-hidden">
+      <div className="bg-white rounded-lg border border-border overflow-hidden">
         {loading ? (
-          <div className="p-8 text-center text-gray-500">Loading...</div>
+          <div className="p-8 flex justify-center">
+            <Spinner className="w-8 h-8 text-emerald" />
+          </div>
         ) : projects.length === 0 ? (
           <div className="p-8 text-center">
-            <p className="text-gray-500 mb-4">No projects found</p>
+            <p className="text-content-secondary text-sm mb-4">
+              {text.projects.table.empty}
+            </p>
             <button
               onClick={() => setIsNewModalOpen(true)}
-              className="text-primary hover:underline font-medium"
+              className="text-emerald hover:text-emerald-dark font-medium text-sm"
             >
-              Create your first project
+              {text.projects.table.createFirst}
             </button>
           </div>
         ) : (
           <table className="w-full">
-            <thead className="bg-gray-50 border-b border-gray-200">
+            <thead className="bg-bg-secondary border-b border-border">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Project
+                <th className="px-5 py-3 text-left text-xs font-medium text-content-secondary">
+                  {text.projects.table.headers.project}
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Client
+                <th className="px-5 py-3 text-left text-xs font-medium text-content-secondary">
+                  {text.projects.table.headers.client}
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Delivery Date
+                <th className="px-5 py-3 text-left text-xs font-medium text-content-secondary">
+                  {text.projects.table.headers.deliveryDate}
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Status
+                <th className="px-5 py-3 text-left text-xs font-medium text-content-secondary">
+                  {text.projects.table.headers.status}
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Feedback
+                <th className="px-5 py-3 text-left text-xs font-medium text-content-secondary">
+                  {text.projects.table.headers.feedback}
                 </th>
-                <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Actions
+                <th className="px-5 py-3 text-right text-xs font-medium text-content-secondary">
+                  {text.projects.table.headers.actions}
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
+            <tbody className="bg-white divide-y divide-border">
               {projects.map((project) => (
-                <tr key={project.id} className="hover:bg-gray-50">
-                  <td className="px-6 py-4">
+                <tr
+                  key={project.id}
+                  className="hover:bg-bg-secondary transition-colors"
+                >
+                  <td className="px-5 py-4">
                     <div>
-                      <div className="font-medium text-gray-900">{project.name}</div>
+                      <div className="font-medium text-content-primary text-sm!">
+                        {project.name}
+                      </div>
                       {project.description && (
-                        <div className="text-sm text-gray-500 line-clamp-1">
+                        <div className="text-xs text-content-secondary line-clamp-1">
                           {project.description}
                         </div>
                       )}
                     </div>
                   </td>
-                  <td className="px-6 py-4">
-                    <div className="text-sm text-gray-900">{project.client_name}</div>
+                  <td className="px-5 py-4">
+                    <div className="text-sm text-content-primary">
+                      {project.client_name}
+                    </div>
                     {project.client_email && (
-                      <div className="text-sm text-gray-500">{project.client_email}</div>
+                      <div className="text-xs text-content-secondary">
+                        {project.client_email}
+                      </div>
                     )}
                   </td>
-                  <td className="px-6 py-4 text-sm text-gray-900">
+                  <td className="px-5 py-4 text-sm text-content-primary">
                     {formatDate(project.delivery_date)}
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-5 py-4">
                     <span
                       className={`px-2 py-1 text-xs font-medium rounded-full ${
-                        project.status === 'delivered'
-                          ? 'bg-green-100 text-green-800'
-                          : project.status === 'in_progress'
-                          ? 'bg-blue-100 text-blue-800'
-                          : 'bg-gray-100 text-gray-800'
+                        project.status === "delivered"
+                          ? "bg-emerald-light text-emerald-dark"
+                          : project.status === "in_progress"
+                          ? "bg-info-light text-info"
+                          : "bg-gray-100 text-gray-600"
                       }`}
                     >
-                      {project.status.replace('_', ' ')}
+                      {project.status === "delivered"
+                        ? text.projects.table.status.delivered
+                        : project.status === "in_progress"
+                        ? text.projects.table.status.inProgress
+                        : text.projects.table.status.archived}
                     </span>
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-5 py-4">
                     <span
                       className={`px-2 py-1 text-xs font-medium rounded-full ${
-                        project.feedback_status === 'received'
-                          ? 'bg-green-100 text-green-800'
-                          : project.feedback_status === 'sent'
-                          ? 'bg-yellow-100 text-yellow-800'
-                          : 'bg-gray-100 text-gray-800'
+                        project.feedback_status === "received"
+                          ? "bg-emerald-light text-emerald-dark"
+                          : project.feedback_status === "sent"
+                          ? "bg-warning-light text-warning"
+                          : "bg-gray-100 text-gray-600"
                       }`}
                     >
-                      {project.feedback_status.replace('_', ' ')}
+                      {project.feedback_status === "received"
+                        ? text.projects.table.feedbackStatus.received
+                        : project.feedback_status === "sent"
+                        ? text.projects.table.feedbackStatus.sent
+                        : text.projects.table.feedbackStatus.notSent}
                     </span>
                   </td>
-                  <td className="px-6 py-4 text-right text-sm space-x-2">
-                    {project.feedback_status === 'not_sent' && project.client_email && (
-                      <button
-                        onClick={() => setFeedbackProject(project)}
-                        className="text-green-600 hover:text-green-800 font-medium"
-                      >
-                        Send Feedback
-                      </button>
-                    )}
+                  <td className="px-5 py-4 text-right text-xs space-x-2">
+                    {project.feedback_status === "not_sent" &&
+                      project.client_email && (
+                        <button
+                          onClick={() => setFeedbackProject(project)}
+                          className="text-emerald hover:text-emerald-dark font-medium"
+                        >
+                          {text.projects.table.actions.send}
+                        </button>
+                      )}
                     <button
                       onClick={() => setEditingProject(project)}
-                      className="text-primary hover:text-primary/80 font-medium"
+                      className="text-emerald hover:text-emerald-dark font-medium"
                     >
-                      Edit
+                      {text.projects.table.actions.edit}
                     </button>
                     <button
                       onClick={() => setDeletingProject(project)}
-                      className="text-red-600 hover:text-red-800 font-medium"
+                      className="text-error hover:text-error/80 font-medium"
                     >
-                      Delete
+                      {text.projects.table.actions.delete}
                     </button>
                   </td>
                 </tr>
@@ -224,10 +250,7 @@ export default function ProjectsPage() {
       </div>
 
       {/* Modals */}
-      <NewProjectModal
-        isOpen={isNewModalOpen}
-        onClose={handleModalClose}
-      />
+      <NewProjectModal isOpen={isNewModalOpen} onClose={handleModalClose} />
 
       {editingProject && (
         <EditProjectModal

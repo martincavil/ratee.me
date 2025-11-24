@@ -69,7 +69,9 @@ export function Problem() {
     const timer = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
-          setActiveIndex((current) => (current + 1) % text.problem.issues.length);
+          setActiveIndex(
+            (current) => (current + 1) % text.problem.issues.length
+          );
           return 0;
         }
         return prev + increment;
@@ -129,7 +131,9 @@ export function Problem() {
             </div>
             <div className="mt-4 p-3 bg-emerald-50 rounded-lg border border-emerald-100">
               <div className="text-xs text-emerald-700 font-medium">
-                {lang === "fr" ? "Feedback envoyé automatiquement" : "Feedback sent automatically"}
+                {lang === "fr"
+                  ? "Feedback envoyé automatiquement"
+                  : "Feedback sent automatically"}
               </div>
             </div>
           </div>
@@ -154,7 +158,7 @@ export function Problem() {
               </div>
               <div className="mt-4 px-4 py-2 bg-gray-100 rounded-lg">
                 <code className="text-xs text-gray-600">
-                  {"<embed src=\"ratee.me/badge/...\" />"}
+                  {'<embed src="ratee.me/badge/..." />'}
                 </code>
               </div>
             </div>
@@ -240,7 +244,7 @@ export function Problem() {
         </div>
 
         {/* Accordion + Screen Layout */}
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Accordion Items */}
           <div className="space-y-4">
             {text.problem.issues.map((issue, index) => (
@@ -255,7 +259,7 @@ export function Problem() {
               >
                 {/* Progress bar for active item */}
                 {activeIndex === index && (
-                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-gray-200 rounded-l-xl overflow-hidden">
+                  <div className="absolute rounded-l-xl -left-0.5 top-1 bottom-1 w-1 bg-gray-200 overflow-hidden">
                     <div
                       className="w-full bg-emerald-500 transition-all duration-75 ease-linear"
                       style={{ height: `${progress}%` }}
@@ -266,7 +270,7 @@ export function Problem() {
                 <div className="p-5 pl-6">
                   <div className="flex items-start gap-4">
                     <div
-                      className={`text-2xl flex-shrink-0 ${
+                      className={`text-lg flex-shrink-0 ${
                         activeIndex === index ? "" : "opacity-60"
                       }`}
                     >
@@ -274,7 +278,7 @@ export function Problem() {
                     </div>
                     <div>
                       <h3
-                        className={`font-semibold mb-1 transition-colors ${
+                        className={`text-xl! font-semibold mb-1 transition-colors ${
                           activeIndex === index
                             ? "text-gray-900"
                             : "text-gray-600"

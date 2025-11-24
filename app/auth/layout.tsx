@@ -1,8 +1,8 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Authentication - ratee.me',
-  description: 'Sign in or create an account',
+  title: "Authentication - ratee.me",
+  description: "Sign in or create an account",
 };
 
 export default function AuthLayout({
@@ -11,8 +11,8 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
-      <div className="w-full max-w-md px-4">
+    <div className="h-screen flex items-center justify-center bg-linear-to-br from-blue-50 to-emerald-100">
+      <div className="w-full max-w-2xl px-4">
         {/* Logo */}
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-primary">ratee.me</h1>
@@ -22,9 +22,7 @@ export default function AuthLayout({
         </div>
 
         {/* Auth form card */}
-        <div className="bg-white rounded-lg shadow-lg p-8">
-          {children}
-        </div>
+        <div className="bg-white rounded-lg shadow-lg p-8">{children}</div>
 
         {/* Footer */}
         <div className="text-center mt-6 text-sm text-muted-foreground">

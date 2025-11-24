@@ -1,22 +1,30 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
-import { loginSchema, type LoginInput } from '@/lib/validators';
-import { ROUTES } from '@/lib/constants';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { loginSchema, type LoginInput } from "@/lib/validators";
+import { ROUTES } from "@/lib/constants";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 export function LoginForm() {
   const router = useRouter();
   const [formData, setFormData] = useState<LoginInput>({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
-  const [errors, setErrors] = useState<Partial<Record<keyof LoginInput, string>>>({});
+  const [errors, setErrors] = useState<
+    Partial<Record<keyof LoginInput, string>>
+  >({});
   const [loading, setLoading] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
 
@@ -48,55 +56,69 @@ export function LoginForm() {
     setLoading(true);
 
     try {
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
       const data = await response.json();
 
       if (!data.success) {
-        setApiError(data.error || 'Login failed');
+        setApiError(data.error || "Login failed");
         return;
       }
 
       router.push(ROUTES.DASHBOARD);
       router.refresh();
     } catch {
-      setApiError('An unexpected error occurred. Please try again.');
+      setApiError("An unexpected error occurred. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <Card className="w-full max-w-md">
-      <CardHeader className="text-center">
-        <CardTitle className="text-2xl">Welcome Back</CardTitle>
-        <CardDescription>Sign in to your account</CardDescription>
+    <Card className="w-full max-w-md bg-white border border-border shadow-sm">
+      <CardHeader className="text-center space-y-2 pb-6">
+        <CardTitle className="text-2xl! font-bold text-content-primary font-sora">
+          Bon retour
+        </CardTitle>
+        <CardDescription className="text-sm text-content-secondary">
+          Connectez-vous à votre compte
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+            <Label
+              htmlFor="email"
+              className="text-sm font-medium text-content-primary"
+            >
+              Email
+            </Label>
             <Input
               type="email"
               id="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="you@example.com"
+              placeholder="vous@exemple.com"
               autoComplete="email"
-              className={errors.email ? 'border-red-500' : ''}
+              className={errors.email ? "border-error" : ""}
             />
             {errors.email && (
-              <p className="text-sm text-red-600">{errors.email}</p>
+              <p className="text-sm text-error">{errors.email}</p>
             )}
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
+            <Label
+              htmlFor="password"
+              className="text-sm font-medium text-content-primary"
+            >
+              Mot de passe
+            </Label>
             <Input
               type="password"
               id="password"
@@ -105,28 +127,35 @@ export function LoginForm() {
               onChange={handleChange}
               placeholder="••••••••"
               autoComplete="current-password"
-              className={errors.password ? 'border-red-500' : ''}
+              className={errors.password ? "border-error" : ""}
             />
             {errors.password && (
-              <p className="text-sm text-red-600">{errors.password}</p>
+              <p className="text-sm text-error">{errors.password}</p>
             )}
           </div>
 
           {apiError && (
-            <div className="p-3 bg-red-50 border border-red-200 rounded-md">
-              <p className="text-sm text-red-600">{apiError}</p>
+            <div className="p-3 bg-error-light border border-error/20 rounded-md">
+              <p className="text-sm text-error">{apiError}</p>
             </div>
           )}
 
-          <Button type="submit" disabled={loading} className="w-full">
-            {loading ? 'Logging in...' : 'Log In'}
+          <Button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-emerald text-white hover:bg-emerald-dark transition-colors font-medium"
+          >
+            {loading ? "Connexion..." : "Se connecter"}
           </Button>
         </form>
 
-        <p className="mt-6 text-center text-sm text-gray-600">
-          Don&apos;t have an account?{' '}
-          <Link href={ROUTES.SIGNUP} className="text-emerald-500 hover:underline font-medium">
-            Sign up
+        <p className="mt-6 text-center text-sm text-content-secondary">
+          Pas encore de compte?{" "}
+          <Link
+            href={ROUTES.SIGNUP}
+            className="text-emerald hover:text-emerald-dark font-medium"
+          >
+            S&apos;inscrire
           </Link>
         </p>
       </CardContent>

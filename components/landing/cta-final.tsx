@@ -7,9 +7,9 @@ export function CTAFinal() {
   const { text } = useLanguage();
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+    <section className="md:py-20 md:px-4 lg:px-8 bg-white">
       <div className="max-w-4xl mx-auto">
-        <div className="relative bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-3xl p-10 md:p-16 text-center overflow-hidden">
+        <div className="relative bg-linear-to-br from-emerald-500 to-emerald-600 md:rounded-3xl p-10 md:p-16 text-center overflow-hidden">
           {/* Background decoration */}
           <div className="absolute top-0 left-0 w-32 h-32 bg-white/10 rounded-full -translate-x-1/2 -translate-y-1/2" />
           <div className="absolute bottom-0 right-0 w-48 h-48 bg-white/10 rounded-full translate-x-1/3 translate-y-1/3" />

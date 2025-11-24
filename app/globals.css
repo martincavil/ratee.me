@@ -1,12 +1,44 @@
 @import "tailwindcss";
 
-/* Design Tokens */
+@theme {
+  /* Colors - Tailwind v4 requires @theme directive */
+  --color-bg-primary: #F5F3F0;
+  --color-bg-secondary: #FAFAF8;
+
+  --color-content-primary: #1D1D1E;
+  --color-content-secondary: #666666;
+  --color-content-tertiary: #999999;
+
+  --color-emerald: #10B981;
+  --color-emerald-light: #D1F5E8;
+  --color-emerald-dark: #047857;
+
+  --color-primary: #10B981;
+  --color-primary-foreground: #FFFFFF;
+
+  --color-border: #E5E7EB;
+
+  /* Functional colors */
+  --color-success: #10B981;
+  --color-success-light: #D1FAE5;
+
+  --color-warning: #F59E0B;
+  --color-warning-light: #FEF3C7;
+
+  --color-error: #EF4444;
+  --color-error-light: #FEE2E2;
+
+  --color-info: #3B82F6;
+  --color-info-light: #DBEAFE;
+}
+
+/* Design Tokens - Legacy CSS variables */
 :root {
   /* Fonts */
   --font-sora: 'Sora', system-ui, sans-serif;
   --font-inter: 'Inter', system-ui, sans-serif;
 
-  /* Colors */
+  /* Colors - for direct CSS usage */
   --bg-primary: #F5F3F0;
   --bg-secondary: #FAFAF8;
   --text-primary: #1D1D1E;

@@ -1,8 +1,10 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
+import { useLanguage } from "@/lib/i18n";
 
 export default function BadgePage() {
+  const { text } = useLanguage();
   const [stats, setStats] = useState({
     avg_nps: 0,
     total_feedbacks: 0,
@@ -18,23 +20,25 @@ export default function BadgePage() {
 
   const fetchStats = async () => {
     try {
-      const response = await fetch('/api/badge/stats');
+      const response = await fetch("/api/badge/stats");
       const data = await response.json();
       if (data.success) {
         setStats(data.data.stats);
       }
     } catch (error) {
-      console.error('Failed to fetch stats:', error);
+      console.error("Failed to fetch stats:", error);
     }
   };
 
-  const embedCode = `<div style="font-family: Arial, sans-serif; border: 2px solid #0052FF; border-radius: 8px; padding: 16px; max-width: 300px; text-align: center;">
-  <div style="font-size: 14px; color: #666; margin-bottom: 8px;">Client Satisfaction</div>
-  <div style="font-size: 48px; font-weight: bold; color: #0052FF;">${stats.avg_nps.toFixed(1)}</div>
-  <div style="font-size: 12px; color: #999; margin-bottom: 16px;">Average NPS Score</div>
-  <div style="font-size: 12px; color: #666;">${stats.total_feedbacks} total feedbacks</div>
+  const embedCode = `<div style="font-family: Arial, sans-serif; border: 2px solid #10B981; border-radius: 8px; padding: 16px; max-width: 300px; text-align: center;">
+  <div style="font-size: 14px; color: #666; margin-bottom: 8px;">${text.badge.preview.satisfaction}</div>
+  <div style="font-size: 48px; font-weight: bold; color: #10B981;">${stats.avg_nps.toFixed(
+    1
+  )}</div>
+  <div style="font-size: 12px; color: #999; margin-bottom: 16px;">${text.badge.preview.avgNPS}</div>
+  <div style="font-size: 12px; color: #666;">${stats.total_feedbacks} ${text.badge.preview.totalFeedbacks}</div>
   <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #eee; font-size: 10px; color: #999;">
-    Powered by ratee.me
+    ${text.badge.preview.certified}
   </div>
 </div>`;
 
@@ -46,120 +50,152 @@ export default function BadgePage() {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-6">NPS Badge</h1>
+      <h1 className="text-2xl! font-bold text-content-primary font-sora mb-6">
+        {text.badge.title}
+      </h1>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Preview */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-semibold mb-4">Badge Preview</h2>
-          <p className="text-gray-600 mb-6">
-            This is how your NPS badge will appear on your website
-          </p>
-
-          <div className="flex justify-center">
-            <div
-              style={{
-                fontFamily: 'Arial, sans-serif',
-                border: '2px solid #0052FF',
-                borderRadius: '8px',
-                padding: '16px',
-                maxWidth: '300px',
-                textAlign: 'center',
-              }}
-            >
-              <div style={{ fontSize: '14px', color: '#666', marginBottom: '8px' }}>
-                Client Satisfaction
-              </div>
-              <div style={{ fontSize: '48px', fontWeight: 'bold', color: '#0052FF' }}>
+      <div className="mb-6">
+        {/* Stats Breakdown */}
+        <div className="mt-6 bg-white rounded-lg border border-border p-6">
+          <h2 className="text-xl! font-semibold text-content-primary font-sora mb-4">
+            {text.badge.stats.title}
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="text-center p-4 bg-bg-secondary rounded-md">
+              <p className="text-2xl font-bold text-emerald">
                 {stats.avg_nps.toFixed(1)}
-              </div>
-              <div style={{ fontSize: '12px', color: '#999', marginBottom: '16px' }}>
-                Average NPS Score
-              </div>
-              <div style={{ fontSize: '12px', color: '#666' }}>
-                {stats.total_feedbacks} total feedbacks
-              </div>
-              <div
-                style={{
-                  marginTop: '12px',
-                  paddingTop: '12px',
-                  borderTop: '1px solid #eee',
-                  fontSize: '10px',
-                  color: '#999',
-                }}
-              >
-                Powered by ratee.me
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-md">
-            <p className="text-sm text-blue-800">
-              <strong>Note:</strong> The badge updates automatically when you receive new
-              feedbacks!
-            </p>
-          </div>
-        </div>
-
-        {/* Embed Code */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-semibold mb-4">Embed Code</h2>
-          <p className="text-gray-600 mb-6">
-            Copy this code and paste it anywhere on your website
-          </p>
-
-          <div className="relative">
-            <pre className="bg-gray-900 text-gray-100 p-4 rounded-md overflow-x-auto text-xs">
-              {embedCode}
-            </pre>
-            <button
-              onClick={copyCode}
-              className="absolute top-2 right-2 px-3 py-1 bg-white text-gray-900 rounded text-sm font-medium hover:bg-gray-100"
-            >
-              {copied ? '✓ Copied!' : 'Copy'}
-            </button>
-          </div>
-
-          <div className="mt-6 space-y-4">
-            <div>
-              <h3 className="font-medium text-gray-900 mb-2">How to use:</h3>
-              <ol className="list-decimal list-inside space-y-2 text-sm text-gray-600">
-                <li>Copy the embed code above</li>
-                <li>Open your website's HTML file</li>
-                <li>Paste the code where you want the badge to appear</li>
-                <li>Save and refresh your website</li>
-              </ol>
-            </div>
-
-            <div className="p-4 bg-green-50 border border-green-200 rounded-md">
-              <p className="text-sm text-green-800">
-                <strong>Pro tip:</strong> Place your badge on your homepage, about page,
-                or portfolio to build trust with potential clients!
               </p>
+              <p className="text-xs text-content-secondary">{text.badge.stats.avgNPS}</p>
+            </div>
+            <div className="text-center p-4 bg-emerald-light rounded-md">
+              <p className="text-2xl font-bold text-emerald-dark">
+                {stats.total_promoters}
+              </p>
+              <p className="text-xs text-content-secondary">{text.badge.stats.promoters}</p>
+            </div>
+            <div className="text-center p-4 bg-warning-light rounded-md">
+              <p className="text-2xl font-bold text-warning">
+                {stats.total_passives}
+              </p>
+              <p className="text-xs text-content-secondary">{text.badge.stats.passives}</p>
+            </div>
+            <div className="text-center p-4 bg-error-light rounded-md">
+              <p className="text-2xl font-bold text-error">
+                {stats.total_detractors}
+              </p>
+              <p className="text-xs text-content-secondary">{text.badge.stats.detractors}</p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Stats Breakdown */}
-      <div className="mt-8 bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-semibold mb-4">Your Stats</h2>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <div className="text-center p-4 bg-gray-50 rounded-md">
-            <p className="text-2xl font-bold text-gray-900">{stats.avg_nps.toFixed(1)}</p>
-            <p className="text-sm text-gray-600">Average NPS</p>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Preview */}
+        <div className="bg-white rounded-lg border border-border p-6">
+          <h2 className="text-xl! font-semibold text-content-primary font-sora mb-4">
+            {text.badge.preview.title}
+          </h2>
+          <p className="text-content-secondary text-sm mb-6">
+            {text.badge.preview.description}
+          </p>
+
+          <div className="flex justify-center">
+            <div
+              style={{
+                fontFamily: "Arial, sans-serif",
+                border: "2px solid #10B981",
+                borderRadius: "8px",
+                padding: "16px",
+                maxWidth: "300px",
+                textAlign: "center",
+              }}
+            >
+              <div
+                style={{ fontSize: "14px", color: "#666", marginBottom: "8px" }}
+              >
+                {text.badge.preview.satisfaction}
+              </div>
+              <div
+                style={{
+                  fontSize: "48px",
+                  fontWeight: "bold",
+                  color: "#10B981",
+                }}
+              >
+                {stats.avg_nps.toFixed(1)}
+              </div>
+              <div
+                style={{
+                  fontSize: "12px",
+                  color: "#999",
+                  marginBottom: "16px",
+                }}
+              >
+                {text.badge.preview.avgNPS}
+              </div>
+              <div style={{ fontSize: "12px", color: "#666" }}>
+                {stats.total_feedbacks} {text.badge.preview.totalFeedbacks}
+              </div>
+              <div
+                style={{
+                  marginTop: "12px",
+                  paddingTop: "12px",
+                  borderTop: "1px solid #eee",
+                  fontSize: "10px",
+                  color: "#999",
+                }}
+              >
+                {text.badge.preview.certified}
+              </div>
+            </div>
           </div>
-          <div className="text-center p-4 bg-green-50 rounded-md">
-            <p className="text-2xl font-bold text-green-600">{stats.total_promoters}</p>
-            <p className="text-sm text-gray-600">Promoters</p>
+
+          <div className="mt-6 p-4 bg-info-light border border-info/20 rounded-md">
+            <p className="text-xs text-info">
+              <strong>{text.badge.preview.note}:</strong> {text.badge.preview.noteText}
+            </p>
           </div>
-          <div className="text-center p-4 bg-yellow-50 rounded-md">
-            <p className="text-2xl font-bold text-yellow-600">{stats.total_passives}</p>
-            <p className="text-sm text-gray-600">Passives</p>
+        </div>
+
+        {/* Embed Code */}
+        <div className="bg-white rounded-lg border border-border p-6">
+          <h2 className="text-xl! font-semibold text-content-primary font-sora mb-4">
+            {text.badge.embed.title}
+          </h2>
+          <p className="text-content-secondary text-sm mb-6">
+            {text.badge.embed.description}
+          </p>
+
+          <div className="relative">
+            <pre className="bg-content-primary text-white p-4 rounded-md overflow-x-auto text-xs">
+              {embedCode}
+            </pre>
+            <button
+              onClick={copyCode}
+              className="absolute top-2 right-2 px-3 py-1 bg-white text-content-primary rounded text-xs font-medium hover:bg-bg-secondary transition-colors"
+            >
+              {copied ? `✓ ${text.badge.embed.copied}` : text.badge.embed.copy}
+            </button>
           </div>
-          <div className="text-center p-4 bg-red-50 rounded-md">
-            <p className="text-2xl font-bold text-red-600">{stats.total_detractors}</p>
-            <p className="text-sm text-gray-600">Detractors</p>
+
+          <div className="mt-6 space-y-4">
+            <div>
+              <h3 className="font-medium text-content-primary text-sm! mb-2">
+                {text.badge.embed.howToUse}
+              </h3>
+              <ol className="list-decimal list-inside space-y-2 text-xs text-content-secondary">
+                <li>{text.badge.embed.steps.step1}</li>
+                <li>{text.badge.embed.steps.step2}</li>
+                <li>{text.badge.embed.steps.step3}</li>
+                <li>{text.badge.embed.steps.step4}</li>
+              </ol>
+            </div>
+
+            <div className="p-4 bg-emerald-light border border-emerald/20 rounded-md">
+              <p className="text-xs text-emerald-dark">
+                <strong>{text.badge.embed.tip}:</strong> {text.badge.embed.tipText}
+              </p>
+            </div>
           </div>
         </div>
       </div>

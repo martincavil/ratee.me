@@ -28,8 +28,8 @@ export const NPS_CATEGORIES = {
 
 export const ROUTES = {
   HOME: "/",
-  LOGIN: "/login",
-  SIGNUP: "/signup",
+  LOGIN: "/auth/login",
+  SIGNUP: "/auth/signup",
   DASHBOARD: "/dashboard",
   PROJECTS: "/dashboard/projects",
   FEEDBACKS: "/dashboard/feedbacks",
@@ -51,7 +51,8 @@ export const content = {
     },
     problem: {
       title: "Ce que ratee.me change pour vous",
-      subtitle: "Freelances et agences gagnent en efficacité, en crédibilité et en revenus.",
+      subtitle:
+        "Freelances et agences gagnent en efficacité, en crédibilité et en revenus.",
       issues: [
         {
           icon: "⏱️",
@@ -160,8 +161,7 @@ export const content = {
         },
         {
           number: "100%",
-          unit: "des feedbacks",
-          heading: "Centralisés",
+          heading: "Des feedbacks centralisés",
           description:
             "Plus de data éparpillée. Un dashboard unique. Tu peux enfin analyser et améliorer avec confiance.",
         },
@@ -289,7 +289,8 @@ export const content = {
       ],
     },
     ctaFinal: {
-      headline: "Si vous êtes arrivé jusque-là, c'est qu'il est temps d'essayer.",
+      headline:
+        "Si vous êtes arrivé jusque-là, c'est qu'il est temps d'essayer.",
       subheadline:
         "Rejoignez les freelances et agences qui ont déjà automatisé leur collecte de feedbacks.",
       ctaPrimary: "Commencer gratuitement",
@@ -324,7 +325,7 @@ export const content = {
           { label: "Contact", href: "/contact" },
         ],
       },
-      copyright: "Copyright © 2024 ratee.me. All rights reserved.",
+      copyright: "Copyright © 2025 ratee.me. All rights reserved.",
       madeIn: "Made in France 🇫🇷 | Serving the world 🌍",
     },
     nav: {
@@ -333,6 +334,204 @@ export const content = {
       demo: "Demo",
       login: "Connexion",
       signup: "Inscription",
+    },
+    notFound: {
+      title: "Page introuvable",
+      description: "La page que vous cherchez n'existe pas ou a été déplacée.",
+      backHome: "Retour à l'accueil",
+    },
+    feedbackNotFound: {
+      title: "Lien de feedback invalide",
+      subtitle: "Ce lien de feedback est invalide ou a expiré.",
+      description:
+        "Le lien de feedback que vous essayez d'accéder n'existe pas ou n'est plus valide.",
+      contact:
+        "Si vous pensez qu'il s'agit d'une erreur, veuillez contacter la personne qui vous a envoyé ce lien.",
+      cta: "Aller sur la page d'accueil de ratee.me",
+      poweredBy: "Certifié par",
+    },
+    dashboard: {
+      welcome: "Bon retour",
+      subtitle: "Voici ce qui se passe avec vos feedbacks clients",
+      banners: {
+        free: {
+          title: "Vous êtes en plan FREE (1 projet/mois)",
+          description: "Upgrade pour projets illimités + email automation",
+          action: "Upgrade",
+        },
+        trial: {
+          title: "Vous êtes en PRO (30j gratuit)",
+          daysLeft: "jours restants",
+          description: "Email automation activée - profitez-en!",
+        },
+        pro: {
+          title: "Vous êtes en plan PRO - Automations activées",
+        },
+      },
+      stats: {
+        totalProjects: "Total Projets",
+        totalFeedbacks: "Total Feedbacks",
+        avgNPS: "Score NPS Moyen",
+        lastFeedback: "Dernier Feedback",
+        noFeedbackYet: "Pas encore",
+      },
+      recentProjects: {
+        title: "Projets Récents",
+        viewAll: "Voir tout",
+        empty: "Pas encore de projets",
+        createFirst: "Créer votre premier projet",
+        status: {
+          delivered: "Livré",
+          inProgress: "En cours",
+          archived: "Archivé",
+        },
+      },
+      recentFeedbacks: {
+        title: "Feedbacks Récents",
+        viewAll: "Voir tout",
+        empty: "Pas encore de feedbacks",
+        emptyDescription: "Les feedbacks apparaîtront ici une fois que vos clients répondront",
+        noComment: "Pas de commentaire",
+      },
+    },
+    projects: {
+      title: "Projets",
+      newProject: "Nouveau Projet",
+      filters: {
+        all: "Tous",
+        inProgress: "En cours",
+        delivered: "Livrés",
+        archived: "Archivés",
+      },
+      table: {
+        headers: {
+          project: "Projet",
+          client: "Client",
+          deliveryDate: "Date de Livraison",
+          status: "Statut",
+          feedback: "Feedback",
+          actions: "Actions",
+        },
+        empty: "Aucun projet trouvé",
+        createFirst: "Créer votre premier projet",
+        status: {
+          delivered: "Livré",
+          inProgress: "En cours",
+          archived: "Archivé",
+        },
+        feedbackStatus: {
+          received: "Reçu",
+          sent: "Envoyé",
+          notSent: "Non envoyé",
+        },
+        actions: {
+          send: "Envoyer",
+          edit: "Modifier",
+          delete: "Supprimer",
+        },
+      },
+    },
+    feedbacks: {
+      title: "Feedbacks Clients",
+      stats: {
+        avgNPS: "Score NPS Moyen",
+        promoters: "Promoteurs (9-10)",
+        passives: "Passifs (7-8)",
+        detractors: "Détracteurs (0-6)",
+      },
+      list: {
+        title: "Tous les Feedbacks",
+        empty: "Pas encore de feedbacks",
+        emptyDescription: "Les feedbacks apparaîtront ici une fois que vos clients répondront",
+      },
+    },
+    settings: {
+      title: "Paramètres",
+      sections: {
+        profile: "Informations du Profil",
+        account: "Compte",
+        session: "Session",
+        dangerZone: "Zone de Danger",
+      },
+      form: {
+        email: {
+          label: "Email",
+          helper: "L'email ne peut pas être modifié",
+        },
+        fullName: {
+          label: "Nom Complet *",
+        },
+        companyName: {
+          label: "Nom de l'Entreprise",
+        },
+        avatarUrl: {
+          label: "URL Avatar",
+          helper: "Optionnel : URL de votre photo de profil",
+        },
+        save: "Enregistrer les modifications",
+        saving: "Enregistrement...",
+        successMessage: "Profil mis à jour avec succès!",
+      },
+      account: {
+        accountId: "ID du Compte",
+        status: {
+          label: "Statut",
+          active: "Actif",
+        },
+      },
+      session: {
+        signOut: "Se déconnecter",
+      },
+      dangerZone: {
+        description: "Une fois que vous supprimez votre compte, il n'y a plus de retour en arrière. Tous vos projets et feedbacks seront définitivement supprimés.",
+        deleteAccount: "Supprimer le Compte",
+        comingSoon: "Suppression de compte bientôt disponible",
+      },
+    },
+    badge: {
+      title: "Badge NPS",
+      stats: {
+        title: "Vos Statistiques",
+        avgNPS: "NPS Moyen",
+        promoters: "Promoteurs",
+        passives: "Passifs",
+        detractors: "Détracteurs",
+      },
+      preview: {
+        title: "Aperçu du Badge",
+        description: "Voici comment votre badge NPS apparaîtra sur votre site web",
+        satisfaction: "Satisfaction Client",
+        avgNPS: "Score NPS Moyen",
+        totalFeedbacks: "feedbacks au total",
+        certified: "Certifié par ratee.me",
+        note: "Note",
+        noteText: "Le badge se met à jour automatiquement quand vous recevez de nouveaux feedbacks !",
+      },
+      embed: {
+        title: "Code d'Intégration",
+        description: "Copiez ce code et collez-le n'importe où sur votre site web",
+        copy: "Copier",
+        copied: "Copié!",
+        howToUse: "Comment l'utiliser :",
+        steps: {
+          step1: "Copiez le code d'intégration ci-dessus",
+          step2: "Ouvrez le fichier HTML de votre site web",
+          step3: "Collez le code là où vous voulez que le badge apparaisse",
+          step4: "Enregistrez et rafraîchissez votre site web",
+        },
+        tip: "Astuce",
+        tipText: "Placez votre badge sur votre page d'accueil, page à propos, ou portfolio pour inspirer confiance à vos clients potentiels !",
+      },
+    },
+    navbar: {
+      dashboard: "Tableau de bord",
+      projects: "Projets",
+      feedbacks: "Feedbacks",
+      badge: "Badge",
+      settings: "Paramètres",
+      language: "Langue",
+      logout: "Se déconnecter",
+      loggingOut: "Déconnexion...",
     },
   },
   en: {
@@ -347,7 +546,8 @@ export const content = {
     },
     problem: {
       title: "What ratee.me changes for you",
-      subtitle: "Freelancers and agencies gain efficiency, credibility and revenue.",
+      subtitle:
+        "Freelancers and agencies gain efficiency, credibility and revenue.",
       issues: [
         {
           icon: "⏱️",
@@ -456,8 +656,7 @@ export const content = {
         },
         {
           number: "100%",
-          unit: "of feedback",
-          heading: "Centralized",
+          heading: "Centralized feedback",
           description:
             "No more scattered data. One dashboard. You can finally analyze and improve with confidence.",
         },
@@ -629,6 +828,205 @@ export const content = {
       demo: "Demo",
       login: "Login",
       signup: "Sign up",
+    },
+    notFound: {
+      title: "Page not found",
+      description:
+        "The page you are looking for does not exist or has been moved.",
+      backHome: "Back to home",
+    },
+    feedbackNotFound: {
+      title: "Invalid Feedback Link",
+      subtitle: "This feedback link is invalid or has expired.",
+      description:
+        "The feedback link you're trying to access doesn't exist or is no longer valid.",
+      contact:
+        "If you believe this is an error, please contact the person who sent you this link.",
+      cta: "Go to ratee.me Homepage",
+      poweredBy: "Powered by",
+    },
+    dashboard: {
+      welcome: "Welcome back",
+      subtitle: "Here's what's happening with your client feedback",
+      banners: {
+        free: {
+          title: "You're on the FREE plan (1 project/month)",
+          description: "Upgrade for unlimited projects + email automation",
+          action: "Upgrade",
+        },
+        trial: {
+          title: "You're on PRO (30-day free trial)",
+          daysLeft: "days left",
+          description: "Email automation enabled - enjoy!",
+        },
+        pro: {
+          title: "You're on the PRO plan - Automations enabled",
+        },
+      },
+      stats: {
+        totalProjects: "Total Projects",
+        totalFeedbacks: "Total Feedback",
+        avgNPS: "Average NPS Score",
+        lastFeedback: "Last Feedback",
+        noFeedbackYet: "Not yet",
+      },
+      recentProjects: {
+        title: "Recent Projects",
+        viewAll: "View all",
+        empty: "No projects yet",
+        createFirst: "Create your first project",
+        status: {
+          delivered: "Delivered",
+          inProgress: "In Progress",
+          archived: "Archived",
+        },
+      },
+      recentFeedbacks: {
+        title: "Recent Feedback",
+        viewAll: "View all",
+        empty: "No feedback yet",
+        emptyDescription: "Feedback will appear here once your clients respond",
+        noComment: "No comment",
+      },
+    },
+    projects: {
+      title: "Projects",
+      newProject: "New Project",
+      filters: {
+        all: "All",
+        inProgress: "In Progress",
+        delivered: "Delivered",
+        archived: "Archived",
+      },
+      table: {
+        headers: {
+          project: "Project",
+          client: "Client",
+          deliveryDate: "Delivery Date",
+          status: "Status",
+          feedback: "Feedback",
+          actions: "Actions",
+        },
+        empty: "No projects found",
+        createFirst: "Create your first project",
+        status: {
+          delivered: "Delivered",
+          inProgress: "In Progress",
+          archived: "Archived",
+        },
+        feedbackStatus: {
+          received: "Received",
+          sent: "Sent",
+          notSent: "Not Sent",
+        },
+        actions: {
+          send: "Send",
+          edit: "Edit",
+          delete: "Delete",
+        },
+      },
+    },
+    feedbacks: {
+      title: "Client Feedback",
+      stats: {
+        avgNPS: "Average NPS Score",
+        promoters: "Promoters (9-10)",
+        passives: "Passives (7-8)",
+        detractors: "Detractors (0-6)",
+      },
+      list: {
+        title: "All Feedback",
+        empty: "No feedback yet",
+        emptyDescription: "Feedback will appear here once your clients respond",
+      },
+    },
+    settings: {
+      title: "Settings",
+      sections: {
+        profile: "Profile Information",
+        account: "Account",
+        session: "Session",
+        dangerZone: "Danger Zone",
+      },
+      form: {
+        email: {
+          label: "Email",
+          helper: "Email cannot be changed",
+        },
+        fullName: {
+          label: "Full Name *",
+        },
+        companyName: {
+          label: "Company Name",
+        },
+        avatarUrl: {
+          label: "Avatar URL",
+          helper: "Optional: URL to your profile picture",
+        },
+        save: "Save Changes",
+        saving: "Saving...",
+        successMessage: "Profile updated successfully!",
+      },
+      account: {
+        accountId: "Account ID",
+        status: {
+          label: "Status",
+          active: "Active",
+        },
+      },
+      session: {
+        signOut: "Log Out",
+      },
+      dangerZone: {
+        description: "Once you delete your account, there's no going back. All your projects and feedback will be permanently deleted.",
+        deleteAccount: "Delete Account",
+        comingSoon: "Account deletion coming soon",
+      },
+    },
+    badge: {
+      title: "NPS Badge",
+      stats: {
+        title: "Your Stats",
+        avgNPS: "Average NPS",
+        promoters: "Promoters",
+        passives: "Passives",
+        detractors: "Detractors",
+      },
+      preview: {
+        title: "Badge Preview",
+        description: "This is how your NPS badge will appear on your website",
+        satisfaction: "Client Satisfaction",
+        avgNPS: "Average NPS Score",
+        totalFeedbacks: "total feedback",
+        certified: "Certified by ratee.me",
+        note: "Note",
+        noteText: "The badge updates automatically when you receive new feedback!",
+      },
+      embed: {
+        title: "Embed Code",
+        description: "Copy this code and paste it anywhere on your website",
+        copy: "Copy",
+        copied: "Copied!",
+        howToUse: "How to use:",
+        steps: {
+          step1: "Copy the embed code above",
+          step2: "Open your website's HTML file",
+          step3: "Paste the code where you want the badge to appear",
+          step4: "Save and refresh your website",
+        },
+        tip: "Pro tip",
+        tipText: "Place your badge on your homepage, about page, or portfolio to build trust with potential clients!",
+      },
+    },
+    navbar: {
+      dashboard: "Dashboard",
+      projects: "Projects",
+      feedbacks: "Feedback",
+      badge: "Badge",
+      settings: "Settings",
+      language: "Language",
+      logout: "Log Out",
+      loggingOut: "Logging out...",
     },
   },
 } as const;
