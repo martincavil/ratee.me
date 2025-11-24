@@ -48,7 +48,7 @@ export default async function DashboardPage() {
             </div>
             <a
               href="/pricing"
-              className="px-4 py-2 bg-accent text-white text-sm font-inter font-medium rounded-lg hover:bg-accent-dark"
+              className="px-4 py-2 bg-emerald-500 text-white text-sm font-inter font-medium rounded-lg hover:bg-emerald-600"
             >
               Upgrade
             </a>
@@ -58,14 +58,14 @@ export default async function DashboardPage() {
 
       {/* Trial Banner */}
       {showTrialBanner && (
-        <div className="bg-accent-light border border-accent/20 rounded-lg p-4 mb-6">
+        <div className="bg-emerald-100 border border-emerald-500/20 rounded-lg p-4 mb-6">
           <div className="flex items-center gap-3">
             <span className="text-2xl">✨</span>
             <div>
-              <p className="font-inter text-accent-dark font-medium">
+              <p className="font-inter text-emerald-600 font-medium">
                 Vous êtes en <strong>PRO (30j gratuit)</strong> - {daysLeft} jours restants
               </p>
-              <p className="font-inter text-accent-700 text-sm">
+              <p className="font-inter text-emerald-500-700 text-sm">
                 Email automation activée - profitez-en!
               </p>
             </div>
@@ -75,11 +75,11 @@ export default async function DashboardPage() {
 
       {/* Active PRO Banner */}
       {showProBanner && (
-        <div className="bg-accent-50 border border-accent/20 rounded-lg p-4 mb-6">
+        <div className="bg-emerald-500-50 border border-emerald-500/20 rounded-lg p-4 mb-6">
           <div className="flex items-center gap-3">
             <span className="text-xl">✅</span>
             <div>
-              <p className="font-inter text-accent font-medium">
+              <p className="font-inter text-emerald-500 font-medium">
                 Vous êtes en plan <strong>PRO</strong> - Automations activées
               </p>
             </div>

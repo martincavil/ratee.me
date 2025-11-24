@@ -21,8 +21,8 @@ const config: Config = {
           tertiary: '#999999',
         },
 
-        // Accent (Emerald Green)
-        accent: {
+        // Emerald Green
+        emerald: {
           50: '#F0FDFA',
           100: '#D1F5E8',
           200: '#A2E8D5',

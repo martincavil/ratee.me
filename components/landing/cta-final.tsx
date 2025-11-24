@@ -1,45 +1,43 @@
-'use client';
+"use client";
 
-import { useLanguage } from '@/lib/i18n';
-import Link from 'next/link';
+import { useLanguage } from "@/lib/i18n";
+import Link from "next/link";
 
 export function CTAFinal() {
   const { text } = useLanguage();
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-700">
-      <div className="max-w-4xl mx-auto text-center">
-        <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
-          {text.ctaFinal.headline}
-        </h2>
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+      <div className="max-w-4xl mx-auto">
+        <div className="relative bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-3xl p-10 md:p-16 text-center overflow-hidden">
+          {/* Background decoration */}
+          <div className="absolute top-0 left-0 w-32 h-32 bg-white/10 rounded-full -translate-x-1/2 -translate-y-1/2" />
+          <div className="absolute bottom-0 right-0 w-48 h-48 bg-white/10 rounded-full translate-x-1/3 translate-y-1/3" />
 
-        <p className="text-xl text-blue-100 mb-10">
-          {text.ctaFinal.subheadline}
-        </p>
+          <div className="relative z-10">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white! mb-4 leading-tight">
+              {text.ctaFinal.headline}
+            </h2>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-          <Link
-            href="/signup"
-            className="px-10 py-4 bg-white text-primary rounded-lg font-bold text-lg hover:bg-gray-100 transition-all hover:scale-105 shadow-2xl"
-          >
-            {text.ctaFinal.ctaPrimary}
-          </Link>
-          <button
-            className="px-10 py-4 bg-transparent text-white rounded-lg font-bold text-lg border-2 border-white hover:bg-white hover:text-primary transition-all"
-          >
-            {text.ctaFinal.ctaSecondary}
-          </button>
-        </div>
+            <p className="text-emerald-100! mb-8 max-w-2xl mx-auto">
+              {text.ctaFinal.subheadline}
+            </p>
 
-        <div className="flex flex-wrap justify-center gap-6 text-blue-100">
-          {text.ctaFinal.microcopy.map((item, index) => (
-            <div key={index} className="flex items-center gap-2">
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-              </svg>
-              <span>{item}</span>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                href="/auth/signup"
+                className="px-8 py-3 bg-white text-emerald-600 rounded-lg font-semibold hover:bg-gray-100 transition-all hover:scale-105 shadow-lg"
+              >
+                {text.ctaFinal.ctaPrimary}
+              </Link>
+              <Link
+                href="#pricing"
+                className="px-8 py-3 bg-transparent text-white rounded-lg font-semibold border-2 border-white/50 hover:bg-white/10 transition-all"
+              >
+                {text.ctaFinal.ctaSecondary}
+              </Link>
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </section>

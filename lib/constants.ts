@@ -50,59 +50,65 @@ export const content = {
       ctaSecondary: "Voir une démo rapide",
     },
     problem: {
-      title: "Le problème que tu connais trop bien",
-      description: [
-        "À la fin d'une mission, tu dois envoyer un mail de feedback. Sauf que tu l'oublies. Ou le client oublie de répondre. Résultat: zéro data sur comment tu vraiment te débrouilles.",
-        "Les clients satisfaits ne reviennent jamais d'eux-mêmes. Il faut les demander. Mais tu sais pas qui est vraiment satisfait. Pas de NPS, pas de système. Juste du vent.",
-        "Et même si tu collectes les feedbacks, c'est en 5 endroits différents. Un mail ici, un Slack là, une réponse Google Form ailleurs. Pas de dashboard, pas de vue d'ensemble, pas de insights exploitables.",
-      ],
+      title: "Ce que ratee.me change pour vous",
+      subtitle: "Freelances et agences gagnent en efficacité, en crédibilité et en revenus.",
       issues: [
         {
-          icon: "😰",
-          title: "Manuellement, c'est un cauchemar",
+          icon: "⏱️",
+          title: "Gain de temps",
           description:
-            "Chaque feedback à demander, chaque client à relancer, zero données exploitables",
+            "Économisez 5 à 6 heures par mois. Plus de relances manuelles, plus de fichiers Excel à maintenir. Les feedbacks arrivent automatiquement après chaque étape projet.",
+          screen: "automation",
         },
         {
-          icon: "📉",
-          title: "Tu perds des recommendations",
+          icon: "🏆",
+          title: "Légitimité renforcée",
           description:
-            "Les clients heureux ne reviennent pas d'eux-mêmes sans un petit coup de pouce",
+            "Affichez votre score NPS sur votre site. Vos prospects voient immédiatement votre crédibilité. La preuve sociale qui convertit, sans effort.",
+          screen: "badge",
         },
         {
-          icon: "🔀",
-          title: "Tout éparpillé partout",
+          icon: "🔄",
+          title: "Clients récurrents",
           description:
-            "Email, Slack, Spreadsheets, Notion. Zéro vue d'ensemble.",
-        },
-      ],
-    },
-    solution: {
-      title: "Comment ça marche",
-      steps: [
-        {
-          icon: "⚙️",
-          heading: "Configure une fois",
-          description:
-            "Définis tes étapes de projet (onboarding, mission, livraison). Choisis quand envoyer les feedbacks. C'est tout.",
-        },
-        {
-          icon: "🤖",
-          heading: "Laisse la magie opérer",
-          description:
-            "À chaque étape complétée, un mail de feedback part automatiquement au client. Zéro effort de ta part.",
-        },
-        {
-          icon: "📊",
-          heading: "Les données arrivent toutes seules",
-          description:
-            "Les clients remplissent le formulaire (1 clic + commentaire). Tu reçois tout dans ton dashboard ratee.me.",
+            "Identifiez vos clients les plus satisfaits. Recontactez-les au bon moment pour de nouvelles missions. Transformez chaque projet réussi en opportunité.",
+          screen: "dashboard",
         },
         {
           icon: "📈",
-          heading: "Utilise les insights pour mieux faire",
+          title: "Process améliorés",
           description:
-            "NPS moyen, citations, tendances. Tu sais comment tu performes vraiment. Tu améliores ce qui ne marche pas.",
+            "Les retours clients révèlent vos axes d'amélioration. Analysez les tendances, identifiez les points de friction, et améliorez continuellement votre service.",
+          screen: "analytics",
+        },
+      ],
+    },
+    timeline: {
+      title: "Pourquoi ratee.me est incontournable",
+      items: [
+        {
+          icon: "🎯",
+          title: "Zéro effort, maximum de data",
+          description:
+            "Les feedbacks s'envoient automatiquement à chaque étape projet. Vous ne faites rien, les données arrivent. Fini les relances oubliées.",
+        },
+        {
+          icon: "💎",
+          title: "Votre réputation, quantifiée",
+          description:
+            "Un score NPS objectif et mesurable. Plus besoin de dire 'mes clients sont satisfaits'. Vous le prouvez avec des chiffres.",
+        },
+        {
+          icon: "🚀",
+          title: "Convertissez plus de prospects",
+          description:
+            "Affichez votre badge NPS sur votre site. Les prospects voient immédiatement votre crédibilité. La confiance se construit avant même le premier contact.",
+        },
+        {
+          icon: "♻️",
+          title: "Transformez les clients en revenus récurrents",
+          description:
+            "Identifiez vos promoteurs et recontactez-les au bon moment. Chaque projet réussi devient une opportunité de mission récurrente.",
         },
       ],
     },
@@ -204,15 +210,14 @@ export const content = {
       title: "Des prix transparents",
       tiers: [
         {
-          name: "Starter",
-          heading: "Parfait pour débuter",
-          price: "Gratuit",
-          period: "Toujours gratuit",
+          name: "Free",
+          heading: "Pour tester",
+          price: "0€",
+          period: "Pour toujours",
           features: [
-            "5 projets",
-            "Feedbacks illimités",
-            "NPS + citations",
-            "Dashboard basique",
+            "1 projet actif",
+            "3 feedbacks/mois",
+            "Score NPS basique",
             "Badge partageable",
           ],
           cta: "Commencer gratuitement",
@@ -220,35 +225,36 @@ export const content = {
         },
         {
           name: "Pro",
-          heading: "Pour les agences",
-          price: "€29",
-          period: "Facturé annuellement (€290/an)",
+          heading: "Pour les freelances",
+          price: "19€",
+          period: "/mois",
           features: [
             "Projets illimités",
-            "Team members (3)",
-            "Intégrations (Slack, Zapier)",
+            "Feedbacks illimités",
             "Analytics avancée",
+            "Badge personnalisable",
+            "Export des données",
             "Support prioritaire",
           ],
-          cta: "Essayer 30j gratuitement",
+          cta: "Essayer 14 jours gratuits",
           popular: true,
-          badge: "Populaire",
+          badge: "Recommandé",
         },
         {
-          name: "Enterprise",
-          heading: "Sur mesure",
+          name: "Business",
+          heading: "Pour les agences",
           price: "Sur devis",
-          period: "Contact us",
+          period: "Contactez-nous",
           features: [
             "Tout de Pro, plus",
+            "Multi-utilisateurs",
             "SSO / SAML",
-            "Webhooks",
-            "Custom integrations",
-            "Dedicated support",
+            "API & Webhooks",
+            "Account manager dédié",
           ],
-          cta: "Demander une démo",
+          cta: "Demander un devis",
           popular: false,
-          note: "Pour les équipes 50+ personnes",
+          note: "Pour les équipes 5+ personnes",
         },
       ],
     },
@@ -283,17 +289,11 @@ export const content = {
       ],
     },
     ctaFinal: {
-      headline: "Prêt à arrêter le suivi manuel?",
+      headline: "Si vous êtes arrivé jusque-là, c'est qu'il est temps d'essayer.",
       subheadline:
-        "Rejoins 500+ freelances et agences qui automatisent leur suivi client.",
-      ctaPrimary: "Essayer gratuitement",
-      ctaSecondary: "Voir une démo",
-      microcopy: [
-        "Plan Starter gratuit",
-        "Setup 15 min",
-        "Pas de CB requise",
-        "Support 24/7",
-      ],
+        "Rejoignez les freelances et agences qui ont déjà automatisé leur collecte de feedbacks.",
+      ctaPrimary: "Commencer gratuitement",
+      ctaSecondary: "Voir les tarifs",
     },
     footer: {
       tagline: "L'outil simple pour ne plus jamais laisser un client de côté",
@@ -346,57 +346,65 @@ export const content = {
       ctaSecondary: "Watch Demo",
     },
     problem: {
-      title: "The problem you know too well",
-      description: [
-        "After a project ends, you should send a feedback form. But you forget. Or the client forgets to respond. Result: zero data on how you're actually performing.",
-        "Happy clients don't come back on their own. You need to ask. But you don't know who's truly satisfied. No NPS, no system. Just guesses.",
-        "Even if you collect feedback, it's scattered everywhere. One email here, a Slack message there, a Google Form response somewhere else. No dashboard. No overview. No actionable insights.",
-      ],
+      title: "What ratee.me changes for you",
+      subtitle: "Freelancers and agencies gain efficiency, credibility and revenue.",
       issues: [
         {
-          icon: "😰",
-          title: "Manually, it's a nightmare",
+          icon: "⏱️",
+          title: "Time savings",
           description:
-            "Every feedback to request, every client to chase, zero actionable data",
+            "Save 5-6 hours per month. No more manual follow-ups, no more Excel files to maintain. Feedback arrives automatically after each project stage.",
+          screen: "automation",
         },
         {
-          icon: "📉",
-          title: "You lose recommendations",
-          description: "Happy clients don't come back without a nudge",
-        },
-        {
-          icon: "🔀",
-          title: "Everything scattered",
-          description: "Email, Slack, Spreadsheets, Notion. Zero overview.",
-        },
-      ],
-    },
-    solution: {
-      title: "How it works",
-      steps: [
-        {
-          icon: "⚙️",
-          heading: "Configure once",
+          icon: "🏆",
+          title: "Enhanced credibility",
           description:
-            "Define your project stages (kickoff, in-progress, delivery). Choose when to send feedback forms. Done.",
+            "Display your NPS score on your site. Prospects instantly see your credibility. Social proof that converts, effortlessly.",
+          screen: "badge",
         },
         {
-          icon: "🤖",
-          heading: "Let the magic happen",
+          icon: "🔄",
+          title: "Recurring clients",
           description:
-            "When each stage is done, feedback forms are sent automatically. Zero manual work.",
-        },
-        {
-          icon: "📊",
-          heading: "Data arrives automatically",
-          description:
-            "Clients fill the form (1-click NPS + comment). Everything lands in your ratee.me dashboard.",
+            "Identify your most satisfied clients. Reach out at the right time for new projects. Turn every successful project into an opportunity.",
+          screen: "dashboard",
         },
         {
           icon: "📈",
-          heading: "Use insights to improve",
+          title: "Improved processes",
           description:
-            "Average NPS, testimonials, trends. You see how you're actually performing. You improve what doesn't work.",
+            "Client feedback reveals areas for improvement. Analyze trends, identify friction points, and continuously improve your service.",
+          screen: "analytics",
+        },
+      ],
+    },
+    timeline: {
+      title: "Why ratee.me is essential",
+      items: [
+        {
+          icon: "🎯",
+          title: "Zero effort, maximum data",
+          description:
+            "Feedback is sent automatically at each project stage. You do nothing, data arrives. No more forgotten follow-ups.",
+        },
+        {
+          icon: "💎",
+          title: "Your reputation, quantified",
+          description:
+            "An objective, measurable NPS score. No more saying 'my clients are satisfied'. You prove it with numbers.",
+        },
+        {
+          icon: "🚀",
+          title: "Convert more prospects",
+          description:
+            "Display your NPS badge on your site. Prospects instantly see your credibility. Trust is built before the first contact.",
+        },
+        {
+          icon: "♻️",
+          title: "Turn clients into recurring revenue",
+          description:
+            "Identify your promoters and reach out at the right time. Every successful project becomes a recurring opportunity.",
         },
       ],
     },
@@ -498,51 +506,51 @@ export const content = {
       title: "Transparent pricing",
       tiers: [
         {
-          name: "Starter",
-          heading: "Perfect to start",
-          price: "Free",
-          period: "Always free",
+          name: "Free",
+          heading: "To get started",
+          price: "$0",
+          period: "Forever",
           features: [
-            "5 projects",
-            "Unlimited feedbacks",
-            "NPS + testimonials",
-            "Basic dashboard",
+            "1 active project",
+            "3 feedbacks/month",
+            "Basic NPS score",
             "Shareable badge",
           ],
-          cta: "Start free",
+          cta: "Start for free",
           popular: false,
         },
         {
           name: "Pro",
-          heading: "For growing teams",
-          price: "$29",
-          period: "Billed yearly ($290/year)",
+          heading: "For freelancers",
+          price: "$19",
+          period: "/month",
           features: [
             "Unlimited projects",
-            "Team members (3)",
-            "Integrations (Slack, Zapier)",
+            "Unlimited feedbacks",
             "Advanced analytics",
+            "Customizable badge",
+            "Data export",
             "Priority support",
           ],
-          cta: "Try free 30 days",
+          cta: "Try 14 days free",
           popular: true,
-          badge: "Most popular",
+          badge: "Recommended",
         },
         {
-          name: "Enterprise",
-          heading: "Custom",
+          name: "Business",
+          heading: "For agencies",
           price: "Custom",
           period: "Contact us",
           features: [
             "Everything in Pro, plus",
+            "Multi-users",
             "SSO / SAML",
-            "Webhooks",
-            "Custom integrations",
-            "Dedicated support",
+            "API & Webhooks",
+            "Dedicated account manager",
           ],
-          cta: "Request demo",
+          cta: "Request a quote",
           popular: false,
-          note: "For teams 50+ people",
+          note: "For teams of 5+ people",
         },
       ],
     },
@@ -577,17 +585,11 @@ export const content = {
       ],
     },
     ctaFinal: {
-      headline: "Ready to stop manual follow-ups?",
+      headline: "If you've made it this far, it's time to try.",
       subheadline:
-        "Join 500+ freelancers and agencies automating their client feedback.",
-      ctaPrimary: "Try for free",
-      ctaSecondary: "Watch demo",
-      microcopy: [
-        "Free Starter plan",
-        "15 min setup",
-        "No credit card",
-        "24/7 support",
-      ],
+        "Join freelancers and agencies who have already automated their feedback collection.",
+      ctaPrimary: "Start for free",
+      ctaSecondary: "View pricing",
     },
     footer: {
       tagline: "The simplest way to automate client feedback",

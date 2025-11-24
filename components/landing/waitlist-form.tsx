@@ -98,7 +98,7 @@ export function WaitlistForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder={t.placeholder}
-            className="flex-1 px-4 py-3 rounded-lg border border-border focus:border-accent focus:ring-2 focus:ring-accent-light outline-none transition-all text-content-primary bg-white font-inter"
+            className="flex-1 px-4 py-3 rounded-lg border border-border focus:border-emerald-500 focus:ring-2 focus:ring-accent-light outline-none transition-all text-content-primary bg-white font-inter"
             disabled={status === "loading"}
             required
           />

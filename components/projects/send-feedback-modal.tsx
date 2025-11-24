@@ -61,8 +61,8 @@ export function SendFeedbackModal({ isOpen, onClose, project, onSuccess }: SendF
           className="bg-white rounded-xl max-w-md w-full p-6 text-center shadow-xl"
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="w-16 h-16 bg-accent-light rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg className="w-8 h-8 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg className="w-8 h-8 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
           </div>
@@ -77,7 +77,7 @@ export function SendFeedbackModal({ isOpen, onClose, project, onSuccess }: SendF
 
           <button
             onClick={handleClose}
-            className="w-full px-4 py-3 bg-accent text-white rounded-lg font-inter font-semibold hover:bg-accent-dark transition-colors"
+            className="w-full px-4 py-3 bg-emerald-500 text-white rounded-lg font-inter font-semibold hover:bg-emerald-600 transition-colors"
           >
             Fermer
           </button>
@@ -96,8 +96,8 @@ export function SendFeedbackModal({ isOpen, onClose, project, onSuccess }: SendF
         className="bg-white rounded-xl max-w-md w-full p-6 shadow-xl"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="w-12 h-12 bg-accent-light rounded-full flex items-center justify-center mb-4">
-          <svg className="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mb-4">
+          <svg className="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
           </svg>
         </div>
@@ -113,7 +113,7 @@ export function SendFeedbackModal({ isOpen, onClose, project, onSuccess }: SendF
         <div className="bg-bg-secondary rounded-lg p-4 mb-6">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-              <span className="font-sora font-bold text-accent">
+              <span className="font-sora font-bold text-emerald-500">
                 {project.client_name.charAt(0).toUpperCase()}
               </span>
             </div>
@@ -147,7 +147,7 @@ export function SendFeedbackModal({ isOpen, onClose, project, onSuccess }: SendF
             type="button"
             onClick={handleSend}
             disabled={loading}
-            className="flex-1 px-4 py-3 bg-accent text-white rounded-lg font-inter font-semibold hover:bg-accent-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex-1 px-4 py-3 bg-emerald-500 text-white rounded-lg font-inter font-semibold hover:bg-emerald-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? 'Envoi...' : 'Envoyer'}
           </button>

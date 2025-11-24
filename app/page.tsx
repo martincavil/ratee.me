@@ -1,11 +1,9 @@
 import { LandingNavbar } from '@/components/landing/navbar';
 import { Hero } from '@/components/landing/hero';
 import { Problem } from '@/components/landing/problem';
-import { Solution } from '@/components/landing/solution';
-import { Features } from '@/components/landing/features';
+import { Timeline } from '@/components/landing/timeline';
 import { Results } from '@/components/landing/results';
 import { Testimonials } from '@/components/landing/testimonials';
-import { HowItWorks } from '@/components/landing/how-it-works';
 import { Pricing } from '@/components/landing/pricing';
 import { FAQ } from '@/components/landing/faq';
 import { CTAFinal } from '@/components/landing/cta-final';
@@ -34,11 +32,9 @@ export default function HomePage() {
         <LandingNavbar />
         <Hero />
         <Problem />
-        <Solution />
-        <Features />
+        <Timeline />
         <Results />
         <Testimonials />
-        <HowItWorks />
         <Pricing />
         <FAQ />
         <CTAFinal />

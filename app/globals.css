@@ -12,9 +12,9 @@
   --text-primary: #1D1D1E;
   --text-secondary: #666666;
   --text-tertiary: #999999;
-  --accent: #10B981;
-  --accent-light: #D1F5E8;
-  --accent-dark: #047857;
+  --emerald: #10B981;
+  --emerald-light: #D1F5E8;
+  --emerald-dark: #047857;
   --border: #E5E7EB;
 
   /* Semantic */
@@ -269,21 +269,3 @@ hr {
   background-color: var(--accent-light);
 }
 
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--bg-secondary);
-}
-
-::-webkit-scrollbar-thumb {
-  background: #d1d5db;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #9ca3af;
-}

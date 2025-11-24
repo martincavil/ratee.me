@@ -51,7 +51,7 @@ export function LandingNavbar() {
           {/* Add logo and keep text */}
           <Link
             href="/"
-            className="font-sora text-3xl font-semibold text-content-primary"
+            className="font-sora text-2xl font-semibold text-content-primary"
           >
             ratee.me
           </Link>
@@ -69,7 +69,7 @@ export function LandingNavbar() {
                 className={`px-3 py-1 rounded-full text-sm font-inter font-medium transition-all ${
                   lang === "fr"
                     ? "bg-white text-content-primary shadow-sm"
-                    : "text-content-tertiary hover:text-accent"
+                    : "text-content-tertiary hover:text-emerald-500"
                 }`}
               >
                 🇫🇷 FR
@@ -79,7 +79,7 @@ export function LandingNavbar() {
                 className={`px-3 py-1 rounded-full text-sm font-inter font-medium transition-all ${
                   lang === "en"
                     ? "bg-white text-content-primary shadow-sm"
-                    : "text-content-tertiary hover:text-accent"
+                    : "text-content-tertiary hover:text-emerald-500"
                 }`}
               >
                 🇺🇸 EN
@@ -89,10 +89,10 @@ export function LandingNavbar() {
             {user ? (
               <Link
                 href="/dashboard"
-                className="flex items-center gap-2 font-inter text-sm font-medium text-content-primary hover:text-accent transition-colors"
+                className="flex items-center gap-2 font-inter text-sm font-medium text-content-primary hover:text-emerald-500 transition-colors"
               >
-                <div className="w-8 h-8 rounded-full bg-accent-light flex items-center justify-center">
-                  <span className="text-accent font-semibold text-xs">
+                <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center">
+                  <span className="text-emerald-500 font-semibold text-xs">
                     {user.name.charAt(0).toUpperCase()}
                   </span>
                 </div>
@@ -103,7 +103,7 @@ export function LandingNavbar() {
                 <NavLink href="/auth/login">{text.nav.login}</NavLink>
                 <Link
                   href="/auth/signup"
-                  className="px-5 py-2 bg-accent text-white rounded-full font-inter font-semibold text-sm hover:bg-accent-dark transition-all hover:scale-105"
+                  className="px-5 py-2 bg-emerald-500 text-white rounded-full font-inter font-semibold text-sm hover:bg-emerald-600 transition-all hover:scale-105"
                 >
                   {text.nav.signup}
                 </Link>
@@ -173,7 +173,7 @@ export function LandingNavbar() {
                     }}
                     className={`py-2 rounded-full text-sm font-inter font-medium ${
                       lang === "fr"
-                        ? "bg-accent"
+                        ? "bg-emerald-500"
                         : "bg-bg-secondary text-content-secondary"
                     }`}
                   >
@@ -186,7 +186,7 @@ export function LandingNavbar() {
                     }}
                     className={`py-2 rounded-full text-sm font-inter font-medium ${
                       lang === "en"
-                        ? "bg-accent"
+                        ? "bg-emerald-500"
                         : "bg-bg-secondary text-content-secondary"
                     }`}
                   >
@@ -197,7 +197,7 @@ export function LandingNavbar() {
                 {user ? (
                   <Link
                     href="/dashboard"
-                    className=" w-full py-3 text-accent rounded-full font-inter font-semibold"
+                    className=" w-full py-3 text-emerald-500 rounded-full font-inter font-semibold"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {user.name}
@@ -213,7 +213,7 @@ export function LandingNavbar() {
                     </Link>
                     <Link
                       href="/auth/signup"
-                      className="block w-full px-5 py-3 bg-accent text-white text-center rounded-full font-inter font-semibold"
+                      className="block w-full px-5 py-3 bg-emerald-500 text-white text-center rounded-full font-inter font-semibold"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       {text.nav.signup}
@@ -240,10 +240,10 @@ function NavLink({
   return (
     <Link
       href={href}
-      className="relative font-inter text-sm font-medium text-content-primary hover:text-accent transition-colors duration-300 group"
+      className="relative font-inter text-sm font-medium text-content-primary hover:text-emerald-500 transition-colors duration-300 group"
     >
       {children}
-      <span className="absolute left-0 -bottom-1 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-300 ease-out" />
+      <span className="absolute left-0 -bottom-1 h-0.5 bg-emerald-500 w-0 group-hover:w-full transition-all duration-300 ease-out" />
     </Link>
   );
 }
@@ -261,7 +261,7 @@ function MobileNavLink({
   return (
     <Link
       href={href}
-      className="font-inter text-content-primary hover:text-accent font-medium"
+      className="font-inter text-content-primary hover:text-emerald-500 font-medium"
       onClick={onClick}
     >
       {children}

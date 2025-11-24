@@ -12,21 +12,21 @@ const screensContent = {
       title: "Collect",
       description: "Automated NPS surveys at perfect timing",
       href: "#features",
-      color: "from-accent-100 to-accent-50",
+      color: "from-emerald-100 to-emerald-50",
     },
     {
       id: "analyze",
       title: "Analyze",
       description: "Real-time dashboard with actionable insights",
       href: "#demo",
-      color: "from-accent-50 to-white",
+      color: "from-emerald-50 to-white",
     },
     {
       id: "improve",
       title: "Showcase",
       description: "Display your credibility with embeddable badges",
       href: "#pricing",
-      color: "from-white to-accent-50",
+      color: "from-white to-emerald-50",
     },
   ],
   fr: [
@@ -35,21 +35,21 @@ const screensContent = {
       title: "Collecte",
       description: "Enquêtes NPS automatisées au bon moment",
       href: "#features",
-      color: "from-accent-100 to-accent-50",
+      color: "from-emerald-100 to-emerald-50",
     },
     {
       id: "analyze",
       title: "Analyse",
       description: "Dashboard temps réel avec insights actionnables",
       href: "#demo",
-      color: "from-accent-50 to-white",
+      color: "from-emerald-50 to-white",
     },
     {
       id: "improve",
       title: "Affiche",
       description: "Montre ta crédibilité avec des badges intégrables",
       href: "#pricing",
-      color: "from-white to-accent-50",
+      color: "from-white to-emerald-50",
     },
   ],
 };
@@ -158,7 +158,7 @@ export function Hero() {
                     h-[400px]
                     transition-all duration-300
                     group-hover:shadow-2xl
-                    group-hover:border-accent/30
+                    group-hover:border-emerald-500/30
                   `}
                   >
                     {/* Screen Header */}
@@ -166,7 +166,7 @@ export function Hero() {
                       <div className="flex gap-2">
                         <div className="w-3 h-3 rounded-full bg-error/60"></div>
                         <div className="w-3 h-3 rounded-full bg-warning/60"></div>
-                        <div className="w-3 h-3 rounded-full bg-accent/60"></div>
+                        <div className="w-3 h-3 rounded-full bg-emerald-500/60"></div>
                       </div>
                       <div className="font-inter text-xs text-content-tertiary">
                         ratee.me
@@ -176,7 +176,7 @@ export function Hero() {
                     {/* Screen Content */}
                     <div className="space-y-4">
                       <div>
-                        <h3 className="font-sora text-2xl font-bold text-content-primary group-hover:text-accent transition-colors">
+                        <h3 className="font-sora text-2xl font-bold text-content-primary group-hover:text-emerald-500 transition-colors">
                           {screen.title}
                         </h3>
                         <p className="font-inter text-sm text-content-secondary mt-1">
@@ -227,7 +227,7 @@ export function Hero() {
                                     : '"Excellent service, very responsive..."'}
                                 </div>
                               </div>
-                              <div className="h-7 bg-accent rounded flex items-center justify-center cursor-pointer hover:bg-accent-dark transition-colors">
+                              <div className="h-7 bg-emerald-500 rounded flex items-center justify-center cursor-pointer hover:bg-emerald-600 transition-colors">
                                 <span className="font-inter text-[10px] text-white font-semibold">
                                   {lang === "fr"
                                     ? "Envoyer mon avis"
@@ -274,13 +274,13 @@ export function Hero() {
                                     <div className="font-inter text-[8px] text-content-tertiary">
                                       NPS
                                     </div>
-                                    <div className="font-sora text-base font-bold text-accent">
+                                    <div className="font-sora text-base font-bold text-emerald-500">
                                       8.7
                                     </div>
                                   </div>
-                                  <div className="w-5 h-5 bg-accent/10 rounded flex items-center justify-center">
+                                  <div className="w-5 h-5 bg-emerald-500/10 rounded flex items-center justify-center">
                                     <svg
-                                      className="w-3 h-3 text-accent"
+                                      className="w-3 h-3 text-emerald-500"
                                       fill="currentColor"
                                       viewBox="0 0 20 20"
                                     >
@@ -300,14 +300,14 @@ export function Hero() {
                               <div className="flex items-center gap-2">
                                 <div className="flex-1">
                                   <div className="flex h-3 rounded-full overflow-hidden">
-                                    <div className="bg-accent w-[65%]"></div>
+                                    <div className="bg-emerald-500 w-[65%]"></div>
                                     <div className="bg-warning w-[25%]"></div>
                                     <div className="bg-error w-[10%]"></div>
                                   </div>
                                 </div>
                               </div>
                               <div className="flex justify-between mt-1">
-                                <span className="font-inter text-[7px] text-accent font-medium">
+                                <span className="font-inter text-[7px] text-emerald-500 font-medium">
                                   18 {lang === "fr" ? "clients" : "clients"}
                                 </span>
                                 <span className="font-inter text-[7px] text-warning font-medium">
@@ -328,7 +328,7 @@ export function Hero() {
                                     Hugo D.
                                   </span>
                                 </div>
-                                <span className="px-1.5 py-0.5 bg-accent/10 text-accent text-[8px] font-bold rounded">
+                                <span className="px-1.5 py-0.5 bg-emerald-500/10 text-emerald-500 text-[8px] font-bold rounded">
                                   9/10
                                 </span>
                               </div>
@@ -338,13 +338,13 @@ export function Hero() {
                         {index === 2 && (
                           <div className="space-y-2">
                             {/* Badge Preview */}
-                            <div className="bg-white rounded-lg p-3 border-2 border-accent shadow-sm text-center">
+                            <div className="bg-white rounded-lg p-3 border-2 border-emerald-500 shadow-sm text-center">
                               <div className="font-inter text-[9px] text-content-tertiary mb-1">
                                 {lang === "fr"
                                   ? "Satisfaction Client"
                                   : "Client Satisfaction"}
                               </div>
-                              <div className="font-sora text-3xl font-bold text-accent mb-0.5">
+                              <div className="font-sora text-3xl font-bold text-emerald-500 mb-0.5">
                                 8.7
                               </div>
                               <div className="font-inter text-[8px] text-content-tertiary mb-2">
@@ -371,7 +371,7 @@ export function Hero() {
                               <div className="mt-2 pt-2 border-t border-gray-100">
                                 <span className="font-inter text-[7px] text-content-tertiary">
                                   Powered by{" "}
-                                  <span className="font-medium text-accent">
+                                  <span className="font-medium text-emerald-500">
                                     ratee.me
                                   </span>
                                 </span>
@@ -403,7 +403,7 @@ export function Hero() {
 
                     {/* Hover indicator */}
                     <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <span className="font-inter text-xs text-accent font-medium">
+                      <span className="font-inter text-xs text-emerald-500 font-medium">
                         {lang === "fr" ? "En savoir plus →" : "Learn more →"}
                       </span>
                     </div>
