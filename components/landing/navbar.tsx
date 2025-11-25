@@ -183,9 +183,9 @@ export function LandingNavbar() {
                       setLang("fr");
                       setMobileMenuOpen(false);
                     }}
-                    className={`py-2 rounded-full text-sm font-inter font-medium ${
+                    className={`py-2 px-2 rounded-full text-sm font-inter font-medium ${
                       lang === "fr"
-                        ? "bg-emerald-500"
+                        ? "bg-emerald-500 text-white"
                         : "bg-bg-secondary text-content-secondary"
                     }`}
                   >
@@ -196,9 +196,9 @@ export function LandingNavbar() {
                       setLang("en");
                       setMobileMenuOpen(false);
                     }}
-                    className={`py-2 rounded-full text-sm font-inter font-medium ${
+                    className={`py-2 px-2 rounded-full text-sm font-inter font-medium ${
                       lang === "en"
-                        ? "bg-emerald-500"
+                        ? "bg-emerald-500 text-white"
                         : "bg-bg-secondary text-content-secondary"
                     }`}
                   >

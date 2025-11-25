@@ -13,7 +13,10 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10">
           {/* Brand column */}
           <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="text-xl font-bold text-white mb-3 block cursor-pointer">
+            <Link
+              href="/"
+              className="text-xl font-bold text-white mb-3 block cursor-pointer"
+            >
               ratee.me
             </Link>
             <p className="text-sm text-gray-400! leading-relaxed">
@@ -41,7 +44,7 @@ export function Footer() {
           </div>
 
           {/* Company links */}
-          <div>
+          {/* <div>
             <h3 className="font-semibold text-white! text-sm! mb-3">
               {text.footer.company.title}
             </h3>
@@ -57,7 +60,7 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
 
           {/* Legal links */}
           <div>
