@@ -1,7 +1,18 @@
 import { createAdminClient } from '@/lib/supabase/admin';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Lazy instantiation to avoid build-time errors
+let resendClient: Resend | null = null;
+function getResendClient() {
+  if (!resendClient) {
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      throw new Error('RESEND_API_KEY environment variable is not set');
+    }
+    resendClient = new Resend(apiKey);
+  }
+  return resendClient;
+}
 
 // Email templates
 const templates = {
@@ -183,6 +194,7 @@ export async function sendAutomatedEmail(
 
   // 6. Send email
   try {
+    const resend = getResendClient();
     await resend.emails.send({
       from: process.env.RESEND_FROM_EMAIL || 'noreply@ratee.me',
       to: project.client_email,
