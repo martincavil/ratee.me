@@ -3,13 +3,23 @@
 import { useLanguage } from "@/lib/i18n";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import type { User } from "@/types/database";
 
 export function LandingNavbar() {
   const { lang, setLang, text } = useLanguage();
+  const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [scrolled, setScrolled] = useState(false);
+
+  // Helper to convert anchor links to full paths when not on landing page
+  const getNavLink = (href: string) => {
+    if (href.startsWith("#") && pathname !== "/") {
+      return `/${href}`;
+    }
+    return href;
+  };
 
   useEffect(() => {
     // Fetch current user if authenticated
@@ -51,16 +61,18 @@ export function LandingNavbar() {
           {/* Add logo and keep text */}
           <Link
             href="/"
-            className="font-sora text-2xl font-semibold text-content-primary"
+            className="font-sora text-2xl font-semibold text-content-primary cursor-pointer"
           >
             ratee.me
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6">
-            <NavLink href="#features">{text.nav.features}</NavLink>
-            <NavLink href="#pricing">{text.nav.pricing}</NavLink>
-            <NavLink href="#demo">{text.nav.demo}</NavLink>
+            <NavLink href={getNavLink("#features")}>
+              {text.nav.features}
+            </NavLink>
+            <NavLink href="/pricing/">{text.nav.pricing}</NavLink>
+            <NavLink href={getNavLink("#demo")}>{text.nav.demo}</NavLink>
 
             {/* Language toggle */}
             <div className="flex items-center gap-1 bg-bg-secondary rounded-full p-1">
@@ -89,7 +101,7 @@ export function LandingNavbar() {
             {user ? (
               <Link
                 href="/dashboard"
-                className="flex items-center gap-2 font-inter text-sm font-medium text-content-primary hover:text-emerald-500 transition-colors"
+                className="flex items-center gap-2 font-inter text-sm font-medium text-content-primary hover:text-emerald-500 transition-colors cursor-pointer"
               >
                 <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center">
                   <span className="text-emerald-500 font-semibold text-xs">
@@ -103,7 +115,7 @@ export function LandingNavbar() {
                 <NavLink href="/auth/login">{text.nav.login}</NavLink>
                 <Link
                   href="/auth/signup"
-                  className="px-5 py-2 bg-emerald-500 text-white rounded-full font-inter font-semibold text-sm hover:bg-emerald-600 transition-all hover:scale-105"
+                  className="px-5 py-2 bg-emerald-500 text-white rounded-full font-inter font-semibold text-sm hover:bg-emerald-600 transition-all hover:scale-105 cursor-pointer"
                 >
                   {text.nav.signup}
                 </Link>
@@ -146,19 +158,19 @@ export function LandingNavbar() {
           <div className="md:hidden py-4 border-t border-border">
             <div className="flex flex-col gap-4">
               <MobileNavLink
-                href="#features"
+                href={getNavLink("#features")}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {text.nav.features}
               </MobileNavLink>
               <MobileNavLink
-                href="#pricing"
+                href="/pricing"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {text.nav.pricing}
               </MobileNavLink>
               <MobileNavLink
-                href="#demo"
+                href={getNavLink("#demo")}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {text.nav.demo}
@@ -197,7 +209,7 @@ export function LandingNavbar() {
                 {user ? (
                   <Link
                     href="/dashboard"
-                    className=" w-full py-3 text-emerald-500 rounded-full font-inter font-semibold"
+                    className=" w-full py-3 text-emerald-500 rounded-full font-inter font-semibold cursor-pointer"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {user.name}
@@ -206,14 +218,14 @@ export function LandingNavbar() {
                   <>
                     <Link
                       href="/auth/login"
-                      className="block w-full px-5 py-3 bg-bg-secondary text-content-primary text-center rounded-full font-inter font-semibold mb-3"
+                      className="block w-full px-5 py-3 bg-bg-secondary text-content-primary text-center rounded-full font-inter font-semibold mb-3 cursor-pointer"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       {text.nav.login}
                     </Link>
                     <Link
                       href="/auth/signup"
-                      className="block w-full px-5 py-3 bg-emerald-500 text-white text-center rounded-full font-inter font-semibold"
+                      className="block w-full px-5 py-3 bg-emerald-500 text-white text-center rounded-full font-inter font-semibold cursor-pointer"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       {text.nav.signup}
@@ -240,7 +252,7 @@ function NavLink({
   return (
     <Link
       href={href}
-      className="relative font-inter text-sm font-medium text-content-primary hover:text-emerald-500 transition-colors duration-300 group"
+      className="relative font-inter text-sm font-medium text-content-primary hover:text-emerald-500 transition-colors duration-300 group cursor-pointer"
     >
       {children}
       <span className="absolute left-0 -bottom-1 h-0.5 bg-emerald-500 w-0 group-hover:w-full transition-all duration-300 ease-out" />
@@ -261,7 +273,7 @@ function MobileNavLink({
   return (
     <Link
       href={href}
-      className="font-inter text-content-primary hover:text-emerald-500 font-medium"
+      className="font-inter text-content-primary hover:text-emerald-500 font-medium cursor-pointer"
       onClick={onClick}
     >
       {children}

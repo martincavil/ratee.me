@@ -236,7 +236,7 @@ export const content = {
             "Export des données",
             "Support prioritaire",
           ],
-          cta: "Essayer 14 jours gratuits",
+          cta: "Commencer",
           popular: true,
           badge: "Recommandé",
         },
@@ -302,7 +302,7 @@ export const content = {
         title: "Product",
         links: [
           { label: "Features", href: "#features" },
-          { label: "Pricing", href: "#pricing" },
+          { label: "Tarifs", href: "/pricing/" },
           { label: "Demo", href: "#demo" },
           { label: "Changelog", href: "/changelog" },
         ],
@@ -330,7 +330,7 @@ export const content = {
     },
     nav: {
       features: "Features",
-      pricing: "Pricing",
+      pricing: "Tarifs",
       demo: "Demo",
       login: "Connexion",
       signup: "Inscription",
@@ -390,7 +390,8 @@ export const content = {
         title: "Feedbacks Récents",
         viewAll: "Voir tout",
         empty: "Pas encore de feedbacks",
-        emptyDescription: "Les feedbacks apparaîtront ici une fois que vos clients répondront",
+        emptyDescription:
+          "Les feedbacks apparaîtront ici une fois que vos clients répondront",
         noComment: "Pas de commentaire",
       },
     },
@@ -442,7 +443,8 @@ export const content = {
       list: {
         title: "Tous les Feedbacks",
         empty: "Pas encore de feedbacks",
-        emptyDescription: "Les feedbacks apparaîtront ici une fois que vos clients répondront",
+        emptyDescription:
+          "Les feedbacks apparaîtront ici une fois que vos clients répondront",
       },
     },
     settings: {
@@ -483,7 +485,8 @@ export const content = {
         signOut: "Se déconnecter",
       },
       dangerZone: {
-        description: "Une fois que vous supprimez votre compte, il n'y a plus de retour en arrière. Tous vos projets et feedbacks seront définitivement supprimés.",
+        description:
+          "Une fois que vous supprimez votre compte, il n'y a plus de retour en arrière. Tous vos projets et feedbacks seront définitivement supprimés.",
         deleteAccount: "Supprimer le Compte",
         comingSoon: "Suppression de compte bientôt disponible",
       },
@@ -499,17 +502,20 @@ export const content = {
       },
       preview: {
         title: "Aperçu du Badge",
-        description: "Voici comment votre badge NPS apparaîtra sur votre site web",
+        description:
+          "Voici comment votre badge NPS apparaîtra sur votre site web",
         satisfaction: "Satisfaction Client",
         avgNPS: "Score NPS Moyen",
         totalFeedbacks: "feedbacks au total",
         certified: "Certifié par ratee.me",
         note: "Note",
-        noteText: "Le badge se met à jour automatiquement quand vous recevez de nouveaux feedbacks !",
+        noteText:
+          "Le badge se met à jour automatiquement quand vous recevez de nouveaux feedbacks !",
       },
       embed: {
         title: "Code d'Intégration",
-        description: "Copiez ce code et collez-le n'importe où sur votre site web",
+        description:
+          "Copiez ce code et collez-le n'importe où sur votre site web",
         copy: "Copier",
         copied: "Copié!",
         howToUse: "Comment l'utiliser :",
@@ -520,7 +526,8 @@ export const content = {
           step4: "Enregistrez et rafraîchissez votre site web",
         },
         tip: "Astuce",
-        tipText: "Placez votre badge sur votre page d'accueil, page à propos, ou portfolio pour inspirer confiance à vos clients potentiels !",
+        tipText:
+          "Placez votre badge sur votre page d'accueil, page à propos, ou portfolio pour inspirer confiance à vos clients potentiels !",
       },
     },
     navbar: {
@@ -731,7 +738,7 @@ export const content = {
             "Data export",
             "Priority support",
           ],
-          cta: "Try 14 days free",
+          cta: "Get Started",
           popular: true,
           badge: "Recommended",
         },
@@ -796,7 +803,7 @@ export const content = {
         title: "Product",
         links: [
           { label: "Features", href: "#features" },
-          { label: "Pricing", href: "#pricing" },
+          { label: "Tarifs", href: "/pricing/" },
           { label: "Demo", href: "#demo" },
           { label: "Changelog", href: "/changelog" },
         ],
@@ -978,7 +985,8 @@ export const content = {
         signOut: "Log Out",
       },
       dangerZone: {
-        description: "Once you delete your account, there's no going back. All your projects and feedback will be permanently deleted.",
+        description:
+          "Once you delete your account, there's no going back. All your projects and feedback will be permanently deleted.",
         deleteAccount: "Delete Account",
         comingSoon: "Account deletion coming soon",
       },
@@ -1000,7 +1008,8 @@ export const content = {
         totalFeedbacks: "total feedback",
         certified: "Certified by ratee.me",
         note: "Note",
-        noteText: "The badge updates automatically when you receive new feedback!",
+        noteText:
+          "The badge updates automatically when you receive new feedback!",
       },
       embed: {
         title: "Embed Code",
@@ -1015,7 +1024,8 @@ export const content = {
           step4: "Save and refresh your website",
         },
         tip: "Pro tip",
-        tipText: "Place your badge on your homepage, about page, or portfolio to build trust with potential clients!",
+        tipText:
+          "Place your badge on your homepage, about page, or portfolio to build trust with potential clients!",
       },
     },
     navbar: {

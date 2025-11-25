@@ -80,7 +80,7 @@ export function Pricing() {
               {/* CTA */}
               <Link
                 href={tier.name === "Business" ? "/contact" : "/auth/signup"}
-                className={`block w-full py-3 px-4 rounded-lg font-semibold text-sm text-center transition-all ${
+                className={`block w-full py-3 px-4 rounded-lg font-semibold text-sm text-center transition-all cursor-pointer ${
                   tier.popular
                     ? "bg-emerald-500 text-white hover:bg-emerald-600 shadow-md hover:shadow-lg"
                     : "bg-gray-100 text-gray-900 hover:bg-gray-200"

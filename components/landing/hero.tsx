@@ -25,7 +25,7 @@ const screensContent = {
       id: "improve",
       title: "Showcase",
       description: "Display your credibility with embeddable badges",
-      href: "#pricing",
+      href: "/pricing/",
       color: "from-white to-emerald-50",
     },
   ],
@@ -48,7 +48,7 @@ const screensContent = {
       id: "improve",
       title: "Affiche",
       description: "Montre ta crédibilité avec des badges intégrables",
-      href: "#pricing",
+      href: "/pricing/",
       color: "from-white to-emerald-50",
     },
   ],
@@ -130,7 +130,7 @@ export function Hero() {
                 <Link
                   key={screen.id}
                   href={screen.href}
-                  className="absolute w-full transition-all duration-700 ease-in-out hover:scale-[1.02] group origin-bottom"
+                  className="absolute w-full transition-all duration-700 ease-in-out hover:scale-[1.02] group origin-bottom cursor-pointer"
                   style={{
                     top:
                       relativeIndex === 0

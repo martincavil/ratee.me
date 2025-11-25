@@ -13,7 +13,7 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10">
           {/* Brand column */}
           <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="text-xl font-bold text-white mb-3 block">
+            <Link href="/" className="text-xl font-bold text-white mb-3 block cursor-pointer">
               ratee.me
             </Link>
             <p className="text-sm text-gray-400! leading-relaxed">
@@ -31,7 +31,7 @@ export function Footer() {
                 <li key={index}>
                   <Link
                     href={link.href}
-                    className="text-sm text-gray-400 hover:text-emerald-400 transition-colors"
+                    className="text-sm text-gray-400 hover:text-emerald-400 transition-colors cursor-pointer"
                   >
                     {link.label}
                   </Link>
@@ -50,7 +50,7 @@ export function Footer() {
                 <li key={index}>
                   <Link
                     href={link.href}
-                    className="text-sm text-gray-400 hover:text-emerald-400 transition-colors"
+                    className="text-sm text-gray-400 hover:text-emerald-400 transition-colors cursor-pointer"
                   >
                     {link.label}
                   </Link>
@@ -69,7 +69,7 @@ export function Footer() {
                 <li key={index}>
                   <Link
                     href={link.href}
-                    className="text-sm text-gray-400 hover:text-emerald-400 transition-colors"
+                    className="text-sm text-gray-400 hover:text-emerald-400 transition-colors cursor-pointer"
                   >
                     {link.label}
                   </Link>

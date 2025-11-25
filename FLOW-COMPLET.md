@@ -24,11 +24,13 @@ Ce document décrit le parcours complet d'un utilisateur de ratee.me, depuis la 
 ## 1. Inscription & Onboarding
 
 ### 1.1 Accès à la Landing Page
+
 ```
 URL: https://ratee.me/
 ```
 
 **User voit :**
+
 - Hero section avec proposition de valeur
 - Section "Comment ça marche"
 - Pricing (Free, Pro, Business)
@@ -36,18 +38,22 @@ URL: https://ratee.me/
 - CTA "Commencer gratuitement"
 
 ### 1.2 Clic sur "Commencer gratuitement"
+
 ```
 Redirection: /auth/signup
 ```
 
 ### 1.3 Formulaire d'inscription
+
 **Champs requis :**
+
 - Email
 - Mot de passe (min 6 caractères)
 - Nom complet
 - Nom de l'entreprise (optionnel)
 
 **Action :**
+
 ```typescript
 POST /api/auth/signup
 Body: {
@@ -61,6 +67,7 @@ Body: {
 ### 1.4 Création du compte
 
 **Côté Backend (API) :**
+
 1. Validation des données (Zod schema)
 2. Création du user dans `auth.users` (Supabase Auth)
 3. Trigger automatique : création du profil dans `public.users`
@@ -68,6 +75,7 @@ Body: {
 5. Session créée automatiquement
 
 **Response :**
+
 ```json
 {
   "success": true,
@@ -83,6 +91,7 @@ Body: {
 ```
 
 ### 1.5 Redirection automatique
+
 ```
 → /dashboard
 ```
@@ -92,16 +101,20 @@ Body: {
 ## 2. Connexion
 
 ### 2.1 Utilisateur revient sur le site
+
 ```
 URL: /auth/login
 ```
 
 ### 2.2 Formulaire de connexion
+
 **Champs :**
+
 - Email
 - Mot de passe
 
 **Action :**
+
 ```typescript
 POST /api/auth/login
 Body: {
@@ -113,11 +126,13 @@ Body: {
 ### 2.3 Authentification
 
 **Côté Backend :**
+
 1. Validation avec Supabase Auth
 2. Création de session (cookie httpOnly)
 3. Récupération du profil user
 
 **Response :**
+
 ```json
 {
   "success": true,
@@ -129,6 +144,7 @@ Body: {
 ```
 
 ### 2.4 Redirection
+
 ```
 → /dashboard
 ```
@@ -138,38 +154,43 @@ Body: {
 ## 3. Découverte du Dashboard
 
 ### 3.1 Page Dashboard chargée
+
 ```
 URL: /dashboard
 Layout: DashboardLayout (avec Navbar)
 ```
 
 ### 3.2 Appels API automatiques
+
 ```typescript
 // Récupération des données en parallèle
 Promise.all([
-  fetch("/api/auth/me"),          // Info utilisateur
+  fetch("/api/auth/me"), // Info utilisateur
   fetch("/api/projects?limit=5"), // 5 derniers projets
-  fetch("/api/feedbacks?limit=5"),// 5 derniers feedbacks
-  fetch("/api/badge/stats"),      // Stats NPS
-  fetch("/api/subscriptions"),    // Abonnement actuel
-])
+  fetch("/api/feedbacks?limit=5"), // 5 derniers feedbacks
+  fetch("/api/badge/stats"), // Stats NPS
+  fetch("/api/subscriptions"), // Abonnement actuel
+]);
 ```
 
 ### 3.3 Dashboard affiche
 
 **Banner du plan :**
+
 - **Plan FREE** : "Vous êtes en plan FREE (1 projet/mois)"
   - CTA "Upgrade"
 - **Plan PRO (trial)** : "Vous êtes en PRO (30j gratuit) - X jours restants"
 - **Plan PRO (actif)** : "Vous êtes en plan PRO - Automations activées"
 
 **Stats Cards :**
+
 - Total Projets : `0`
 - Total Feedbacks : `0`
 - Score NPS Moyen : `0.0`
 - Dernier Feedback : `Pas encore`
 
 **Sections :**
+
 - Projets Récents (vide)
   - CTA : "Créer votre premier projet"
 - Feedbacks Récents (vide)
@@ -180,12 +201,15 @@ Promise.all([
 ## 4. Création d'un Projet
 
 ### 4.1 Clic sur "+ Nouveau Projet"
+
 ```
 Action: Ouvre une modale (NewProjectModal)
 ```
 
 ### 4.2 Formulaire de création
+
 **Champs requis :**
+
 - Nom du projet : "Refonte site web Acme"
 - Nom du client : "John Doe"
 - Email du client : "john@acme.com" (optionnel mais recommandé pour automation)
@@ -193,6 +217,7 @@ Action: Ouvre une modale (NewProjectModal)
 - Date de livraison : "2024-12-15"
 
 ### 4.3 Soumission du formulaire
+
 ```typescript
 POST /api/projects
 Body: {
@@ -207,6 +232,7 @@ Body: {
 ### 4.4 Création en base
 
 **Table `projects` :**
+
 ```sql
 INSERT INTO projects (
   user_id,
@@ -223,7 +249,9 @@ INSERT INTO projects (
 ```
 
 ### 4.5 Projet créé
+
 **Response :**
+
 ```json
 {
   "success": true,
@@ -240,6 +268,7 @@ INSERT INTO projects (
 ```
 
 ### 4.6 Dashboard mis à jour
+
 - Projet apparaît dans "Projets Récents"
 - Badge : `En cours`
 - Total Projets : `1`
@@ -249,12 +278,15 @@ INSERT INTO projects (
 ## 5. Gestion du Projet
 
 ### 5.1 Navigation vers la page Projets
+
 ```
 URL: /dashboard/projects
 ```
 
 ### 5.2 Vue liste des projets
+
 **Colonnes du tableau :**
+
 - Projet : Nom + Description
 - Client : Nom + Email
 - Date de Livraison : 15/12/2024
@@ -263,6 +295,7 @@ URL: /dashboard/projects
 - Actions : [Modifier] [Supprimer]
 
 ### 5.3 Actions disponibles
+
 - **Modifier** : Éditer les infos du projet
 - **Supprimer** : Supprimer le projet (avec confirmation)
 - **Envoyer** : Apparaît quand le projet est livré (voir section suivante)
@@ -272,9 +305,11 @@ URL: /dashboard/projects
 ## 6. Livraison du Projet
 
 ### 6.1 Projet terminé
+
 User marque le projet comme "Livré" via le bouton "Modifier"
 
 ### 6.2 Changement de statut
+
 ```typescript
 PUT /api/projects/{id}
 Body: {
@@ -284,6 +319,7 @@ Body: {
 ```
 
 ### 6.3 Mise à jour en base
+
 ```sql
 UPDATE projects
 SET
@@ -294,7 +330,9 @@ WHERE id = 'project-uuid';
 ```
 
 ### 6.4 Apparition du bouton "Envoyer"
+
 Dans la colonne Actions du tableau, si :
+
 - `status = 'delivered'`
 - `feedback_status = 'not_sent'`
 - `client_email` existe
@@ -306,24 +344,29 @@ Dans la colonne Actions du tableau, si :
 ## 7. Email Automation J+0 (Onboarding)
 
 ### 7.1 Clic sur "Envoyer"
+
 ```
 Action: Ouvre SendFeedbackModal
 ```
 
 ### 7.2 Modale d'envoi
+
 **Affiche :**
+
 - Email du client : john@acme.com
 - Nom du projet : Refonte site web Acme
 - Aperçu de l'email qui sera envoyé
 
 ### 7.3 Confirmation d'envoi
+
 ```typescript
-POST /api/projects/{id}/send-feedback
+POST / api / projects / { id } / send - feedback;
 ```
 
 ### 7.4 Côté Backend - Envoi de l'email
 
 **API Route :**
+
 ```typescript
 // 1. Récupération du projet
 const project = await getProjectById(id);
@@ -335,29 +378,29 @@ const feedbackUrl = `${process.env.NEXT_PUBLIC_URL}/feedback/${project.feedback_
 await sendEmail({
   to: project.client_email,
   subject: `🎯 Votre avis sur ${project.name}`,
-  template: 'feedback-request',
+  template: "feedback-request",
   data: {
     clientName: project.client_name,
     projectName: project.name,
     freelancerName: user.name,
-    feedbackUrl: feedbackUrl
-  }
+    feedbackUrl: feedbackUrl,
+  },
 });
 
 // 4. Mise à jour du statut
 await updateProject(id, {
-  feedback_status: 'sent'
+  feedback_status: "sent",
 });
 
 // 5. Enregistrement dans email_automations
 await insertEmailAutomation({
   project_id: id,
   user_id: user.id,
-  email_type: 'onboarding',
+  email_type: "onboarding",
   client_email: project.client_email,
   client_name: project.client_name,
   sent_at: new Date(),
-  status: 'sent'
+  status: "sent",
 });
 ```
 
@@ -366,6 +409,7 @@ await insertEmailAutomation({
 **Objet :** `🎯 Votre avis sur Refonte site web Acme`
 
 **Contenu :**
+
 ```
 Bonjour John,
 
@@ -384,6 +428,7 @@ Dupont Agency
 ```
 
 ### 7.6 Dashboard mis à jour
+
 - Badge Feedback : `Non envoyé` → `Envoyé`
 - Bouton "Envoyer" disparaît
 
@@ -392,6 +437,7 @@ Dupont Agency
 ## 8. Client Soumet son Feedback
 
 ### 8.1 Client clique sur le lien
+
 ```
 URL: /feedback/{token}
 ```
@@ -399,6 +445,7 @@ URL: /feedback/{token}
 ### 8.2 Validation du token
 
 **API :**
+
 ```typescript
 GET /api/feedback/validate?token={token}
 
@@ -413,12 +460,15 @@ if (!project) {
 ### 8.3 Page de feedback affichée
 
 **Contenu :**
+
 - Logo ratee.me
 - "Merci de donner votre avis sur le projet : Refonte site web Acme"
 - Nom du client pré-rempli : John Doe
 
 **Formulaire :**
+
 1. **Score NPS (obligatoire) :**
+
    - Question : "Sur une échelle de 0 à 10, recommanderiez-vous Jean Dupont ?"
    - Boutons : [0] [1] [2] [3] [4] [5] [6] [7] [8] [9] [10]
    - Couleurs :
@@ -427,12 +477,14 @@ if (!project) {
      - 9-10 : Vert (Promoteur)
 
 2. **Commentaire (optionnel) :**
+
    - Textarea : "Partagez votre expérience (optionnel)"
 
 3. **Email (optionnel) :**
    - Input : "Votre email (pour être recontacté si besoin)"
 
 ### 8.4 Soumission du feedback
+
 ```typescript
 POST /api/feedback/submit
 Body: {
@@ -446,11 +498,13 @@ Body: {
 ### 8.5 Enregistrement en base
 
 **1. Récupération du projet :**
+
 ```sql
 SELECT * FROM projects WHERE feedback_token = 'token-uuid';
 ```
 
 **2. Insertion du feedback :**
+
 ```sql
 INSERT INTO feedbacks (
   project_id,
@@ -470,6 +524,7 @@ INSERT INTO feedbacks (
 ```
 
 **3. Mise à jour du projet :**
+
 ```sql
 UPDATE projects
 SET feedback_status = 'received'
@@ -477,6 +532,7 @@ WHERE id = 'project-uuid';
 ```
 
 **4. Trigger automatique : Mise à jour badge_stats :**
+
 ```sql
 -- Recalcule automatiquement les stats de l'utilisateur
 INSERT INTO badge_stats (...)
@@ -484,6 +540,7 @@ INSERT INTO badge_stats (...)
 ```
 
 ### 8.6 Page de confirmation
+
 ```
 Message: "Merci pour votre retour ! Votre avis a bien été enregistré."
 Footer: "Propulsé par ratee.me"
@@ -498,12 +555,14 @@ Footer: "Propulsé par ratee.me"
 **Nouvelle visite du dashboard :**
 
 **Stats Cards :**
+
 - Total Projets : `1`
 - Total Feedbacks : `1` ← Incrémenté
 - Score NPS Moyen : `9.0` ← Calculé
 - Dernier Feedback : `Il y a quelques instants`
 
 **Feedbacks Récents :**
+
 ```
 ┌─────────────────────────────────────────┐
 │ John Doe                        [9/10]  │
@@ -513,9 +572,11 @@ Footer: "Propulsé par ratee.me"
 ```
 
 **Badge du projet :**
+
 - Feedback : `Envoyé` → `Reçu`
 
 ### 9.2 Navigation vers page Feedbacks
+
 ```
 URL: /dashboard/feedbacks
 ```
@@ -523,12 +584,14 @@ URL: /dashboard/feedbacks
 ### 9.3 Stats détaillées affichées
 
 **4 cartes de stats :**
+
 - Score NPS Moyen : `9.0`
 - Promoteurs (9-10) : `1`
 - Passifs (7-8) : `0`
 - Détracteurs (0-6) : `0`
 
 **Liste de tous les feedbacks :**
+
 ```
 ┌───────────────────────────────────────────────┐
 │ John Doe                            [9/10]    │
@@ -547,6 +610,7 @@ URL: /dashboard/feedbacks
 **Déclenchement :** Tous les jours à 9h (UTC)
 
 **Requête :**
+
 ```sql
 SELECT p.*, u.email as user_email, u.name as user_name
 FROM projects p
@@ -567,6 +631,7 @@ WHERE
 **Objet :** `👋 30 jours après ${project.name} - Encore satisfait ?`
 
 **Contenu :**
+
 ```
 Bonjour John,
 
@@ -586,6 +651,7 @@ Dupont Agency
 ```
 
 ### 10.3 Mise à jour du flag
+
 ```sql
 UPDATE projects
 SET automation_30days_sent = true
@@ -593,6 +659,7 @@ WHERE id = 'project-uuid';
 ```
 
 ### 10.4 Enregistrement dans email_automations
+
 ```sql
 INSERT INTO email_automations (
   project_id,
@@ -608,6 +675,7 @@ INSERT INTO email_automations (
 ### 10.5 Si le client soumet un nouveau feedback
 
 **Comportement :**
+
 - Un nouveau feedback est créé dans la table `feedbacks`
 - Les stats NPS sont recalculées (moyenne, promoteurs, etc.)
 - Le `feedback_status` du projet reste `received`
@@ -619,6 +687,7 @@ INSERT INTO email_automations (
 ### 11.1 Cron Job automatique
 
 **Requête similaire à J+30 :**
+
 ```sql
 SELECT ...
 WHERE
@@ -633,6 +702,7 @@ WHERE
 **Objet :** `🎯 3 mois après ${project.name} - Dernier retour`
 
 **Contenu :**
+
 ```
 Bonjour John,
 
@@ -652,6 +722,7 @@ Dupont Agency
 ```
 
 ### 11.3 Mise à jour du flag
+
 ```sql
 UPDATE projects
 SET automation_90days_sent = true
@@ -663,6 +734,7 @@ WHERE id = 'project-uuid';
 ## 12. Badge NPS
 
 ### 12.1 Activation du Badge
+
 ```
 URL: /dashboard/badge
 ```
@@ -670,12 +742,14 @@ URL: /dashboard/badge
 ### 12.2 Page Badge affiche
 
 **Stats :**
+
 - Score NPS Moyen : `9.0`
 - Promoteurs : `1`
 - Passifs : `0`
 - Détracteurs : `0`
 
 **Aperçu du Badge :**
+
 ```
 ┌─────────────────────────┐
 │  Satisfaction Client    │
@@ -687,6 +761,7 @@ URL: /dashboard/badge
 ```
 
 **Code d'intégration :**
+
 ```html
 <div style="...">
   <div>Satisfaction Client</div>
@@ -702,11 +777,13 @@ URL: /dashboard/badge
 ### 12.3 Intégration sur le site
 
 User colle le code sur son site web :
+
 - Homepage
 - Page À propos
 - Portfolio
 
 **Badge mis à jour automatiquement :**
+
 - À chaque nouveau feedback reçu
 - Les stats se mettent à jour en temps réel (via l'API publique)
 
@@ -728,6 +805,7 @@ J+90    : Email automatique "3 mois après"
 ## 🔑 Points Clés Techniques
 
 ### Tables principales utilisées :
+
 1. **auth.users** : Authentification Supabase
 2. **public.users** : Profils utilisateurs
 3. **subscriptions** : Plans (free/pro)
@@ -737,6 +815,7 @@ J+90    : Email automatique "3 mois après"
 7. **email_automations** : Tracking des emails envoyés
 
 ### APIs principales :
+
 - `POST /api/auth/signup`
 - `POST /api/auth/login`
 - `GET /api/auth/me`
@@ -747,10 +826,12 @@ J+90    : Email automatique "3 mois après"
 - `GET /api/badge/stats`
 
 ### Cron Jobs (Edge Functions) :
+
 - **Daily 9am UTC** : Check projets J+30
 - **Daily 9am UTC** : Check projets J+90
 
 ### RLS (Row Level Security) :
+
 - Users peuvent voir/éditer uniquement leurs données
 - Feedbacks lisibles uniquement par le owner du projet
 - Badge stats publiquement lisibles
@@ -760,12 +841,14 @@ J+90    : Email automatique "3 mois après"
 ## ✅ Fonctionnalités par Plan
 
 ### FREE :
+
 - ✅ 1 projet actif max
 - ✅ Feedbacks illimités
 - ✅ Badge NPS
 - ❌ Email automation (J+30, J+90)
 
 ### PRO :
+
 - ✅ Projets illimités
 - ✅ Feedbacks illimités
 - ✅ Badge NPS personnalisable

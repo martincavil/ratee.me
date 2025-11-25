@@ -55,7 +55,7 @@ export default function DashboardPage() {
 
       const userData = await userRes.json();
       if (userData.success && userData.data.user) {
-        setProfile({ name: userData.data.user.full_name });
+        setProfile({ name: userData.data.user.name });
       }
 
       const projectsData = await projectsRes.json();
@@ -98,8 +98,7 @@ export default function DashboardPage() {
     new Date(subscription.trial_until) > new Date();
   const daysLeft = isOnTrial
     ? Math.ceil(
-        (new Date(subscription.trial_until!).getTime() -
-          new Date().getTime()) /
+        (new Date(subscription.trial_until!).getTime() - new Date().getTime()) /
           (1000 * 60 * 60 * 24)
       )
     : 0;
@@ -126,8 +125,8 @@ export default function DashboardPage() {
               </div>
             </div>
             <a
-              href="/pricing"
-              className="px-4 py-2 bg-emerald text-white text-sm font-inter font-medium rounded-lg hover:bg-emerald-dark transition-colors"
+              href="/pricing/"
+              className="px-4 py-2 bg-emerald text-white text-sm font-inter font-medium rounded-lg hover:bg-emerald-dark transition-colors cursor-pointer"
             >
               {text.dashboard.banners.free.action}
             </a>
@@ -314,7 +313,7 @@ export default function DashboardPage() {
             </h2>
             <Link
               href={ROUTES.PROJECTS}
-              className="text-sm text-emerald hover:text-emerald-dark font-medium"
+              className="text-sm text-emerald hover:text-emerald-dark font-medium cursor-pointer"
             >
               {text.dashboard.recentProjects.viewAll} →
             </Link>
@@ -360,7 +359,7 @@ export default function DashboardPage() {
                 </p>
                 <Link
                   href={ROUTES.PROJECTS}
-                  className="inline-flex items-center px-4 py-2 bg-emerald text-white rounded-md hover:bg-emerald-dark font-medium text-sm transition-colors"
+                  className="inline-flex items-center px-4 py-2 bg-emerald text-white rounded-md hover:bg-emerald-dark font-medium text-sm transition-colors cursor-pointer"
                 >
                   {text.dashboard.recentProjects.createFirst}
                 </Link>
@@ -377,7 +376,7 @@ export default function DashboardPage() {
             </h2>
             <Link
               href={ROUTES.FEEDBACKS}
-              className="text-sm text-emerald hover:text-emerald-dark font-medium"
+              className="text-sm text-emerald hover:text-emerald-dark font-medium cursor-pointer"
             >
               {text.dashboard.recentFeedbacks.viewAll} →
             </Link>
