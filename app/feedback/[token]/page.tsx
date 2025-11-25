@@ -1,6 +1,8 @@
-import { getProjectByToken } from '@/lib/supabase/queries';
-import { NPSForm } from '@/components/feedback/nps-form';
-import { notFound } from 'next/navigation';
+import { getProjectByToken } from "@/lib/supabase/queries";
+import { NPSForm } from "@/components/feedback/nps-form";
+import { notFound } from "next/navigation";
+import { headers } from "next/headers";
+import { getFeedbackText, type FeedbackLanguage } from "@/lib/feedback-i18n";
 
 interface FeedbackPageProps {
   params: Promise<{
@@ -16,40 +18,48 @@ export default async function FeedbackPage({ params }: FeedbackPageProps) {
     notFound();
   }
 
+  // Détecter la langue du navigateur ou utiliser 'fr' par défaut
+  const headersList = await headers();
+  const acceptLanguage = headersList.get('accept-language') || 'fr';
+  const language: FeedbackLanguage = acceptLanguage.toLowerCase().startsWith('fr') ? 'fr' : 'en';
+
+  const t = getFeedbackText(language);
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-bg-primary py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-6">
-            <span className="text-primary font-semibold">ratee.me</span>
+          <div className="inline-block px-5 py-2.5 bg-emerald/10 rounded-full mb-8">
+            <span className="text-emerald font-bold text-lg!">ratee.me</span>
           </div>
 
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            We'd love your feedback!
+          <h1 className="text-4xl! font-bold font-sora text-content-primary mb-4">
+            {t.title}
           </h1>
 
-          <p className="text-xl text-gray-600 mb-2">
-            Project: <span className="font-semibold text-gray-900">{project.name}</span>
+          <p className="text-xl! text-content-secondary mb-2 font-inter">
+            {t.subtitle}{" "}
+            <span className="font-semibold text-content-primary">{project.name}</span>
           </p>
 
-          <p className="text-gray-500">
-            Your feedback helps us improve and deliver better results
+          <p className="text-content-tertiary font-inter">
+            {t.description}
           </p>
         </div>
 
         {/* Form Card */}
-        <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-8 sm:p-12">
-          <NPSForm project={project} token={token} />
+        <div className="bg-white rounded-2xl shadow-lg border border-border p-8 sm:p-12">
+          <NPSForm project={project} token={token} language={language} />
         </div>
 
         {/* Footer */}
         <div className="mt-8 text-center">
-          <p className="text-sm text-gray-500">
-            Powered by{' '}
+          <p className="text-sm! text-content-tertiary font-inter">
+            {t.footer}{" "}
             <a
               href="https://ratee.me"
-              className="text-primary font-semibold hover:underline"
+              className="text-emerald font-semibold hover:underline transition-colors"
               target="_blank"
               rel="noopener noreferrer"
             >

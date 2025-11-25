@@ -29,6 +29,11 @@ export async function POST(request: Request) {
       client_name: validated.client_name,
       client_email: validated.client_email,
       nps_score: validated.nps_score,
+      rating_communication: validated.rating_communication,
+      rating_quality: validated.rating_quality,
+      rating_deadlines: validated.rating_deadlines,
+      rating_value: validated.rating_value,
+      rating_overall: validated.rating_overall,
       comment: validated.comment,
     });
 

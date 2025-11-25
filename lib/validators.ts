@@ -101,6 +101,26 @@ export const submitFeedbackSchema = z.object({
     .int('Score must be an integer')
     .min(0, 'Score must be at least 0')
     .max(10, 'Score must be at most 10'),
+  rating_communication: z.union([
+    z.number().int().min(1).max(5),
+    z.null()
+  ]),
+  rating_quality: z.union([
+    z.number().int().min(1).max(5),
+    z.null()
+  ]),
+  rating_deadlines: z.union([
+    z.number().int().min(1).max(5),
+    z.null()
+  ]),
+  rating_value: z.union([
+    z.number().int().min(1).max(5),
+    z.null()
+  ]),
+  rating_overall: z.union([
+    z.number().int().min(1).max(5),
+    z.null()
+  ]),
   comment: z
     .string()
     .max(1000, 'Comment must be less than 1000 characters')

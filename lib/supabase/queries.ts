@@ -243,6 +243,11 @@ export async function createFeedback(feedback: {
   client_name: string;
   client_email?: string;
   nps_score: number;
+  rating_communication?: number | null;
+  rating_quality?: number | null;
+  rating_deadlines?: number | null;
+  rating_value?: number | null;
+  rating_overall?: number | null;
   comment?: string;
 }) {
   const supabase = await createClient();

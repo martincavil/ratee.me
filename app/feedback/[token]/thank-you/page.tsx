@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from "next/link";
 
 export default function ThankYouPage() {
   return (
@@ -35,13 +35,13 @@ export default function ThankYouPage() {
         {/* Message */}
         <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-8">
           <p className="text-gray-700 leading-relaxed mb-4">
-            We really appreciate you taking the time to share your thoughts with us.
-            Your feedback helps us improve and deliver better results.
+            We really appreciate you taking the time to share your thoughts with
+            us. Your feedback helps us improve and deliver better results.
           </p>
 
           <p className="text-gray-600">
-            If you have any additional questions or concerns, feel free to reach out
-            to us directly.
+            If you have any additional questions or concerns, feel free to reach
+            out to us directly.
           </p>
         </div>
 
@@ -55,7 +55,7 @@ export default function ThankYouPage() {
           </Link>
 
           <p className="text-sm text-gray-500">
-            Powered by{' '}
+            Powered by{" "}
             <a
               href="https://ratee.me"
               className="text-primary font-semibold hover:underline"

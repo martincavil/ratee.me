@@ -68,6 +68,10 @@ export async function POST(_request: Request, { params }: RouteParams) {
     // Get sender name from user
     const senderName = user.user_metadata?.full_name || user.email || 'Your partner';
 
+    // Get user language preference (default to 'fr' for French users, 'en' otherwise)
+    // TODO: Add language setting in user profile
+    const userLanguage = (user.user_metadata?.language || 'fr') as 'fr' | 'en';
+
     // Send email
     const emailResult = await sendFeedbackRequestEmail({
       to: project.client_email,
@@ -75,6 +79,7 @@ export async function POST(_request: Request, { params }: RouteParams) {
       projectName: project.name,
       feedbackUrl,
       senderName,
+      language: userLanguage,
     });
 
     if (!emailResult.success) {

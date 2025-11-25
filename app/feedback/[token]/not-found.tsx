@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { useLanguage } from '@/lib/i18n';
+import Link from "next/link";
+import { useLanguage } from "@/lib/i18n";
 
 export default function FeedbackNotFound() {
   const { text } = useLanguage();
@@ -29,7 +29,7 @@ export default function FeedbackNotFound() {
         </div>
 
         {/* Header */}
-        <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+        <h1 className="text-2xl font-bold text-gray-900 mb-4">
           {text.feedbackNotFound.title}
         </h1>
 
@@ -43,9 +43,7 @@ export default function FeedbackNotFound() {
             {text.feedbackNotFound.description}
           </p>
 
-          <p className="text-gray-600">
-            {text.feedbackNotFound.contact}
-          </p>
+          <p className="text-gray-600">{text.feedbackNotFound.contact}</p>
         </div>
 
         {/* CTA */}
@@ -58,7 +56,7 @@ export default function FeedbackNotFound() {
           </Link>
 
           <p className="text-sm text-gray-500">
-            {text.feedbackNotFound.poweredBy}{' '}
+            {text.feedbackNotFound.poweredBy}{" "}
             <a
               href="https://ratee.me"
               className="text-primary font-semibold hover:underline"
