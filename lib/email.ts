@@ -118,14 +118,19 @@ Powered by ratee.me - Client Feedback Automation
   }
 
   try {
+    // En mode développement, utiliser onboarding@resend.dev (domaine de test Resend)
+    // En production, utiliser votre domaine vérifié
+    const fromEmail = process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev";
+
     const result = await resend.emails.send({
-      from: "Ratee.me <noreply@ratee.me>", // Change to your verified domain
+      from: fromEmail,
       to,
       subject,
       html,
       text,
     });
 
+    console.log("Email sent successfully:", { to, subject, from: fromEmail });
     return { success: true, data: result };
   } catch (error) {
     console.error("Failed to send email:", error);

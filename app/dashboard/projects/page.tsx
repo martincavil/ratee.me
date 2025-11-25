@@ -220,24 +220,26 @@ export default function ProjectsPage() {
                     </span>
                   </td>
                   <td className="px-5 py-4 text-right text-xs space-x-2">
-                    {project.feedback_status === "not_sent" &&
+                    {project.feedback_status !== "received" &&
                       project.client_email && (
                         <button
                           onClick={() => setFeedbackProject(project)}
-                          className="text-emerald hover:text-emerald-dark font-medium"
+                          className="text-emerald hover:text-emerald-dark font-medium cursor-pointer"
                         >
-                          {text.projects.table.actions.send}
+                          {project.feedback_status === "sent"
+                            ? "Renvoyer"
+                            : text.projects.table.actions.send}
                         </button>
                       )}
                     <button
                       onClick={() => setEditingProject(project)}
-                      className="text-emerald hover:text-emerald-dark font-medium"
+                      className="text-emerald hover:text-emerald-dark font-medium cursor-pointer"
                     >
                       {text.projects.table.actions.edit}
                     </button>
                     <button
                       onClick={() => setDeletingProject(project)}
-                      className="text-error hover:text-error/80 font-medium"
+                      className="text-error hover:text-error/80 font-medium cursor-pointer"
                     >
                       {text.projects.table.actions.delete}
                     </button>

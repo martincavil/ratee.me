@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ROUTES } from "@/lib/constants";
 import { useLanguage } from "@/lib/i18n";
 import type { User } from "@/types/database";
@@ -17,6 +17,22 @@ export function Navbar({ user }: NavbarProps) {
   const { lang, setLang, text } = useLanguage();
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const [isPro, setIsPro] = useState(false);
+
+  useEffect(() => {
+    const fetchSubscription = async () => {
+      try {
+        const res = await fetch("/api/subscriptions");
+        const data = await res.json();
+        if (data.success && data.data?.plan === "pro") {
+          setIsPro(true);
+        }
+      } catch (error) {
+        console.error("Failed to fetch subscription:", error);
+      }
+    };
+    fetchSubscription();
+  }, []);
 
   const handleLogout = async () => {
     setIsLoggingOut(true);
@@ -81,8 +97,16 @@ export function Navbar({ user }: NavbarProps) {
                 className="flex items-center space-x-3 focus:bg-gray-50  rounded-lg px-3 py-2 hover:bg-gray-50 transition-colors"
               >
                 {/* Avatar */}
-                <div className="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center font-medium">
-                  {user.name.charAt(0).toUpperCase()}
+                <div className="relative">
+                  <div className="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center font-medium">
+                    {user.name.charAt(0).toUpperCase()}
+                  </div>
+                  {/* Pro Badge */}
+                  {isPro && (
+                    <div className="absolute -top-1 -left-1 bg-emerald text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full shadow-sm">
+                      PRO
+                    </div>
+                  )}
                 </div>
                 {/* User Info (Hidden on mobile) */}
                 <div className="hidden md:block text-left">
@@ -121,7 +145,7 @@ export function Navbar({ user }: NavbarProps) {
                   ></div>
 
                   {/* Menu */}
-                  <div className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg py-1 z-20 border border-gray-200">
+                  <div className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg pt-1 z-20 border border-gray-200">
                     {/* User Info (Mobile only) */}
                     <div className="md:hidden px-4 py-3 border-b border-gray-200">
                       <div className="text-sm font-medium text-gray-900">
@@ -182,9 +206,11 @@ export function Navbar({ user }: NavbarProps) {
                     <button
                       onClick={handleLogout}
                       disabled={isLoggingOut}
-                      className="w-full text-left px-4 py-2 text-sm text-error hover:bg-error-light transition-colors disabled:opacity-50 disabled:cursor-not-allowed border-t border-border"
+                      className="w-full text-left px-4 py-2 text-sm text-error hover:bg-error-light transition-colors disabled:opacity-50 rounded-b-md disabled:cursor-not-allowed border-t border-border"
                     >
-                      {isLoggingOut ? text.navbar.loggingOut : text.navbar.logout}
+                      {isLoggingOut
+                        ? text.navbar.loggingOut
+                        : text.navbar.logout}
                     </button>
                   </div>
                 </>

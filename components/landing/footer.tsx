@@ -10,7 +10,7 @@ export function Footer() {
     <footer className="bg-gray-900 text-gray-300 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
         {/* Main footer content */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-8 mb-10">
           {/* Brand column */}
           <div className="col-span-2 md:col-span-1">
             <Link

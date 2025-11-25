@@ -30,12 +30,19 @@ export default async function BetaRedemptionPage({ params }: Props) {
     return <ErrorPage message="Ce lien a expire" />;
   }
 
-  // 4. Check if user already exists
-  const { data: existingUser } = await supabase.auth.admin.listUsers();
-  const userExists = existingUser?.users?.some(u => u.email === invite.email);
+  // 4. Create account
+  const tempPassword = generateSecurePassword();
+  const { data: authUser, error: authError } = await supabase.auth.admin.createUser({
+    email: invite.email,
+    password: tempPassword,
+    email_confirm: true,
+    user_metadata: {
+      name: invite.email.split('@')[0],
+    },
+  });
 
-  if (userExists) {
-    // Mark invite as used and redirect to login
+  // If user already exists, mark invite as used and redirect to login
+  if (authError && authError.message.includes('already registered')) {
     await supabase
       .from('beta_invites')
       .update({ status: 'used', used_at: new Date().toISOString() })
@@ -60,23 +67,12 @@ export default async function BetaRedemptionPage({ params }: Props) {
     );
   }
 
-  // 5. Create account
-  const tempPassword = generateSecurePassword();
-  const { data: authUser, error: authError } = await supabase.auth.admin.createUser({
-    email: invite.email,
-    password: tempPassword,
-    email_confirm: true,
-    user_metadata: {
-      name: invite.email.split('@')[0],
-    },
-  });
-
   if (authError || !authUser.user) {
     console.error('Beta signup auth error:', authError);
-    return <ErrorPage message="Erreur lors de la creation du compte" />;
+    return <ErrorPage message={`Erreur lors de la creation du compte: ${authError?.message || 'Unknown error'}`} />;
   }
 
-  // 6. Create subscription with 30-day trial
+  // 5. Create subscription with 30-day trial
   const trialUntil = new Date();
   trialUntil.setDate(trialUntil.getDate() + (invite.trial_duration_days || 30));
 
@@ -91,9 +87,10 @@ export default async function BetaRedemptionPage({ params }: Props) {
 
   if (subError) {
     console.error('Beta signup subscription error:', subError);
+    return <ErrorPage message={`Erreur lors de la creation de l'abonnement: ${subError.message}`} />;
   }
 
-  // 7. Mark invite as used
+  // 6. Mark invite as used
   await supabase
     .from('beta_invites')
     .update({
@@ -103,13 +100,13 @@ export default async function BetaRedemptionPage({ params }: Props) {
     })
     .eq('token', token);
 
-  // 8. Update waitlist status if exists
+  // 7. Update waitlist status if exists
   await supabase
     .from('waitlist')
     .update({ status: 'converted' })
     .eq('email', invite.email);
 
-  // 9. Show success page with auto-redirect
+  // 8. Show success page with auto-redirect
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-4 bg-gray-50">
       <div className="text-center max-w-md">

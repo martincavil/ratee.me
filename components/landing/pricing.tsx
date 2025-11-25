@@ -36,7 +36,7 @@ export function Pricing() {
 
               {/* Tier name */}
               <div className="mb-4">
-                <h3 className="text-xl font-bold text-gray-900 mb-1">
+                <h3 className="text-xl! font-bold text-gray-900 mb-1">
                   {tier.name}
                 </h3>
                 <p className="text-sm text-gray-500">{tier.heading}</p>
@@ -48,9 +48,13 @@ export function Pricing() {
                   <span className="text-4xl font-bold text-gray-900">
                     {tier.price}
                   </span>
-                  {tier.period && tier.name !== "Free" && tier.name !== "Business" && (
-                    <span className="text-gray-500 text-sm">{tier.period}</span>
-                  )}
+                  {tier.period &&
+                    tier.name !== "Free" &&
+                    tier.name !== "Business" && (
+                      <span className="text-gray-500 text-sm">
+                        {tier.period}
+                      </span>
+                    )}
                 </div>
                 {(tier.name === "Free" || tier.name === "Business") && (
                   <p className="text-xs text-gray-500 mt-1">{tier.period}</p>

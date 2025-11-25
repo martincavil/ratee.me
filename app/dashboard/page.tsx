@@ -93,19 +93,8 @@ export default function DashboardPage() {
     );
   }
 
-  const isOnTrial =
-    subscription?.trial_until &&
-    new Date(subscription.trial_until) > new Date();
-  const daysLeft = isOnTrial
-    ? Math.ceil(
-        (new Date(subscription.trial_until!).getTime() - new Date().getTime()) /
-          (1000 * 60 * 60 * 24)
-      )
-    : 0;
-
-  const showFreeBanner = !subscription || subscription.plan === "free";
-  const showTrialBanner = isOnTrial;
-  const showProBanner = subscription?.plan === "pro" && !isOnTrial;
+  const showFreeBanner = subscription?.plan === "free";
+  const showProBanner = subscription?.plan === "pro";
 
   return (
     <div>
@@ -130,24 +119,6 @@ export default function DashboardPage() {
             >
               {text.dashboard.banners.free.action}
             </a>
-          </div>
-        </div>
-      )}
-
-      {/* Trial Banner */}
-      {showTrialBanner && (
-        <div className="bg-emerald-light border border-emerald/20 rounded-lg p-4 mb-6">
-          <div className="flex items-center gap-3">
-            <span className="text-lg">✨</span>
-            <div>
-              <p className="font-inter text-emerald-dark font-medium text-sm">
-                {text.dashboard.banners.trial.title} - {daysLeft}{" "}
-                {text.dashboard.banners.trial.daysLeft}
-              </p>
-              <p className="font-inter text-emerald-dark text-xs">
-                {text.dashboard.banners.trial.description}
-              </p>
-            </div>
           </div>
         </div>
       )}

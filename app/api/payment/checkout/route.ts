@@ -69,9 +69,6 @@ export async function POST(request: NextRequest) {
       }],
       success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/dashboard?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/pricing`,
-      subscription_data: {
-        trial_period_days: 30,
-      },
     });
 
     return NextResponse.json({ sessionId: session.id, url: session.url });

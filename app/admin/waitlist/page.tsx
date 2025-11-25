@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { createClient } from '@/lib/supabase/client';
+import { useState, useEffect } from "react";
+import { createClient } from "@/lib/supabase/client";
 
 interface WaitlistEntry {
   id: string;
@@ -14,7 +14,7 @@ interface WaitlistEntry {
 export default function AdminWaitlistPage() {
   const [waitlist, setWaitlist] = useState<WaitlistEntry[]>([]);
   const [selected, setSelected] = useState<Set<string>>(new Set());
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -24,9 +24,9 @@ export default function AdminWaitlistPage() {
   async function fetchWaitlist() {
     const supabase = createClient();
     const { data } = await supabase
-      .from('waitlist')
-      .select('*')
-      .order('created_at', { ascending: false });
+      .from("waitlist")
+      .select("*")
+      .order("created_at", { ascending: false });
     if (data) setWaitlist(data);
   }
 
@@ -34,71 +34,80 @@ export default function AdminWaitlistPage() {
     if (selected.size === 0) return;
     setLoading(true);
 
-    const supabase = createClient();
-    const selectedEmails = waitlist.filter(w => selected.has(w.id)).map(w => w.email);
-    const links: string[] = [];
+    try {
+      const selectedEmails = waitlist
+        .filter((w) => selected.has(w.id))
+        .map((w) => w.email);
 
-    for (const email of selectedEmails) {
-      const token = generateToken(32);
-      const { error } = await supabase.from('beta_invites').insert({
-        email,
-        token,
-        status: 'pending',
+      // Appeler l'API route pour générer les invites
+      const response = await fetch("/api/admin/beta-invites", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ emails: selectedEmails }),
       });
 
-      if (!error) {
-        links.push(`${window.location.origin}/beta/${token}`);
-        await supabase
-          .from('waitlist')
-          .update({ status: 'beta_invited' })
-          .eq('email', email);
+      const data = await response.json();
+
+      if (data.success && data.data.links.length > 0) {
+        await navigator.clipboard.writeText(data.data.links.join("\n"));
+        setMessage(
+          `${data.data.count} invites copiees dans le presse-papier!`
+        );
+      } else {
+        setMessage("Erreur: " + (data.error || "Impossible de créer les invites"));
       }
-    }
 
-    if (links.length > 0) {
-      await navigator.clipboard.writeText(links.join('\n'));
-      setMessage(`${links.length} invites copiees!`);
+      setSelected(new Set());
+      await fetchWaitlist();
+    } catch (error) {
+      console.error("Bulk invite error:", error);
+      setMessage("Erreur lors de la génération des invites");
+    } finally {
+      setLoading(false);
+      setTimeout(() => setMessage(""), 5000);
     }
-
-    setSelected(new Set());
-    await fetchWaitlist();
-    setLoading(false);
-    setTimeout(() => setMessage(''), 3000);
   }
 
   function handleExportCSV() {
     const csv = [
-      ['Email', 'Status', 'Date', 'Source'].join(','),
-      ...waitlist.map(w =>
-        [w.email, w.status, new Date(w.created_at).toISOString(), w.source || ''].join(',')
+      ["Email", "Status", "Date", "Source"].join(","),
+      ...waitlist.map((w) =>
+        [
+          w.email,
+          w.status,
+          new Date(w.created_at).toISOString(),
+          w.source || "",
+        ].join(",")
       ),
-    ].join('\n');
+    ].join("\n");
 
-    const blob = new Blob([csv], { type: 'text/csv' });
+    const blob = new Blob([csv], { type: "text/csv" });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
+    const a = document.createElement("a");
     a.href = url;
-    a.download = `waitlist-${new Date().toISOString().split('T')[0]}.csv`;
+    a.download = `waitlist-${new Date().toISOString().split("T")[0]}.csv`;
     a.click();
     URL.revokeObjectURL(url);
   }
 
   async function handleDelete(id: string) {
     const supabase = createClient();
-    await supabase.from('waitlist').delete().eq('id', id);
+    await supabase.from("waitlist").delete().eq("id", id);
     await fetchWaitlist();
   }
 
   const stats = {
     total: waitlist.length,
-    waiting: waitlist.filter(w => w.status === 'waiting').length,
-    invited: waitlist.filter(w => w.status === 'beta_invited').length,
-    converted: waitlist.filter(w => w.status === 'converted').length,
+    waiting: waitlist.filter((w) => w.status === "waiting").length,
+    invited: waitlist.filter((w) => w.status === "beta_invited").length,
+    converted: waitlist.filter((w) => w.status === "converted").length,
   };
 
   const toggleAll = (checked: boolean) => {
     if (checked) {
-      setSelected(new Set(waitlist.filter(w => w.status === 'waiting').map(w => w.id)));
+      setSelected(
+        new Set(waitlist.filter((w) => w.status === "waiting").map((w) => w.id))
+      );
     } else {
       setSelected(new Set());
     }
@@ -116,7 +125,7 @@ export default function AdminWaitlistPage() {
 
   return (
     <div className="space-y-8">
-      <h1 className="text-3xl font-bold text-gray-900">Waitlist Management</h1>
+      <h1 className="text-xl! font-bold text-gray-900">Waitlist Management</h1>
 
       {/* Message */}
       {message && (
@@ -152,7 +161,7 @@ export default function AdminWaitlistPage() {
           disabled={selected.size === 0 || loading}
           className="px-4 py-2 bg-emerald-500 text-white rounded-lg font-medium hover:bg-emerald-600 disabled:opacity-50"
         >
-          {loading ? '...' : `Inviter ${selected.size} selectionnes`}
+          {loading ? "..." : `Inviter ${selected.size} selectionnes`}
         </button>
         <button
           onClick={handleExportCSV}
@@ -171,21 +180,36 @@ export default function AdminWaitlistPage() {
                 <input
                   type="checkbox"
                   onChange={(e) => toggleAll(e.target.checked)}
-                  checked={selected.size === waitlist.filter(w => w.status === 'waiting').length && selected.size > 0}
+                  checked={
+                    selected.size ===
+                      waitlist.filter((w) => w.status === "waiting").length &&
+                    selected.size > 0
+                  }
                   className="rounded border-gray-300"
                 />
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Email</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                Email
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                Status
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                Date
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
             {waitlist.map((item) => (
-              <tr key={item.id} className={selected.has(item.id) ? 'bg-blue-50' : ''}>
+              <tr
+                key={item.id}
+                className={selected.has(item.id) ? "bg-blue-50" : ""}
+              >
                 <td className="px-6 py-4">
-                  {item.status === 'waiting' && (
+                  {item.status === "waiting" && (
                     <input
                       type="checkbox"
                       checked={selected.has(item.id)}
@@ -194,20 +218,28 @@ export default function AdminWaitlistPage() {
                     />
                   )}
                 </td>
-                <td className="px-6 py-4 text-sm text-gray-900">{item.email}</td>
+                <td className="px-6 py-4 text-sm text-gray-900">
+                  {item.email}
+                </td>
                 <td className="px-6 py-4">
-                  <span className={`px-2 py-1 text-xs rounded-full ${
-                    item.status === 'waiting'
-                      ? 'bg-yellow-100 text-yellow-800'
-                      : item.status === 'beta_invited'
-                      ? 'bg-blue-100 text-blue-800'
-                      : 'bg-green-100 text-green-800'
-                  }`}>
-                    {item.status === 'waiting' ? 'En attente' : item.status === 'beta_invited' ? 'Invite' : 'Converti'}
+                  <span
+                    className={`px-2 py-1 text-xs rounded-full ${
+                      item.status === "waiting"
+                        ? "bg-yellow-100 text-yellow-800"
+                        : item.status === "beta_invited"
+                        ? "bg-blue-100 text-blue-800"
+                        : "bg-green-100 text-green-800"
+                    }`}
+                  >
+                    {item.status === "waiting"
+                      ? "En attente"
+                      : item.status === "beta_invited"
+                      ? "Invite"
+                      : "Converti"}
                   </span>
                 </td>
                 <td className="px-6 py-4 text-sm text-gray-500">
-                  {new Date(item.created_at).toLocaleDateString('fr-FR')}
+                  {new Date(item.created_at).toLocaleDateString("fr-FR")}
                 </td>
                 <td className="px-6 py-4">
                   <button
@@ -229,13 +261,4 @@ export default function AdminWaitlistPage() {
       </div>
     </div>
   );
-}
-
-function generateToken(length: number): string {
-  const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  let token = '';
-  for (let i = 0; i < length; i++) {
-    token += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return token;
 }

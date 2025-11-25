@@ -49,7 +49,7 @@ export async function POST(_request: Request, { params }: RouteParams) {
       );
     }
 
-    // Check if feedback was already received
+    // Check if feedback was already received (can't resend if received)
     if (project.feedback_status === 'received') {
       return NextResponse.json(
         {
@@ -59,6 +59,8 @@ export async function POST(_request: Request, { params }: RouteParams) {
         { status: 400 }
       );
     }
+
+    // Allow resending if status is "sent" (useful for testing)
 
     // Generate feedback URL
     const feedbackUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/feedback/${project.feedback_token}`;
