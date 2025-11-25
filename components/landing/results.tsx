@@ -28,7 +28,7 @@ export function Results() {
                   <span className="text-5xl font-bold text-emerald-600">
                     {stat.number}
                   </span>
-                  {stat.unit && (
+                  {"unit" in stat && stat.unit && (
                     <span className="text-lg font-medium text-emerald-500">
                       {stat.unit}
                     </span>
