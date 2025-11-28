@@ -274,7 +274,7 @@ export const content = {
         {
           question: "Je suis solo, c'est pour moi?",
           answer:
-            "Totalement. Solo freelancer ou agence 50 personnes, tout le monde y gagne. Commence avec le plan Starter (gratuit).",
+            "Totalement. Solo freelancer ou agence 50 personnes, tout le monde y gagne. Commence avec le plan Free (gratuit).",
         },
         {
           question: "Est-ce que je peux customiser les emails?",
@@ -774,7 +774,7 @@ export const content = {
         {
           question: "I'm a solo freelancer. Is this for me?",
           answer:
-            "Absolutely. Solo or 50-person agency, everyone wins. Start with Starter (free).",
+            "Absolutely. Solo or 50-person agency, everyone wins. Start with Free.",
         },
         {
           question: "Can I customize the emails?",
