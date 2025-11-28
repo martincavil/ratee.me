@@ -141,25 +141,52 @@ export function Problem() {
 
       case "badge":
         return (
-          <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
-            <div className="text-sm font-semibold text-gray-900 mb-4">
-              {screens.badge.title}
-            </div>
-            <div className="flex flex-col items-center py-6">
-              <div className="w-32 h-32 rounded-full bg-linear-to-br from-emerald-400 to-emerald-600 flex items-center justify-center shadow-lg">
+          <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100 flex items-center justify-center min-h-[300px]">
+            {/* Badge Container with glow effect */}
+            <div className="relative">
+              {/* Glow effect */}
+              <div className="absolute inset-0 bg-emerald-400/20 blur-2xl rounded-lg" />
+
+              {/* Badge */}
+              <div className="relative bg-white border-2 border-emerald-500 rounded-xl p-6 shadow-2xl max-w-[200px]">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-white">
-                    {screens.badge.score}
+                  <div className="text-sm text-gray-600 mb-2 font-medium">
+                    {lang === "fr"
+                      ? "Satisfaction clients"
+                      : "Client satisfaction"}
                   </div>
-                  <div className="text-xs text-emerald-100">
-                    {screens.badge.label}
+                  <div className="text-6xl font-bold text-emerald-600 mb-2">
+                    9.2
+                  </div>
+                  <div className="text-xs text-gray-500 mb-3">
+                    {lang === "fr" ? "Note NPS moyenne" : "Average NPS score"}
+                  </div>
+                  <div className="text-sm text-gray-600 font-medium mb-4">
+                    {lang === "fr"
+                      ? "24 clients satisfaits"
+                      : "24 satisfied clients"}
+                  </div>
+                  <div className="pt-3 border-t border-gray-200">
+                    <div className="flex items-center justify-center gap-1 text-xs text-gray-400">
+                      <svg
+                        className="w-3 h-3"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      <span>
+                        {lang === "fr"
+                          ? "Certifié ratee.me"
+                          : "Certified by ratee.me"}
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="mt-4 px-4 py-2 bg-gray-100 rounded-lg">
-                <code className="text-xs text-gray-600">
-                  {'<embed src="ratee.me/badge/..." />'}
-                </code>
               </div>
             </div>
           </div>
@@ -208,8 +235,8 @@ export function Problem() {
               {[65, 72, 78, 85].map((height, i) => (
                 <div key={i} className="flex-1 flex flex-col items-center">
                   <div
-                    className="w-full bg-gradient-to-t from-emerald-500 to-emerald-400 rounded-t-md"
-                    style={{ height: `${height}%` }}
+                    className="w-full bg-gradient-to-t from-emerald-300 to-emerald-400 rounded-t-md"
+                    style={{ height: `${height}px` }}
                   />
                   <div className="text-xs text-gray-500 mt-2">
                     {screens.analytics.months[i]}

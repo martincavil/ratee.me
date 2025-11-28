@@ -30,7 +30,7 @@ export function PainPoints() {
           icon: "📊",
           title: "Tes feedbacks sont éparpillés partout",
           description:
-            "Google Sheets, emails, notes manuscrites, messages Slack... Impossible d'avoir une vue d'ensemble. Tu ne sais même pas ton score moyen.",
+            "Google Sheets, emails, notes manuscrites, messages Slack... Impossible d'avoir une vue d'ensemble. Tu ne connais même pas ton réel NPS.",
           stat: "Aucune analyse possible",
         },
         {

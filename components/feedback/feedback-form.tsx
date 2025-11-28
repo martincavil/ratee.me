@@ -152,7 +152,7 @@ export function FeedbackForm({
           </span>
         </div>
         <h1 className="text-2xl! font-bold text-gray-900 font-sora mb-2">
-          Ton avis compte vraiment !
+          Votre avis compte vraiment !
         </h1>
         <p className="text-lg text-gray-600 font-inter mb-1">
           30 secondes pour nous aider à devenir meilleurs
@@ -173,7 +173,7 @@ export function FeedbackForm({
       {/* Step 1: NPS */}
       <div className="space-y-3">
         <label className="block text-base font-semibold text-gray-900 font-sora">
-          Sur une échelle de 0 à 10, recommanderais-tu nos services ?
+          Sur une échelle de 0 à 10, recommanderiez-vous nos services ?
         </label>
         <NpsButtons
           value={formState.nps}
@@ -232,7 +232,7 @@ export function FeedbackForm({
       {/* Step 4: Will return */}
       <div className="space-y-3">
         <label className="block text-base font-semibold text-gray-900 font-sora">
-          Reviendrais-tu pour une autre mission ? *
+          Reviendriez-vous pour une autre mission ? *
         </label>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           {[
@@ -286,7 +286,7 @@ export function FeedbackForm({
               starRatings: { ...formState.starRatings, communication: value },
             })
           }
-          label="Comment as-tu trouvé la communication ? ⭐"
+          label="Comment avez-vous trouvé la communication ? ⭐"
           sublabel="Réactivité, clarté des échanges, disponibilité..."
         />
 
@@ -334,8 +334,8 @@ export function FeedbackForm({
               starRatings: { ...formState.starRatings, recommendation: value },
             })
           }
-          label="Recommanderais-tu cette personne à un ami ? ⭐"
-          sublabel="Basé sur ton expérience globale..."
+          label="Recommanderiez-vous cette personne à un ami ? ⭐"
+          sublabel="Basé sur votre expérience globale..."
         />
       </div>
 
@@ -369,7 +369,7 @@ export function FeedbackForm({
               {formState.testimonial.length}/300 caractères
             </p>
             <p className="text-xs text-gray-500 font-inter">
-              On peut l&apos;afficher sur notre site avec ton accord
+              Nous pouvons l&apos;afficher sur notre site avec votre accord
             </p>
           </div>
         </>
@@ -396,7 +396,7 @@ export function FeedbackForm({
               htmlFor="allowPublish"
               className="text-sm font-semibold text-gray-900 font-sora cursor-pointer"
             >
-              On peut afficher ton nom/entreprise avec ce témoignage ?
+              Pouvons-nous afficher votre nom/entreprise avec ce témoignage ?
             </label>
           </div>
 

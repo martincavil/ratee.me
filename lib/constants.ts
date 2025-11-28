@@ -50,7 +50,7 @@ export const content = {
       ctaSecondary: "Voir une démo rapide",
     },
     problem: {
-      title: "Ce que ratee.me change pour vous",
+      title: "Ce que ratee.me change pour toi",
       subtitle:
         "Freelances et agences gagnent en efficacité, en crédibilité et en revenus.",
       issues: [
@@ -58,28 +58,28 @@ export const content = {
           icon: "⏱️",
           title: "Gain de temps",
           description:
-            "Économisez 5 à 6 heures par mois. Plus de relances manuelles, plus de fichiers Excel à maintenir. Les feedbacks arrivent automatiquement après chaque étape projet.",
+            "Économise 5 à 6 heures par mois. Plus de relances manuelles, plus de fichiers Excel à maintenir. Les feedbacks arrivent automatiquement après chaque étape projet.",
           screen: "automation",
         },
         {
           icon: "🏆",
           title: "Légitimité renforcée",
           description:
-            "Affichez votre score NPS sur votre site. Vos prospects voient immédiatement votre crédibilité. La preuve sociale qui convertit, sans effort.",
+            "Affiche ton score NPS sur ton site. Tes prospects voient immédiatement ta crédibilité. La preuve sociale qui convertit, sans effort.",
           screen: "badge",
         },
         {
           icon: "🔄",
           title: "Clients récurrents",
           description:
-            "Identifiez vos clients les plus satisfaits. Recontactez-les au bon moment pour de nouvelles missions. Transformez chaque projet réussi en opportunité.",
+            "Identifie tes clients les plus satisfaits. Recontacte-les au bon moment pour de nouvelles missions. Transforme chaque projet réussi en opportunité.",
           screen: "dashboard",
         },
         {
           icon: "📈",
           title: "Process améliorés",
           description:
-            "Les retours clients révèlent vos axes d'amélioration. Analysez les tendances, identifiez les points de friction, et améliorez continuellement votre service.",
+            "Les retours clients révèlent tes axes d'amélioration. Analyse les tendances, identifie les points de friction, et améliore continuellement ton service.",
           screen: "analytics",
         },
       ],
@@ -91,13 +91,13 @@ export const content = {
           icon: "🎯",
           title: "Zéro effort, maximum de data",
           description:
-            "Les feedbacks s'envoient automatiquement à chaque étape projet. Vous ne faites rien, les données arrivent. Fini les relances oubliées.",
+            "Les feedbacks s'envoient automatiquement à chaque étape projet. Tu ne fais rien, les données arrivent. Fini les relances oubliées.",
         },
         {
           icon: "💎",
           title: "Votre réputation, quantifiée",
           description:
-            "Un score NPS objectif et mesurable. Plus besoin de dire 'mes clients sont satisfaits'. Vous le prouvez avec des chiffres.",
+            "Un score NPS objectif et mesurable. Plus besoin de dire 'mes clients sont satisfaits'. Tu le prouves avec des chiffres.",
         },
         {
           icon: "🚀",
@@ -246,7 +246,7 @@ export const content = {
           price: "Sur devis",
           period: "Contactez-nous",
           features: [
-            "Tout de Pro, plus",
+            "Tout de Pro +",
             "Multi-utilisateurs",
             "SSO / SAML",
             "API & Webhooks",
@@ -289,40 +289,38 @@ export const content = {
       ],
     },
     ctaFinal: {
-      headline:
-        "Si vous êtes arrivé jusque-là, c'est qu'il est temps d'essayer.",
+      headline: "Si tu es arrivé jusque-là, c'est qu'il est temps d'essayer.",
       subheadline:
-        "Rejoignez les freelances et agences qui ont déjà automatisé leur collecte de feedbacks.",
+        "Rejoins les freelances et agences qui ont déjà automatisé leur collecte de feedbacks.",
       ctaPrimary: "Commencer gratuitement",
       ctaSecondary: "Voir les tarifs",
     },
     footer: {
       tagline: "L'outil simple pour ne plus jamais laisser un client de côté",
       product: {
-        title: "Product",
+        title: "Produit",
         links: [
           { label: "Features", href: "#features" },
           { label: "Tarifs", href: "/pricing/" },
-          { label: "Demo", href: "#demo" },
+          // { label: "Demo", href: "#demo" },
           { label: "Changelog", href: "/changelog" },
         ],
       },
       company: {
-        title: "Company",
+        title: "Société",
         links: [
           { label: "About", href: "/about" },
           { label: "Blog", href: "/blog" },
-          { label: "Careers", href: "/careers" },
-          { label: "Press", href: "/press" },
+          // { label: "Press", href: "/press" },
         ],
       },
       legal: {
         title: "Legal",
         links: [
-          { label: "Privacy Policy", href: "/privacy" },
-          { label: "Terms of Service", href: "/terms" },
-          { label: "GDPR", href: "/gdpr" },
-          { label: "Contact", href: "/contact" },
+          { label: "Politique de confidentialité", href: "/privacy" },
+          { label: "Conditions d'utilisation", href: "/terms" },
+          // { label: "RGPD", href: "/gdpr" },
+          { label: "Contact", href: "mailto:martin@ratee.me" },
         ],
       },
       copyright: "Copyright © 2025 ratee.me. All rights reserved.",
@@ -337,16 +335,16 @@ export const content = {
     },
     notFound: {
       title: "Page introuvable",
-      description: "La page que vous cherchez n'existe pas ou a été déplacée.",
+      description: "La page que tu cherches n'existe pas ou a été déplacée.",
       backHome: "Retour à l'accueil",
     },
     feedbackNotFound: {
       title: "Lien de feedback invalide",
       subtitle: "Ce lien de feedback est invalide ou a expiré.",
       description:
-        "Le lien de feedback que vous essayez d'accéder n'existe pas ou n'est plus valide.",
+        "Le lien de feedback que tu essayes d'accéder n'existe pas ou n'est plus valide.",
       contact:
-        "Si vous pensez qu'il s'agit d'une erreur, veuillez contacter la personne qui vous a envoyé ce lien.",
+        "Si tu penses qu'il s'agit d'une erreur, veuillez contacter la personne qui t'a envoyé ce lien.",
       cta: "Aller sur la page d'accueil de ratee.me",
       poweredBy: "Certifié par",
     },
@@ -355,17 +353,17 @@ export const content = {
       subtitle: "Voici ce qui se passe avec vos feedbacks clients",
       banners: {
         free: {
-          title: "Vous êtes en plan FREE (1 projet/mois)",
+          title: "tu es en plan FREE (1 projet/mois)",
           description: "Upgrade pour projets illimités + email automation",
           action: "Upgrade",
         },
         trial: {
-          title: "Vous êtes en PRO (30j gratuit)",
+          title: "Tu es en PRO (30j gratuit)",
           daysLeft: "jours restants",
           description: "Email automation activée - profitez-en!",
         },
         pro: {
-          title: "Vous êtes en plan PRO - Automations activées",
+          title: "Tu es en plan PRO - Automations activées",
         },
       },
       stats: {
@@ -486,7 +484,7 @@ export const content = {
       },
       dangerZone: {
         description:
-          "Une fois que vous supprimez votre compte, il n'y a plus de retour en arrière. Tous vos projets et feedbacks seront définitivement supprimés.",
+          "Une fois que tu supprimes ton compte, il n'y a plus de retour en arrière. Tous tes projets et feedbacks seront définitivement supprimés.",
         deleteAccount: "Supprimer le Compte",
         comingSoon: "Suppression de compte bientôt disponible",
       },
@@ -510,7 +508,7 @@ export const content = {
         certified: "Certifié par ratee.me",
         note: "Note",
         noteText:
-          "Le badge se met à jour automatiquement quand vous recevez de nouveaux feedbacks !",
+          "Le badge se met à jour automatiquement quand tu reçois de nouveaux feedbacks !",
       },
       embed: {
         title: "Code d'Intégration",
@@ -522,12 +520,12 @@ export const content = {
         steps: {
           step1: "Copiez le code d'intégration ci-dessus",
           step2: "Ouvrez le fichier HTML de votre site web",
-          step3: "Collez le code là où vous voulez que le badge apparaisse",
+          step3: "Collez le code là où tu veux que le badge apparaisse",
           step4: "Enregistrez et rafraîchissez votre site web",
         },
         tip: "Astuce",
         tipText:
-          "Placez votre badge sur votre page d'accueil, page à propos, ou portfolio pour inspirer confiance à vos clients potentiels !",
+          "Place ton badge sur ta page d'accueil, page à propos, ou portfolio pour inspirer confiance à tes clients potentiels !",
       },
     },
     navbar: {
@@ -748,7 +746,7 @@ export const content = {
           price: "Custom",
           period: "Contact us",
           features: [
-            "Everything in Pro, plus",
+            "Everything in Pro +",
             "Multi-users",
             "SSO / SAML",
             "API & Webhooks",

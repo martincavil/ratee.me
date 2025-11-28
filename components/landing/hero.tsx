@@ -459,7 +459,9 @@ export function Hero() {
                               </div>
                               <div className="flex-1 ml-2">
                                 <div className="bg-white rounded px-2 py-0.5 text-[7px] text-gray-500 max-w-[120px]">
-                                  {lang === "fr" ? "tonsite.com" : "yourwebsite.com"}
+                                  {lang === "fr"
+                                    ? "tonsite.com"
+                                    : "yourwebsite.com"}
                                 </div>
                               </div>
                             </div>
@@ -470,20 +472,30 @@ export function Hero() {
                                 {/* Left: Hero Content */}
                                 <div>
                                   <div className="inline-block px-1.5 py-0.5 bg-emerald-100 text-emerald-700 rounded-full text-[7px] font-medium mb-1">
-                                    {lang === "fr" ? "Développeur Freelance" : "Freelance Developer"}
+                                    {lang === "fr"
+                                      ? "Développeur Freelance"
+                                      : "Freelance Developer"}
                                   </div>
-                                  <h3 className="font-sora text-[10px] font-bold text-gray-900 mb-1">
-                                    {lang === "fr" ? "Je crée des solutions web" : "I build web solutions"}
+                                  <h3 className="font-sora text-[10px]! font-bold text-gray-900 mb-1">
+                                    {lang === "fr"
+                                      ? "Je crée des solutions web"
+                                      : "I build web solutions"}
                                   </h3>
                                   <p className="text-[7px] text-gray-600 mb-2 leading-tight">
-                                    {lang === "fr" ? "Expert en développement web moderne." : "Expert in modern web development."}
+                                    {lang === "fr"
+                                      ? "Expert en développement web moderne."
+                                      : "Expert in modern web development."}
                                   </p>
                                   <div className="flex gap-1">
                                     <div className="px-2 py-1 bg-emerald-600 text-white rounded text-[6px] font-medium">
-                                      {lang === "fr" ? "Me contacter" : "Contact me"}
+                                      {lang === "fr"
+                                        ? "Me contacter"
+                                        : "Contact me"}
                                     </div>
                                     <div className="px-2 py-1 bg-white border border-gray-300 text-gray-700 rounded text-[6px] font-medium">
-                                      {lang === "fr" ? "Mes projets" : "My projects"}
+                                      {lang === "fr"
+                                        ? "Mes projets"
+                                        : "My projects"}
                                     </div>
                                   </div>
                                 </div>
@@ -500,16 +512,22 @@ export function Hero() {
                                       <div className="relative bg-white border border-emerald-500 rounded-md p-2 shadow-lg max-w-[90px]">
                                         <div className="text-center">
                                           <div className="text-[6px] text-gray-600 mb-0.5 font-medium">
-                                            {lang === "fr" ? "Satisfaction clients" : "Client satisfaction"}
+                                            {lang === "fr"
+                                              ? "Satisfaction clients"
+                                              : "Client satisfaction"}
                                           </div>
                                           <div className="text-2xl font-bold text-emerald-600 mb-0.5">
                                             9.2
                                           </div>
                                           <div className="text-[5px] text-gray-500 mb-1">
-                                            {lang === "fr" ? "Note NPS" : "NPS score"}
+                                            {lang === "fr"
+                                              ? "Note NPS"
+                                              : "NPS score"}
                                           </div>
                                           <div className="text-[6px] text-gray-600 font-medium mb-1">
-                                            {lang === "fr" ? "24 clients" : "24 clients"}
+                                            {lang === "fr"
+                                              ? "24 clients"
+                                              : "24 clients"}
                                           </div>
                                           <div className="pt-1 border-t border-gray-200">
                                             <div className="flex items-center justify-center gap-0.5 text-[5px] text-gray-400">
@@ -525,7 +543,9 @@ export function Hero() {
                                                 />
                                               </svg>
                                               <span>
-                                                {lang === "fr" ? "ratee.me" : "ratee.me"}
+                                                {lang === "fr"
+                                                  ? "ratee.me"
+                                                  : "ratee.me"}
                                               </span>
                                             </div>
                                           </div>

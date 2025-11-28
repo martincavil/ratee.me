@@ -46,10 +46,10 @@ export function SuccessMessage({ onAutoRedirect }: SuccessMessageProps) {
 
         {/* Message */}
         <p className="text-lg text-gray-600 font-inter mb-2">
-          Ton avis est important pour nous
+          Votre avis est important pour nous
         </p>
         <p className="text-sm text-gray-500 font-inter mb-8">
-          Tu recevras un email de confirmation
+          Vous recevrez un email de confirmation
         </p>
 
         {/* CTA Button */}

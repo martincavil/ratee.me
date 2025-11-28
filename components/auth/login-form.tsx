@@ -85,7 +85,7 @@ export function LoginForm() {
           Bon retour
         </CardTitle>
         <CardDescription className="text-sm text-content-secondary">
-          Connectez-vous à votre compte
+          Connecte-toi à ton compte
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -103,7 +103,7 @@ export function LoginForm() {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="vous@exemple.com"
+              placeholder="severin@exemple.com"
               autoComplete="email"
               className={errors.email ? "border-error" : ""}
             />
