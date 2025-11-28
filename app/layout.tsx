@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Sora, Inter } from 'next/font/google';
 import { LanguageProvider } from '@/lib/i18n';
+import { generateMetadata } from '@/lib/seo';
 import './globals.css';
 
 const sora = Sora({
@@ -17,20 +18,8 @@ const inter = Inter({
   display: 'swap',
 });
 
-export const metadata: Metadata = {
-  title: 'ratee.me - Automate Client Feedback Collection',
-  description: 'Professional NPS tracking and client feedback automation for freelancers and agencies',
-  keywords: ['NPS', 'feedback', 'client testimonials', 'freelance', 'agency'],
-  authors: [{ name: 'ratee.me' }],
-  openGraph: {
-    type: 'website',
-    locale: 'en_US',
-    url: 'https://ratee.me',
-    title: 'ratee.me - Automate Client Feedback Collection',
-    description: 'Professional NPS tracking and client feedback automation',
-    siteName: 'ratee.me',
-  },
-};
+// Métadonnées SEO optimisées pour le français (langue principale)
+export const metadata: Metadata = generateMetadata('fr');
 
 export default function RootLayout({
   children,

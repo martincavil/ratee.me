@@ -303,7 +303,7 @@ export const content = {
           { label: "Features", href: "#features" },
           { label: "Tarifs", href: "/pricing/" },
           // { label: "Demo", href: "#demo" },
-          { label: "Changelog", href: "/changelog" },
+          // { label: "Changelog", href: "/changelog" },
         ],
       },
       company: {
@@ -802,8 +802,8 @@ export const content = {
         links: [
           { label: "Features", href: "#features" },
           { label: "Tarifs", href: "/pricing/" },
-          { label: "Demo", href: "#demo" },
-          { label: "Changelog", href: "/changelog" },
+          // { label: "Demo", href: "#demo" },
+          // { label: "Changelog", href: "/changelog" },
         ],
       },
       company: {

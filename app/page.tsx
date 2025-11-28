@@ -9,19 +9,23 @@ import { FAQ } from '@/components/landing/faq';
 import { CTAFinal } from '@/components/landing/cta-final';
 import { Footer } from '@/components/landing/footer';
 import { LanguageProvider } from '@/lib/i18n';
+import { generateMetadata, jsonLd } from '@/lib/seo';
+import { Metadata } from 'next';
 
-export const metadata = {
-  title: 'ratee.me - Automatise ton feedback client | Automate client feedback',
-  description: 'Automatise la collecte de feedbacks NPS de tes clients. Feedbacks, citations, badge NPS. Tout en pilote automatique.',
+// Métadonnées SEO optimisées pour la page d'accueil (français prioritaire)
+export const metadata: Metadata = {
+  ...generateMetadata('fr'),
+  title: 'ratee.me - Automatise ton feedback client et NPS en pilote automatique',
+  description: 'Collecte automatiquement les feedbacks NPS de tes clients, obtiens des témoignages authentiques et affiche ton badge de satisfaction client. Solution tout-en-un pour freelances et agences.',
   openGraph: {
-    title: 'ratee.me - Automatise ton feedback client',
-    description: 'Automatise la collecte de feedbacks NPS de tes clients. Feedbacks, citations, badge NPS. Tout en pilote automatique.',
-    type: 'website',
+    ...generateMetadata('fr').openGraph,
+    title: 'ratee.me - Automatise ton feedback client et NPS en pilote automatique',
+    description: 'Collecte automatiquement les feedbacks NPS de tes clients, obtiens des témoignages authentiques et affiche ton badge de satisfaction client.',
   },
   twitter: {
-    card: 'summary_large_image',
+    ...generateMetadata('fr').twitter,
     title: 'ratee.me - Automatise ton feedback client',
-    description: 'Automatise la collecte de feedbacks NPS de tes clients.',
+    description: 'Collecte automatiquement les feedbacks NPS de tes clients. Feedbacks, témoignages, badge NPS. Tout en pilote automatique.',
   },
 };
 
@@ -29,6 +33,11 @@ export default function HomePage() {
   return (
     <LanguageProvider>
       <div className="min-h-screen bg-white">
+        {/* JSON-LD pour le SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd.fr) }}
+        />
         <LandingNavbar />
         <Hero />
         <PainPoints />
