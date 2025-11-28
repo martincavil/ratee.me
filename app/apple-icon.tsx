@@ -1,6 +1,6 @@
 import { ImageResponse } from 'next/og';
 
-// Génération de l'icône Apple avec l'emoji ⭐
+// Génération de l'icône Apple avec "R" blanc sur gradient emerald
 export const runtime = 'edge';
 
 export const size = {
@@ -16,15 +16,18 @@ export default function AppleIcon() {
       <div
         style={{
           fontSize: 120,
-          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          fontWeight: 700,
+          background: 'linear-gradient(to bottom right, #a7f3d0, #047857)',
           width: '100%',
           height: '100%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
+          color: 'white',
+          fontFamily: 'sans-serif',
         }}
       >
-        ⭐
+        R
       </div>
     ),
     {

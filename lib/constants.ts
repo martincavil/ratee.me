@@ -818,13 +818,12 @@ export const content = {
       legal: {
         title: "Legal",
         links: [
-          { label: "Privacy Policy", href: "/privacy" },
-          { label: "Terms of Service", href: "/terms" },
-          { label: "GDPR", href: "/gdpr" },
-          { label: "Contact", href: "/contact" },
+          { label: "Privacy Policy", href: "/en/privacy" },
+          { label: "Terms of Service", href: "/en/terms" },
+          { label: "Contact", href: "mailto:legal@ratee.me" },
         ],
       },
-      copyright: "Copyright © 2024 ratee.me. All rights reserved.",
+      copyright: "Copyright © 2025 ratee.me. All rights reserved.",
       madeIn: "Made in France 🇫🇷 | Serving the world 🌍",
     },
     nav: {

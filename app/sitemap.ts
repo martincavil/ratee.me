@@ -30,6 +30,30 @@ export default function sitemap(): MetadataRoute.Sitemap {
       },
     },
     {
+      url: `${baseUrl}/privacy`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.6,
+      alternates: {
+        languages: {
+          fr: `${baseUrl}/privacy`,
+          en: `${baseUrl}/en/privacy`,
+        },
+      },
+    },
+    {
+      url: `${baseUrl}/terms`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.6,
+      alternates: {
+        languages: {
+          fr: `${baseUrl}/terms`,
+          en: `${baseUrl}/en/terms`,
+        },
+      },
+    },
+    {
       url: `${baseUrl}/auth/login`,
       lastModified: currentDate,
       changeFrequency: 'yearly',

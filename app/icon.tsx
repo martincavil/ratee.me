@@ -1,6 +1,6 @@
 import { ImageResponse } from 'next/og';
 
-// Génération du favicon avec l'emoji ⭐ (représente les ratings/feedbacks)
+// Génération du favicon avec "R" blanc sur gradient emerald
 export const runtime = 'edge';
 
 export const size = {
@@ -15,17 +15,19 @@ export default function Icon() {
     (
       <div
         style={{
-          fontSize: 24,
-          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          fontSize: 22,
+          fontWeight: 700,
+          background: 'linear-gradient(to bottom right, #a7f3d0, #047857)',
           width: '100%',
           height: '100%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          borderRadius: '20%',
+          color: 'white',
+          fontFamily: 'sans-serif',
         }}
       >
-        ⭐
+        R
       </div>
     ),
     {
