@@ -32,6 +32,19 @@ export default function SettingsPage() {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [apiError, setApiError] = useState<string | null>(null);
 
+  // Password change state
+  const [passwordData, setPasswordData] = useState({
+    newPassword: "",
+    confirmPassword: "",
+  });
+  const [passwordErrors, setPasswordErrors] = useState<{
+    newPassword?: string;
+    confirmPassword?: string;
+  }>({});
+  const [passwordSuccess, setPasswordSuccess] = useState<string | null>(null);
+  const [passwordApiError, setPasswordApiError] = useState<string | null>(null);
+  const [changingPassword, setChangingPassword] = useState(false);
+
   useEffect(() => {
     fetchProfile();
   }, []);
@@ -111,6 +124,73 @@ export default function SettingsPage() {
       setApiError("An unexpected error occurred");
     } finally {
       setSaving(false);
+    }
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setPasswordData((prev) => ({ ...prev, [name]: value }));
+    if (passwordErrors[name as keyof typeof passwordErrors]) {
+      setPasswordErrors((prev) => ({ ...prev, [name]: undefined }));
+    }
+    setPasswordSuccess(null);
+    setPasswordApiError(null);
+  };
+
+  const handlePasswordSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setPasswordErrors({});
+    setPasswordApiError(null);
+    setPasswordSuccess(null);
+
+    // Validation
+    const errors: typeof passwordErrors = {};
+
+    if (!passwordData.newPassword) {
+      errors.newPassword = "Le nouveau mot de passe est requis";
+    } else if (passwordData.newPassword.length < 8) {
+      errors.newPassword = "Le mot de passe doit contenir au moins 8 caractères";
+    }
+
+    if (!passwordData.confirmPassword) {
+      errors.confirmPassword = "Veuillez confirmer le nouveau mot de passe";
+    } else if (passwordData.newPassword !== passwordData.confirmPassword) {
+      errors.confirmPassword = "Les mots de passe ne correspondent pas";
+    }
+
+    if (Object.keys(errors).length > 0) {
+      setPasswordErrors(errors);
+      return;
+    }
+
+    setChangingPassword(true);
+
+    try {
+      const response = await fetch("/api/auth/change-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          newPassword: passwordData.newPassword,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!data.success) {
+        setPasswordApiError(data.error || "Échec de la modification du mot de passe");
+        return;
+      }
+
+      setPasswordSuccess("Mot de passe modifié avec succès");
+      setPasswordData({
+        newPassword: "",
+        confirmPassword: "",
+      });
+      setTimeout(() => setPasswordSuccess(null), 5000);
+    } catch (error) {
+      setPasswordApiError("Une erreur inattendue s'est produite");
+    } finally {
+      setChangingPassword(false);
     }
   };
 
@@ -237,6 +317,83 @@ export default function SettingsPage() {
                 className="w-full px-4 py-2 bg-emerald text-white rounded-md hover:bg-emerald-dark disabled:opacity-50 disabled:cursor-not-allowed font-medium text-sm transition-colors"
               >
                 {saving ? text.settings.form.saving : text.settings.form.save}
+              </button>
+            </div>
+          </form>
+        </div>
+
+        {/* Password Change */}
+        <div className="lg:col-span-3 bg-white rounded-lg border border-border p-6">
+          <h2 className="text-xl! font-semibold text-content-primary font-sora mb-2">
+            Sécurité
+          </h2>
+          <p className="text-sm text-content-secondary mb-6">
+            Définissez un nouveau mot de passe pour votre compte
+          </p>
+
+          <form onSubmit={handlePasswordSubmit} className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-content-primary mb-1">
+                Nouveau mot de passe
+              </label>
+              <input
+                type="password"
+                name="newPassword"
+                value={passwordData.newPassword}
+                onChange={handlePasswordChange}
+                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-emerald text-sm ${
+                  passwordErrors.newPassword ? "border-error" : "border-border"
+                }`}
+              />
+              {passwordErrors.newPassword && (
+                <p className="mt-1 text-xs text-error">
+                  {passwordErrors.newPassword}
+                </p>
+              )}
+              <p className="mt-1 text-xs text-content-tertiary">
+                Au moins 8 caractères
+              </p>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-content-primary mb-1">
+                Confirmer le nouveau mot de passe
+              </label>
+              <input
+                type="password"
+                name="confirmPassword"
+                value={passwordData.confirmPassword}
+                onChange={handlePasswordChange}
+                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-emerald text-sm ${
+                  passwordErrors.confirmPassword ? "border-error" : "border-border"
+                }`}
+              />
+              {passwordErrors.confirmPassword && (
+                <p className="mt-1 text-xs text-error">
+                  {passwordErrors.confirmPassword}
+                </p>
+              )}
+            </div>
+
+            {passwordSuccess && (
+              <div className="p-3 bg-emerald-light border border-emerald/20 rounded-md">
+                <p className="text-sm text-emerald-dark">{passwordSuccess}</p>
+              </div>
+            )}
+
+            {passwordApiError && (
+              <div className="p-3 bg-error-light border border-error/20 rounded-md">
+                <p className="text-sm text-error">{passwordApiError}</p>
+              </div>
+            )}
+
+            <div className="pt-4">
+              <button
+                type="submit"
+                disabled={changingPassword}
+                className="w-full px-4 py-2 bg-emerald text-white rounded-md hover:bg-emerald-dark disabled:opacity-50 disabled:cursor-not-allowed font-medium text-sm transition-colors"
+              >
+                {changingPassword ? "Modification en cours..." : "Modifier le mot de passe"}
               </button>
             </div>
           </form>

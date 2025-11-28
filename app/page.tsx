@@ -1,5 +1,6 @@
 import { LandingNavbar } from '@/components/landing/navbar';
 import { Hero } from '@/components/landing/hero';
+import { PainPoints } from '@/components/landing/pain-points';
 import { Problem } from '@/components/landing/problem';
 import { Timeline } from '@/components/landing/timeline';
 import { Results } from '@/components/landing/results';
@@ -31,6 +32,7 @@ export default function HomePage() {
       <div className="min-h-screen bg-white">
         <LandingNavbar />
         <Hero />
+        <PainPoints />
         <Problem />
         <Timeline />
         <Results />

@@ -35,7 +35,7 @@ export function Timeline() {
   }, []);
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+    <section id="timeline" className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">

@@ -146,7 +146,7 @@ export function Problem() {
               {screens.badge.title}
             </div>
             <div className="flex flex-col items-center py-6">
-              <div className="w-32 h-32 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center shadow-lg">
+              <div className="w-32 h-32 rounded-full bg-linear-to-br from-emerald-400 to-emerald-600 flex items-center justify-center shadow-lg">
                 <div className="text-center">
                   <div className="text-3xl font-bold text-white">
                     {screens.badge.score}
@@ -231,7 +231,7 @@ export function Problem() {
   };
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-bg-primary">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-bg-primary" id="features">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">

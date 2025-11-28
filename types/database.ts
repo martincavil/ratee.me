@@ -33,10 +33,24 @@ export interface Project {
 export interface Feedback {
   id: string;
   project_id: string;
+  feedback_token: string | null;
   client_name: string;
   nps_score: number; // 0-10
-  comment: string | null;
-  email: string | null;
+  comment: string | null; // Legacy field
+  email: string | null; // Legacy field
+  what_went_well: string | null;
+  to_improve: string | null;
+  will_return: 'yes' | 'maybe' | 'no' | null;
+  testimonial: string | null;
+  allow_publish: boolean | null;
+  publish_option: 'name' | 'anon' | 'no' | null;
+  respondent_email: string | null;
+  want_newsletter: boolean | null;
+  star_rating_communication: number | null; // 1-5
+  star_rating_deadlines: number | null; // 1-5
+  star_rating_quality: number | null; // 1-5
+  star_rating_professionalism: number | null; // 1-5
+  star_rating_recommendation: number | null; // 1-5
   created_at: string;
 }
 

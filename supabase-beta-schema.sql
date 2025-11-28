@@ -137,6 +137,22 @@ CREATE TRIGGER update_subscriptions_updated_at
   FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
 -- ============================================
+-- TRIGGER: Auto-create subscription on signup
+-- ============================================
+CREATE OR REPLACE FUNCTION handle_new_user_subscription()
+RETURNS TRIGGER AS $$
+BEGIN
+  INSERT INTO public.subscriptions (user_id, plan, status)
+  VALUES (NEW.id, 'free', 'active');
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+CREATE TRIGGER on_auth_user_created_subscription
+  AFTER INSERT ON auth.users
+  FOR EACH ROW EXECUTE FUNCTION handle_new_user_subscription();
+
+-- ============================================
 -- HELPER FUNCTION: Get waitlist count
 -- ============================================
 CREATE OR REPLACE FUNCTION get_waitlist_count()

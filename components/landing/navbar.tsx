@@ -72,7 +72,7 @@ export function LandingNavbar() {
               {text.nav.features}
             </NavLink>
             <NavLink href="/pricing/">{text.nav.pricing}</NavLink>
-            <NavLink href={getNavLink("#demo")}>{text.nav.demo}</NavLink>
+            {/* <NavLink href={getNavLink("#demo")}>{text.nav.demo}</NavLink> */}
 
             {/* Language toggle */}
             <div className="flex items-center gap-1 bg-bg-secondary rounded-full p-1">
@@ -169,12 +169,12 @@ export function LandingNavbar() {
               >
                 {text.nav.pricing}
               </MobileNavLink>
-              <MobileNavLink
+              {/* <MobileNavLink
                 href={getNavLink("#demo")}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {text.nav.demo}
-              </MobileNavLink>
+              </MobileNavLink> */}
 
               <div className="pt-4 border-t border-border">
                 <div className="flex items-center gap-2 mb-4">

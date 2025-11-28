@@ -8,22 +8,23 @@ import { useState, useEffect } from "react";
 const screensContent = {
   en: [
     {
-      id: "collect",
-      title: "Collect",
-      description: "Automated NPS surveys at perfect timing",
+      id: "automate",
+      title: "Automated email campaigns",
+      description:
+        "Send feedback requests at perfect timing: D-Day, D+30, D+60",
       href: "#features",
       color: "from-emerald-100 to-emerald-50",
     },
     {
       id: "analyze",
-      title: "Analyze",
+      title: "Analyze your internal processes",
       description: "Real-time dashboard with actionable insights",
-      href: "#demo",
+      href: "#features",
       color: "from-emerald-50 to-white",
     },
     {
       id: "improve",
-      title: "Showcase",
+      title: "Be proud of your work",
       description: "Display your credibility with embeddable badges",
       href: "/pricing/",
       color: "from-white to-emerald-50",
@@ -31,22 +32,22 @@ const screensContent = {
   ],
   fr: [
     {
-      id: "collect",
-      title: "Collecte",
-      description: "Enquêtes NPS automatisées au bon moment",
+      id: "automate",
+      title: "Automatisation des emails",
+      description: "Envoie de feedbacks au bon moment: J-0, J+30, J+60",
       href: "#features",
       color: "from-emerald-100 to-emerald-50",
     },
     {
       id: "analyze",
-      title: "Analyse",
+      title: "Analyse tes process internes",
       description: "Dashboard temps réel avec insights actionnables",
-      href: "#demo",
+      href: "#features",
       color: "from-emerald-50 to-white",
     },
     {
       id: "improve",
-      title: "Affiche",
+      title: "Sois fier de ton travail",
       description: "Montre ta crédibilité avec des badges intégrables",
       href: "/pricing/",
       color: "from-white to-emerald-50",
@@ -149,7 +150,7 @@ export function Hero() {
                     ${
                       relativeIndex === 0
                         ? "bg-white"
-                        : `bg-gradient-to-br ${screen.color} backdrop-blur-sm`
+                        : `bg-linear-to-br ${screen.color} backdrop-blur-sm`
                     }
                     rounded-2xl
                     border border-white/50
@@ -188,7 +189,118 @@ export function Hero() {
                       <div className="space-y-3">
                         {index === 0 && (
                           <>
-                            {/* Feedback Form Mockup */}
+                            {/* Email Automation Timeline */}
+                            <div className="bg-white rounded-lg p-3 border border-gray-200 shadow-sm">
+                              <div className="font-inter text-[10px] font-semibold text-content-primary mb-3">
+                                {lang === "fr"
+                                  ? "Campagne email automatisée"
+                                  : "Automated email campaign"}
+                              </div>
+
+                              {/* Timeline */}
+                              <div className="space-y-2">
+                                {/* J-0 */}
+                                <div className="flex items-start gap-2">
+                                  <div className="flex flex-col items-center">
+                                    <div className="w-6 h-6 rounded-full bg-emerald-500 flex items-center justify-center">
+                                      <svg
+                                        className="w-3 h-3 text-white"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                      >
+                                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                                      </svg>
+                                    </div>
+                                    <div className="w-0.5 h-8 bg-emerald-200"></div>
+                                  </div>
+                                  <div className="flex-1 pt-0.5">
+                                    <div className="flex items-center justify-between mb-0.5">
+                                      <span className="font-inter text-[9px] font-semibold text-emerald-600">
+                                        J-0
+                                      </span>
+                                      <span className="px-1.5 py-0.5 bg-emerald-100 text-emerald-600 text-[7px] font-semibold rounded">
+                                        {lang === "fr" ? "ENVOYÉ" : "SENT"}
+                                      </span>
+                                    </div>
+                                    <div className="font-inter text-[8px] text-content-secondary">
+                                      {lang === "fr"
+                                        ? "Fin de mission - Demande de feedback"
+                                        : "Mission end - Feedback request"}
+                                    </div>
+                                  </div>
+                                </div>
+
+                                {/* J+30 */}
+                                <div className="flex items-start gap-2">
+                                  <div className="flex flex-col items-center">
+                                    <div className="w-6 h-6 rounded-full bg-amber-500 flex items-center justify-center">
+                                      <svg
+                                        className="w-3 h-3 text-white"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                      >
+                                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                                      </svg>
+                                    </div>
+                                    <div className="w-0.5 h-8 bg-amber-200"></div>
+                                  </div>
+                                  <div className="flex-1 pt-0.5">
+                                    <div className="flex items-center justify-between mb-0.5">
+                                      <span className="font-inter text-[9px] font-semibold text-amber-600">
+                                        J+30
+                                      </span>
+                                      <span className="px-1.5 py-0.5 bg-amber-100 text-amber-600 text-[7px] font-semibold rounded">
+                                        {lang === "fr"
+                                          ? "PLANIFIÉ"
+                                          : "SCHEDULED"}
+                                      </span>
+                                    </div>
+                                    <div className="font-inter text-[8px] text-content-secondary">
+                                      {lang === "fr"
+                                        ? "Suivi - Comment ça se passe ?"
+                                        : "Follow-up - How's it going?"}
+                                    </div>
+                                  </div>
+                                </div>
+
+                                {/* J+60 */}
+                                <div className="flex items-start gap-2">
+                                  <div className="flex flex-col items-center">
+                                    <div className="w-6 h-6 rounded-full bg-gray-300 flex items-center justify-center">
+                                      <svg
+                                        className="w-3 h-3 text-white"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                      >
+                                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                                      </svg>
+                                    </div>
+                                  </div>
+                                  <div className="flex-1 pt-0.5">
+                                    <div className="flex items-center justify-between mb-0.5">
+                                      <span className="font-inter text-[9px] font-semibold text-gray-600">
+                                        J+60
+                                      </span>
+                                      <span className="px-1.5 py-0.5 bg-gray-100 text-gray-600 text-[7px] font-semibold rounded">
+                                        {lang === "fr"
+                                          ? "EN ATTENTE"
+                                          : "PENDING"}
+                                      </span>
+                                    </div>
+                                    <div className="font-inter text-[8px] text-content-secondary">
+                                      {lang === "fr"
+                                        ? "Relance - Nouveau projet ?"
+                                        : "Reminder - New project?"}
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* OLD FEEDBACK FORM MOCKUP - COMMENTED OUT
                             <div className="bg-white rounded-lg p-3 border border-gray-200 shadow-sm">
                               <div className="text-center mb-3">
                                 <div className="font-inter text-[10px] text-content-tertiary mb-1">
@@ -235,6 +347,7 @@ export function Hero() {
                                 </span>
                               </div>
                             </div>
+                            */}
                           </>
                         )}
                         {index === 1 && (

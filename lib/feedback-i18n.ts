@@ -1,20 +1,21 @@
-export type FeedbackLanguage = 'fr' | 'en';
+export type FeedbackLanguage = "fr" | "en";
 
 export const feedbackTranslations = {
   fr: {
     title: "Nous aimerions avoir votre avis !",
     subtitle: "Projet :",
-    description: "Votre retour nous aide à nous améliorer et à livrer de meilleurs résultats",
+    description:
+      "Votre retour nous aide à nous améliorer et à livrer de meilleurs résultats",
 
     nps: {
-      title: "Quelle est la probabilité que vous nous recommandiez à un ami ou un collègue ?",
-      notLikely: "Pas du tout probable",
-      veryLikely: "Extrêmement probable",
+      title: "Notez la mission de manière globale sur une échelle de 0 à 10 :",
+      notLikely: "Je n'ai vraiment pas apprécié le travail",
+      veryLikely: "J'ai adoré la qualité du travail",
       labels: {
-        detractor: "Détracteur",
-        passive: "Passif",
-        promoter: "Promoteur",
-        superPromoter: "Super Promoteur",
+        detractor: "Mauvais travail",
+        passive: "Travail moyen",
+        promoter: "Bon travail",
+        superPromoter: "Excellent travail",
       },
       scoreLabel: "Score :",
     },
@@ -75,14 +76,14 @@ export const feedbackTranslations = {
     description: "Your feedback helps us improve and deliver better results",
 
     nps: {
-      title: "How likely are you to recommend us to a friend or colleague?",
+      title: "Rate the mission overall on a scale from 0 to 10:",
       notLikely: "Not likely at all",
       veryLikely: "Extremely likely",
       labels: {
-        detractor: "Detractor",
-        passive: "Passive",
-        promoter: "Promoter",
-        superPromoter: "Super Promoter",
+        detractor: "Bad work",
+        passive: "Average work",
+        promoter: "Good work",
+        superPromoter: "Excellent work",
       },
       scoreLabel: "Score:",
     },

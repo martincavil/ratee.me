@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
       .from('subscriptions')
       .select('stripe_customer_id')
       .eq('user_id', user.id)
-      .single();
+      .maybeSingle();
 
     let customerId = subscription?.stripe_customer_id;
 
@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
       });
       customerId = customer.id;
 
-      // Update subscription with customer ID
+      // Update or create subscription with customer ID
       await adminClient
         .from('subscriptions')
         .upsert({
@@ -44,6 +44,8 @@ export async function POST(request: NextRequest) {
           stripe_customer_id: customerId,
           plan: 'free',
           status: 'active',
+        }, {
+          onConflict: 'user_id'
         });
     }
 

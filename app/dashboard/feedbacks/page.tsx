@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { formatDate, getNPSCategory } from "@/lib/utils";
 import { useLanguage } from "@/lib/i18n";
 import { Spinner } from "@/components/ui/spinner";
+import { FeedbackStats } from "@/components/dashboard/feedback-stats";
 import type { Feedback } from "@/types/database";
 
 interface Stats {
@@ -25,6 +26,10 @@ export default function FeedbacksPage() {
     nps_distribution: { detractors: 0, passives: 0, promoters: 0 },
   });
   const [loading, setLoading] = useState(true);
+  const [selectedFeedback, setSelectedFeedback] = useState<Feedback | null>(
+    null
+  );
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     fetchFeedbacks();
@@ -45,6 +50,16 @@ export default function FeedbacksPage() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleFeedbackClick = (feedback: Feedback) => {
+    setSelectedFeedback(feedback);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedFeedback(null);
   };
 
   if (loading) {
@@ -124,7 +139,8 @@ export default function FeedbacksPage() {
               return (
                 <div
                   key={feedback.id}
-                  className="p-5 hover:bg-bg-secondary transition-colors"
+                  onClick={() => handleFeedbackClick(feedback)}
+                  className="p-5 hover:bg-bg-secondary transition-colors cursor-pointer"
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
@@ -162,6 +178,13 @@ export default function FeedbacksPage() {
           </div>
         )}
       </div>
+
+      {/* Feedback Details Modal */}
+      <FeedbackStats
+        feedback={selectedFeedback}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+      />
     </div>
   );
 }

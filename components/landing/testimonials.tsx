@@ -6,7 +6,10 @@ export function Testimonials() {
   const { text } = useLanguage();
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-bg-primary">
+    <section
+      id="testimonials"
+      className="py-20 px-4 sm:px-6 lg:px-8 bg-bg-primary"
+    >
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
@@ -43,7 +46,7 @@ export function Testimonials() {
 
               {/* Author */}
               <div className="flex items-center gap-3 pt-4 border-t border-gray-100">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white font-semibold text-sm">
+                <div className="w-10 h-10 rounded-full bg-linear-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white font-semibold text-sm">
                   {testimonial.name.charAt(0)}
                 </div>
                 <div>
