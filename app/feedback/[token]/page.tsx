@@ -120,7 +120,6 @@ export default function FeedbackPage({ params }: FeedbackPageProps) {
           <FeedbackForm
             token={token}
             projectName={project?.name || ""}
-            clientName={project?.client_name || ""}
             onSuccess={handleSuccess}
           />
         </div>

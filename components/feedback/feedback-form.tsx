@@ -7,7 +7,6 @@ import { StarRating } from "./star-rating";
 interface FeedbackFormProps {
   token: string;
   projectName: string;
-  clientName: string;
   onSuccess: () => void;
 }
 
@@ -33,7 +32,6 @@ interface FormState {
 export function FeedbackForm({
   token,
   projectName,
-  clientName,
   onSuccess,
 }: FeedbackFormProps) {
   const [formState, setFormState] = useState<FormState>({
