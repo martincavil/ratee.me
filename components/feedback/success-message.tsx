@@ -10,13 +10,13 @@ interface SuccessMessageProps {
 export function SuccessMessage({ onAutoRedirect }: SuccessMessageProps) {
   useEffect(() => {
     // Auto redirect after 5 seconds
-    if (onAutoRedirect) {
-      const timer = setTimeout(() => {
-        onAutoRedirect();
-      }, 5000);
+    if (!onAutoRedirect) return;
 
-      return () => clearTimeout(timer);
-    }
+    const timer = setTimeout(() => {
+      onAutoRedirect();
+    }, 5000);
+
+    return () => clearTimeout(timer);
   }, [onAutoRedirect]);
 
   return (

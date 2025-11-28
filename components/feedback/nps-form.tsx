@@ -206,7 +206,7 @@ export function NPSForm({ project, token, language = "en" }: NPSFormProps) {
               setRatings((prev) => ({ ...prev, communication: value }))
             }
             label={t.ratings.communication.title}
-            description={t.ratings.communication.description}
+            sublabel={t.ratings.communication.description}
           />
 
           <StarRating
@@ -215,7 +215,7 @@ export function NPSForm({ project, token, language = "en" }: NPSFormProps) {
               setRatings((prev) => ({ ...prev, quality: value }))
             }
             label={t.ratings.quality.title}
-            description={t.ratings.quality.description}
+            sublabel={t.ratings.quality.description}
           />
 
           <StarRating
@@ -224,7 +224,7 @@ export function NPSForm({ project, token, language = "en" }: NPSFormProps) {
               setRatings((prev) => ({ ...prev, deadlines: value }))
             }
             label={t.ratings.deadlines.title}
-            description={t.ratings.deadlines.description}
+            sublabel={t.ratings.deadlines.description}
           />
 
           <StarRating
@@ -233,7 +233,7 @@ export function NPSForm({ project, token, language = "en" }: NPSFormProps) {
               setRatings((prev) => ({ ...prev, value: value }))
             }
             label={t.ratings.value.title}
-            description={t.ratings.value.description}
+            sublabel={t.ratings.value.description}
           />
 
           <StarRating
@@ -242,7 +242,7 @@ export function NPSForm({ project, token, language = "en" }: NPSFormProps) {
               setRatings((prev) => ({ ...prev, overall: value }))
             }
             label={t.ratings.overall.title}
-            description={t.ratings.overall.description}
+            sublabel={t.ratings.overall.description}
           />
         </div>
 
