@@ -3,7 +3,6 @@ import { Hero } from '@/components/landing/hero';
 import { PainPoints } from '@/components/landing/pain-points';
 import { Problem } from '@/components/landing/problem';
 import { Timeline } from '@/components/landing/timeline';
-import { Results } from '@/components/landing/results';
 import { Testimonials } from '@/components/landing/testimonials';
 import { Pricing } from '@/components/landing/pricing';
 import { FAQ } from '@/components/landing/faq';
@@ -35,7 +34,6 @@ export default function HomePage() {
         <PainPoints />
         <Problem />
         <Timeline />
-        <Results />
         <Testimonials />
         <Pricing />
         <FAQ />

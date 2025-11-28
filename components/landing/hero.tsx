@@ -449,64 +449,91 @@ export function Hero() {
                           </>
                         )}
                         {index === 2 && (
-                          <div className="space-y-2">
-                            {/* Badge Preview */}
-                            <div className="bg-white rounded-lg p-3 border-2 border-emerald-500 shadow-sm text-center">
-                              <div className="font-inter text-[9px] text-content-tertiary mb-1">
-                                {lang === "fr"
-                                  ? "Satisfaction Client"
-                                  : "Client Satisfaction"}
+                          <div className="bg-gray-50 rounded-lg overflow-hidden border border-gray-200 shadow-sm">
+                            {/* Browser Chrome */}
+                            <div className="bg-gray-100 px-2 py-1.5 flex items-center gap-1.5 border-b border-gray-200">
+                              <div className="flex gap-1">
+                                <div className="w-1.5 h-1.5 rounded-full bg-red-400" />
+                                <div className="w-1.5 h-1.5 rounded-full bg-yellow-400" />
+                                <div className="w-1.5 h-1.5 rounded-full bg-green-400" />
                               </div>
-                              <div className="font-sora text-3xl font-bold text-emerald-500 mb-0.5">
-                                8.7
-                              </div>
-                              <div className="font-inter text-[8px] text-content-tertiary mb-2">
-                                {lang === "fr"
-                                  ? "Score NPS moyen"
-                                  : "Average NPS Score"}
-                              </div>
-                              <div className="flex justify-center gap-0.5 mb-2">
-                                {[...Array(5)].map((_, i) => (
-                                  <svg
-                                    key={i}
-                                    className={`w-2.5 h-2.5 ${
-                                      i < 4 ? "text-warning" : "text-gray-200"
-                                    } fill-current`}
-                                    viewBox="0 0 20 20"
-                                  >
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                  </svg>
-                                ))}
-                              </div>
-                              <div className="font-inter text-[7px] text-content-tertiary">
-                                26 feedbacks
-                              </div>
-                              <div className="mt-2 pt-2 border-t border-gray-100">
-                                <span className="font-inter text-[7px] text-content-tertiary">
-                                  Powered by{" "}
-                                  <span className="font-medium text-emerald-500">
-                                    ratee.me
-                                  </span>
-                                </span>
+                              <div className="flex-1 ml-2">
+                                <div className="bg-white rounded px-2 py-0.5 text-[7px] text-gray-500 max-w-[120px]">
+                                  {lang === "fr" ? "tonsite.com" : "yourwebsite.com"}
+                                </div>
                               </div>
                             </div>
-                            {/* Embed Code Preview */}
-                            <div className="bg-gray-900 rounded-lg p-2">
-                              <div className="font-mono text-[7px] text-gray-400">
-                                <span className="text-pink-400">&lt;div</span>{" "}
-                                <span className="text-green-400">class</span>=
-                                <span className="text-yellow-300">
-                                  "ratee-badge"
-                                </span>
-                                <span className="text-pink-400">&gt;</span>
-                              </div>
-                              <div className="flex items-center justify-between mt-1">
-                                <span className="font-inter text-[7px] text-gray-500">
-                                  {lang === "fr" ? "Code embed" : "Embed code"}
-                                </span>
-                                <span className="px-1 py-0.5 bg-white/10 rounded text-[7px] text-white font-medium">
-                                  {lang === "fr" ? "Copier" : "Copy"}
-                                </span>
+
+                            {/* Website Content */}
+                            <div className="bg-gradient-to-br from-gray-50 to-white p-3">
+                              <div className="grid grid-cols-2 gap-3 items-center">
+                                {/* Left: Hero Content */}
+                                <div>
+                                  <div className="inline-block px-1.5 py-0.5 bg-emerald-100 text-emerald-700 rounded-full text-[7px] font-medium mb-1">
+                                    {lang === "fr" ? "Développeur Freelance" : "Freelance Developer"}
+                                  </div>
+                                  <h3 className="font-sora text-[10px] font-bold text-gray-900 mb-1">
+                                    {lang === "fr" ? "Je crée des solutions web" : "I build web solutions"}
+                                  </h3>
+                                  <p className="text-[7px] text-gray-600 mb-2 leading-tight">
+                                    {lang === "fr" ? "Expert en développement web moderne." : "Expert in modern web development."}
+                                  </p>
+                                  <div className="flex gap-1">
+                                    <div className="px-2 py-1 bg-emerald-600 text-white rounded text-[6px] font-medium">
+                                      {lang === "fr" ? "Me contacter" : "Contact me"}
+                                    </div>
+                                    <div className="px-2 py-1 bg-white border border-gray-300 text-gray-700 rounded text-[6px] font-medium">
+                                      {lang === "fr" ? "Mes projets" : "My projects"}
+                                    </div>
+                                  </div>
+                                </div>
+
+                                {/* Right: NPS Badge */}
+                                <div className="flex justify-end">
+                                  <div className="inline-block">
+                                    {/* Badge Container with glow effect */}
+                                    <div className="relative">
+                                      {/* Glow effect */}
+                                      <div className="absolute inset-0 bg-emerald-400/20 blur-lg rounded-md" />
+
+                                      {/* Badge */}
+                                      <div className="relative bg-white border border-emerald-500 rounded-md p-2 shadow-lg max-w-[90px]">
+                                        <div className="text-center">
+                                          <div className="text-[6px] text-gray-600 mb-0.5 font-medium">
+                                            {lang === "fr" ? "Satisfaction clients" : "Client satisfaction"}
+                                          </div>
+                                          <div className="text-2xl font-bold text-emerald-600 mb-0.5">
+                                            9.2
+                                          </div>
+                                          <div className="text-[5px] text-gray-500 mb-1">
+                                            {lang === "fr" ? "Note NPS" : "NPS score"}
+                                          </div>
+                                          <div className="text-[6px] text-gray-600 font-medium mb-1">
+                                            {lang === "fr" ? "24 clients" : "24 clients"}
+                                          </div>
+                                          <div className="pt-1 border-t border-gray-200">
+                                            <div className="flex items-center justify-center gap-0.5 text-[5px] text-gray-400">
+                                              <svg
+                                                className="w-1.5 h-1.5"
+                                                fill="currentColor"
+                                                viewBox="0 0 20 20"
+                                              >
+                                                <path
+                                                  fillRule="evenodd"
+                                                  d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                  clipRule="evenodd"
+                                                />
+                                              </svg>
+                                              <span>
+                                                {lang === "fr" ? "ratee.me" : "ratee.me"}
+                                              </span>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
                               </div>
                             </div>
                           </div>
