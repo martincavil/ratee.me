@@ -88,7 +88,9 @@ export function Hero() {
             </div>
 
             {/* Waitlist Form */}
-            <WaitlistForm />
+            <div id="waitlist">
+              <WaitlistForm />
+            </div>
           </div>
 
           {/* Right: Stacked Screens */}

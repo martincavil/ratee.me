@@ -1,10 +1,10 @@
 "use client";
 
-import Link from 'next/link';
-import { useLanguage } from '@/lib/i18n';
-import { LandingNavbar } from '@/components/landing/navbar';
-import { Footer } from '@/components/landing/footer';
-import { CheckoutButton } from '@/components/pricing/checkout-button';
+import Link from "next/link";
+import { useLanguage } from "@/lib/i18n";
+import { LandingNavbar } from "@/components/landing/navbar";
+import { Footer } from "@/components/landing/footer";
+import { CheckoutButton } from "@/components/pricing/checkout-button";
 
 export default function PricingPage() {
   const { text, lang } = useLanguage();
@@ -20,19 +20,21 @@ export default function PricingPage() {
               {text.pricing.title}
             </h1>
             <p className="font-inter text-lg text-content-secondary">
-              {lang === 'fr'
-                ? 'Choisissez le plan qui correspond à vos besoins'
-                : 'Choose the plan that fits your needs'}
+              {lang === "fr"
+                ? "Choisissez le plan qui correspond à vos besoins"
+                : "Choose the plan that fits your needs"}
             </p>
           </div>
 
           {/* Pricing Cards */}
-          <div className="grid md:grid-cols-3 gap-6">
-            {text.pricing.tiers.map((tier, index) => (
+          <div className="grid md:grid-cols-2 gap-12">
+            {text.pricing.tiers.map((tier: any, index: number) => (
               <div
                 key={index}
                 className={`bg-white rounded-2xl shadow-lg border-2 p-6 relative transition-all hover:shadow-xl ${
-                  tier.popular ? 'border-emerald-500 scale-105' : 'border-border'
+                  tier.popular
+                    ? "border-emerald-500 scale-105"
+                    : "border-border"
                 }`}
               >
                 {/* Popular Badge */}
@@ -49,7 +51,9 @@ export default function PricingPage() {
                   <h3 className="font-sora text-xl font-bold text-content-primary mb-1">
                     {tier.name}
                   </h3>
-                  <p className="font-inter text-sm text-content-tertiary">{tier.heading}</p>
+                  <p className="font-inter text-sm text-content-tertiary">
+                    {tier.heading}
+                  </p>
                 </div>
 
                 {/* Price */}
@@ -58,18 +62,22 @@ export default function PricingPage() {
                     <span className="font-sora text-4xl font-bold text-content-primary">
                       {tier.price}
                     </span>
-                    {tier.period && tier.name !== 'Free' && /* tier.name !== 'Business' && */ ( // TODO: Business plan - À implémenter plus tard
-                      <span className="font-inter text-content-tertiary text-sm">{tier.period}</span>
-                    )}
+                    {tier.period && tier.name !== "Free" ? (
+                      <span className="font-inter text-content-tertiary text-sm">
+                        {tier.period}
+                      </span>
+                    ) : null}
                   </div>
-                  {(tier.name === 'Free' /* || tier.name === 'Business' */) && ( // TODO: Business plan - À implémenter plus tard
-                    <p className="font-inter text-xs text-content-tertiary mt-1">{tier.period}</p>
-                  )}
+                  {tier.name === "Free" ? (
+                    <p className="font-inter text-xs text-content-tertiary mt-1">
+                      {tier.period}
+                    </p>
+                  ) : null}
                 </div>
 
                 {/* Features */}
                 <ul className="space-y-3 mb-6">
-                  {tier.features.map((feature, idx) => (
+                  {tier.features.map((feature: string, idx: number) => (
                     <li key={idx} className="flex items-center gap-2">
                       <svg
                         className="w-4 h-4 flex-shrink-0 text-emerald-500"
@@ -99,7 +107,7 @@ export default function PricingPage() {
                 {/* Note */}
                 {'note' in tier && tier.note && (
                   <p className="text-center font-inter text-xs text-content-tertiary mt-3">
-                    {tier.note}
+                    {String(tier.note)}
                   </p>
                 )}
               </div>
@@ -109,15 +117,15 @@ export default function PricingPage() {
           {/* Bottom note */}
           <div className="text-center mt-12">
             <p className="font-inter text-sm text-content-secondary mb-4">
-              {lang === 'fr'
-                ? 'Tous les plans incluent un support email. Annulation à tout moment.'
-                : 'All plans include email support. Cancel anytime.'}
+              {lang === "fr"
+                ? "Tous les plans incluent un support email. Annulation à tout moment."
+                : "All plans include email support. Cancel anytime."}
             </p>
             <Link
               href="/#faq"
               className="text-emerald-500 hover:text-emerald-600 font-inter font-medium text-sm transition-colors cursor-pointer"
             >
-              {lang === 'fr' ? 'Consultez la FAQ →' : 'Check out the FAQ →'}
+              {lang === "fr" ? "Consultez la FAQ →" : "Check out the FAQ →"}
             </Link>
           </div>
         </div>

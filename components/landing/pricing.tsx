@@ -15,8 +15,8 @@ export function Pricing() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {text.pricing.tiers.map((tier, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {text.pricing.tiers.map((tier: any, index: number) => (
             <div
               key={index}
               className={`relative bg-white rounded-2xl p-6 border-2 transition-all hover:shadow-xl ${
@@ -48,23 +48,18 @@ export function Pricing() {
                   <span className="text-4xl font-bold text-gray-900">
                     {tier.price}
                   </span>
-                  {tier.period &&
-                    tier.name !== "Free" &&
-                    // tier.name !== "Business" && // TODO: Business plan - À implémenter plus tard
-                    (
-                      <span className="text-gray-500 text-sm">
-                        {tier.period}
-                      </span>
-                    )}
+                  {tier.period && tier.name !== "Free" ? (
+                    <span className="text-gray-500 text-sm">{tier.period}</span>
+                  ) : null}
                 </div>
-                {(tier.name === "Free" /* || tier.name === "Business" */) && ( // TODO: Business plan - À implémenter plus tard
+                {tier.name === "Free" ? (
                   <p className="text-xs text-gray-500 mt-1">{tier.period}</p>
-                )}
+                ) : null}
               </div>
 
               {/* Features */}
               <div className="mb-6 space-y-3">
-                {tier.features.map((feature, featureIndex) => (
+                {tier.features.map((feature: string, featureIndex: number) => (
                   <div key={featureIndex} className="flex items-center gap-2">
                     <svg
                       className="w-4 h-4 text-emerald-500 flex-shrink-0"
@@ -84,7 +79,7 @@ export function Pricing() {
 
               {/* CTA */}
               <Link
-                href={/* tier.name === "Business" ? "/contact" : */ "/auth/signup"} // TODO: Business plan - À implémenter plus tard
+                href="/auth/signup"
                 className={`block w-full py-3 px-4 rounded-lg font-semibold text-sm text-center transition-all cursor-pointer ${
                   tier.popular
                     ? "bg-emerald-500 text-white hover:bg-emerald-600 shadow-md hover:shadow-lg"
@@ -95,9 +90,9 @@ export function Pricing() {
               </Link>
 
               {/* Note */}
-              {"note" in tier && tier.note && (
+              {'note' in tier && tier.note && (
                 <p className="text-xs text-gray-500 text-center mt-3">
-                  {tier.note}
+                  {String(tier.note)}
                 </p>
               )}
             </div>

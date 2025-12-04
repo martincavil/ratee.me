@@ -95,21 +95,21 @@ export const content = {
         },
         {
           icon: "💎",
-          title: "Votre réputation, quantifiée",
+          title: "Ta réputation, quantifiée",
           description:
             "Un score NPS objectif et mesurable. Plus besoin de dire 'mes clients sont satisfaits'. Tu le prouves avec des chiffres.",
         },
         {
           icon: "🚀",
-          title: "Convertissez plus de prospects",
+          title: "Convertis plus de prospects",
           description:
-            "Affichez votre badge NPS sur votre site. Les prospects voient immédiatement votre crédibilité. La confiance se construit avant même le premier contact.",
+            "Affiche ton badge NPS sur ton site. Les prospects voient immédiatement ta crédibilité. La confiance se construit avant même le premier contact.",
         },
         {
           icon: "♻️",
-          title: "Transformez les clients en revenus récurrents",
+          title: "Transforme les clients en revenus récurrents",
           description:
-            "Identifiez vos promoteurs et recontactez-les au bon moment. Chaque projet réussi devient une opportunité de mission récurrente.",
+            "Identifie tes promoteurs et recontacte-les au bon moment. Chaque projet réussi devient une opportunité de mission récurrente.",
         },
       ],
     },
@@ -293,7 +293,7 @@ export const content = {
       headline: "Si tu es arrivé jusque-là, c'est qu'il est temps d'essayer.",
       subheadline:
         "Rejoins les freelances et agences qui ont déjà automatisé leur collecte de feedbacks.",
-      ctaPrimary: "Commencer gratuitement",
+      ctaPrimary: "Rejoins la Waitlist dès maintenant",
       ctaSecondary: "Voir les tarifs",
     },
     footer: {
@@ -794,7 +794,7 @@ export const content = {
       headline: "If you've made it this far, it's time to try.",
       subheadline:
         "Join freelancers and agencies who have already automated their feedback collection.",
-      ctaPrimary: "Start for free",
+      ctaPrimary: "Join the Waitlist now",
       ctaSecondary: "View pricing",
     },
     footer: {

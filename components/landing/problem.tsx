@@ -332,8 +332,8 @@ export function Problem() {
           </div>
 
           {/* Screen Display */}
-          <div className="hidden md:flex lg:sticky lg:top-24">
-            <div className="relative">
+          <div className="hidden lg:flex lg:sticky lg:top-24">
+            <div className="relative w-full">
               {text.problem.issues.map((issue, index) => (
                 <div
                   key={index}
