@@ -54,6 +54,7 @@ export function Navbar({ user }: NavbarProps) {
     { href: ROUTES.PROJECTS, label: text.navbar.projects },
     { href: ROUTES.FEEDBACKS, label: text.navbar.feedbacks },
     { href: ROUTES.BADGE, label: text.navbar.badge },
+    { href: ROUTES.EMAIL_AUTOMATION, label: text.navbar.emailAutomation },
   ];
 
   return (

@@ -67,7 +67,7 @@ export const feedbackTranslations = {
       submitError: "Une erreur est survenue. Veuillez réessayer.",
     },
 
-    footer: "Propulsé par",
+    footer: "Certifié par",
   },
 
   en: {

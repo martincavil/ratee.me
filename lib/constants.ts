@@ -34,6 +34,7 @@ export const ROUTES = {
   PROJECTS: "/dashboard/projects",
   FEEDBACKS: "/dashboard/feedbacks",
   BADGE: "/dashboard/badge",
+  EMAIL_AUTOMATION: "/dashboard/email-automation",
   SETTINGS: "/dashboard/settings",
 } as const;
 
@@ -534,6 +535,7 @@ export const content = {
       projects: "Projets",
       feedbacks: "Feedbacks",
       badge: "Badge",
+      emailAutomation: "Emails auto",
       settings: "Paramètres",
       language: "Langue",
       logout: "Se déconnecter",
@@ -1032,6 +1034,7 @@ export const content = {
       projects: "Projects",
       feedbacks: "Feedback",
       badge: "Badge",
+      emailAutomation: "Emails",
       settings: "Settings",
       language: "Language",
       logout: "Log Out",

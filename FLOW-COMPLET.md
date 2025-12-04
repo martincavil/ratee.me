@@ -1,6 +1,6 @@
-# 🔄 Flow Complet ratee.me - De la Connexion à J+60
+# 🔄 Flow Complet ratee.me - De la Connexion à J+90
 
-Ce document décrit le parcours complet d'un utilisateur de ratee.me, depuis la première connexion jusqu'à l'automation d'emails à J+60 après la fin d'une mission.
+Ce document décrit le parcours complet d'un utilisateur de ratee.me, depuis la première connexion jusqu'à l'automation d'emails à J+90 après la fin d'une mission.
 
 ---
 

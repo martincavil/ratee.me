@@ -69,7 +69,7 @@ export function FeedbackStats({
         <div className="pb-4 border-b border-gray-200">
           <div className="flex items-start justify-between mb-3">
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 font-sora">
+              <h3 className="text-lg! font-semibold text-gray-900 font-sora">
                 {feedback.client_name}
               </h3>
               <p className="text-sm text-gray-500 mt-1">
@@ -108,11 +108,13 @@ export function FeedbackStats({
         {/* Main Feedback */}
         <div className="space-y-4">
           <div>
-            <h4 className="text-sm font-semibold text-gray-900 font-sora mb-2">
+            <p className="text-sm font-semibold text-gray-900 font-sora mb-2">
               ✅ Ce qui a bien marché
-            </h4>
+            </p>
             <p className="text-sm text-gray-700 bg-emerald-50 border border-emerald-200 rounded-lg p-3">
-              {feedback.what_went_well || <i className="text-gray-400">Non renseigné</i>}
+              {feedback.what_went_well || (
+                <i className="text-gray-400">Non renseigné</i>
+              )}
             </p>
           </div>
 
@@ -121,7 +123,9 @@ export function FeedbackStats({
               💡 Points d&apos;amélioration
             </h4>
             <p className="text-sm text-gray-700 bg-orange-50 border border-orange-200 rounded-lg p-3">
-              {feedback.to_improve || <i className="text-gray-400">Non renseigné</i>}
+              {feedback.to_improve || (
+                <i className="text-gray-400">Non renseigné</i>
+              )}
             </p>
           </div>
 
@@ -227,7 +231,9 @@ export function FeedbackStats({
               <h4 className="text-sm font-semibold text-gray-900 font-sora mb-2">
                 📧 Contact
               </h4>
-              <p className="text-sm text-gray-700">{feedback.respondent_email}</p>
+              <p className="text-sm text-gray-700">
+                {feedback.respondent_email}
+              </p>
               {feedback.want_newsletter && (
                 <p className="text-xs text-emerald-600 mt-1">
                   ✓ S&apos;est inscrit à la newsletter

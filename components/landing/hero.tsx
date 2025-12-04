@@ -11,7 +11,7 @@ const screensContent = {
       id: "automate",
       title: "Automated email campaigns",
       description:
-        "Send feedback requests at perfect timing: D-Day, D+30, D+60",
+        "Send feedback requests at perfect timing: D-Day, D+30, D+90",
       href: "#features",
       color: "from-emerald-100 to-emerald-50",
     },
@@ -34,7 +34,7 @@ const screensContent = {
     {
       id: "automate",
       title: "Automatisation des emails",
-      description: "Envoie de feedbacks au bon moment: J-0, J+30, J+60",
+      description: "Envoie de feedbacks au bon moment: J-0, J+30, J+90",
       href: "#features",
       color: "from-emerald-100 to-emerald-50",
     },
@@ -268,7 +268,7 @@ export function Hero() {
                                   </div>
                                 </div>
 
-                                {/* J+60 */}
+                                {/* J+90 */}
                                 <div className="flex items-start gap-2">
                                   <div className="flex flex-col items-center">
                                     <div className="w-6 h-6 rounded-full bg-gray-300 flex items-center justify-center">
@@ -285,7 +285,7 @@ export function Hero() {
                                   <div className="flex-1 pt-0.5">
                                     <div className="flex items-center justify-between mb-0.5">
                                       <span className="font-inter text-[9px] font-semibold text-gray-600">
-                                        J+60
+                                        J+90
                                       </span>
                                       <span className="px-1.5 py-0.5 bg-gray-100 text-gray-600 text-[7px] font-semibold rounded">
                                         {lang === "fr"

@@ -145,7 +145,7 @@ export default function FeedbacksPage() {
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <div className="flex items-center space-x-3 mb-2">
-                        <h3 className="font-semibold text-content-primary text-sm">
+                        <h3 className="font-semibold text-content-primary text-sm!">
                           {feedback.client_name}
                         </h3>
                         <span
@@ -170,6 +170,23 @@ export default function FeedbacksPage() {
                       <p className="text-xs text-content-tertiary">
                         {formatDate(feedback.created_at)}
                       </p>
+                    </div>
+
+                    <div className="flex items-center gap-1 text-emerald-600 font-medium text-sm">
+                      <span>Voir le feedback</span>
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
                     </div>
                   </div>
                 </div>

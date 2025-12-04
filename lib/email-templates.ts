@@ -2,7 +2,7 @@
  * Email templates avec support i18n (FR/EN)
  */
 
-export type Language = 'fr' | 'en';
+export type Language = "fr" | "en";
 
 interface EmailContent {
   subject: string;
@@ -24,7 +24,8 @@ const translations: Record<Language, EmailContent> = {
   fr: {
     subject: "Votre avis sur {projectName} nous intéresse",
     greeting: "Bonjour {clientName} ! 👋",
-    intro: "Nous espérons que vous êtes satisfait de <strong>{projectName}</strong>. Votre retour est précieux pour nous !",
+    intro:
+      "Nous espérons que vous êtes satisfait de <strong>{projectName}</strong>. Votre retour est précieux pour nous !",
     cta: "Cela ne prendra que <strong>2 minutes</strong> pour partager votre avis. Votre feedback sincère nous aide à nous améliorer et à offrir de meilleurs résultats.",
     ctaButton: "Donner mon avis",
     whatToExpect: {
@@ -32,18 +33,19 @@ const translations: Record<Language, EmailContent> = {
       steps: [
         "Noter votre expérience sur une échelle de 0 à 10",
         "Partager ce qui a bien fonctionné ou ce qui pourrait être amélioré",
-        "Moins de 2 minutes chrono"
-      ]
+        "Moins de 2 minutes chrono",
+      ],
     },
     footer: {
       sentBy: "Cette demande a été envoyée par <strong>{senderName}</strong>",
-      poweredBy: "Propulsé par"
-    }
+      poweredBy: "Certifié par",
+    },
   },
   en: {
     subject: "We'd love your feedback on {projectName}",
     greeting: "Hi {clientName}! 👋",
-    intro: "We hope you're happy with <strong>{projectName}</strong>. Your feedback would mean the world to us!",
+    intro:
+      "We hope you're happy with <strong>{projectName}</strong>. Your feedback would mean the world to us!",
     cta: "It'll only take <strong>2 minutes</strong> to share your thoughts. Your honest feedback helps us improve and deliver better results.",
     ctaButton: "Share Your Feedback",
     whatToExpect: {
@@ -51,18 +53,21 @@ const translations: Record<Language, EmailContent> = {
       steps: [
         "Rate your experience on a scale of 0-10",
         "Share what we did well or could improve",
-        "Takes less than 2 minutes"
-      ]
+        "Takes less than 2 minutes",
+      ],
     },
     footer: {
       sentBy: "This feedback request was sent by <strong>{senderName}</strong>",
-      poweredBy: "Powered by"
-    }
-  }
+      poweredBy: "Powered by",
+    },
+  },
 };
 
-function replacePlaceholders(text: string, vars: Record<string, string>): string {
-  return text.replace(/\{(\w+)\}/g, (_, key) => vars[key] || '');
+function replacePlaceholders(
+  text: string,
+  vars: Record<string, string>
+): string {
+  return text.replace(/\{(\w+)\}/g, (_, key) => vars[key] || "");
 }
 
 export function getFeedbackEmailContent(params: {
@@ -85,7 +90,7 @@ export function getFeedbackEmailContent(params: {
   const whatToExpect = t.whatToExpect;
   const footer = {
     sentBy: replacePlaceholders(t.footer.sentBy, vars),
-    poweredBy: t.footer.poweredBy
+    poweredBy: t.footer.poweredBy,
   };
 
   // HTML Email Template
@@ -146,7 +151,9 @@ export function getFeedbackEmailContent(params: {
 
               <!-- Alternative Link -->
               <p style="color: #9ca3af; font-size: 14px; text-align: center; margin: 0 0 36px 0; word-break: break-all;">
-                ${language === 'fr' ? 'Ou copiez ce lien' : 'Or copy this link'}:
+                ${
+                  language === "fr" ? "Ou copiez ce lien" : "Or copy this link"
+                }:
                 <br/>
                 <a href="${feedbackUrl}" style="color: #10B981; text-decoration: none;">${feedbackUrl}</a>
               </p>
@@ -161,7 +168,11 @@ export function getFeedbackEmailContent(params: {
                   ${whatToExpect.title}
                 </h2>
                 <ul style="color: #4b5563; font-size: 15px; margin: 0; padding-left: 24px; line-height: 1.8;">
-                  ${whatToExpect.steps.map(step => `<li style="margin-bottom: 8px;">${step}</li>`).join('')}
+                  ${whatToExpect.steps
+                    .map(
+                      (step) => `<li style="margin-bottom: 8px;">${step}</li>`
+                    )
+                    .join("")}
                 </ul>
               </div>
             </td>
@@ -174,7 +185,9 @@ export function getFeedbackEmailContent(params: {
                 ${footer.sentBy}
               </p>
               <p style="color: #9ca3af; font-size: 13px; text-align: center; margin: 0;">
-                ${footer.poweredBy} <a href="https://ratee.me" style="color: #10B981; text-decoration: none; font-weight: 600;">ratee.me</a>
+                ${
+                  footer.poweredBy
+                } <a href="https://ratee.me" style="color: white; text-decoration: none; font-weight: 600;">ratee.me</a>
               </p>
             </td>
           </tr>
@@ -192,17 +205,17 @@ export function getFeedbackEmailContent(params: {
   const text = `
 ${greeting}
 
-${intro.replace(/<\/?strong>/g, '')}
+${intro.replace(/<\/?strong>/g, "")}
 
-${cta.replace(/<\/?strong>/g, '')}
+${cta.replace(/<\/?strong>/g, "")}
 
 ${ctaButton}: ${feedbackUrl}
 
 ${whatToExpect.title}
-${whatToExpect.steps.map((step, i) => `${i + 1}. ${step}`).join('\n')}
+${whatToExpect.steps.map((step, i) => `${i + 1}. ${step}`).join("\n")}
 
 ---
-${footer.sentBy.replace(/<\/?strong>/g, '')}
+${footer.sentBy.replace(/<\/?strong>/g, "")}
 ${footer.poweredBy} ratee.me - https://ratee.me
   `.trim();
 
