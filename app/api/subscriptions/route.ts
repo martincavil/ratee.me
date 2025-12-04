@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { requireAuth, getUser } from '@/lib/supabase/auth';
 import { createClient } from '@/lib/supabase/server';
+import { ADMIN_EMAILS } from '@/lib/constants';
 
 export async function GET() {
   try {
@@ -15,6 +16,22 @@ export async function GET() {
         },
         { status: 401 }
       );
+    }
+
+    // Check if user is admin - admins get PRO automatically
+    const isAdmin = user.email && ADMIN_EMAILS.includes(user.email as typeof ADMIN_EMAILS[number]);
+
+    if (isAdmin) {
+      // Return PRO subscription for admin
+      return NextResponse.json({
+        success: true,
+        data: {
+          user_id: user.id,
+          plan: 'pro',
+          status: 'active',
+          is_admin_override: true,
+        },
+      });
     }
 
     const supabase = await createClient();
