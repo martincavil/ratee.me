@@ -142,7 +142,7 @@ export default function FeedbacksPage() {
                   onClick={() => handleFeedbackClick(feedback)}
                   className="p-5 hover:bg-bg-secondary transition-colors cursor-pointer"
                 >
-                  <div className="flex items-start justify-between">
+                  <div className="flex items-center justify-between">
                     <div className="flex-1">
                       <div className="flex items-center space-x-3 mb-2">
                         <h3 className="font-semibold text-content-primary text-sm!">

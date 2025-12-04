@@ -108,7 +108,7 @@ export function FeedbackStats({
         {/* Main Feedback */}
         <div className="space-y-4">
           <div>
-            <p className="text-sm font-semibold text-gray-900 font-sora mb-2">
+            <p className="text-sm! font-semibold text-gray-900 font-sora mb-2">
               ✅ Ce qui a bien marché
             </p>
             <p className="text-sm text-gray-700 bg-emerald-50 border border-emerald-200 rounded-lg p-3">
@@ -119,7 +119,7 @@ export function FeedbackStats({
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold text-gray-900 font-sora mb-2">
+            <h4 className="text-sm! font-semibold text-gray-900 font-sora mb-2">
               💡 Points d&apos;amélioration
             </h4>
             <p className="text-sm text-gray-700 bg-orange-50 border border-orange-200 rounded-lg p-3">
@@ -130,7 +130,7 @@ export function FeedbackStats({
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold text-gray-900 font-sora mb-2">
+            <h4 className="text-sm! font-semibold text-gray-900 font-sora mb-2">
               🔄 Reviendrait pour une autre mission
             </h4>
             <p className="text-sm">
@@ -204,7 +204,7 @@ export function FeedbackStats({
           <>
             <hr className="border-gray-200" />
             <div>
-              <h4 className="text-sm font-semibold text-gray-900 font-sora mb-2">
+              <h4 className="text-sm! font-semibold text-gray-900 font-sora mb-2">
                 💬 Témoignage
               </h4>
               <blockquote className="text-sm text-gray-700 italic bg-gray-50 border-l-4 border-emerald-500 rounded-r-lg p-4">
@@ -228,7 +228,7 @@ export function FeedbackStats({
           <>
             <hr className="border-gray-200" />
             <div>
-              <h4 className="text-sm font-semibold text-gray-900 font-sora mb-2">
+              <h4 className="text-sm! font-semibold text-gray-900 font-sora mb-2">
                 📧 Contact
               </h4>
               <p className="text-sm text-gray-700">
