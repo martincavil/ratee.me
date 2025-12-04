@@ -50,13 +50,14 @@ export function Pricing() {
                   </span>
                   {tier.period &&
                     tier.name !== "Free" &&
-                    tier.name !== "Business" && (
+                    // tier.name !== "Business" && // TODO: Business plan - À implémenter plus tard
+                    (
                       <span className="text-gray-500 text-sm">
                         {tier.period}
                       </span>
                     )}
                 </div>
-                {(tier.name === "Free" || tier.name === "Business") && (
+                {(tier.name === "Free" /* || tier.name === "Business" */) && ( // TODO: Business plan - À implémenter plus tard
                   <p className="text-xs text-gray-500 mt-1">{tier.period}</p>
                 )}
               </div>
@@ -83,7 +84,7 @@ export function Pricing() {
 
               {/* CTA */}
               <Link
-                href={tier.name === "Business" ? "/contact" : "/auth/signup"}
+                href={/* tier.name === "Business" ? "/contact" : */ "/auth/signup"} // TODO: Business plan - À implémenter plus tard
                 className={`block w-full py-3 px-4 rounded-lg font-semibold text-sm text-center transition-all cursor-pointer ${
                   tier.popular
                     ? "bg-emerald-500 text-white hover:bg-emerald-600 shadow-md hover:shadow-lg"

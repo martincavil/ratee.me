@@ -54,21 +54,22 @@ export function CheckoutButton({ tierName, isPopular, cta }: CheckoutButtonProps
     );
   }
 
+  // TODO: Business plan - À implémenter plus tard
   // Business tier - link to contact
-  if (tierName === 'Business') {
-    return (
-      <Link
-        href="/contact"
-        className={`block w-full py-3 px-4 rounded-lg font-inter font-semibold text-sm text-center transition-all cursor-pointer ${
-          isPopular
-            ? 'bg-emerald-500 text-white hover:bg-emerald-600 shadow-md hover:shadow-lg'
-            : 'bg-gray-100 text-content-primary hover:bg-gray-200'
-        }`}
-      >
-        {cta}
-      </Link>
-    );
-  }
+  // if (tierName === 'Business') {
+  //   return (
+  //     <Link
+  //       href="/contact"
+  //       className={`block w-full py-3 px-4 rounded-lg font-inter font-semibold text-sm text-center transition-all cursor-pointer ${
+  //         isPopular
+  //           ? 'bg-emerald-500 text-white hover:bg-emerald-600 shadow-md hover:shadow-lg'
+  //           : 'bg-gray-100 text-content-primary hover:bg-gray-200'
+  //       }`}
+  //     >
+  //       {cta}
+  //     </Link>
+  //   );
+  // }
 
   // Pro tier - Stripe checkout
   return (

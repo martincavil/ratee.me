@@ -58,11 +58,11 @@ export default function PricingPage() {
                     <span className="font-sora text-4xl font-bold text-content-primary">
                       {tier.price}
                     </span>
-                    {tier.period && tier.name !== 'Free' && tier.name !== 'Business' && (
+                    {tier.period && tier.name !== 'Free' && /* tier.name !== 'Business' && */ ( // TODO: Business plan - À implémenter plus tard
                       <span className="font-inter text-content-tertiary text-sm">{tier.period}</span>
                     )}
                   </div>
-                  {(tier.name === 'Free' || tier.name === 'Business') && (
+                  {(tier.name === 'Free' /* || tier.name === 'Business' */) && ( // TODO: Business plan - À implémenter plus tard
                     <p className="font-inter text-xs text-content-tertiary mt-1">{tier.period}</p>
                   )}
                 </div>

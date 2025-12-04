@@ -332,7 +332,7 @@ export function Problem() {
           </div>
 
           {/* Screen Display */}
-          <div className="lg:sticky lg:top-24">
+          <div className="hidden md:flex lg:sticky lg:top-24">
             <div className="relative">
               {text.problem.issues.map((issue, index) => (
                 <div
