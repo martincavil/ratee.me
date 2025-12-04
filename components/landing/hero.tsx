@@ -73,7 +73,10 @@ export function Hero() {
   const screens = screensContent[lang];
 
   return (
-    <section className="min-h-screen flex items-center pt-24 pb-16 px-4 sm:px-6 lg:px-8 bg-bg-primary overflow-hidden">
+    <section
+      id="waitlist"
+      className="min-h-screen flex items-center pt-24 pb-16 px-4 sm:px-6 lg:px-8 bg-bg-primary overflow-hidden"
+    >
       <div className="max-w-7xl mx-auto w-full">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left: Text Content */}
@@ -88,9 +91,7 @@ export function Hero() {
             </div>
 
             {/* Waitlist Form */}
-            <div id="waitlist">
-              <WaitlistForm />
-            </div>
+            <WaitlistForm />
           </div>
 
           {/* Right: Stacked Screens */}
