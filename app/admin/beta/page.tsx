@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { createClient } from "@/lib/supabase/client";
 
 interface BetaInvite {
   id: string;
@@ -24,12 +23,13 @@ export default function AdminBetaPage() {
   }, []);
 
   async function fetchInvites() {
-    const supabase = createClient();
-    const { data } = await supabase
-      .from("beta_invites")
-      .select("*")
-      .order("created_at", { ascending: false });
-    if (data) setInvites(data);
+    try {
+      const response = await fetch("/api/admin/beta");
+      const result = await response.json();
+      if (result.data) setInvites(result.data);
+    } catch (error) {
+      console.error("Error fetching invites:", error);
+    }
   }
 
   async function handleGenerateInvite(e: React.FormEvent) {
@@ -39,23 +39,26 @@ export default function AdminBetaPage() {
     setLoading(true);
     setMessage("");
 
-    const token = generateToken(32);
-    const supabase = createClient();
+    try {
+      const response = await fetch("/api/admin/beta", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "create", email: email.toLowerCase().trim() }),
+      });
 
-    const { error } = await supabase.from("beta_invites").insert({
-      email: email.toLowerCase().trim(),
-      token,
-      status: "pending",
-    });
+      const result = await response.json();
 
-    if (error) {
+      if (!response.ok || result.error) {
+        setMessage("Erreur: " + (result.error || "Unknown error"));
+      } else {
+        const link = `${window.location.origin}/beta/${result.token}`;
+        await navigator.clipboard.writeText(link);
+        setMessage("Invite copiee!");
+        setEmail("");
+        await fetchInvites();
+      }
+    } catch (error: any) {
       setMessage("Erreur: " + error.message);
-    } else {
-      const link = `${window.location.origin}/beta/${token}`;
-      await navigator.clipboard.writeText(link);
-      setMessage("Invite copiee!");
-      setEmail("");
-      await fetchInvites();
     }
 
     setLoading(false);
@@ -70,9 +73,16 @@ export default function AdminBetaPage() {
   }
 
   async function handleDelete(id: string) {
-    const supabase = createClient();
-    await supabase.from("beta_invites").delete().eq("id", id);
-    await fetchInvites();
+    try {
+      await fetch("/api/admin/beta", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "delete", id }),
+      });
+      await fetchInvites();
+    } catch (error) {
+      console.error("Error deleting invite:", error);
+    }
   }
 
   const stats = {
@@ -219,14 +229,4 @@ export default function AdminBetaPage() {
       </div>
     </div>
   );
-}
-
-function generateToken(length: number): string {
-  const chars =
-    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-  let token = "";
-  for (let i = 0; i < length; i++) {
-    token += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return token;
 }
