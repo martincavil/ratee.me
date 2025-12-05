@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { NextRequest, NextResponse } from "next/server";
 
 function generateToken(length: number): string {
@@ -24,8 +25,11 @@ export async function GET() {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
+    // Use admin client to bypass RLS
+    const adminClient = createAdminClient();
+
     // Fetch all beta invites
-    const { data, error } = await supabase
+    const { data, error } = await adminClient
       .from("beta_invites")
       .select("*")
       .order("created_at", { ascending: false });
@@ -51,6 +55,9 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
+    // Use admin client to bypass RLS
+    const adminClient = createAdminClient();
+
     const body = await request.json();
     const { email, action, id } = body;
 
@@ -65,7 +72,7 @@ export async function POST(request: NextRequest) {
 
       const token = generateToken(32);
 
-      const { data, error } = await supabase.from("beta_invites").insert({
+      const { data, error } = await adminClient.from("beta_invites").insert({
         email: email.toLowerCase().trim(),
         token,
         status: "pending",
@@ -81,7 +88,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: "ID is required" }, { status: 400 });
       }
 
-      const { error } = await supabase.from("beta_invites").delete().eq("id", id);
+      const { error } = await adminClient.from("beta_invites").delete().eq("id", id);
 
       if (error) throw error;
 
