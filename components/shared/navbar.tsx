@@ -104,7 +104,7 @@ export function Navbar({ user }: NavbarProps) {
                   </div>
                   {/* Pro Badge */}
                   {isPro && (
-                    <div className="absolute -top-1 -left-1 bg-emerald text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full shadow-sm">
+                    <div className="absolute -top-1 -left-4 bg-white text-primary text-[9px] font-bold px-1.5 py-0.5 rounded-full border border-primary shadow-sm">
                       PRO
                     </div>
                   )}
