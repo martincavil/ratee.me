@@ -149,7 +149,8 @@ export default function SettingsPage() {
     if (!passwordData.newPassword) {
       errors.newPassword = "Le nouveau mot de passe est requis";
     } else if (passwordData.newPassword.length < 8) {
-      errors.newPassword = "Le mot de passe doit contenir au moins 8 caractères";
+      errors.newPassword =
+        "Le mot de passe doit contenir au moins 8 caractères";
     }
 
     if (!passwordData.confirmPassword) {
@@ -177,7 +178,9 @@ export default function SettingsPage() {
       const data = await response.json();
 
       if (!data.success) {
-        setPasswordApiError(data.error || "Échec de la modification du mot de passe");
+        setPasswordApiError(
+          data.error || "Échec de la modification du mot de passe"
+        );
         return;
       }
 
@@ -323,7 +326,7 @@ export default function SettingsPage() {
         </div>
 
         {/* Password Change */}
-        <div className="lg:col-span-3 bg-white rounded-lg border border-border p-6">
+        <div className="lg:col-span-2 bg-white rounded-lg border border-border p-6">
           <h2 className="text-xl! font-semibold text-content-primary font-sora mb-2">
             Sécurité
           </h2>
@@ -365,7 +368,9 @@ export default function SettingsPage() {
                 value={passwordData.confirmPassword}
                 onChange={handlePasswordChange}
                 className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-emerald text-sm ${
-                  passwordErrors.confirmPassword ? "border-error" : "border-border"
+                  passwordErrors.confirmPassword
+                    ? "border-error"
+                    : "border-border"
                 }`}
               />
               {passwordErrors.confirmPassword && (
@@ -393,7 +398,9 @@ export default function SettingsPage() {
                 disabled={changingPassword}
                 className="w-full px-4 py-2 bg-emerald text-white rounded-md hover:bg-emerald-dark disabled:opacity-50 disabled:cursor-not-allowed font-medium text-sm transition-colors"
               >
-                {changingPassword ? "Modification en cours..." : "Modifier le mot de passe"}
+                {changingPassword
+                  ? "Modification en cours..."
+                  : "Modifier le mot de passe"}
               </button>
             </div>
           </form>
