@@ -19,7 +19,8 @@ export async function GET() {
     const {
       data: { user },
     } = await supabase.auth.getUser();
-    if (!user || user.email !== "martin@ratee.me") {
+    const adminEmails = ["martin@ratee.me", "martincavil.dev@gmail.com"];
+    if (!user || !adminEmails.includes(user.email || "")) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
@@ -45,7 +46,8 @@ export async function POST(request: NextRequest) {
     const {
       data: { user },
     } = await supabase.auth.getUser();
-    if (!user || user.email !== "martin@ratee.me") {
+    const adminEmails = ["martin@ratee.me", "martincavil.dev@gmail.com"];
+    if (!user || !adminEmails.includes(user.email || "")) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
