@@ -25,17 +25,18 @@ ON waitlist FOR INSERT
 WITH CHECK (true);
 
 -- Only admin can view/manage waitlist
+-- IMPORTANT: Remplacez 'YOUR_ADMIN_EMAIL@example.com' par votre vrai email admin
 CREATE POLICY "Admin can view waitlist"
 ON waitlist FOR SELECT
-USING (auth.uid() IN (SELECT id FROM auth.users WHERE email = 'martin@ratee.me'));
+USING (auth.uid() IN (SELECT id FROM auth.users WHERE email = 'YOUR_ADMIN_EMAIL@example.com'));
 
 CREATE POLICY "Admin can update waitlist"
 ON waitlist FOR UPDATE
-USING (auth.uid() IN (SELECT id FROM auth.users WHERE email = 'martin@ratee.me'));
+USING (auth.uid() IN (SELECT id FROM auth.users WHERE email = 'YOUR_ADMIN_EMAIL@example.com'));
 
 CREATE POLICY "Admin can delete waitlist"
 ON waitlist FOR DELETE
-USING (auth.uid() IN (SELECT id FROM auth.users WHERE email = 'martin@ratee.me'));
+USING (auth.uid() IN (SELECT id FROM auth.users WHERE email = 'YOUR_ADMIN_EMAIL@example.com'));
 
 -- Index for fast email lookup
 CREATE INDEX idx_waitlist_email ON waitlist(email);
@@ -62,21 +63,22 @@ CREATE TABLE beta_invites (
 ALTER TABLE beta_invites ENABLE ROW LEVEL SECURITY;
 
 -- Admin can manage invites
+-- IMPORTANT: Remplacez 'YOUR_ADMIN_EMAIL@example.com' par votre vrai email admin
 CREATE POLICY "Admin can view invites"
 ON beta_invites FOR SELECT
-USING (auth.uid() IN (SELECT id FROM auth.users WHERE email = 'martin@ratee.me'));
+USING (auth.uid() IN (SELECT id FROM auth.users WHERE email = 'YOUR_ADMIN_EMAIL@example.com'));
 
 CREATE POLICY "Admin can create invites"
 ON beta_invites FOR INSERT
-WITH CHECK (auth.uid() IN (SELECT id FROM auth.users WHERE email = 'martin@ratee.me'));
+WITH CHECK (auth.uid() IN (SELECT id FROM auth.users WHERE email = 'YOUR_ADMIN_EMAIL@example.com'));
 
 CREATE POLICY "Admin can update invites"
 ON beta_invites FOR UPDATE
-USING (auth.uid() IN (SELECT id FROM auth.users WHERE email = 'martin@ratee.me'));
+USING (auth.uid() IN (SELECT id FROM auth.users WHERE email = 'YOUR_ADMIN_EMAIL@example.com'));
 
 CREATE POLICY "Admin can delete invites"
 ON beta_invites FOR DELETE
-USING (auth.uid() IN (SELECT id FROM auth.users WHERE email = 'martin@ratee.me'));
+USING (auth.uid() IN (SELECT id FROM auth.users WHERE email = 'YOUR_ADMIN_EMAIL@example.com'));
 
 -- Public can validate token (for redemption)
 CREATE POLICY "Public can validate token"
@@ -113,9 +115,10 @@ ON subscriptions FOR SELECT
 USING (auth.uid() = user_id);
 
 -- Admin can view all subscriptions
+-- IMPORTANT: Remplacez 'YOUR_ADMIN_EMAIL@example.com' par votre vrai email admin
 CREATE POLICY "Admin can view all subscriptions"
 ON subscriptions FOR SELECT
-USING (auth.uid() IN (SELECT id FROM auth.users WHERE email = 'martin@ratee.me'));
+USING (auth.uid() IN (SELECT id FROM auth.users WHERE email = 'YOUR_ADMIN_EMAIL@example.com'));
 
 -- System can insert subscriptions (for beta signup)
 CREATE POLICY "System can insert subscriptions"

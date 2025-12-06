@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { processAutomatedEmails } from '@/lib/email-automation';
-
-const ADMIN_EMAIL = 'martin@ratee.me';
+import { ADMIN_EMAILS } from '@/lib/constants';
 
 export async function POST(request: NextRequest) {
   // Check for cron secret or admin auth
@@ -23,7 +22,7 @@ export async function POST(request: NextRequest) {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
-  if (!user || user.email !== ADMIN_EMAIL) {
+  if (!user || !ADMIN_EMAILS.includes(user.email as typeof ADMIN_EMAILS[number])) {
     return NextResponse.json(
       { error: 'Unauthorized' },
       { status: 401 }

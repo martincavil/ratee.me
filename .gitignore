@@ -32,6 +32,10 @@ yarn-error.log*
 # vercel
 .vercel
 
+# sensitive SQL scripts (migrations with personal data)
+*-personal.sql
+upgrade-*.sql
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

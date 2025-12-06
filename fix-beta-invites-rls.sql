@@ -10,11 +10,12 @@ DROP POLICY IF EXISTS "Admin can delete invites" ON beta_invites;
 DROP POLICY IF EXISTS "Public can validate token" ON beta_invites;
 
 -- 2. Créer une fonction helper sécurisée pour vérifier si un utilisateur est admin
+-- IMPORTANT: Remplacez 'YOUR_ADMIN_EMAIL@example.com' par votre vrai email admin
 CREATE OR REPLACE FUNCTION is_admin()
 RETURNS BOOLEAN AS $$
 BEGIN
   RETURN (
-    SELECT email IN ('martin@ratee.me', 'martincavil.dev@gmail.com')
+    SELECT email IN ('YOUR_ADMIN_EMAIL@example.com')
     FROM auth.users
     WHERE id = auth.uid()
   );

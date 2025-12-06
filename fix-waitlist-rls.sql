@@ -1,6 +1,6 @@
 -- Fix RLS policies pour waitlist
 -- À exécuter dans le SQL Editor de Supabase
--- Cette migration corrige les policies pour permettre l'accès aux admins (martin@ratee.me et martincavil.dev@gmail.com)
+-- Cette migration corrige les policies pour permettre l'accès aux admins
 
 -- 1. Supprimer les anciennes policies
 DROP POLICY IF EXISTS "Anyone can join waitlist" ON waitlist;
@@ -10,11 +10,12 @@ DROP POLICY IF EXISTS "Admin can delete waitlist" ON waitlist;
 
 -- 2. La fonction is_admin() existe déjà (créée par fix-beta-invites-rls.sql)
 -- Si elle n'existe pas, la créer :
+-- IMPORTANT: Remplacez 'YOUR_ADMIN_EMAIL@example.com' par votre vrai email admin
 CREATE OR REPLACE FUNCTION is_admin()
 RETURNS BOOLEAN AS $$
 BEGIN
   RETURN (
-    SELECT email IN ('martin@ratee.me', 'martincavil.dev@gmail.com')
+    SELECT email IN ('YOUR_ADMIN_EMAIL@example.com')
     FROM auth.users
     WHERE id = auth.uid()
   );

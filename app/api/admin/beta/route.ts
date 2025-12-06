@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { NextRequest, NextResponse } from "next/server";
+import { ADMIN_EMAILS } from "@/lib/constants";
 
 function generateToken(length: number): string {
   const chars =
@@ -20,8 +21,7 @@ export async function GET() {
     const {
       data: { user },
     } = await supabase.auth.getUser();
-    const adminEmails = ["martin@ratee.me", "martincavil.dev@gmail.com"];
-    if (!user || !adminEmails.includes(user.email || "")) {
+    if (!user || !ADMIN_EMAILS.includes(user.email as typeof ADMIN_EMAILS[number])) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
@@ -50,8 +50,7 @@ export async function POST(request: NextRequest) {
     const {
       data: { user },
     } = await supabase.auth.getUser();
-    const adminEmails = ["martin@ratee.me", "martincavil.dev@gmail.com"];
-    if (!user || !adminEmails.includes(user.email || "")) {
+    if (!user || !ADMIN_EMAILS.includes(user.email as typeof ADMIN_EMAILS[number])) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 

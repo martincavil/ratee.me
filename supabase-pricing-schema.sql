@@ -60,9 +60,10 @@ ON email_automations FOR SELECT
 USING (auth.uid() = user_id);
 
 -- Admin can see all
+-- IMPORTANT: Remplacez 'YOUR_ADMIN_EMAIL@example.com' par votre vrai email admin
 CREATE POLICY "Admin sees all automations"
 ON email_automations FOR SELECT
-USING (auth.uid() IN (SELECT id FROM auth.users WHERE email = 'martin@ratee.me'));
+USING (auth.uid() IN (SELECT id FROM auth.users WHERE email = 'YOUR_ADMIN_EMAIL@example.com'));
 
 -- System can insert (for automation)
 CREATE POLICY "System can insert automations"
