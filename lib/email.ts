@@ -1,5 +1,5 @@
 import { Resend } from "resend";
-import { getFeedbackEmailContent, type Language } from "./email-templates";
+import { getFeedbackEmailContent, getWaitlistConfirmationEmailContent, type Language } from "./email-templates";
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 
@@ -67,6 +67,57 @@ export async function sendFeedbackRequestEmail({
     return { success: true, data: result };
   } catch (error) {
     console.error("❌ Failed to send email:", error);
+    console.error("Error details:", JSON.stringify(error, null, 2));
+    return { success: false, error };
+  }
+}
+
+/**
+ * Send waitlist confirmation email
+ */
+export async function sendWaitlistConfirmationEmail({
+  to,
+  language = 'fr',
+}: {
+  to: string;
+  language?: Language;
+}) {
+  // Get translated content
+  const { subject, html, text } = getWaitlistConfirmationEmailContent({
+    language,
+  });
+
+  if (!resend) {
+    console.error("RESEND_API_KEY is not set");
+    return { success: false, error: new Error("Email service not configured") };
+  }
+
+  try {
+    const fromEmail = process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev";
+
+    console.log("🔄 Sending waitlist confirmation email via Resend...", {
+      from: fromEmail,
+      to,
+      subject,
+    });
+
+    const result = await resend.emails.send({
+      from: fromEmail,
+      to,
+      subject,
+      html,
+      text,
+    });
+
+    console.log("✅ Waitlist confirmation email sent successfully:", {
+      to,
+      subject,
+      from: fromEmail,
+      resultId: result.data?.id,
+    });
+    return { success: true, data: result };
+  } catch (error) {
+    console.error("❌ Failed to send waitlist confirmation email:", error);
     console.error("Error details:", JSON.stringify(error, null, 2));
     return { success: false, error };
   }

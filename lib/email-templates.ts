@@ -221,3 +221,150 @@ ${footer.poweredBy} ratee.me - https://ratee.me
 
   return { subject, html, text };
 }
+
+/**
+ * Waitlist confirmation email content
+ */
+export function getWaitlistConfirmationEmailContent(params: {
+  language: Language;
+}) {
+  const { language } = params;
+
+  const content = {
+    fr: {
+      subject: "Bienvenue sur la Waiting List de Ratee.me 🎉",
+      greeting: "Merci de votre intérêt ! 👋",
+      intro: "Merci de vous être inscrit à la <strong>Waiting List</strong> de Ratee.me.",
+      message: "Vous serez contacté par email dès que Ratee.me sera disponible, et c'est pour <strong>très bientôt</strong> !",
+      whatIs: {
+        title: "Qu'est-ce que Ratee.me ?",
+        description: "Ratee.me est la plateforme qui permet aux freelances et agences de collecter facilement des avis clients authentiques et de les transformer en preuve sociale pour attirer plus de clients.",
+      },
+      footer: {
+        thanks: "À très bientôt,",
+        team: "L'équipe Ratee.me",
+      },
+    },
+    en: {
+      subject: "Welcome to Ratee.me Waiting List 🎉",
+      greeting: "Thank you for your interest! 👋",
+      intro: "Thank you for joining the <strong>Waiting List</strong> of Ratee.me.",
+      message: "You will be contacted by email as soon as Ratee.me is available, and it's <strong>coming very soon</strong>!",
+      whatIs: {
+        title: "What is Ratee.me?",
+        description: "Ratee.me is the platform that allows freelancers and agencies to easily collect authentic client reviews and transform them into social proof to attract more clients.",
+      },
+      footer: {
+        thanks: "See you very soon,",
+        team: "The Ratee.me team",
+      },
+    },
+  };
+
+  const t = content[language];
+
+  // HTML Email Template
+  const html = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${t.subject}</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  </style>
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f9fafb;">
+
+  <!-- Container -->
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f9fafb; padding: 40px 20px;">
+    <tr>
+      <td align="center">
+        <!-- Main Content -->
+        <table width="600" cellpadding="0" cellspacing="0" style="max-width: 600px; background-color: #ffffff; border-radius: 16px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); overflow: hidden;">
+
+          <!-- Header -->
+          <tr>
+            <td style="background: linear-gradient(135deg, #10B981 0%, #059669 100%); padding: 40px; text-align: center;">
+              <div style="background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px); color: white; padding: 12px 24px; border-radius: 24px; display: inline-block; font-weight: 700; font-size: 16px; letter-spacing: 0.5px;">
+                ratee.me
+              </div>
+            </td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
+            <td style="padding: 48px 40px;">
+              <h1 style="color: #111827; font-size: 32px; margin: 0 0 24px 0; font-weight: 700; line-height: 1.2;">
+                ${t.greeting}
+              </h1>
+
+              <p style="color: #4b5563; font-size: 17px; line-height: 1.6; margin: 0 0 24px 0;">
+                ${t.intro}
+              </p>
+
+              <p style="color: #4b5563; font-size: 17px; line-height: 1.6; margin: 0 0 36px 0;">
+                ${t.message}
+              </p>
+            </td>
+          </tr>
+
+          <!-- What is Ratee.me -->
+          <tr>
+            <td style="padding: 0 40px 48px 40px;">
+              <div style="background: #f3f4f6; border-radius: 12px; padding: 28px;">
+                <h2 style="color: #111827; font-size: 18px; margin: 0 0 16px 0; font-weight: 600;">
+                  ${t.whatIs.title}
+                </h2>
+                <p style="color: #4b5563; font-size: 15px; margin: 0; line-height: 1.8;">
+                  ${t.whatIs.description}
+                </p>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="background-color: #f9fafb; padding: 32px 40px; border-top: 1px solid #e5e7eb;">
+              <p style="color: #6b7280; font-size: 14px; text-align: center; margin: 0 0 8px 0; line-height: 1.5;">
+                ${t.footer.thanks}
+              </p>
+              <p style="color: #6b7280; font-size: 14px; text-align: center; margin: 0 0 16px 0; line-height: 1.5; font-weight: 600;">
+                ${t.footer.team}
+              </p>
+              <p style="color: #9ca3af; font-size: 13px; text-align: center; margin: 0;">
+                <a href="https://ratee.me" style="color: #10B981; text-decoration: none; font-weight: 600;">ratee.me</a>
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>
+  `.trim();
+
+  // Plain text version
+  const text = `
+${t.greeting}
+
+${t.intro.replace(/<\/?strong>/g, "")}
+
+${t.message.replace(/<\/?strong>/g, "")}
+
+${t.whatIs.title}
+${t.whatIs.description}
+
+---
+${t.footer.thanks}
+${t.footer.team}
+
+ratee.me - https://ratee.me
+  `.trim();
+
+  return { subject: t.subject, html, text };
+}

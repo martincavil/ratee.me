@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
+import { sendWaitlistConfirmationEmail } from '@/lib/email';
 
 export async function POST(request: NextRequest) {
   try {
@@ -54,6 +55,15 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       );
     }
+
+    // Send confirmation email (don't block response if email fails)
+    sendWaitlistConfirmationEmail({
+      to: email.toLowerCase().trim(),
+      language: 'fr', // You could detect language from browser or let users choose
+    }).catch((error) => {
+      console.error('Failed to send waitlist confirmation email:', error);
+      // Don't fail the request if email fails
+    });
 
     return NextResponse.json({ success: true });
   } catch (error) {
