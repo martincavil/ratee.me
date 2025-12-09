@@ -91,7 +91,7 @@ export function Problem() {
     switch (screenType) {
       case "automation":
         return (
-          <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
+          <div className="bg-white rounded-xl p-6 shadow-md border border-gray-100">
             <div className="text-sm font-semibold text-gray-900 mb-4">
               {screens.automation.title}
             </div>
@@ -148,7 +148,7 @@ export function Problem() {
               <div className="absolute inset-0 bg-emerald-400/20 blur-2xl rounded-lg" />
 
               {/* Badge */}
-              <div className="relative bg-white border-2 border-emerald-500 rounded-xl p-6 shadow-2xl max-w-[200px]">
+              <div className="relative bg-white border-2 border-emerald-500 rounded-xl p-6 shadow-xl max-w-[200px]">
                 <div className="text-center">
                   <div className="text-sm text-gray-600 mb-2 font-medium">
                     {lang === "fr"
@@ -194,7 +194,7 @@ export function Problem() {
 
       case "dashboard":
         return (
-          <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
+          <div className="bg-white rounded-xl p-6 shadow-md border border-gray-100">
             <div className="text-sm font-semibold text-gray-900 mb-4">
               {screens.dashboard.title}
             </div>
@@ -227,7 +227,7 @@ export function Problem() {
 
       case "analytics":
         return (
-          <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
+          <div className="bg-white rounded-xl p-6 shadow-md border border-gray-100">
             <div className="text-sm font-semibold text-gray-900 mb-4">
               {screens.analytics.title}
             </div>
@@ -280,7 +280,7 @@ export function Problem() {
                 onClick={() => handleItemClick(index)}
                 className={`relative cursor-pointer rounded-xl transition-all duration-300 ${
                   activeIndex === index
-                    ? "bg-white shadow-md border border-gray-100"
+                    ? "bg-white shadow-sm border border-gray-100"
                     : "hover:bg-white/50"
                 }`}
               >

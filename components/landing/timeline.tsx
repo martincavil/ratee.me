@@ -75,7 +75,7 @@ export function Timeline() {
                         : "opacity-0 translate-x-8"
                     }`}
                   >
-                    <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl hover:border-emerald-500/30 transition-all">
+                    <div className="bg-white rounded-xl p-6 shadow-md border border-gray-100 hover:shadow-lg hover:border-emerald-500/30 transition-all">
                       <div className="flex items-start gap-4">
                         <div className="text-lg flex-shrink-0">{item.icon}</div>
                         <div>
@@ -92,7 +92,7 @@ export function Timeline() {
 
                   {/* Center dot */}
                   <div
-                    className={`hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full border-4 border-white shadow-md transition-all duration-500 ${
+                    className={`hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full border-4 border-white shadow-sm transition-all duration-500 ${
                       isVisible
                         ? "bg-emerald-500 scale-100"
                         : "bg-gray-300 scale-75"

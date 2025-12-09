@@ -22,7 +22,7 @@ export default function AuthLayout({
         </div>
 
         {/* Auth form card */}
-        <div className="bg-white rounded-lg shadow-lg p-8">{children}</div>
+        <div className="bg-white rounded-lg shadow-md p-8">{children}</div>
 
         {/* Footer */}
         <div className="text-center mt-6 text-sm text-muted-foreground">

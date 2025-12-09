@@ -21,7 +21,7 @@ export function Testimonials() {
           {text.testimonials.items.map((testimonial, index) => (
             <div
               key={index}
-              className="bg-white rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all hover:-translate-y-1"
+              className="bg-white rounded-xl p-6 shadow-md border border-gray-100 hover:shadow-lg transition-all hover:-translate-y-1"
             >
               {/* Quote */}
               <div className="mb-6">

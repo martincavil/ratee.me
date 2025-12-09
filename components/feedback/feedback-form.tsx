@@ -253,7 +253,7 @@ export function FeedbackForm({
                 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2
                 ${
                   formState.willReturn === value
-                    ? `bg-${color}-500 text-white shadow-md ring-2 ring-emerald-500`
+                    ? `bg-${color}-500 text-white shadow-sm ring-2 ring-emerald-500`
                     : `bg-${color}-100 text-${color}-700 hover:bg-${color}-200`
                 }
               `}
@@ -487,7 +487,7 @@ export function FeedbackForm({
         disabled={!requiredFieldsFilled || loading}
         className="w-full px-6 py-4 bg-emerald-500 text-white rounded-lg font-sora font-semibold text-base
           hover:bg-emerald-600 disabled:opacity-50 disabled:cursor-not-allowed
-          transition-all duration-200 shadow-md hover:shadow-lg
+          transition-all duration-200 shadow-sm hover:shadow-md
           focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
       >
         {loading ? "Envoi en cours..." : "Envoyer mon avis"}

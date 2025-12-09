@@ -33,7 +33,7 @@ export default function ThankYouPage() {
         </p>
 
         {/* Message */}
-        <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-8">
+        <div className="bg-white rounded-2xl shadow-md border border-gray-200 p-8 mb-8">
           <p className="text-gray-700 leading-relaxed mb-4">
             We really appreciate you taking the time to share your thoughts with
             us. Your feedback helps us improve and deliver better results.
@@ -49,7 +49,7 @@ export default function ThankYouPage() {
         <div className="space-y-4">
           <Link
             href="/"
-            className="inline-block px-8 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition-all hover:shadow-lg"
+            className="inline-block px-8 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition-all hover:shadow-md"
           >
             Learn More About ratee.me
           </Link>

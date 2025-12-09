@@ -100,7 +100,7 @@ export function EditProjectModal({ isOpen, onClose, project }: EditProjectModalP
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-xl"
+        className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-lg"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="p-6 border-b border-gray-200">

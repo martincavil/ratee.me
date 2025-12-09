@@ -53,7 +53,7 @@ export function Modal({
       onClick={onClose}
     >
       <div
-        className={`bg-white rounded-lg shadow-xl ${maxWidthClasses[maxWidth]} w-full max-h-[90vh] overflow-hidden flex flex-col`}
+        className={`bg-white rounded-lg shadow-lg ${maxWidthClasses[maxWidth]} w-full max-h-[90vh] overflow-hidden flex flex-col`}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}

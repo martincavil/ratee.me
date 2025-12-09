@@ -26,7 +26,7 @@ export function Results() {
 
         {/* Website Mockup with Badge */}
         <div className="mb-16">
-          <div className="bg-white rounded-xl shadow-2xl overflow-hidden border border-gray-200">
+          <div className="bg-white rounded-xl shadow-xl overflow-hidden border border-gray-200">
             {/* Browser Chrome */}
             <div className="bg-gray-100 px-4 py-3 flex items-center gap-2 border-b border-gray-200">
               <div className="flex gap-2">
@@ -80,7 +80,7 @@ export function Results() {
                       <div className="absolute inset-0 bg-emerald-400/20 blur-xl rounded-lg" />
 
                       {/* Badge */}
-                      <div className="relative bg-white border-2 border-emerald-500 rounded-lg p-6 shadow-xl max-w-[280px]">
+                      <div className="relative bg-white border-2 border-emerald-500 rounded-lg p-6 shadow-lg max-w-[280px]">
                         <div className="text-center">
                           <div className="text-sm text-gray-600 mb-2 font-medium">
                             {lang === "fr"
@@ -142,7 +142,7 @@ export function Results() {
           {text.results.stats.map((stat, index) => (
             <div
               key={index}
-              className="relative bg-white rounded-2xl p-8 shadow-lg border border-emerald-100 text-center hover:shadow-xl transition-all hover:-translate-y-1 overflow-hidden"
+              className="relative bg-white rounded-2xl p-8 shadow-md border border-emerald-100 text-center hover:shadow-lg transition-all hover:-translate-y-1 overflow-hidden"
             >
               {/* Subtle accent decoration */}
               <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-400 to-emerald-600" />

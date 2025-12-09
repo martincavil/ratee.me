@@ -19,16 +19,16 @@ export function Pricing() {
           {text.pricing.tiers.map((tier: any, index: number) => (
             <div
               key={index}
-              className={`relative bg-white rounded-2xl p-6 border-2 transition-all hover:shadow-xl ${
+              className={`relative bg-white rounded-2xl p-6 border-2 transition-all hover:shadow-lg ${
                 tier.popular
-                  ? "border-emerald-500 shadow-lg scale-105"
-                  : "border-gray-200 shadow-md hover:border-emerald-300"
+                  ? "border-emerald-500 shadow-md scale-105"
+                  : "border-gray-200 shadow-sm hover:border-emerald-300"
               }`}
             >
               {/* Popular badge */}
               {tier.popular && (
                 <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                  <span className="px-3 py-1 bg-emerald-500 text-white text-xs font-semibold rounded-full shadow-md">
+                  <span className="px-3 py-1 bg-emerald-500 text-white text-xs font-semibold rounded-full shadow-sm">
                     {tier.badge}
                   </span>
                 </div>
@@ -82,7 +82,7 @@ export function Pricing() {
                 href="/auth/signup"
                 className={`block w-full py-3 px-4 rounded-lg font-semibold text-sm text-center transition-all cursor-pointer ${
                   tier.popular
-                    ? "bg-emerald-500 text-white hover:bg-emerald-600 shadow-md hover:shadow-lg"
+                    ? "bg-emerald-500 text-white hover:bg-emerald-600 shadow-sm hover:shadow-md"
                     : "bg-gray-100 text-gray-900 hover:bg-gray-200"
                 }`}
               >

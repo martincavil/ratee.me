@@ -2,8 +2,8 @@
 
 @theme {
   /* Colors - Tailwind v4 requires @theme directive */
-  --color-bg-primary: #F5F3F0;
-  --color-bg-secondary: #FAFAF8;
+  --color-bg-primary: #F5F5F7;
+  --color-bg-secondary: #FAFAFA;
 
   --color-content-primary: #1D1D1E;
   --color-content-secondary: #666666;
@@ -39,8 +39,8 @@
   --font-inter: 'Inter', system-ui, sans-serif;
 
   /* Colors - for direct CSS usage */
-  --bg-primary: #F5F3F0;
-  --bg-secondary: #FAFAF8;
+  --bg-primary: #F5F5F7;
+  --bg-secondary: #FAFAFA;
   --text-primary: #1D1D1E;
   --text-secondary: #666666;
   --text-tertiary: #999999;
@@ -175,7 +175,7 @@ textarea:focus,
 select:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-light);
+  box-shadow: 0 0 0 2px var(--accent-light);
 }
 
 /* Button Base */
@@ -201,7 +201,7 @@ select:focus {
 .btn-primary:hover {
   background-color: var(--accent-dark);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
 }
 
 .btn-secondary {
@@ -233,7 +233,7 @@ select:focus {
 }
 
 .card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   border-color: var(--accent-light);
 }
 

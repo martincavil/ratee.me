@@ -157,11 +157,11 @@ export function Hero() {
                     }
                     rounded-2xl
                     border border-white/50
-                    shadow-xl
+                    shadow-lg
                     p-6
                     h-[400px]
                     transition-all duration-300
-                    group-hover:shadow-2xl
+                    group-hover:shadow-xl
                     group-hover:border-emerald-500/30
                   `}
                   >
@@ -193,7 +193,7 @@ export function Hero() {
                         {index === 0 && (
                           <>
                             {/* Email Automation Timeline */}
-                            <div className="bg-white rounded-lg p-3 border border-gray-200 shadow-sm">
+                            <div className="bg-white rounded-lg p-3 border border-gray-200">
                               <div className="font-inter text-[10px] font-semibold text-content-primary mb-3">
                                 {lang === "fr"
                                   ? "Campagne email automatisée"
@@ -304,7 +304,7 @@ export function Hero() {
                             </div>
 
                             {/* OLD FEEDBACK FORM MOCKUP - COMMENTED OUT
-                            <div className="bg-white rounded-lg p-3 border border-gray-200 shadow-sm">
+                            <div className="bg-white rounded-lg p-3 border border-gray-200">
                               <div className="text-center mb-3">
                                 <div className="font-inter text-[10px] text-content-tertiary mb-1">
                                   {lang === "fr"
@@ -323,7 +323,7 @@ export function Hero() {
                                     key={i}
                                     className={`flex-1 h-7 rounded text-[9px] flex items-center justify-center font-bold transition-all ${
                                       i === 9
-                                        ? "bg-emerald-500 text-white scale-110 shadow-md"
+                                        ? "bg-emerald-500 text-white scale-110 shadow-sm"
                                         : i === 10
                                         ? "bg-emerald-100 text-emerald-600"
                                         : i >= 7
@@ -357,7 +357,7 @@ export function Hero() {
                           <>
                             {/* Dashboard Stats Mockup */}
                             <div className="grid grid-cols-2 gap-2 mb-2">
-                              <div className="bg-white rounded-lg p-2 border border-gray-200 shadow-sm">
+                              <div className="bg-white rounded-lg p-2 border border-gray-200">
                                 <div className="flex items-center justify-between">
                                   <div>
                                     <div className="font-inter text-[8px] text-content-tertiary">
@@ -384,7 +384,7 @@ export function Hero() {
                                   </div>
                                 </div>
                               </div>
-                              <div className="bg-white rounded-lg p-2 border border-gray-200 shadow-sm">
+                              <div className="bg-white rounded-lg p-2 border border-gray-200">
                                 <div className="flex items-center justify-between">
                                   <div>
                                     <div className="font-inter text-[8px] text-content-tertiary">
@@ -407,7 +407,7 @@ export function Hero() {
                               </div>
                             </div>
                             {/* NPS Distribution */}
-                            <div className="bg-white rounded-lg p-2 border border-gray-200 shadow-sm">
+                            <div className="bg-white rounded-lg p-2 border border-gray-200">
                               <div className="font-inter text-[8px] text-content-tertiary mb-2">
                                 {lang === "fr"
                                   ? "Distribution NPS"
@@ -436,7 +436,7 @@ export function Hero() {
                               </div>
                             </div>
                             {/* Recent Feedback */}
-                            <div className="bg-white rounded-lg p-2 border border-gray-200 shadow-sm">
+                            <div className="bg-white rounded-lg p-2 border border-gray-200">
                               <div className="flex items-center justify-between">
                                 <div className="flex items-center gap-1.5">
                                   <div className="w-4 h-4 bg-gray-200 rounded-full"></div>
@@ -452,7 +452,7 @@ export function Hero() {
                           </>
                         )}
                         {index === 2 && (
-                          <div className="bg-gray-50 rounded-lg overflow-hidden border border-gray-200 shadow-sm">
+                          <div className="bg-gray-50 rounded-lg overflow-hidden border border-gray-200">
                             {/* Browser Chrome */}
                             <div className="bg-gray-100 px-2 py-1.5 flex items-center gap-1.5 border-b border-gray-200">
                               <div className="flex gap-1">
@@ -512,7 +512,7 @@ export function Hero() {
                                       <div className="absolute inset-0 bg-emerald-400/20 blur-lg rounded-md" />
 
                                       {/* Badge */}
-                                      <div className="relative bg-white border border-emerald-500 rounded-md p-2 shadow-lg max-w-[90px]">
+                                      <div className="relative bg-white border border-emerald-500 rounded-md p-2 shadow-md max-w-[90px]">
                                         <div className="text-center">
                                           <div className="text-[6px] text-gray-600 mb-0.5 font-medium">
                                             {lang === "fr"

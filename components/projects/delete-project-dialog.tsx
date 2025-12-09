@@ -48,7 +48,7 @@ export function DeleteProjectDialog({ isOpen, onClose, project }: DeleteProjectD
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-lg max-w-md w-full p-6 shadow-xl"
+        className="bg-white rounded-lg max-w-md w-full p-6 shadow-lg"
         onClick={(e) => e.stopPropagation()}
       >
         <h2 className="text-xl font-bold mb-4">Delete Project</h2>

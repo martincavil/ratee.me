@@ -46,7 +46,7 @@ export function NpsButtons({ value, onChange }: NpsButtonsProps) {
                 value === score
                   ? `${getButtonColor(
                       score
-                    )} scale-110 shadow-lg ring-2 ring-emerald-500`
+                    )} scale-110 shadow-md ring-2 ring-emerald-500`
                   : getButtonInactiveColor(score)
               }
             `}

@@ -66,7 +66,7 @@ export function SendFeedbackModal({
         onClick={handleClose}
       >
         <div
-          className="bg-white rounded-xl max-w-md w-full p-6 text-center shadow-xl"
+          className="bg-white rounded-xl max-w-md w-full p-6 text-center shadow-lg"
           onClick={(e) => e.stopPropagation()}
         >
           <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -114,7 +114,7 @@ export function SendFeedbackModal({
       onClick={handleClose}
     >
       <div
-        className="bg-white rounded-xl max-w-md w-full p-6 shadow-xl"
+        className="bg-white rounded-xl max-w-md w-full p-6 shadow-lg"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mb-4">

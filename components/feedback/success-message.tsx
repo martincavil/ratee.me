@@ -21,7 +21,7 @@ export function SuccessMessage({ onAutoRedirect }: SuccessMessageProps) {
 
   return (
     <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="bg-white rounded-2xl shadow-lg p-8 sm:p-12 text-center">
+      <div className="bg-white rounded-2xl shadow-md p-8 sm:p-12 text-center">
         {/* Success Icon */}
         <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6">
           <svg
@@ -55,7 +55,7 @@ export function SuccessMessage({ onAutoRedirect }: SuccessMessageProps) {
         {/* CTA Button */}
         <Link
           href="/"
-          className="inline-block px-8 py-3 bg-emerald-500 text-white rounded-lg font-sora font-semibold hover:bg-emerald-600 transition-colors shadow-md hover:shadow-lg"
+          className="inline-block px-8 py-3 bg-emerald-500 text-white rounded-lg font-sora font-semibold hover:bg-emerald-600 transition-colors shadow-sm hover:shadow-md"
         >
           Retour à l&apos;accueil
         </Link>

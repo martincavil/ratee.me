@@ -70,7 +70,7 @@ export default function FeedbackPage({ params }: FeedbackPageProps) {
   if (error) {
     return (
       <div className="min-h-screen bg-[#F5F3F0] flex items-center justify-center px-4">
-        <div className="max-w-md w-full bg-white rounded-2xl shadow-lg p-8 text-center">
+        <div className="max-w-md w-full bg-white rounded-2xl shadow-md p-8 text-center">
           <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <svg
               className="w-8 h-8 text-red-600"
@@ -116,7 +116,7 @@ export default function FeedbackPage({ params }: FeedbackPageProps) {
   return (
     <div className="min-h-screen bg-[#F5F3F0] py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-2xl mx-auto">
-        <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 lg:p-12">
+        <div className="bg-white rounded-2xl shadow-md p-6 sm:p-8 lg:p-12">
           <FeedbackForm
             token={token}
             projectName={project?.name || ""}

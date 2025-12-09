@@ -52,7 +52,7 @@ export function LandingNavbar() {
       <div
         className={`max-w-6xl mx-auto transition-all duration-300 ${
           scrolled
-            ? "bg-white/60 backdrop-blur-xl shadow-lg md:rounded-full px-6"
+            ? "bg-white/60 backdrop-blur-xl shadow-md md:rounded-full px-6"
             : "px-6"
         } bg-white md:bg-transparent`}
       >

@@ -112,10 +112,10 @@ export function PainPoints() {
           {content.problems.map((problem, index) => (
             <div
               key={index}
-              className="group relative bg-white rounded-2xl p-6 lg:p-8 border-2 border-emerald-500/20 hover:border-emerald-500/40 hover:shadow-xl hover:shadow-emerald-500/5 transition-all duration-300"
+              className="group relative bg-white rounded-2xl p-6 lg:p-8 border-2 border-emerald-500/20 hover:border-emerald-500/40 hover:shadow-lg hover:shadow-emerald-500/5 transition-all duration-300"
             >
               {/* Problem Number Badge - Keep RED */}
-              <div className="absolute -top-3 -left-3 w-10 h-10 bg-linear-to-br from-emerald-300 to-emerald-600 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg">
+              <div className="absolute -top-3 -left-3 w-10 h-10 bg-linear-to-br from-emerald-300 to-emerald-600 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-md">
                 {index + 1}
               </div>
 
@@ -165,7 +165,7 @@ export function PainPoints() {
             onClick={handleScrollToFeatures}
             className="inline-block"
           >
-            <div className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-lg transition-colors shadow-lg hover:shadow-xl">
+            <div className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-lg transition-colors shadow-md hover:shadow-lg">
               <span>{lang === "fr" ? "Découvre comment" : "Discover how"}</span>
               <svg
                 className="w-5 h-5 animate-bounce"

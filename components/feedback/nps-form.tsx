@@ -161,8 +161,8 @@ export function NPSForm({ project, token, language = "en" }: NPSFormProps) {
                     ? `${getScoreColor(
                         score,
                         true
-                      )} ring-4 ring-offset-2 ring-emerald scale-110 shadow-lg`
-                    : `${getScoreColor(score)} shadow-sm`
+                      )} ring-4 ring-offset-2 ring-emerald scale-110 shadow-md`
+                    : `${getScoreColor(score)}`
                 }`}
               >
                 {score}
@@ -333,7 +333,7 @@ export function NPSForm({ project, token, language = "en" }: NPSFormProps) {
         <button
           type="submit"
           disabled={loading}
-          className="w-full px-6 py-4 bg-emerald text-white rounded-xl font-bold text-lg! hover:bg-emerald-dark disabled:opacity-50 disabled:cursor-not-allowed transition-all hover:shadow-xl font-inter"
+          className="w-full px-6 py-4 bg-emerald text-white rounded-xl font-bold text-lg! hover:bg-emerald-dark disabled:opacity-50 disabled:cursor-not-allowed transition-all hover:shadow-lg font-inter"
         >
           {loading ? t.form.submitting : t.form.submit}
         </button>

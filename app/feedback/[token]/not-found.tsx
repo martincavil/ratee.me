@@ -38,7 +38,7 @@ export default function FeedbackNotFound() {
         </p>
 
         {/* Message */}
-        <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-8">
+        <div className="bg-white rounded-2xl shadow-md border border-gray-200 p-8 mb-8">
           <p className="text-gray-700 leading-relaxed mb-4">
             {text.feedbackNotFound.description}
           </p>
@@ -50,7 +50,7 @@ export default function FeedbackNotFound() {
         <div className="space-y-4">
           <Link
             href="/"
-            className="inline-block px-8 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition-all hover:shadow-lg"
+            className="inline-block px-8 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition-all hover:shadow-md"
           >
             {text.feedbackNotFound.cta}
           </Link>

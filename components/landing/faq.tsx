@@ -22,7 +22,7 @@ export function FAQ() {
               key={index}
               className={`bg-white rounded-xl border overflow-hidden transition-all ${
                 openIndex === index
-                  ? "border-emerald-200 shadow-md"
+                  ? "border-emerald-200 shadow-sm"
                   : "border-gray-100 hover:border-emerald-100"
               }`}
             >
@@ -68,15 +68,13 @@ export function FAQ() {
         {/* Contact CTA */}
         <div className="mt-10 text-center">
           <p className="text-sm text-gray-500 mb-2">
-            {lang === "fr"
-              ? "D'autres questions ?"
-              : "More questions?"}
+            {lang === "fr" ? "D'autres questions ?" : "More questions?"}
           </p>
           <a
-            href="mailto:hello@ratee.me"
+            href="mailto:martin@ratee.me"
             className="text-emerald-600 font-medium text-sm hover:underline"
           >
-            hello@ratee.me
+            martin@ratee.me
           </a>
         </div>
       </div>
