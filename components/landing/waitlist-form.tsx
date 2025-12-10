@@ -21,7 +21,7 @@ export function WaitlistForm() {
           .from("waitlist")
           .select("*", { count: "exact", head: true });
         if (totalCount !== null) {
-          setCount(Math.max(150, totalCount));
+          setCount(Math.max(30, totalCount));
         }
       } catch {
         // Keep default count
