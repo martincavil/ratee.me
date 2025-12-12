@@ -57,7 +57,7 @@ export default function FeedbackPage({ params }: FeedbackPageProps) {
   // Loading state
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#F5F3F0] flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-blue-50 to-emerald-200">
         <div className="text-center">
           <div className="animate-spin w-12 h-12 border-4 border-emerald-500 border-t-transparent rounded-full mx-auto mb-4"></div>
           <p className="text-gray-600 font-inter">Chargement...</p>
@@ -114,7 +114,7 @@ export default function FeedbackPage({ params }: FeedbackPageProps) {
 
   // Form state
   return (
-    <div className="min-h-screen bg-[#F5F3F0] py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen py-8 px-4 sm:px-6 lg:px-8  bg-linear-to-br from-blue-50 to-emerald-200">
       <div className="max-w-2xl mx-auto">
         <div className="bg-white rounded-2xl shadow-md p-6 sm:p-8 lg:p-12">
           <FeedbackForm

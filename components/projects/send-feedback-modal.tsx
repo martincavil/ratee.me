@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import type { Project } from "@/types/database";
+import { UpgradeModal } from "@/components/ui/upgrade-modal";
+import { useLanguage } from "@/lib/i18n";
 
 interface SendFeedbackModalProps {
   isOpen: boolean;
@@ -16,9 +18,11 @@ export function SendFeedbackModal({
   project,
   onSuccess,
 }: SendFeedbackModalProps) {
+  const { lang } = useLanguage();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false);
 
   if (!isOpen) return null;
 
@@ -37,6 +41,12 @@ export function SendFeedbackModal({
       const data = await response.json();
 
       if (!data.success) {
+        // Check if it's a free plan limitation
+        if (data.error === 'free_plan_limit') {
+          setShowUpgradeModal(true);
+          onClose();
+          return;
+        }
         setError(data.error || "Failed to send feedback request");
         return;
       }
@@ -109,10 +119,20 @@ export function SendFeedbackModal({
 
   // Confirmation state
   return (
-    <div
-      className="fixed inset-0 bg-white/60 backdrop-blur-sm flex items-center justify-center z-50 p-4"
-      onClick={handleClose}
-    >
+    <>
+      <UpgradeModal
+        isOpen={showUpgradeModal}
+        onClose={() => setShowUpgradeModal(false)}
+        feature={
+          lang === "fr"
+            ? "Le plan Free est limité à 1 client."
+            : "Free plan is limited to 1 client."
+        }
+      />
+      <div
+        className="fixed inset-0 bg-white/60 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+        onClick={handleClose}
+      >
       <div
         className="bg-white rounded-xl max-w-md w-full p-6 shadow-lg"
         onClick={(e) => e.stopPropagation()}
@@ -190,6 +210,7 @@ export function SendFeedbackModal({
           </button>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 }

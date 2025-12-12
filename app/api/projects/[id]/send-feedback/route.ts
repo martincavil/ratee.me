@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { requireAuth } from '@/lib/supabase/auth';
 import { getProjectById, updateProject } from '@/lib/supabase/queries';
 import { sendFeedbackRequestEmail } from '@/lib/email';
+import { createClient } from '@/lib/supabase/server';
 
 interface RouteParams {
   params: Promise<{
@@ -13,6 +14,7 @@ export async function POST(_request: Request, { params }: RouteParams) {
   try {
     const user = await requireAuth();
     const { id } = await params;
+    const supabase = await createClient();
 
     // Get project
     const project = await getProjectById(id);
@@ -58,6 +60,48 @@ export async function POST(_request: Request, { params }: RouteParams) {
         },
         { status: 400 }
       );
+    }
+
+    // Check user's subscription plan
+    const { data: subscription } = await supabase
+      .from('subscriptions')
+      .select('plan')
+      .eq('user_id', user.id)
+      .single();
+
+    const userPlan = subscription?.plan || 'free';
+
+    // For FREE plan: Check if user has already sent feedback to a different client
+    if (userPlan === 'free' && project.feedback_status === 'not_sent') {
+      // Count distinct clients that have been sent feedback
+      const { data: sentProjects } = await supabase
+        .from('projects')
+        .select('client_email')
+        .eq('user_id', user.id)
+        .in('feedback_status', ['sent', 'received'])
+        .not('client_email', 'is', null);
+
+      if (sentProjects && sentProjects.length > 0) {
+        // Get unique client emails
+        const uniqueClients = new Set(
+          sentProjects.map((p) => p.client_email?.toLowerCase())
+        );
+
+        // If this is a new client and user already has 1 client with sent feedback
+        if (
+          !uniqueClients.has(project.client_email?.toLowerCase() || '') &&
+          uniqueClients.size >= 1
+        ) {
+          return NextResponse.json(
+            {
+              success: false,
+              error: 'free_plan_limit',
+              message: 'Free plan limited to 1 client. Upgrade to Pro for unlimited clients.',
+            },
+            { status: 403 }
+          );
+        }
+      }
     }
 
     // Allow resending if status is "sent" (useful for testing)
