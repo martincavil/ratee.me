@@ -610,6 +610,10 @@ export const content = {
           "Compte créé ! Vérifie ton email pour confirmer ton compte.",
       },
     },
+    emailAutomationPage: {
+      showMore: "Voir plus",
+      showLess: "Voir moins",
+    },
   },
   en: {
     hero: {
@@ -1174,6 +1178,10 @@ export const content = {
         successEmailConfirmation:
           "Account created! Please check your email to confirm your account.",
       },
+    },
+    emailAutomationPage: {
+      showMore: "Show more",
+      showLess: "Show less",
     },
   },
 } as const;

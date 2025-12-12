@@ -13,6 +13,7 @@ interface EmailTemplate {
   trigger: string;
   subject: string;
   bodyPreview: string;
+  bodyFull: string;
   isPro: boolean;
   icon: string;
 }
@@ -30,6 +31,23 @@ const emailTemplates: EmailTemplate[] = [
     subject: "Votre avis sur {projectName} nous intéresse",
     bodyPreview:
       "Bonjour {clientName}! Nous espérons que vous êtes satisfait de {projectName}. Votre retour est précieux pour nous...",
+    bodyFull: `Bonjour {clientName}!
+
+Nous espérons que vous êtes satisfait de {projectName}. Votre retour est précieux pour nous et nous aidera à continuer à améliorer nos services.
+
+Nous aimerions connaître votre avis en quelques questions rapides. Cela ne vous prendra que 2 minutes:
+
+👉 {feedbackLink}
+
+Votre feedback nous permet de :
+• Comprendre ce qui a bien fonctionné
+• Identifier les axes d'amélioration
+• Mieux vous servir sur les prochains projets
+
+Un grand merci d'avance pour votre temps!
+
+Cordialement,
+{freelanceName}`,
     isPro: false,
     icon: "📧",
   },
@@ -41,6 +59,22 @@ const emailTemplates: EmailTemplate[] = [
     subject: "Comment ça se passe avec {projectName}?",
     bodyPreview:
       "Salut {clientName}, Un mois a passé depuis qu'on a livré {projectName}. Ça tourne bien? Des questions?...",
+    bodyFull: `Salut {clientName}!
+
+Un mois a passé depuis qu'on a livré {projectName}. J'espère que tout se passe bien de votre côté!
+
+Je voulais prendre de vos nouvelles:
+• Est-ce que tout fonctionne comme prévu?
+• Avez-vous des questions ou besoin d'ajustements?
+• Y a-t-il quelque chose que nous pourrions améliorer?
+
+N'hésitez pas à me faire signe si vous avez besoin de quoi que ce soit. Je suis là pour vous accompagner!
+
+Si vous avez 2 minutes, j'aimerais vraiment avoir votre retour:
+👉 {feedbackLink}
+
+À très bientôt,
+{freelanceName}`,
     isPro: true,
     icon: "🔄",
   },
@@ -53,18 +87,38 @@ const emailTemplates: EmailTemplate[] = [
     subject: "On pense à toi! 😊",
     bodyPreview:
       "Salut {clientName}, 3 mois maintenant depuis {projectName}! Comment ça se passe? Si tu es heureux, on aimerait que tu nous recommandes...",
+    bodyFull: `Salut {clientName}!
+
+3 mois déjà depuis qu'on a terminé {projectName}! Le temps passe vite 😊
+
+J'espère que tout roule de votre côté. Je voulais prendre contact pour:
+
+1. **Savoir comment ça se passe** avec le projet - Est-ce qu'il répond toujours à vos attentes?
+
+2. **Voir si vous avez de nouveaux projets** en tête - Je serais ravi de collaborer à nouveau avec vous!
+
+3. **Vous demander une faveur** - Si vous êtes satisfait de notre collaboration, un petit témoignage ou une recommandation serait vraiment apprécié 🙏
+
+Donnez-moi votre retour ici:
+👉 {feedbackLink}
+
+Au plaisir d'échanger avec vous!
+
+Cordialement,
+{freelanceName}`,
     isPro: true,
     icon: "🚀",
   },
 ];
 
 export default function EmailAutomationPage() {
-  const { lang } = useLanguage();
+  const { lang, text } = useLanguage();
   const [userPlan, setUserPlan] = useState<UserPlan | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedTemplate, setSelectedTemplate] =
     useState<EmailTemplate | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showFullContent, setShowFullContent] = useState(false);
   const [stats, setStats] = useState<{ sent: number; scheduled: number }>({
     sent: 0,
     scheduled: 0,
@@ -104,6 +158,7 @@ export default function EmailAutomationPage() {
 
   const handleViewTemplate = (template: EmailTemplate) => {
     setSelectedTemplate(template);
+    setShowFullContent(false);
     setIsModalOpen(true);
   };
 
@@ -309,8 +364,33 @@ export default function EmailAutomationPage() {
                 {lang === "fr" ? "Aperçu du contenu" : "Content preview"}:
               </p>
               <div className="text-sm text-gray-700 bg-gray-50 rounded-lg p-4 border border-gray-200 leading-relaxed whitespace-pre-line">
-                {selectedTemplate.bodyPreview}
+                {showFullContent
+                  ? selectedTemplate.bodyFull
+                  : selectedTemplate.bodyPreview}
               </div>
+              <button
+                onClick={() => setShowFullContent(!showFullContent)}
+                className="mt-2 text-sm text-emerald-600 hover:text-emerald-700 font-medium flex items-center gap-1"
+              >
+                {showFullContent
+                  ? text.emailAutomationPage.showLess
+                  : text.emailAutomationPage.showMore}
+                <svg
+                  className={`w-4 h-4 transition-transform ${
+                    showFullContent ? "rotate-180" : ""
+                  }`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
             </div>
 
             {/* Trigger info */}
