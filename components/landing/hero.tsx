@@ -3,6 +3,7 @@
 import { useLanguage } from "@/lib/i18n";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import type { User } from "@/types/database";
 
 const screensContent = {
   en: [
@@ -58,6 +59,25 @@ export function Hero() {
   const { text, lang } = useLanguage();
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    // Fetch current user if authenticated
+    async function fetchUser() {
+      try {
+        const response = await fetch("/api/auth/me");
+        if (response.ok) {
+          const data = await response.json();
+          if (data.success && data.data?.user) {
+            setUser(data.data.user);
+          }
+        }
+      } catch {
+        // User not authenticated
+      }
+    }
+    fetchUser();
+  }, []);
 
   useEffect(() => {
     if (isPaused) return;
@@ -92,10 +112,13 @@ export function Hero() {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
-                href="/auth/signup"
+                href={user ? "/dashboard" : "/auth/signup"}
                 className="px-8 py-4 bg-[#10B981] text-white rounded-lg font-inter font-semibold hover:bg-[#047857] transition-all hover:scale-105 hover:shadow-md text-center cursor-pointer"
               >
-                {text.hero.cta}
+                {user
+                  ? (lang === "fr" ? "Mon Dashboard" : "My Dashboard")
+                  : text.hero.cta
+                }
               </Link>
               {/* <Link
                 href="/pricing"

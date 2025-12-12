@@ -44,7 +44,6 @@ export function SendFeedbackModal({
         // Check if it's a free plan limitation
         if (data.error === 'free_plan_limit') {
           setShowUpgradeModal(true);
-          onClose();
           return;
         }
         setError(data.error || "Failed to send feedback request");
@@ -122,17 +121,21 @@ export function SendFeedbackModal({
     <>
       <UpgradeModal
         isOpen={showUpgradeModal}
-        onClose={() => setShowUpgradeModal(false)}
+        onClose={() => {
+          setShowUpgradeModal(false);
+          onClose();
+        }}
         feature={
           lang === "fr"
             ? "Le plan Free est limité à 1 client."
             : "Free plan is limited to 1 client."
         }
       />
-      <div
-        className="fixed inset-0 bg-white/60 backdrop-blur-sm flex items-center justify-center z-50 p-4"
-        onClick={handleClose}
-      >
+      {!showUpgradeModal && (
+        <div
+          className="fixed inset-0 bg-white/60 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+          onClick={handleClose}
+        >
       <div
         className="bg-white rounded-xl max-w-md w-full p-6 shadow-lg"
         onClick={(e) => e.stopPropagation()}
@@ -211,6 +214,7 @@ export function SendFeedbackModal({
         </div>
       </div>
       </div>
+      )}
     </>
   );
 }

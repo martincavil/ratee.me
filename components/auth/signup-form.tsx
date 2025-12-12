@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { signupSchema, type SignupInput } from "@/lib/validators";
@@ -19,7 +19,7 @@ import {
 
 export function SignupForm() {
   const router = useRouter();
-  const { text } = useLanguage();
+  const { text, lang } = useLanguage();
   const [formData, setFormData] = useState<SignupInput>({
     email: "",
     password: "",
@@ -32,6 +32,25 @@ export function SignupForm() {
   const [loading, setLoading] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // Check if user is already logged in
+    async function checkAuth() {
+      try {
+        const response = await fetch("/api/auth/me");
+        if (response.ok) {
+          const data = await response.json();
+          if (data.success && data.data?.user) {
+            setIsLoggedIn(true);
+          }
+        }
+      } catch {
+        // User not authenticated
+      }
+    }
+    checkAuth();
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -90,6 +109,48 @@ export function SignupForm() {
       setLoading(false);
     }
   };
+
+  // If user is already logged in, show message
+  if (isLoggedIn) {
+    return (
+      <Card className="w-full bg-white border border-border shadow-sm">
+        <CardHeader className="text-center space-y-2 pb-6">
+          <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg
+              className="w-8 h-8 text-emerald-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+          </div>
+          <CardTitle className="text-2xl! font-bold text-content-primary font-sora">
+            {lang === "fr" ? "Vous êtes déjà connecté" : "You are already logged in"}
+          </CardTitle>
+          <CardDescription className="text-sm text-content-secondary">
+            {lang === "fr"
+              ? "Vous pouvez accéder à votre tableau de bord."
+              : "You can access your dashboard."
+            }
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Link
+            href={ROUTES.DASHBOARD}
+            className="block w-full px-4 py-3 bg-emerald-500 text-white text-center rounded-lg font-inter font-semibold hover:bg-emerald-600 transition-colors cursor-pointer"
+          >
+            {lang === "fr" ? "Aller au Dashboard" : "Go to Dashboard"}
+          </Link>
+        </CardContent>
+      </Card>
+    );
+  }
 
   return (
     <Card className="w-full">

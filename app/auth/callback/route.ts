@@ -11,9 +11,17 @@ export async function GET(request: Request) {
   const code = requestUrl.searchParams.get('code');
   const next = requestUrl.searchParams.get('next') ?? '/dashboard';
 
-  if (code) {
-    const supabase = await createClient();
+  const supabase = await createClient();
 
+  // Check if user is already authenticated
+  const { data: { user: existingUser } } = await supabase.auth.getUser();
+
+  // If user is already logged in and no code is provided, redirect to dashboard
+  if (existingUser && !code) {
+    return NextResponse.redirect(new URL(next, requestUrl.origin));
+  }
+
+  if (code) {
     // Exchange the code for a session
     const { error } = await supabase.auth.exchangeCodeForSession(code);
 
@@ -28,6 +36,6 @@ export async function GET(request: Request) {
     );
   }
 
-  // No code provided, redirect to home
+  // No code provided and not authenticated, redirect to home
   return NextResponse.redirect(new URL('/', requestUrl.origin));
 }

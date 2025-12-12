@@ -2,9 +2,30 @@
 
 import { useLanguage } from "@/lib/i18n";
 import Link from "next/link";
+import { useState, useEffect } from "react";
+import type { User } from "@/types/database";
 
 export function CTAFinal() {
-  const { text } = useLanguage();
+  const { text, lang } = useLanguage();
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    // Fetch current user if authenticated
+    async function fetchUser() {
+      try {
+        const response = await fetch("/api/auth/me");
+        if (response.ok) {
+          const data = await response.json();
+          if (data.success && data.data?.user) {
+            setUser(data.data.user);
+          }
+        }
+      } catch {
+        // User not authenticated
+      }
+    }
+    fetchUser();
+  }, []);
 
   return (
     <section className="md:py-20 md:px-4 lg:px-8 bg-white">
@@ -25,10 +46,13 @@ export function CTAFinal() {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                href="/auth/signup"
+                href={user ? "/dashboard" : "/auth/signup"}
                 className="px-8 py-3 bg-white text-emerald-600 rounded-lg font-semibold hover:bg-gray-100 transition-all hover:scale-105 shadow-md cursor-pointer"
               >
-                {text.ctaFinal.ctaPrimary}
+                {user
+                  ? (lang === "fr" ? "Mon Dashboard" : "My Dashboard")
+                  : text.ctaFinal.ctaPrimary
+                }
               </Link>
               <Link
                 href="/pricing"
