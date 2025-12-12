@@ -23,11 +23,17 @@ export function CheckoutButton({ tierName, isPopular, cta }: CheckoutButtonProps
 
       const data = await response.json();
 
+      // If user is not authenticated, redirect to login
+      if (response.status === 401) {
+        window.location.href = `/auth/login?redirect=/pricing`;
+        return;
+      }
+
       if (data.url) {
         // Redirect to Stripe Checkout
         window.location.href = data.url;
-      } else if (data.error) {
-        console.error('Checkout error:', data.error);
+      } else {
+        console.error('Checkout error:', data.error, data.details);
         alert('Erreur lors de la création du checkout. Veuillez réessayer.');
         setLoading(false);
       }

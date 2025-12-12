@@ -6,9 +6,9 @@ import { createAdminClient } from '@/lib/supabase/admin';
 export async function POST(request: NextRequest) {
   try {
     const supabase = await createClient();
-    const { data: { user } } = await supabase.auth.getUser();
+    const { data: { user }, error: authError } = await supabase.auth.getUser();
 
-    if (!user) {
+    if (authError || !user) {
       return NextResponse.json(
         { error: 'Unauthorized' },
         { status: 401 }
@@ -19,14 +19,17 @@ export async function POST(request: NextRequest) {
 
     // Get or create Stripe customer
     const adminClient = createAdminClient();
-    const { data: subscription } = await adminClient
+    const { data: subscription, error: subError } = await adminClient
       .from('subscriptions')
       .select('stripe_customer_id')
       .eq('user_id', user.id)
       .maybeSingle();
 
-    let customerId = subscription?.stripe_customer_id;
+    if (subError) {
+      throw new Error(`Failed to fetch subscription: ${subError.message}`);
+    }
 
+    let customerId = subscription?.stripe_customer_id;
     const stripe = getStripe();
 
     if (!customerId) {
@@ -37,7 +40,7 @@ export async function POST(request: NextRequest) {
       customerId = customer.id;
 
       // Update or create subscription with customer ID
-      await adminClient
+      const { error: upsertError } = await adminClient
         .from('subscriptions')
         .upsert({
           user_id: user.id,
@@ -47,6 +50,10 @@ export async function POST(request: NextRequest) {
         }, {
           onConflict: 'user_id'
         });
+
+      if (upsertError) {
+        throw new Error(`Failed to save customer: ${upsertError.message}`);
+      }
     }
 
     // Determine price based on interval
@@ -55,10 +62,7 @@ export async function POST(request: NextRequest) {
       : STRIPE_PRICES.PRO_MONTHLY;
 
     if (!stripePriceId) {
-      return NextResponse.json(
-        { error: 'Price not configured' },
-        { status: 500 }
-      );
+      throw new Error('Stripe price ID is not configured');
     }
 
     // Create checkout session
@@ -77,7 +81,10 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Checkout error:', error);
     return NextResponse.json(
-      { error: 'Failed to create checkout session' },
+      {
+        error: 'Failed to create checkout session',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      },
       { status: 500 }
     );
   }

@@ -54,7 +54,8 @@ Cordialement,
   {
     id: "30_days_followup",
     name: "J+30 : Suivi satisfaction",
-    description: "Demande une mise à jour du feedback 30 jours après la livraison",
+    description:
+      "Demande une mise à jour du feedback 30 jours après la livraison",
     trigger: "30 jours après la livraison",
     subject: "Comment ça se passe avec {projectName}?",
     bodyPreview:
@@ -107,7 +108,7 @@ Au plaisir d'échanger avec vous!
 Cordialement,
 {freelanceName}`,
     isPro: true,
-    icon: "🚀",
+    // icon: "🚀",
   },
 ];
 
@@ -222,7 +223,7 @@ export default function EmailAutomationPage() {
               <div className="flex items-start justify-between">
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2">
-                    <span className="text-2xl">{template.icon}</span>
+                    {/* <span className="text-2xl">{template.icon}</span> */}
                     <div className="flex items-center gap-2">
                       <h3 className="text-lg font-semibold text-content-primary font-sora">
                         {template.name}
@@ -232,9 +233,7 @@ export default function EmailAutomationPage() {
                           PRO
                         </span>
                       )}
-                      {isLocked && (
-                        <span className="text-gray-400">🔒</span>
-                      )}
+                      {isLocked && <span className="text-gray-400">🔒</span>}
                     </div>
                   </div>
 
