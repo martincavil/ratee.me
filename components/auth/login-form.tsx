@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { loginSchema, type LoginInput } from "@/lib/validators";
 import { ROUTES } from "@/lib/constants";
+import { useLanguage } from "@/lib/i18n";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -18,6 +19,7 @@ import {
 
 export function LoginForm() {
   const router = useRouter();
+  const { text } = useLanguage();
   const [formData, setFormData] = useState<LoginInput>({
     email: "",
     password: "",
@@ -72,20 +74,20 @@ export function LoginForm() {
       router.push(ROUTES.DASHBOARD);
       router.refresh();
     } catch {
-      setApiError("An unexpected error occurred. Please try again.");
+      setApiError(text.auth.login.errorGeneric);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <Card className="w-full max-w-md bg-white border border-border shadow-sm">
+    <Card className="w-full bg-white border border-border shadow-sm">
       <CardHeader className="text-center space-y-2 pb-6">
         <CardTitle className="text-2xl! font-bold text-content-primary font-sora">
-          Bon retour
+          {text.auth.login.title}
         </CardTitle>
         <CardDescription className="text-sm text-content-secondary">
-          Connecte-toi à ton compte
+          {text.auth.login.subtitle}
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -95,7 +97,7 @@ export function LoginForm() {
               htmlFor="email"
               className="text-sm font-medium text-content-primary"
             >
-              Email
+              {text.auth.login.emailLabel}
             </Label>
             <Input
               type="email"
@@ -103,7 +105,7 @@ export function LoginForm() {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="severin@exemple.com"
+              placeholder={text.auth.login.emailPlaceholder}
               autoComplete="email"
               className={errors.email ? "border-error" : ""}
             />
@@ -117,7 +119,7 @@ export function LoginForm() {
               htmlFor="password"
               className="text-sm font-medium text-content-primary"
             >
-              Mot de passe
+              {text.auth.login.passwordLabel}
             </Label>
             <Input
               type="password"
@@ -125,7 +127,7 @@ export function LoginForm() {
               name="password"
               value={formData.password}
               onChange={handleChange}
-              placeholder="••••••••"
+              placeholder={text.auth.login.passwordPlaceholder}
               autoComplete="current-password"
               className={errors.password ? "border-error" : ""}
             />
@@ -145,17 +147,17 @@ export function LoginForm() {
             disabled={loading}
             className="w-full bg-emerald text-white hover:bg-emerald-dark transition-colors font-medium"
           >
-            {loading ? "Connexion..." : "Se connecter"}
+            {loading ? text.auth.login.submitting : text.auth.login.submitButton}
           </Button>
         </form>
 
         <p className="mt-6 text-center text-sm text-content-secondary">
-          Pas encore de compte?{" "}
+          {text.auth.login.noAccount}{" "}
           <Link
             href={ROUTES.SIGNUP}
             className="text-emerald hover:text-emerald-dark font-medium"
           >
-            S&apos;inscrire
+            {text.auth.login.signupLink}
           </Link>
         </p>
       </CardContent>

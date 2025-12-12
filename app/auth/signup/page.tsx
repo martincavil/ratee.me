@@ -3,7 +3,8 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Inscription - ratee.me",
-  description: "Créez votre compte ratee.me et commencez à collecter des feedbacks clients",
+  description:
+    "Créez votre compte ratee.me et commencez à collecter des feedbacks clients",
   robots: {
     index: false,
     follow: false,
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
 export default function SignupPage() {
   return (
     <div className="flex flex-col items-center justify-center">
-      <div className="w-full max-w-md">
+      <div className="w-full max-w-2xl flex justify-center">
         <SignupForm />
       </div>
     </div>
