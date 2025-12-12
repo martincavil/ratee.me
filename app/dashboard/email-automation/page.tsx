@@ -108,7 +108,7 @@ Au plaisir d'échanger avec vous!
 Cordialement,
 {freelanceName}`,
     isPro: true,
-    // icon: "🚀",
+    icon: "🚀",
   },
 ];
 
