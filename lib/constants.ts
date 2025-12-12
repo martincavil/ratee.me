@@ -47,7 +47,7 @@ export const content = {
         "Automatise la collecte de feedbacks. Affiche ton score NPS fièrement. Laisse tes clients satisfaits vendre pour toi.",
       description:
         "Freelance ou agence? Tu collectes manuellement les feedbacks clients, tu relances pour les avis, tu génères des rapports dans Excel. C'est fini. ratee.me automatise tout : feedbacks NPS envoyés au bon moment, citations collectées, badge à afficher sur ton site. Tout centralisé. Tout simple.",
-      cta: "Essayer gratuitement",
+      cta: "Créer un compte",
       ctaSecondary: "Voir une démo rapide",
     },
     problem: {
@@ -283,7 +283,7 @@ export const content = {
         {
           question: "Est-ce que je peux customiser les emails?",
           answer:
-            "Sur le plan Pro+. Mais par défaut, on a déjà des templates pro qu'on recommande.",
+            "Sur le plan Pro. Mais par défaut, on a déjà des templates pro qu'on recommande.",
         },
         {
           question: "Que se passe-t-il si je résilie?",
@@ -555,7 +555,8 @@ export const content = {
         submitting: "Connexion...",
         noAccount: "Pas encore de compte?",
         signupLink: "S'inscrire",
-        errorGeneric: "Une erreur inattendue s'est produite. Veuillez réessayer.",
+        errorGeneric:
+          "Une erreur inattendue s'est produite. Veuillez réessayer.",
       },
       signup: {
         title: "Créer un compte",
@@ -574,7 +575,10 @@ export const content = {
         submitting: "Création...",
         hasAccount: "Déjà un compte?",
         loginLink: "Se connecter",
-        errorGeneric: "Une erreur inattendue s'est produite. Veuillez réessayer.",
+        errorGeneric:
+          "Une erreur inattendue s'est produite. Veuillez réessayer.",
+        successEmailConfirmation:
+          "Compte créé ! Vérifie ton email pour confirmer ton compte.",
       },
     },
   },
@@ -585,7 +589,7 @@ export const content = {
         "Automate feedback collection. Display your NPS score proudly. Let satisfied clients do the selling for you.",
       description:
         "Freelancer or agency? You manually collect client feedback, chase for testimonials, build reports in Excel. Not anymore. ratee.me automates it all: NPS feedback sent at the right time, testimonials collected automatically, shareable badge for your site. Everything centralized. Everything simple.",
-      cta: "Start Free",
+      cta: "Create an account",
       ctaSecondary: "Watch Demo",
     },
     problem: {
@@ -821,7 +825,7 @@ export const content = {
         {
           question: "Can I customize the emails?",
           answer:
-            "On Pro+ plans. But we have solid templates we recommend by default.",
+            "On Pro plans. But we have solid templates we recommend by default.",
         },
         {
           question: "What if I cancel?",
@@ -1110,6 +1114,8 @@ export const content = {
         hasAccount: "Already have an account?",
         loginLink: "Log in",
         errorGeneric: "An unexpected error occurred. Please try again.",
+        successEmailConfirmation:
+          "Account created! Please check your email to confirm your account.",
       },
     },
   },

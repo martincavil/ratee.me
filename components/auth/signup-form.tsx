@@ -31,6 +31,7 @@ export function SignupForm() {
   >({});
   const [loading, setLoading] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -44,6 +45,7 @@ export function SignupForm() {
     e.preventDefault();
     setErrors({});
     setApiError(null);
+    setSuccessMessage(null);
 
     const result = signupSchema.safeParse(formData);
     if (!result.success) {
@@ -73,6 +75,13 @@ export function SignupForm() {
         return;
       }
 
+      // If email confirmation is required, show translated message
+      if (data.emailConfirmationRequired) {
+        setSuccessMessage(text.auth.signup.successEmailConfirmation);
+        return;
+      }
+
+      // Otherwise redirect to dashboard
       router.push(ROUTES.DASHBOARD);
       router.refresh();
     } catch {
@@ -163,6 +172,12 @@ export function SignupForm() {
           {apiError && (
             <div className="p-3 bg-red-50 border border-red-200 rounded-md">
               <p className="text-sm text-red-600">{apiError}</p>
+            </div>
+          )}
+
+          {successMessage && (
+            <div className="p-3 bg-green-50 border border-green-200 rounded-md">
+              <p className="text-sm text-green-600">{successMessage}</p>
             </div>
           )}
 

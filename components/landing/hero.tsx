@@ -97,12 +97,12 @@ export function Hero() {
               >
                 {text.hero.cta}
               </Link>
-              <Link
+              {/* <Link
                 href="/pricing"
                 className="px-8 py-4 bg-white text-content-primary rounded-lg font-inter font-semibold border-2 border-border hover:bg-gray-50 transition-all text-center cursor-pointer"
               >
                 {lang === "fr" ? "Voir les tarifs" : "View pricing"}
-              </Link>
+              </Link> */}
             </div>
 
             {/* Social Proof */}

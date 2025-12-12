@@ -38,13 +38,24 @@ export async function POST(request: Request) {
       );
     }
 
-    if (!authData.user || !authData.session) {
+    if (!authData.user) {
       return NextResponse.json<ApiResponse>(
         {
           success: false,
           error: 'Failed to create user',
         },
         { status: 500 }
+      );
+    }
+
+    // If no session (email confirmation required), return success with flag
+    if (!authData.session) {
+      return NextResponse.json<ApiResponse>(
+        {
+          success: true,
+          emailConfirmationRequired: true,
+        },
+        { status: 201 }
       );
     }
 
