@@ -12,11 +12,15 @@
 Site URL: https://ratee.me
 ```
 
-**Redirect URLs (ajoute les deux) :**
+**Redirect URLs (ajoute ces URLs) :**
 ```
-https://ratee.me/**
 https://ratee.me/auth/callback
+https://www.ratee.me/auth/callback
+https://ratee.me/**
+https://www.ratee.me/**
 ```
+
+> **Important :** Ajoute bien les versions avec ET sans `www` !
 
 ### Variables d'environnement (Production)
 
