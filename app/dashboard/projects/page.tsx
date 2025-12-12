@@ -8,6 +8,13 @@ import { EditProjectModal } from "@/components/projects/edit-project-modal";
 import { DeleteProjectDialog } from "@/components/projects/delete-project-dialog";
 import { SendFeedbackModal } from "@/components/projects/send-feedback-modal";
 import { Spinner } from "@/components/ui/spinner";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { Send, Edit, Trash2 } from "lucide-react";
 import type { Project } from "@/types/database";
 
 export default function ProjectsPage() {
@@ -52,7 +59,8 @@ export default function ProjectsPage() {
   };
 
   return (
-    <div>
+    <TooltipProvider>
+      <div>
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl! font-bold text-content-primary font-sora">
@@ -134,22 +142,22 @@ export default function ProjectsPage() {
           <table className="w-full">
             <thead className="bg-bg-secondary border-b border-border">
               <tr>
-                <th className="px-5 py-3 text-left text-xs font-medium text-content-secondary">
+                <th className="px-3 py-3 text-left text-xs font-medium text-content-secondary">
                   {text.projects.table.headers.project}
                 </th>
-                <th className="px-5 py-3 text-left text-xs font-medium text-content-secondary">
+                <th className="px-3 py-3 text-left text-xs font-medium text-content-secondary">
                   {text.projects.table.headers.client}
                 </th>
-                <th className="px-5 py-3 text-left text-xs font-medium text-content-secondary">
+                <th className="px-3 py-3 text-left text-xs font-medium text-content-secondary">
                   {text.projects.table.headers.deliveryDate}
                 </th>
-                <th className="px-5 py-3 text-left text-xs font-medium text-content-secondary">
+                <th className="px-3 py-3 text-left text-xs font-medium text-content-secondary">
                   {text.projects.table.headers.status}
                 </th>
-                <th className="px-5 py-3 text-left text-xs font-medium text-content-secondary">
+                <th className="px-3 py-3 text-left text-xs font-medium text-content-secondary">
                   {text.projects.table.headers.feedback}
                 </th>
-                <th className="px-5 py-3 text-right text-xs font-medium text-content-secondary">
+                <th className="px-3 py-3 text-right text-xs font-medium text-content-secondary">
                   {text.projects.table.headers.actions}
                 </th>
               </tr>
@@ -160,7 +168,7 @@ export default function ProjectsPage() {
                   key={project.id}
                   className="hover:bg-bg-secondary transition-colors"
                 >
-                  <td className="px-5 py-4">
+                  <td className="px-3 py-4">
                     <div>
                       <div className="font-medium text-content-primary text-sm!">
                         {project.name}
@@ -172,7 +180,7 @@ export default function ProjectsPage() {
                       )}
                     </div>
                   </td>
-                  <td className="px-5 py-4">
+                  <td className="px-3 py-4">
                     <div className="text-sm text-content-primary">
                       {project.client_name}
                     </div>
@@ -182,10 +190,10 @@ export default function ProjectsPage() {
                       </div>
                     )}
                   </td>
-                  <td className="px-5 py-4 text-sm text-content-primary">
+                  <td className="px-3 py-4 text-sm text-content-primary">
                     {formatDate(project.delivery_date)}
                   </td>
-                  <td className="px-5 py-4">
+                  <td className="px-3 py-4">
                     <span
                       className={`px-2 py-1 text-xs font-medium rounded-full ${
                         project.status === "delivered"
@@ -202,7 +210,7 @@ export default function ProjectsPage() {
                         : text.projects.table.status.archived}
                     </span>
                   </td>
-                  <td className="px-5 py-4">
+                  <td className="px-3 py-4">
                     <span
                       className={`px-2 py-1 text-xs font-medium rounded-full ${
                         project.feedback_status === "received"
@@ -219,30 +227,55 @@ export default function ProjectsPage() {
                         : text.projects.table.feedbackStatus.notSent}
                     </span>
                   </td>
-                  <td className="px-5 py-4 text-right text-xs space-x-2">
-                    {project.feedback_status !== "received" &&
-                      project.client_email && (
-                        <button
-                          onClick={() => setFeedbackProject(project)}
-                          className="text-emerald hover:text-emerald-dark font-medium cursor-pointer"
-                        >
-                          {project.feedback_status === "sent"
-                            ? "Renvoyer"
-                            : text.projects.table.actions.send}
-                        </button>
-                      )}
-                    <button
-                      onClick={() => setEditingProject(project)}
-                      className="text-emerald hover:text-emerald-dark font-medium cursor-pointer"
-                    >
-                      {text.projects.table.actions.edit}
-                    </button>
-                    <button
-                      onClick={() => setDeletingProject(project)}
-                      className="text-error hover:text-error/80 font-medium cursor-pointer"
-                    >
-                      {text.projects.table.actions.delete}
-                    </button>
+                  <td className="px-3 py-4 text-right">
+                    <div className="flex items-center justify-end gap-2">
+                      {project.feedback_status !== "received" &&
+                        project.client_email && (
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <button
+                                onClick={() => setFeedbackProject(project)}
+                                className="p-2 text-emerald hover:text-emerald-dark hover:bg-emerald-light/50 rounded-md transition-colors cursor-pointer"
+                              >
+                                <Send className="w-4 h-4" />
+                              </button>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>
+                                {project.feedback_status === "sent"
+                                  ? text.projects.table.actions.resend
+                                  : text.projects.table.actions.send}
+                              </p>
+                            </TooltipContent>
+                          </Tooltip>
+                        )}
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <button
+                            onClick={() => setEditingProject(project)}
+                            className="p-2 text-emerald hover:text-emerald-dark hover:bg-emerald-light/50 rounded-md transition-colors cursor-pointer"
+                          >
+                            <Edit className="w-4 h-4" />
+                          </button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>{text.projects.table.actions.edit}</p>
+                        </TooltipContent>
+                      </Tooltip>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <button
+                            onClick={() => setDeletingProject(project)}
+                            className="p-2 text-error hover:text-error/80 hover:bg-error-light/50 rounded-md transition-colors cursor-pointer"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>{text.projects.table.actions.delete}</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -278,6 +311,7 @@ export default function ProjectsPage() {
           onSuccess={fetchProjects}
         />
       )}
-    </div>
+      </div>
+    </TooltipProvider>
   );
 }

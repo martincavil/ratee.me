@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createProjectSchema, type CreateProjectInput } from '@/lib/validators';
+import { useLanguage } from '@/lib/i18n';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -23,6 +24,7 @@ interface NewProjectModalProps {
 
 export function NewProjectModal({ isOpen, onClose }: NewProjectModalProps) {
   const router = useRouter();
+  const { text } = useLanguage();
   const [formData, setFormData] = useState<CreateProjectInput>({
     name: '',
     client_name: '',
@@ -71,7 +73,7 @@ export function NewProjectModal({ isOpen, onClose }: NewProjectModalProps) {
       const data = await response.json();
 
       if (!data.success) {
-        setApiError(data.error || 'Failed to create project');
+        setApiError(data.error || text.projects.modal.errors.failed);
         return;
       }
 
@@ -85,7 +87,7 @@ export function NewProjectModal({ isOpen, onClose }: NewProjectModalProps) {
         delivery_date: '',
       });
     } catch {
-      setApiError('An unexpected error occurred');
+      setApiError(text.projects.modal.errors.unexpected);
     } finally {
       setLoading(false);
     }
@@ -95,69 +97,69 @@ export function NewProjectModal({ isOpen, onClose }: NewProjectModalProps) {
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-2xl">
         <DialogHeader>
-          <DialogTitle>New Project</DialogTitle>
+          <DialogTitle>{text.projects.modal.title}</DialogTitle>
           <DialogDescription>
-            Create a new project to start collecting feedback
+            {text.projects.modal.description}
           </DialogDescription>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="name">Project Name *</Label>
+            <Label htmlFor="name">{text.projects.modal.fields.nameRequired}</Label>
             <Input
               id="name"
               name="name"
               value={formData.name}
               onChange={handleChange}
-              placeholder="Website Redesign"
+              placeholder={text.projects.modal.fields.namePlaceholder}
               className={errors.name ? 'border-red-500' : ''}
             />
             {errors.name && <p className="text-sm text-red-600">{errors.name}</p>}
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="client_name">Client Name *</Label>
+            <Label htmlFor="client_name">{text.projects.modal.fields.clientNameRequired}</Label>
             <Input
               id="client_name"
               name="client_name"
               value={formData.client_name}
               onChange={handleChange}
-              placeholder="Acme Corp"
+              placeholder={text.projects.modal.fields.clientNamePlaceholder}
               className={errors.client_name ? 'border-red-500' : ''}
             />
             {errors.client_name && <p className="text-sm text-red-600">{errors.client_name}</p>}
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="client_email">Client Email</Label>
+            <Label htmlFor="client_email">{text.projects.modal.fields.clientEmail}</Label>
             <Input
               type="email"
               id="client_email"
               name="client_email"
               value={formData.client_email}
               onChange={handleChange}
-              placeholder="john@acme.com"
+              placeholder={text.projects.modal.fields.clientEmailPlaceholder}
               className={errors.client_email ? 'border-red-500' : ''}
             />
             {errors.client_email && <p className="text-sm text-red-600">{errors.client_email}</p>}
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="description">Description</Label>
+            <Label htmlFor="description">{text.projects.modal.fields.description}</Label>
             <Textarea
               id="description"
               name="description"
               value={formData.description}
               onChange={handleChange}
               rows={3}
-              placeholder="Brief project description..."
+              placeholder={text.projects.modal.fields.descriptionPlaceholder}
               className={errors.description ? 'border-red-500' : ''}
             />
             {errors.description && <p className="text-sm text-red-600">{errors.description}</p>}
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="delivery_date">Delivery Date *</Label>
+            <Label htmlFor="delivery_date">{text.projects.modal.fields.deliveryDateRequired}</Label>
             <Input
               type="date"
               id="delivery_date"
@@ -177,10 +179,10 @@ export function NewProjectModal({ isOpen, onClose }: NewProjectModalProps) {
 
           <DialogFooter>
             <Button type="button" variant="outline" onClick={onClose}>
-              Cancel
+              {text.projects.modal.buttons.cancel}
             </Button>
             <Button type="submit" disabled={loading}>
-              {loading ? 'Creating...' : 'Create Project'}
+              {loading ? text.projects.modal.buttons.creating : text.projects.modal.buttons.create}
             </Button>
           </DialogFooter>
         </form>
