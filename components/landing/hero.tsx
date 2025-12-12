@@ -1,7 +1,6 @@
 "use client";
 
 import { useLanguage } from "@/lib/i18n";
-import { WaitlistForm } from "./waitlist-form";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
@@ -74,7 +73,7 @@ export function Hero() {
 
   return (
     <section
-      id="waitlist"
+      id="hero"
       className="min-h-screen flex items-center pt-24 pb-16 px-4 sm:px-6 lg:px-8 bg-bg-primary overflow-hidden"
     >
       <div className="max-w-7xl mx-auto w-full">
@@ -90,8 +89,41 @@ export function Hero() {
               </p>
             </div>
 
-            {/* Waitlist Form */}
-            <WaitlistForm />
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link
+                href="/auth/signup"
+                className="px-8 py-4 bg-[#10B981] text-white rounded-lg font-inter font-semibold hover:bg-[#047857] transition-all hover:scale-105 hover:shadow-md text-center cursor-pointer"
+              >
+                {text.hero.cta}
+              </Link>
+              <Link
+                href="/pricing"
+                className="px-8 py-4 bg-white text-content-primary rounded-lg font-inter font-semibold border-2 border-border hover:bg-gray-50 transition-all text-center cursor-pointer"
+              >
+                {lang === "fr" ? "Voir les tarifs" : "View pricing"}
+              </Link>
+            </div>
+
+            {/* Social Proof */}
+            <div className="flex items-center gap-2 text-sm text-content-secondary">
+              <svg
+                className="w-5 h-5 text-green-500"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <span>
+                {lang === "fr"
+                  ? "Inscription gratuite • Sans carte bancaire"
+                  : "Free signup • No credit card required"}
+              </span>
+            </div>
           </div>
 
           {/* Right: Stacked Screens */}

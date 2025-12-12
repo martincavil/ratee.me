@@ -25,13 +25,13 @@ export function CTAFinal() {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                href="#waitlist"
+                href="/auth/signup"
                 className="px-8 py-3 bg-white text-emerald-600 rounded-lg font-semibold hover:bg-gray-100 transition-all hover:scale-105 shadow-md cursor-pointer"
               >
                 {text.ctaFinal.ctaPrimary}
               </Link>
               <Link
-                href="/pricing/"
+                href="/pricing"
                 className="px-8 py-3 bg-transparent text-white rounded-lg font-semibold border-2 border-white/50 hover:bg-white/10 transition-all cursor-pointer"
               >
                 {text.ctaFinal.ctaSecondary}

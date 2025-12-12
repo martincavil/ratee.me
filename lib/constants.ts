@@ -216,8 +216,9 @@ export const content = {
           price: "0€",
           period: "Pour toujours",
           features: [
-            "1 projet actif",
-            "3 feedbacks/mois",
+            "1 utilisateur",
+            "Projets illimités",
+            "Feedbacks illimités",
             "Score NPS basique",
             "Badge partageable",
           ],
@@ -226,10 +227,11 @@ export const content = {
         },
         {
           name: "Pro",
-          heading: "Pour les freelances",
+          heading: "Pour les freelances et agences",
           price: "19€",
           period: "/mois",
           features: [
+            "Utilisateurs illimités",
             "Projets illimités",
             "Feedbacks illimités",
             "Analytics avancée",
@@ -237,7 +239,7 @@ export const content = {
             "Export des données",
             "Support prioritaire",
           ],
-          cta: "Commencer",
+          cta: "Commencer maintenant",
           popular: true,
           badge: "Recommandé",
         },
@@ -294,7 +296,7 @@ export const content = {
       headline: "Si tu es arrivé jusque-là, c'est qu'il est temps d'essayer.",
       subheadline:
         "Rejoins les freelances et agences qui ont déjà automatisé leur collecte de feedbacks.",
-      ctaPrimary: "Rejoins la Waitlist dès maintenant",
+      ctaPrimary: "Commencer gratuitement",
       ctaSecondary: "Voir les tarifs",
     },
     footer: {
@@ -718,8 +720,9 @@ export const content = {
           price: "$0",
           period: "Forever",
           features: [
-            "1 active project",
-            "3 feedbacks/month",
+            "1 user",
+            "Unlimited projects",
+            "Unlimited feedbacks",
             "Basic NPS score",
             "Shareable badge",
           ],
@@ -728,10 +731,11 @@ export const content = {
         },
         {
           name: "Pro",
-          heading: "For freelancers",
+          heading: "For freelancers and agencies",
           price: "$19",
           period: "/month",
           features: [
+            "Unlimited users",
             "Unlimited projects",
             "Unlimited feedbacks",
             "Advanced analytics",
@@ -739,7 +743,7 @@ export const content = {
             "Data export",
             "Priority support",
           ],
-          cta: "Get Started",
+          cta: "Get Started Now",
           popular: true,
           badge: "Recommended",
         },
@@ -796,7 +800,7 @@ export const content = {
       headline: "If you've made it this far, it's time to try.",
       subheadline:
         "Join freelancers and agencies who have already automated their feedback collection.",
-      ctaPrimary: "Join the Waitlist now",
+      ctaPrimary: "Start for Free",
       ctaSecondary: "View pricing",
     },
     footer: {
