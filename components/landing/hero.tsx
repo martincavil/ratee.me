@@ -491,7 +491,7 @@ export function Hero() {
                               </div>
                             </div>
                             {/* Recent Feedback */}
-                            <div className="bg-white rounded-lg p-2 border border-gray-200">
+                            <div className="bg-white rounded-lg p-2 border border-gray-200 space-y-1.5">
                               <div className="flex items-center justify-between">
                                 <div className="flex items-center gap-1.5">
                                   <div className="w-4 h-4 bg-gray-200 rounded-full"></div>
@@ -500,7 +500,29 @@ export function Hero() {
                                   </span>
                                 </div>
                                 <span className="px-1.5 py-0.5 bg-emerald-500/10 text-emerald-500 text-[8px] font-bold rounded">
+                                  10/10
+                                </span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-1.5">
+                                  <div className="w-4 h-4 bg-gray-200 rounded-full"></div>
+                                  <span className="font-inter text-[8px] font-medium">
+                                    Marie L.
+                                  </span>
+                                </div>
+                                <span className="px-1.5 py-0.5 bg-emerald-500/10 text-emerald-500 text-[8px] font-bold rounded">
                                   9/10
+                                </span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-1.5">
+                                  <div className="w-4 h-4 bg-gray-200 rounded-full"></div>
+                                  <span className="font-inter text-[8px] font-medium">
+                                    {lang === "fr" ? "Tech Solutions" : "Tech Solutions"}
+                                  </span>
+                                </div>
+                                <span className="px-1.5 py-0.5 bg-amber-500/10 text-amber-500 text-[8px] font-bold rounded">
+                                  8/10
                                 </span>
                               </div>
                             </div>
