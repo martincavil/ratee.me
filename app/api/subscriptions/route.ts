@@ -46,9 +46,14 @@ export async function GET() {
       throw error;
     }
 
+    // If no subscription found, return free plan by default
     return NextResponse.json({
       success: true,
-      data: data || null,
+      data: data || {
+        user_id: user.id,
+        plan: 'free',
+        status: 'active',
+      },
     });
   } catch (error) {
     console.error('Subscription error:', error);
