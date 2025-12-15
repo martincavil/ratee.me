@@ -268,27 +268,27 @@ export const content = {
         {
           question: "Ça prend combien de temps à setup?",
           answer:
-            "15 minutes. Tu crées ton compte, tu configures tes étapes, c'est live.",
+            "5 minutes. Tu crées ton compte, tu configures tes étapes, c'est tout bon.",
         },
         {
           question: "Est-ce que mes clients vont aimer recevoir des feedbacks?",
           answer:
             "Oui. 80%+ répondent quand c'est simple (NPS 1-click + commentaire). Et la transparence plaît.",
         },
-        {
-          question: "Je suis solo, c'est pour moi?",
-          answer:
-            "Totalement. Solo freelancer ou agence 50 personnes, tout le monde y gagne. Commence avec le plan Free (gratuit).",
-        },
+        // {
+        //   question: "Je suis seul, c'est pour moi?",
+        //   answer:
+        //     "Totalement. Solo freelancer ou agence 50 personnes, tout le monde y gagne. Commence avec le plan Free (gratuit).",
+        // },
         {
           question: "Est-ce que je peux customiser les emails?",
           answer:
-            "Sur le plan Pro. Mais par défaut, on a déjà des templates pro qu'on recommande.",
+            "Oui sur le plan Pro. Mais par défaut, on a déjà des templates qu'on recommande.",
         },
         {
           question: "Que se passe-t-il si je résilie?",
           answer:
-            "Tes données te restent. Tu peux les télécharger en CSV. Zéro rétention.",
+            "Tes données t'appartiennent. Tu peux les télécharger en CSV. Zéro rétention.",
         },
       ],
     },
@@ -324,7 +324,11 @@ export const content = {
           { label: "Politique de confidentialité", href: "/privacy" },
           { label: "Conditions d'utilisation", href: "/terms" },
           // { label: "RGPD", href: "/gdpr" },
-          { label: "Contact", href: "mailto:martin@ratee.me" },
+          {
+            label: "Contact",
+            //  href: "mailto:martin@ratee.me"
+            href: "mailto:martin.cavi98@gmail.com",
+          },
         ],
       },
       copyright: "Copyright © 2025 ratee.me. All rights reserved.",

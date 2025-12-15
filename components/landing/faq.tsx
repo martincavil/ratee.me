@@ -71,10 +71,12 @@ export function FAQ() {
             {lang === "fr" ? "D'autres questions ?" : "More questions?"}
           </p>
           <a
-            href="mailto:martin@ratee.me"
+            href="mailto:martin.cavil98@gmail.com"
+            // href="mailto:martin@ratee.me"
             className="text-emerald-600 font-medium text-sm hover:underline"
           >
-            martin@ratee.me
+            {/* martin@ratee.me */}
+            martin.cavil98@gmail.com
           </a>
         </div>
       </div>
