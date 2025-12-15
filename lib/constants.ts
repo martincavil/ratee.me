@@ -86,7 +86,7 @@ export const content = {
       ],
     },
     timeline: {
-      title: "Pourquoi ratee.me est incontournable",
+      title: "Pourquoi ratee.me est incontournable pour les freelances",
       items: [
         {
           icon: "Target",
