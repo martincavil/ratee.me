@@ -368,3 +368,194 @@ ratee.me - https://ratee.me
 
   return { subject: t.subject, html, text };
 }
+
+/**
+ * Freelancer notification email when a client submits feedback
+ */
+export function getFreelancerFeedbackNotificationEmailContent(params: {
+  language: Language;
+  freelancerName: string;
+  clientName: string;
+  projectName: string;
+  npsScore: number;
+  comment?: string;
+  dashboardUrl: string;
+}) {
+  const { language, freelancerName, clientName, projectName, npsScore, comment, dashboardUrl } = params;
+
+  // Determine NPS category
+  const getNpsCategory = (score: number) => {
+    if (score <= 5) return { label: language === 'fr' ? 'Détracteur' : 'Detractor', color: '#EF4444' };
+    if (score <= 7) return { label: language === 'fr' ? 'Passif' : 'Passive', color: '#F59E0B' };
+    return { label: language === 'fr' ? 'Promoteur' : 'Promoter', color: '#10B981' };
+  };
+
+  const npsCategory = getNpsCategory(npsScore);
+
+  const content = {
+    fr: {
+      subject: `Nouveau feedback reçu pour ${projectName} - ${npsScore}/10`,
+      greeting: `Bonjour ${freelancerName} ! 👋`,
+      intro: `<strong>${clientName}</strong> vient de soumettre son feedback pour le projet <strong>${projectName}</strong>.`,
+      scoreLabel: 'Score NPS',
+      categoryLabel: 'Catégorie',
+      commentLabel: 'Commentaire',
+      noComment: 'Aucun commentaire fourni',
+      ctaButton: 'Voir le feedback complet',
+      footer: {
+        tip: 'Astuce : Utilisez ce feedback pour améliorer vos services et contacter vos clients promoteurs pour de nouveaux projets !',
+        poweredBy: 'Géré par',
+      },
+    },
+    en: {
+      subject: `New feedback received for ${projectName} - ${npsScore}/10`,
+      greeting: `Hi ${freelancerName}! 👋`,
+      intro: `<strong>${clientName}</strong> just submitted feedback for the project <strong>${projectName}</strong>.`,
+      scoreLabel: 'NPS Score',
+      categoryLabel: 'Category',
+      commentLabel: 'Comment',
+      noComment: 'No comment provided',
+      ctaButton: 'View full feedback',
+      footer: {
+        tip: 'Tip: Use this feedback to improve your services and contact your promoter clients for new projects!',
+        poweredBy: 'Powered by',
+      },
+    },
+  };
+
+  const t = content[language];
+
+  // HTML Email Template
+  const html = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${t.subject}</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  </style>
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f9fafb;">
+
+  <!-- Container -->
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f9fafb; padding: 40px 20px;">
+    <tr>
+      <td align="center">
+        <!-- Main Content -->
+        <table width="600" cellpadding="0" cellspacing="0" style="max-width: 600px; background-color: #ffffff; border-radius: 16px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); overflow: hidden;">
+
+          <!-- Header -->
+          <tr>
+            <td style="background: linear-gradient(135deg, #10B981 0%, #059669 100%); padding: 40px; text-align: center;">
+              <div style="background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px); color: white; padding: 12px 24px; border-radius: 24px; display: inline-block; font-weight: 700; font-size: 16px; letter-spacing: 0.5px;">
+                ratee.me
+              </div>
+            </td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
+            <td style="padding: 48px 40px;">
+              <h1 style="color: #111827; font-size: 28px; margin: 0 0 24px 0; font-weight: 700; line-height: 1.2;">
+                ${t.greeting}
+              </h1>
+
+              <p style="color: #4b5563; font-size: 17px; line-height: 1.6; margin: 0 0 36px 0;">
+                ${t.intro}
+              </p>
+
+              <!-- Feedback Summary -->
+              <div style="background: #f3f4f6; border-radius: 12px; padding: 28px; margin-bottom: 36px;">
+                <table width="100%" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td style="padding-bottom: 20px;">
+                      <p style="color: #6b7280; font-size: 14px; margin: 0 0 8px 0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
+                        ${t.scoreLabel}
+                      </p>
+                      <div style="display: flex; align-items: center;">
+                        <span style="color: #111827; font-size: 48px; font-weight: 700; margin-right: 16px;">
+                          ${npsScore}<span style="font-size: 24px; color: #6b7280;">/10</span>
+                        </span>
+                        <span style="background-color: ${npsCategory.color}20; color: ${npsCategory.color}; padding: 8px 16px; border-radius: 20px; font-size: 14px; font-weight: 600;">
+                          ${npsCategory.label}
+                        </span>
+                      </div>
+                    </td>
+                  </tr>
+                  ${comment ? `
+                  <tr>
+                    <td style="padding-top: 20px; border-top: 1px solid #e5e7eb;">
+                      <p style="color: #6b7280; font-size: 14px; margin: 0 0 8px 0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
+                        ${t.commentLabel}
+                      </p>
+                      <p style="color: #111827; font-size: 15px; line-height: 1.6; margin: 0; font-style: italic;">
+                        "${comment}"
+                      </p>
+                    </td>
+                  </tr>
+                  ` : ''}
+                </table>
+              </div>
+
+              <!-- CTA Button -->
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td align="center" style="padding: 0 0 24px 0;">
+                    <a href="${dashboardUrl}" style="display: inline-block; background: linear-gradient(135deg, #10B981 0%, #059669 100%); color: white; text-decoration: none; padding: 18px 48px; border-radius: 12px; font-weight: 600; font-size: 17px; box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3); transition: all 0.3s ease;">
+                      ${t.ctaButton}
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Tip Section -->
+          <tr>
+            <td style="background-color: #EFF6FF; padding: 24px 40px; border-top: 1px solid #e5e7eb;">
+              <p style="color: #1E40AF; font-size: 14px; margin: 0; line-height: 1.6;">
+                💡 <strong>${t.footer.tip}</strong>
+              </p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="background-color: #f9fafb; padding: 32px 40px; border-top: 1px solid #e5e7eb;">
+              <p style="color: #9ca3af; font-size: 13px; text-align: center; margin: 0;">
+                ${t.footer.poweredBy} <a href="https://ratee.me" style="color: #10B981; text-decoration: none; font-weight: 600;">ratee.me</a>
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>
+  `.trim();
+
+  // Plain text version
+  const text = `
+${t.greeting}
+
+${t.intro.replace(/<\/?strong>/g, "")}
+
+${t.scoreLabel}: ${npsScore}/10 (${npsCategory.label})
+
+${comment ? `${t.commentLabel}: "${comment}"` : t.noComment}
+
+${t.ctaButton}: ${dashboardUrl}
+
+---
+💡 ${t.footer.tip}
+
+${t.footer.poweredBy} ratee.me - https://ratee.me
+  `.trim();
+
+  return { subject: t.subject, html, text };
+}
