@@ -54,9 +54,6 @@ const screensContent = {
         { name: "Creative Studio", nps: 10, status: "Promoter" },
         { name: "Digital Agency", nps: 9, status: "Promoter" },
         { name: "Tech Startup", nps: 8, status: "Passive" },
-        { name: "Hugo D.", nps: 10, status: "Promoter" },
-        { name: "Marie L.", nps: 9, status: "Promoter" },
-        { name: "Tech Solutions", nps: 8, status: "Passive" },
       ],
     },
     analytics: {
@@ -104,7 +101,7 @@ export function Problem() {
     switch (screenType) {
       case "automation":
         return (
-          <div className="bg-white rounded-xl p-6 shadow-md border border-gray-100">
+          <div className="bg-white rounded-xl p-6 shadow-md border border-gray-100 min-h-[300px] flex flex-col">
             <div className="text-sm font-semibold text-gray-900 mb-4">
               {screens.automation.title}
             </div>
@@ -207,7 +204,7 @@ export function Problem() {
 
       case "dashboard":
         return (
-          <div className="bg-white rounded-xl p-6 shadow-md border border-gray-100">
+          <div className="bg-white rounded-xl p-6 shadow-md border border-gray-100 min-h-[300px] flex flex-col">
             <div className="text-sm font-semibold text-gray-900 mb-4">
               {screens.dashboard.title}
             </div>
@@ -240,7 +237,7 @@ export function Problem() {
 
       case "analytics":
         return (
-          <div className="bg-white rounded-xl p-6 shadow-md border border-gray-100">
+          <div className="bg-white rounded-xl p-6 shadow-md border border-gray-100 min-h-[300px] flex flex-col">
             <div className="text-sm font-semibold text-gray-900 mb-4">
               {screens.analytics.title}
             </div>
@@ -311,7 +308,9 @@ export function Problem() {
                   <div className="flex items-start gap-4">
                     <div
                       className={`flex-shrink-0 ${
-                        activeIndex === index ? "text-emerald-600" : "text-gray-400"
+                        activeIndex === index
+                          ? "text-emerald-600"
+                          : "text-gray-400"
                       }`}
                     >
                       {getIcon(issue.icon)}
