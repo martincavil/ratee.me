@@ -147,16 +147,16 @@ export default function SettingsPage() {
     const errors: typeof passwordErrors = {};
 
     if (!passwordData.newPassword) {
-      errors.newPassword = "Le nouveau mot de passe est requis";
+      errors.newPassword = "New password is required";
     } else if (passwordData.newPassword.length < 8) {
       errors.newPassword =
-        "Le mot de passe doit contenir au moins 8 caractères";
+        "Password must be at least 8 characters long";
     }
 
     if (!passwordData.confirmPassword) {
-      errors.confirmPassword = "Veuillez confirmer le nouveau mot de passe";
+      errors.confirmPassword = "Please confirm the new password";
     } else if (passwordData.newPassword !== passwordData.confirmPassword) {
-      errors.confirmPassword = "Les mots de passe ne correspondent pas";
+      errors.confirmPassword = "Passwords do not match";
     }
 
     if (Object.keys(errors).length > 0) {
@@ -179,19 +179,19 @@ export default function SettingsPage() {
 
       if (!data.success) {
         setPasswordApiError(
-          data.error || "Échec de la modification du mot de passe"
+          data.error || "Failed to change password"
         );
         return;
       }
 
-      setPasswordSuccess("Mot de passe modifié avec succès");
+      setPasswordSuccess("Password changed successfully");
       setPasswordData({
         newPassword: "",
         confirmPassword: "",
       });
       setTimeout(() => setPasswordSuccess(null), 5000);
     } catch (error) {
-      setPasswordApiError("Une erreur inattendue s'est produite");
+      setPasswordApiError("An unexpected error occurred");
     } finally {
       setChangingPassword(false);
     }
@@ -288,7 +288,7 @@ export default function SettingsPage() {
                 name="avatar_url"
                 value={formData.avatar_url}
                 onChange={handleChange}
-                placeholder="https://exemple.com/avatar.jpg"
+                placeholder="https://example.com/avatar.jpg"
                 className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-emerald text-sm ${
                   errors.avatar_url ? "border-error" : "border-border"
                 }`}
@@ -328,16 +328,16 @@ export default function SettingsPage() {
         {/* Password Change */}
         <div className="lg:col-span-2 bg-white rounded-lg border border-border p-6">
           <h2 className="text-xl! font-semibold text-content-primary font-sora mb-2">
-            Sécurité
+            Security
           </h2>
           <p className="text-sm text-content-secondary mb-6">
-            Définissez un nouveau mot de passe pour votre compte
+            Set a new password for your account
           </p>
 
           <form onSubmit={handlePasswordSubmit} className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-content-primary mb-1">
-                Nouveau mot de passe
+                New password
               </label>
               <input
                 type="password"
@@ -354,13 +354,13 @@ export default function SettingsPage() {
                 </p>
               )}
               <p className="mt-1 text-xs text-content-tertiary">
-                Au moins 8 caractères
+                At least 8 characters
               </p>
             </div>
 
             <div>
               <label className="block text-sm font-medium text-content-primary mb-1">
-                Confirmer le nouveau mot de passe
+                Confirm new password
               </label>
               <input
                 type="password"
@@ -399,15 +399,15 @@ export default function SettingsPage() {
                 className="w-full px-4 py-2 bg-emerald text-white rounded-md hover:bg-emerald-dark disabled:opacity-50 disabled:cursor-not-allowed font-medium text-sm transition-colors"
               >
                 {changingPassword
-                  ? "Modification en cours..."
-                  : "Modifier le mot de passe"}
+                  ? "Changing password..."
+                  : "Change password"}
               </button>
             </div>
           </form>
         </div>
 
         {/* Account Actions */}
-        <div className="lg:col-span-2 flex flex-col gap-4 justify-between">
+        <div className="lg:col-span-3 flex flex-col gap-4 justify-between">
           {/* Account Info */}
           <div className="bg-white rounded-lg border border-border p-5">
             <h2 className="text-xl! font-semibold text-content-primary font-sora mb-4">
