@@ -1,6 +1,7 @@
 "use client";
 
 import { useLanguage } from "@/lib/i18n";
+import { Sparkles } from "lucide-react";
 
 export function Results() {
   const { text, lang } = useLanguage();
@@ -12,10 +13,11 @@ export function Results() {
     >
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 flex items-center justify-center gap-3">
             {lang === "fr"
-              ? "Sois fier de ton travail 💪"
-              : "Be proud of your work 💪"}
+              ? "Sois fier de ton travail"
+              : "Be proud of your work"}
+            <Sparkles className="w-8 h-8 text-emerald-600" />
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             {lang === "fr"

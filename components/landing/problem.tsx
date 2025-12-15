@@ -2,6 +2,13 @@
 
 import { useLanguage } from "@/lib/i18n";
 import { useState, useEffect } from "react";
+import * as Icons from "lucide-react";
+
+// Helper to get icon component
+const getIcon = (iconName: string) => {
+  const Icon = Icons[iconName as keyof typeof Icons] as any;
+  return Icon ? <Icon className="w-6 h-6" /> : null;
+};
 
 // Screen content for each accordion item
 const screensContent = {
@@ -297,11 +304,11 @@ export function Problem() {
                 <div className="p-5 pl-6">
                   <div className="flex items-start gap-4">
                     <div
-                      className={`text-lg flex-shrink-0 ${
-                        activeIndex === index ? "" : "opacity-60"
+                      className={`flex-shrink-0 ${
+                        activeIndex === index ? "text-emerald-600" : "text-gray-400"
                       }`}
                     >
-                      {issue.icon}
+                      {getIcon(issue.icon)}
                     </div>
                     <div>
                       <h3

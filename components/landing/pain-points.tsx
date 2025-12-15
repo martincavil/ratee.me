@@ -2,6 +2,24 @@
 
 import { useLanguage } from "@/lib/i18n";
 import Link from "next/link";
+import {
+  // Timer,
+  // Users,
+  // BarChart2,
+  // DollarSign,
+  AlertTriangle,
+} from "lucide-react";
+
+// const getIcon = (iconName: string) => {
+//   const icons: Record<string, any> = {
+//     Timer,
+//     Users,
+//     BarChart2,
+//     DollarSign,
+//   };
+//   const Icon = icons[iconName];
+//   return Icon ? <Icon className="w-12 h-12" /> : null;
+// };
 
 export function PainPoints() {
   const { lang } = useLanguage();
@@ -13,28 +31,28 @@ export function PainPoints() {
         "Chaque jour, freelances et agences perdent du temps et des opportunités.",
       problems: [
         {
-          icon: "😓",
+          // icon: "Timer",
           title: "Tu relances manuellement pour les feedbacks",
           description:
             "Emails de suivi, messages LinkedIn, appels... Tu passes des heures à demander l'avis de tes clients. Et souvent, tu n'obtiens rien.",
           stat: "5-6h/mois perdues",
         },
         {
-          icon: "🤷",
+          // icon: "Users",
           title: "Tu ne peux pas prouver ta qualité",
           description:
             "Tu dis 'mes clients sont satisfaits', mais tu n'as rien de concret à montrer. Pas de chiffres, pas de preuves objectives. Juste ta parole.",
           stat: "0 preuve sociale quantifiable",
         },
         {
-          icon: "📊",
+          // icon: "BarChart2",
           title: "Tes feedbacks sont éparpillés partout",
           description:
             "Google Sheets, emails, notes manuscrites, messages Slack... Impossible d'avoir une vue d'ensemble. Tu ne connais même pas ton réel NPS.",
           stat: "Aucune analyse possible",
         },
         {
-          icon: "💸",
+          // icon: "DollarSign",
           title: "Tu rates des opportunités de revenus récurrents",
           description:
             "Tes meilleurs clients? Tu ne les recontactes jamais. Tu ne sais pas qui recommanderait tes services. Tu laisses de l'argent sur la table.",
@@ -48,28 +66,28 @@ export function PainPoints() {
         "Every day, freelancers and agencies lose time and opportunities.",
       problems: [
         {
-          icon: "😓",
+          // icon: "Timer",
           title: "You manually chase feedback",
           description:
             "Follow-up emails, LinkedIn messages, calls... You spend hours asking for client feedback. And often, you get nothing.",
           stat: "5-6h/month wasted",
         },
         {
-          icon: "🤷",
+          // icon: "Users",
           title: "You can't prove your quality",
           description:
             "You say 'my clients are satisfied', but you have nothing concrete to show. No numbers, no objective proof. Just your word.",
           stat: "0 quantifiable social proof",
         },
         {
-          icon: "📊",
+          // icon: "BarChart2",
           title: "Your feedback is scattered everywhere",
           description:
             "Google Sheets, emails, handwritten notes, Slack messages... Impossible to get an overview. You don't even know your average score.",
           stat: "No analysis possible",
         },
         {
-          icon: "💸",
+          // icon: "DollarSign",
           title: "You miss recurring revenue opportunities",
           description:
             "Your best clients? You never re-contact them. You don't know who would recommend your services. You're leaving money on the table.",
@@ -95,8 +113,9 @@ export function PainPoints() {
         {/* Header */}
         <div className="text-center mb-16">
           <div className="inline-block px-4 py-2 bg-red-500/10 border border-red-500/20 rounded-full mb-6">
-            <span className="text-red-500 font-semibold text-sm">
-              {lang === "fr" ? "⚠️ STOP" : "⚠️ STOP"}
+            <span className="text-red-500 font-semibold text-sm flex items-center gap-2">
+              <AlertTriangle className="w-4 h-4" />
+              STOP
             </span>
           </div>
           <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6 font-sora">
@@ -120,7 +139,7 @@ export function PainPoints() {
               </div>
 
               {/* Icon */}
-              <div className="text-5xl mb-4">{problem.icon}</div>
+              {/* <div className="text-slate-300 mb-4">{getIcon(problem.icon)}</div> */}
 
               {/* Title */}
               <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-emerald-600 transition-colors">

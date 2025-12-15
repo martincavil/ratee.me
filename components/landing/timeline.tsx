@@ -2,6 +2,13 @@
 
 import { useLanguage } from "@/lib/i18n";
 import { useEffect, useRef, useState } from "react";
+import * as Icons from "lucide-react";
+
+// Helper to get icon component
+const getIcon = (iconName: string) => {
+  const Icon = Icons[iconName as keyof typeof Icons] as any;
+  return Icon ? <Icon className="w-6 h-6" /> : null;
+};
 
 export function Timeline() {
   const { text } = useLanguage();
@@ -77,7 +84,7 @@ export function Timeline() {
                   >
                     <div className="bg-white rounded-xl p-6 shadow-md border border-gray-100 hover:shadow-lg hover:border-emerald-500/30 transition-all">
                       <div className="flex items-start gap-4">
-                        <div className="text-lg flex-shrink-0">{item.icon}</div>
+                        <div className="flex-shrink-0 text-emerald-600">{getIcon(item.icon)}</div>
                         <div>
                           <h3 className="text-xl! font-semibold text-gray-900 mb-2">
                             {item.title}

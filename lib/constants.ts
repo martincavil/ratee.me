@@ -56,28 +56,28 @@ export const content = {
         "Freelances et agences gagnent en efficacité, en crédibilité et en revenus.",
       issues: [
         {
-          icon: "⏱️",
+          icon: "Clock",
           title: "Gain de temps",
           description:
             "Économise 5 à 6 heures par mois. Plus de relances manuelles, plus de fichiers Excel à maintenir. Les feedbacks arrivent automatiquement après chaque étape projet.",
           screen: "automation",
         },
         {
-          icon: "🏆",
+          icon: "Trophy",
           title: "Légitimité renforcée",
           description:
             "Affiche ton score NPS sur ton site. Tes prospects voient immédiatement ta crédibilité. La preuve sociale qui convertit, sans effort.",
           screen: "badge",
         },
         {
-          icon: "🔄",
+          icon: "Repeat",
           title: "Clients récurrents",
           description:
             "Identifie tes clients les plus satisfaits. Recontacte-les au bon moment pour de nouvelles missions. Transforme chaque projet réussi en opportunité.",
           screen: "dashboard",
         },
         {
-          icon: "📈",
+          icon: "TrendingUp",
           title: "Process améliorés",
           description:
             "Les retours clients révèlent tes axes d'amélioration. Analyse les tendances, identifie les points de friction, et améliore continuellement ton service.",
@@ -89,25 +89,25 @@ export const content = {
       title: "Pourquoi ratee.me est incontournable",
       items: [
         {
-          icon: "🎯",
+          icon: "Target",
           title: "Zéro effort, maximum de data",
           description:
             "Les feedbacks s'envoient automatiquement à chaque étape projet. Tu ne fais rien, les données arrivent. Fini les relances oubliées.",
         },
         {
-          icon: "💎",
+          icon: "Gem",
           title: "Ta réputation, quantifiée",
           description:
             "Un score NPS objectif et mesurable. Plus besoin de dire 'mes clients sont satisfaits'. Tu le prouves avec des chiffres.",
         },
         {
-          icon: "🚀",
+          icon: "Rocket",
           title: "Convertis plus de prospects",
           description:
             "Affiche ton badge NPS sur ton site. Les prospects voient immédiatement ta crédibilité. La confiance se construit avant même le premier contact.",
         },
         {
-          icon: "♻️",
+          icon: "RefreshCw",
           title: "Transforme les clients en revenus récurrents",
           description:
             "Identifie tes promoteurs et recontacte-les au bon moment. Chaque projet réussi devient une opportunité de mission récurrente.",
@@ -118,25 +118,25 @@ export const content = {
       title: "Tout ce dont tu as besoin",
       items: [
         {
-          icon: "⚡",
+          icon: "Zap",
           title: "Tout est automatique",
           description:
             "Feedbacks envoyés au bon moment, sans intervention. Tu peux virer ça de ta to-do list.",
         },
         {
-          icon: "📈",
+          icon: "BarChart3",
           title: "Un seul endroit pour tout",
           description:
             "Tous tes clients, tous leurs feedbacks, tous les scores NPS. Vue d'ensemble totale, une seule source de vérité.",
         },
         {
-          icon: "⭐",
+          icon: "Star",
           title: "Scores + témoignages",
           description:
             "Collecte NPS 0-10 et citations. Voir qui te recommande vraiment, qui ne l'est pas. Data honnête.",
         },
         {
-          icon: "🎖️",
+          icon: "Award",
           title: "Affiche ton score",
           description:
             "Badge NPS embeddable sur ton site. Prouve ta qualité en 1 clic. Clients voient ta crédibilité.",
@@ -631,28 +631,28 @@ export const content = {
         "Freelancers and agencies gain efficiency, credibility and revenue.",
       issues: [
         {
-          icon: "⏱️",
+          icon: "Clock",
           title: "Time savings",
           description:
             "Save 5-6 hours per month. No more manual follow-ups, no more Excel files to maintain. Feedback arrives automatically after each project stage.",
           screen: "automation",
         },
         {
-          icon: "🏆",
+          icon: "Trophy",
           title: "Enhanced credibility",
           description:
             "Display your NPS score on your site. Prospects instantly see your credibility. Social proof that converts, effortlessly.",
           screen: "badge",
         },
         {
-          icon: "🔄",
+          icon: "Repeat",
           title: "Recurring clients",
           description:
             "Identify your most satisfied clients. Reach out at the right time for new projects. Turn every successful project into an opportunity.",
           screen: "dashboard",
         },
         {
-          icon: "📈",
+          icon: "TrendingUp",
           title: "Improved processes",
           description:
             "Client feedback reveals areas for improvement. Analyze trends, identify friction points, and continuously improve your service.",
@@ -664,25 +664,25 @@ export const content = {
       title: "Why ratee.me is essential",
       items: [
         {
-          icon: "🎯",
+          icon: "Target",
           title: "Zero effort, maximum data",
           description:
             "Feedback is sent automatically at each project stage. You do nothing, data arrives. No more forgotten follow-ups.",
         },
         {
-          icon: "💎",
+          icon: "Gem",
           title: "Your reputation, quantified",
           description:
             "An objective, measurable NPS score. No more saying 'my clients are satisfied'. You prove it with numbers.",
         },
         {
-          icon: "🚀",
+          icon: "Rocket",
           title: "Convert more prospects",
           description:
             "Display your NPS badge on your site. Prospects instantly see your credibility. Trust is built before the first contact.",
         },
         {
-          icon: "♻️",
+          icon: "RefreshCw",
           title: "Turn clients into recurring revenue",
           description:
             "Identify your promoters and reach out at the right time. Every successful project becomes a recurring opportunity.",
@@ -693,25 +693,25 @@ export const content = {
       title: "Everything you need",
       items: [
         {
-          icon: "⚡",
+          icon: "Zap",
           title: "Everything automated",
           description:
             "Feedback sent at the right time, hands-free. Remove it from your to-do forever.",
         },
         {
-          icon: "📈",
+          icon: "BarChart3",
           title: "One place for everything",
           description:
             "All your clients, all their feedback, all their NPS scores. Complete overview, one source of truth.",
         },
         {
-          icon: "⭐",
+          icon: "Star",
           title: "Scores + testimonials",
           description:
             "Collect NPS 0-10 and quotes. See who recommends you, who doesn't. Real data.",
         },
         {
-          icon: "🎖️",
+          icon: "Award",
           title: "Show your score",
           description:
             "Embeddable NPS badge for your site. Prove quality instantly. Clients see your credibility.",
