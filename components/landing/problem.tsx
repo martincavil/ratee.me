@@ -28,6 +28,9 @@ const screensContent = {
         { name: "Studio Créatif", nps: 10, status: "Promoteur" },
         { name: "Agence Digital", nps: 9, status: "Promoteur" },
         { name: "Startup Tech", nps: 8, status: "Passif" },
+        { name: "Hugo D.", nps: 10, status: "Promoteur" },
+        { name: "Marie L.", nps: 9, status: "Promoteur" },
+        { name: "Tech Solutions", nps: 8, status: "Passif" },
       ],
     },
     analytics: {
@@ -51,6 +54,9 @@ const screensContent = {
         { name: "Creative Studio", nps: 10, status: "Promoter" },
         { name: "Digital Agency", nps: 9, status: "Promoter" },
         { name: "Tech Startup", nps: 8, status: "Passive" },
+        { name: "Hugo D.", nps: 10, status: "Promoter" },
+        { name: "Marie L.", nps: 9, status: "Promoter" },
+        { name: "Tech Solutions", nps: 8, status: "Passive" },
       ],
     },
     analytics: {

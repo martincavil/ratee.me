@@ -241,7 +241,7 @@ export const content = {
           ],
           cta: "Commencer maintenant",
           popular: true,
-          badge: "Recommandé",
+          badge: "Populaire",
         },
         // TODO: Business plan - À implémenter plus tard
         // {
@@ -816,7 +816,7 @@ export const content = {
           ],
           cta: "Get Started Now",
           popular: true,
-          badge: "Recommended",
+          badge: "The Most Popular",
         },
         // TODO: Business plan - To implement later
         // {

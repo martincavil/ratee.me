@@ -47,7 +47,7 @@ export function CTAFinal() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href={user ? "/dashboard" : "/auth/signup"}
-                className="px-8 py-3 bg-white text-emerald-600 rounded-lg font-semibold hover:bg-gray-100 transition-all hover:scale-105 shadow-md cursor-pointer"
+                className="px-8 py-3 bg-white text-emerald-600 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-md cursor-pointer"
               >
                 {user
                   ? (lang === "fr" ? "Mon Dashboard" : "My Dashboard")

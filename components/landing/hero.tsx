@@ -113,7 +113,7 @@ export function Hero() {
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
                 href={user ? "/dashboard" : "/auth/signup"}
-                className="px-8 py-4 bg-[#10B981] text-white rounded-lg font-inter font-semibold hover:bg-[#047857] transition-all hover:scale-105 hover:shadow-md text-center cursor-pointer"
+                className="px-8 py-4 bg-[#10B981] text-white rounded-lg font-inter font-semibold hover:bg-[#047857] transition-colors text-center cursor-pointer"
               >
                 {user
                   ? (lang === "fr" ? "Mon Dashboard" : "My Dashboard")
@@ -189,7 +189,7 @@ export function Hero() {
                 <Link
                   key={screen.id}
                   href={screen.href}
-                  className="absolute w-full transition-all duration-700 ease-in-out hover:scale-[1.02] group origin-bottom cursor-pointer"
+                  className="absolute w-full transition-all duration-700 ease-in-out group origin-bottom cursor-pointer"
                   style={{
                     top:
                       relativeIndex === 0

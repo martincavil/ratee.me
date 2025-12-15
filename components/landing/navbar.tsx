@@ -115,7 +115,7 @@ export function LandingNavbar() {
                 <NavLink href="/auth/login">{text.nav.login}</NavLink>
                 <Link
                   href="/auth/signup"
-                  className="px-5 py-2 bg-emerald-500 text-white rounded-full font-inter font-semibold text-sm hover:bg-emerald-600 transition-all hover:scale-105 cursor-pointer"
+                  className="px-5 py-2 bg-emerald-500 text-white rounded-full font-inter font-semibold text-sm hover:bg-emerald-600 transition-colors cursor-pointer"
                 >
                   {text.nav.signup}
                 </Link>
