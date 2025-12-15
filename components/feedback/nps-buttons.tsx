@@ -7,26 +7,32 @@ interface NpsButtonsProps {
 
 export function NpsButtons({ value, onChange }: NpsButtonsProps) {
   const getButtonColor = (score: number) => {
-    if (score <= 3) {
+    // 0-5: Détracteurs (rouge)
+    if (score <= 5) {
       return "bg-red-500 text-white hover:bg-red-600";
-    } else if (score <= 6) {
+    }
+    // 6-7: Passifs (orange)
+    else if (score <= 7) {
       return "bg-orange-500 text-white hover:bg-orange-600";
-    } else if (score <= 8) {
-      return "bg-emerald-400 text-white hover:bg-emerald-500";
-    } else {
-      return "bg-emerald-600 text-white hover:bg-emerald-700";
+    }
+    // 8-10: Promoteurs (vert)
+    else {
+      return "bg-emerald-500 text-white hover:bg-emerald-600";
     }
   };
 
   const getButtonInactiveColor = (score: number) => {
-    if (score <= 3) {
+    // 0-5: Détracteurs (rouge)
+    if (score <= 5) {
       return "bg-red-100 text-red-700 hover:bg-red-200";
-    } else if (score <= 6) {
+    }
+    // 6-7: Passifs (orange)
+    else if (score <= 7) {
       return "bg-orange-100 text-orange-700 hover:bg-orange-200";
-    } else if (score <= 8) {
+    }
+    // 8-10: Promoteurs (vert)
+    else {
       return "bg-emerald-100 text-emerald-700 hover:bg-emerald-200";
-    } else {
-      return "bg-emerald-200 text-emerald-800 hover:bg-emerald-300";
     }
   };
 

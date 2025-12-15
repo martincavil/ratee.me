@@ -104,39 +104,38 @@ export function NPSForm({ project, token, language = "en" }: NPSFormProps) {
   };
 
   const getScoreLabel = (score: number) => {
-    if (score <= 4) return t.nps.labels.detractor;
-    if (score <= 6) return t.nps.labels.passive;
+    // 0-5: Détracteurs
+    if (score <= 5) return t.nps.labels.detractor;
+    // 6-7: Passifs
     if (score <= 7) return t.nps.labels.passive;
-    if (score <= 8) return t.nps.labels.promoter;
+    // 8-9: Promoteurs
+    if (score <= 9) return t.nps.labels.promoter;
+    // 10: Super Promoteurs
     return t.nps.labels.superPromoter;
   };
 
   const getScoreColor = (score: number, isSelected: boolean = false) => {
-    // Détracteurs (0-4) : Rouge
+    // Détracteurs (0-5) : Rouge avec gradient
     if (score <= 1)
       return isSelected ? "bg-red-800" : "bg-red-800 hover:bg-red-900";
     if (score <= 3)
       return isSelected ? "bg-red-700" : "bg-red-700 hover:bg-red-800";
-    if (score === 4)
+    if (score <= 5)
       return isSelected ? "bg-red-600" : "bg-red-600 hover:bg-red-700";
 
-    // Passifs bas (5-6) : Orange
-    if (score === 5)
-      return isSelected ? "bg-orange-600" : "bg-orange-600 hover:bg-orange-700";
+    // Passifs (6-7) : Orange
     if (score === 6)
-      return isSelected ? "bg-orange-500" : "bg-orange-500 hover:bg-orange-600";
-
-    // Passifs hauts (7) : Jaune
+      return isSelected ? "bg-orange-600" : "bg-orange-600 hover:bg-orange-700";
     if (score === 7)
-      return isSelected ? "bg-yellow-500" : "bg-yellow-500 hover:bg-yellow-600";
+      return isSelected ? "bg-orange-500" : "bg-orange-500 hover:bg-orange-600";
 
     // Promoteurs (8-10) : Vert de plus en plus foncé
     if (score === 8)
-      return isSelected ? "bg-green-500" : "bg-green-500 hover:bg-green-600";
+      return isSelected ? "bg-emerald-500" : "bg-emerald-500 hover:bg-emerald-600";
     if (score === 9)
-      return isSelected ? "bg-green-600" : "bg-green-600 hover:bg-green-700";
+      return isSelected ? "bg-emerald-600" : "bg-emerald-600 hover:bg-emerald-700";
     if (score === 10)
-      return isSelected ? "bg-green-700" : "bg-green-700 hover:bg-green-800";
+      return isSelected ? "bg-emerald-700" : "bg-emerald-700 hover:bg-emerald-800";
 
     return "bg-gray-300";
   };

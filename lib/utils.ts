@@ -45,19 +45,25 @@ export function timeAgo(date: Date | string): string {
 
 /**
  * Get NPS category from score
+ * 0-5: Detractor
+ * 6-7: Passive
+ * 8-10: Promoter
  */
 export function getNPSCategory(score: number): 'detractor' | 'passive' | 'promoter' {
-  if (score <= 6) return 'detractor';
-  if (score <= 8) return 'passive';
+  if (score <= 5) return 'detractor';
+  if (score <= 7) return 'passive';
   return 'promoter';
 }
 
 /**
  * Get NPS badge variant
+ * 0-5: Destructive (red)
+ * 6-7: Default (gray/orange)
+ * 8-10: Success (green)
  */
 export function getNPSBadgeVariant(score: number): 'destructive' | 'default' | 'success' {
-  if (score <= 6) return 'destructive';
-  if (score <= 8) return 'default';
+  if (score <= 5) return 'destructive';
+  if (score <= 7) return 'default';
   return 'success';
 }
 
