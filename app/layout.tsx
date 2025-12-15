@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 import { Sora, Inter } from 'next/font/google';
 import { LanguageProvider } from '@/lib/i18n';
-import { generateMetadata } from '@/lib/seo';
+import { generateMetadata, jsonLd, organizationSchema } from '@/lib/seo';
 import GoogleAnalytics from '@/components/analytics/google-analytics';
+import Script from 'next/script';
 import './globals.css';
 
 const sora = Sora({
@@ -20,6 +21,7 @@ const inter = Inter({
 });
 
 // Métadonnées SEO optimisées pour le français (langue principale)
+// La langue sera détectée dynamiquement côté client via LanguageProvider
 export const metadata: Metadata = generateMetadata('fr');
 
 export default function RootLayout({
@@ -29,6 +31,25 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" className={`${sora.variable} ${inter.variable}`}>
+      <head>
+        {/* JSON-LD Structured Data for SEO */}
+        <Script
+          id="json-ld-software"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd.fr),
+          }}
+          strategy="beforeInteractive"
+        />
+        <Script
+          id="json-ld-organization"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationSchema),
+          }}
+          strategy="beforeInteractive"
+        />
+      </head>
       <body className="font-inter bg-bg-primary text-content-primary antialiased">
         <GoogleAnalytics />
         <LanguageProvider>

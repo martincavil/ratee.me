@@ -2,12 +2,14 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
+import type { FeedbackLanguage } from "@/lib/feedback-i18n";
 
 interface SuccessMessageProps {
   onAutoRedirect?: () => void;
+  language?: FeedbackLanguage;
 }
 
-export function SuccessMessage({ onAutoRedirect }: SuccessMessageProps) {
+export function SuccessMessage({ onAutoRedirect, language = 'fr' }: SuccessMessageProps) {
   useEffect(() => {
     // Auto redirect after 5 seconds
     if (!onAutoRedirect) return;
@@ -41,15 +43,15 @@ export function SuccessMessage({ onAutoRedirect }: SuccessMessageProps) {
 
         {/* Title */}
         <h1 className="text-3xl font-bold text-gray-900 font-sora mb-3">
-          Merci !
+          {language === 'fr' ? 'Merci !' : 'Thank you!'}
         </h1>
 
         {/* Message */}
         <p className="text-lg text-gray-600 font-inter mb-2">
-          Votre avis est important pour nous
+          {language === 'fr' ? 'Votre avis est important pour nous' : 'Your feedback is important to us'}
         </p>
         <p className="text-sm text-gray-500 font-inter mb-8">
-          Vous recevrez un email de confirmation
+          {language === 'fr' ? 'Vous recevrez un email de confirmation' : 'You will receive a confirmation email'}
         </p>
 
         {/* CTA Button */}
@@ -57,12 +59,12 @@ export function SuccessMessage({ onAutoRedirect }: SuccessMessageProps) {
           href="/"
           className="inline-block px-8 py-3 bg-emerald-500 text-white rounded-lg font-sora font-semibold hover:bg-emerald-600 transition-colors shadow-sm hover:shadow-md"
         >
-          Retour à l&apos;accueil
+          {language === 'fr' ? "Retour à l'accueil" : 'Back to home'}
         </Link>
 
         {/* Auto redirect notice */}
         <p className="mt-6 text-xs text-gray-400 font-inter">
-          Redirection automatique dans 5 secondes...
+          {language === 'fr' ? 'Redirection automatique dans 5 secondes...' : 'Automatic redirect in 5 seconds...'}
         </p>
       </div>
     </div>

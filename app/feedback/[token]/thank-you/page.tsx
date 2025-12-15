@@ -1,8 +1,40 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { detectFeedbackLanguage, type FeedbackLanguage } from "@/lib/feedback-i18n";
 
 export default function ThankYouPage() {
+  const [language, setLanguage] = useState<FeedbackLanguage>('fr');
+
+  useEffect(() => {
+    const detectedLang = detectFeedbackLanguage();
+    setLanguage(detectedLang);
+  }, []);
+
+  const text = {
+    fr: {
+      title: "Merci !",
+      subtitle: "Votre avis a été soumis avec succès.",
+      message1: "Nous apprécions vraiment que vous ayez pris le temps de partager vos commentaires avec nous. Votre avis nous aide à nous améliorer et à offrir de meilleurs résultats.",
+      message2: "Si vous avez des questions ou des préoccupations supplémentaires, n'hésitez pas à nous contacter directement.",
+      cta: "En savoir plus sur ratee.me",
+      poweredBy: "Propulsé par",
+    },
+    en: {
+      title: "Thank You!",
+      subtitle: "Your feedback has been successfully submitted.",
+      message1: "We really appreciate you taking the time to share your thoughts with us. Your feedback helps us improve and deliver better results.",
+      message2: "If you have any additional questions or concerns, feel free to reach out to us directly.",
+      cta: "Learn More About ratee.me",
+      poweredBy: "Powered by",
+    },
+  };
+
+  const t = text[language];
+
   return (
-    <div className="min-h-screen bg-linear-to-br from-green-50 via-white to-blue-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-blue-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-2xl mx-auto text-center">
         {/* Success Icon */}
         <div className="mb-8 flex justify-center">
@@ -25,23 +57,21 @@ export default function ThankYouPage() {
 
         {/* Header */}
         <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
-          Thank You!
+          {t.title}
         </h1>
 
         <p className="text-xl text-gray-600 mb-8">
-          Your feedback has been successfully submitted.
+          {t.subtitle}
         </p>
 
         {/* Message */}
         <div className="bg-white rounded-2xl shadow-md border border-gray-200 p-8 mb-8">
           <p className="text-gray-700 leading-relaxed mb-4">
-            We really appreciate you taking the time to share your thoughts with
-            us. Your feedback helps us improve and deliver better results.
+            {t.message1}
           </p>
 
           <p className="text-gray-600">
-            If you have any additional questions or concerns, feel free to reach
-            out to us directly.
+            {t.message2}
           </p>
         </div>
 
@@ -49,16 +79,16 @@ export default function ThankYouPage() {
         <div className="space-y-4">
           <Link
             href="/"
-            className="inline-block px-8 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition-all hover:shadow-md"
+            className="inline-block px-8 py-3 bg-emerald-500 text-white rounded-lg font-semibold hover:bg-emerald-600 transition-all hover:shadow-md"
           >
-            Learn More About ratee.me
+            {t.cta}
           </Link>
 
           <p className="text-sm text-gray-500">
-            Powered by{" "}
+            {t.poweredBy}{" "}
             <a
               href="https://ratee.me"
-              className="text-primary font-semibold hover:underline"
+              className="text-emerald-600 font-semibold hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >

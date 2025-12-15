@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { FeedbackForm } from "@/components/feedback/feedback-form";
-import { SuccessMessage } from "@/components/feedback/success-message";
+import { NPSForm } from "@/components/feedback/nps-form";
 import { useRouter } from "next/navigation";
+import { detectFeedbackLanguage, type FeedbackLanguage } from "@/lib/feedback-i18n";
 
 interface FeedbackPageProps {
   params: Promise<{
@@ -17,7 +17,13 @@ export default function FeedbackPage({ params }: FeedbackPageProps) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [project, setProject] = useState<any>(null);
-  const [success, setSuccess] = useState(false);
+  const [language, setLanguage] = useState<FeedbackLanguage>('fr');
+
+  // Detect browser language on mount
+  useEffect(() => {
+    const detectedLang = detectFeedbackLanguage();
+    setLanguage(detectedLang);
+  }, []);
 
   useEffect(() => {
     // Get token from params
@@ -33,25 +39,17 @@ export default function FeedbackPage({ params }: FeedbackPageProps) {
       const data = await response.json();
 
       if (!data.success) {
-        setError(data.error || "Lien invalide ou expiré");
+        setError(data.error || (language === 'fr' ? "Lien invalide ou expiré" : "Invalid or expired link"));
         return;
       }
 
       setProject(data.data);
     } catch (err) {
       console.error("Validation error:", err);
-      setError("Une erreur est survenue");
+      setError(language === 'fr' ? "Une erreur est survenue" : "An error occurred");
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleSuccess = () => {
-    setSuccess(true);
-  };
-
-  const handleAutoRedirect = () => {
-    router.push("/");
   };
 
   // Loading state
@@ -60,7 +58,9 @@ export default function FeedbackPage({ params }: FeedbackPageProps) {
       <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-blue-50 to-emerald-200">
         <div className="text-center">
           <div className="animate-spin w-12 h-12 border-4 border-emerald-500 border-t-transparent rounded-full mx-auto mb-4"></div>
-          <p className="text-gray-600 font-inter">Chargement...</p>
+          <p className="text-gray-600 font-inter">
+            {language === 'fr' ? 'Chargement...' : 'Loading...'}
+          </p>
         </div>
       </div>
     );
@@ -90,38 +90,33 @@ export default function FeedbackPage({ params }: FeedbackPageProps) {
             ❌ {error}
           </h1>
           <p className="text-gray-600 font-inter mb-6">
-            Le lien de feedback n&apos;est plus valide ou a expiré.
+            {language === 'fr'
+              ? "Le lien de feedback n'est plus valide ou a expiré."
+              : "The feedback link is no longer valid or has expired."}
           </p>
           <button
             onClick={() => router.push("/")}
             className="px-6 py-3 bg-emerald-500 text-white rounded-lg font-sora font-semibold hover:bg-emerald-600 transition-colors"
           >
-            Retour à l&apos;accueil
+            {language === 'fr' ? "Retour à l'accueil" : "Back to home"}
           </button>
         </div>
       </div>
     );
   }
 
-  // Success state
-  if (success) {
-    return (
-      <div className="min-h-screen bg-[#F5F3F0] flex items-center justify-center">
-        <SuccessMessage onAutoRedirect={handleAutoRedirect} />
-      </div>
-    );
-  }
-
   // Form state
   return (
-    <div className="min-h-screen py-8 px-4 sm:px-6 lg:px-8  bg-linear-to-br from-blue-50 to-emerald-200">
-      <div className="max-w-2xl mx-auto">
-        <div className="bg-white rounded-2xl shadow-md p-6 sm:p-8 lg:p-12">
-          <FeedbackForm
-            token={token}
-            projectName={project?.name || ""}
-            onSuccess={handleSuccess}
-          />
+    <div className="min-h-screen py-8 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 to-emerald-50">
+      <div className="max-w-3xl mx-auto">
+        <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 lg:p-12">
+          {project && (
+            <NPSForm
+              project={project}
+              token={token}
+              language={language}
+            />
+          )}
         </div>
       </div>
     </div>

@@ -142,3 +142,18 @@ export const feedbackTranslations = {
 export function getFeedbackText(lang: FeedbackLanguage) {
   return feedbackTranslations[lang];
 }
+
+/**
+ * Detect browser language for feedback forms
+ * Returns 'fr' if browser language is French, 'en' otherwise
+ */
+export function detectFeedbackLanguage(): FeedbackLanguage {
+  if (typeof window === 'undefined') return 'fr';
+
+  // Detect from browser
+  const browserLang = navigator.language || (navigator as any).userLanguage;
+
+  // If browser language starts with 'fr' (fr, fr-FR, fr-CA, etc.), use French
+  // Otherwise, use English
+  return browserLang.toLowerCase().startsWith('fr') ? 'fr' : 'en';
+}
