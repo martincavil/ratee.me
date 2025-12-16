@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { signupSchema } from '@/lib/validators';
 import type { ApiResponse, AuthResponse } from '@/types/api';
+import { sendNewUserRegistrationNotification } from '@/lib/email';
 
 /**
  * POST /api/auth/signup
@@ -65,6 +66,16 @@ export async function POST(request: Request) {
       .select('*')
       .eq('id', authData.user.id)
       .single();
+
+    // Send notification email to admin (don't block the response)
+    sendNewUserRegistrationNotification({
+      userEmail: authData.user.email!,
+      userName: profile?.name || validated.name,
+      companyName: profile?.company_name || undefined,
+      language: 'fr',
+    }).catch((error) => {
+      console.error('Failed to send registration notification:', error);
+    });
 
     const response: ApiResponse<AuthResponse> = {
       success: true,

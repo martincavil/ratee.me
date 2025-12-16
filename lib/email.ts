@@ -1,5 +1,5 @@
 import { Resend } from "resend";
-import { getFeedbackEmailContent, getWaitlistConfirmationEmailContent, getFreelancerFeedbackNotificationEmailContent, type Language } from "./email-templates";
+import { getFeedbackEmailContent, getWaitlistConfirmationEmailContent, getFreelancerFeedbackNotificationEmailContent, getNewUserRegistrationNotificationEmailContent, type Language } from "./email-templates";
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 
@@ -187,6 +187,72 @@ export async function sendFreelancerFeedbackNotification({
     return { success: true, data: result };
   } catch (error) {
     console.error("❌ Failed to send freelancer notification email:", error);
+    console.error("Error details:", JSON.stringify(error, null, 2));
+    return { success: false, error };
+  }
+}
+
+/**
+ * Send notification email to admin when a new user registers
+ */
+export async function sendNewUserRegistrationNotification({
+  userEmail,
+  userName,
+  companyName,
+  language = 'fr',
+}: {
+  userEmail: string;
+  userName: string;
+  companyName?: string;
+  language?: Language;
+}) {
+  // Get admin email from environment variable
+  const adminEmail = process.env.ADMIN_EMAIL;
+
+  if (!adminEmail) {
+    console.error("ADMIN_EMAIL is not set");
+    return { success: false, error: new Error("Admin email not configured") };
+  }
+
+  // Get translated content
+  const { subject, html, text } = getNewUserRegistrationNotificationEmailContent({
+    language,
+    userEmail,
+    userName,
+    companyName,
+  });
+
+  if (!resend) {
+    console.error("RESEND_API_KEY is not set");
+    return { success: false, error: new Error("Email service not configured") };
+  }
+
+  try {
+    const fromEmail = process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev";
+
+    console.log("🔄 Sending new user registration notification via Resend...", {
+      from: fromEmail,
+      to: adminEmail,
+      subject,
+    });
+
+    const result = await resend.emails.send({
+      from: fromEmail,
+      to: adminEmail,
+      subject,
+      html,
+      text,
+    });
+
+    console.log("✅ New user registration notification sent successfully:", {
+      to: adminEmail,
+      subject,
+      from: fromEmail,
+      resultId: result.data?.id,
+    });
+    return { success: true, data: result };
+  } catch (error) {
+    console.error("❌ Failed to send new user registration notification:", error);
     console.error("Error details:", JSON.stringify(error, null, 2));
     return { success: false, error };
   }

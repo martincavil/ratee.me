@@ -16,6 +16,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 export function LoginForm() {
   const router = useRouter();
@@ -30,6 +38,11 @@ export function LoginForm() {
   const [loading, setLoading] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [forgotPasswordOpen, setForgotPasswordOpen] = useState(false);
+  const [forgotPasswordEmail, setForgotPasswordEmail] = useState("");
+  const [forgotPasswordLoading, setForgotPasswordLoading] = useState(false);
+  const [forgotPasswordSuccess, setForgotPasswordSuccess] = useState(false);
+  const [forgotPasswordError, setForgotPasswordError] = useState<string | null>(null);
 
   useEffect(() => {
     // Check if user is already logged in
@@ -96,6 +109,42 @@ export function LoginForm() {
       setApiError(text.auth.login.errorGeneric);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleForgotPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setForgotPasswordError(null);
+    setForgotPasswordSuccess(false);
+
+    if (!forgotPasswordEmail || !forgotPasswordEmail.includes("@")) {
+      setForgotPasswordError(
+        lang === "fr" ? "Email invalide" : "Invalid email"
+      );
+      return;
+    }
+
+    setForgotPasswordLoading(true);
+
+    try {
+      const response = await fetch("/api/auth/forgot-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: forgotPasswordEmail }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setForgotPasswordSuccess(true);
+        setForgotPasswordEmail("");
+      } else {
+        setForgotPasswordError(data.error || text.auth.forgotPassword.errorGeneric);
+      }
+    } catch {
+      setForgotPasswordError(text.auth.forgotPassword.errorGeneric);
+    } finally {
+      setForgotPasswordLoading(false);
     }
   };
 
@@ -176,12 +225,84 @@ export function LoginForm() {
           </div>
 
           <div className="space-y-2">
-            <Label
-              htmlFor="password"
-              className="text-sm font-medium text-content-primary"
-            >
-              {text.auth.login.passwordLabel}
-            </Label>
+            <div className="flex items-center justify-between">
+              <Label
+                htmlFor="password"
+                className="text-sm font-medium text-content-primary"
+              >
+                {text.auth.login.passwordLabel}
+              </Label>
+              <Dialog open={forgotPasswordOpen} onOpenChange={setForgotPasswordOpen}>
+                <DialogTrigger asChild>
+                  <button
+                    type="button"
+                    className="text-sm text-emerald hover:text-emerald-dark font-medium"
+                  >
+                    {text.auth.login.forgotPassword}
+                  </button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-md">
+                  <DialogHeader>
+                    <DialogTitle>{text.auth.forgotPassword.title}</DialogTitle>
+                    <DialogDescription>
+                      {text.auth.forgotPassword.subtitle}
+                    </DialogDescription>
+                  </DialogHeader>
+                  {forgotPasswordSuccess ? (
+                    <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-md">
+                      <p className="text-sm text-emerald-700">
+                        {text.auth.forgotPassword.successMessage}
+                      </p>
+                    </div>
+                  ) : (
+                    <form onSubmit={handleForgotPassword} className="space-y-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="forgot-email">
+                          {text.auth.forgotPassword.emailLabel}
+                        </Label>
+                        <Input
+                          type="email"
+                          id="forgot-email"
+                          value={forgotPasswordEmail}
+                          onChange={(e) => setForgotPasswordEmail(e.target.value)}
+                          placeholder={text.auth.forgotPassword.emailPlaceholder}
+                          autoComplete="email"
+                        />
+                      </div>
+                      {forgotPasswordError && (
+                        <div className="p-3 bg-error-light border border-error/20 rounded-md">
+                          <p className="text-sm text-error">{forgotPasswordError}</p>
+                        </div>
+                      )}
+                      <div className="flex gap-3">
+                        <Button
+                          type="button"
+                          variant="outline"
+                          onClick={() => {
+                            setForgotPasswordOpen(false);
+                            setForgotPasswordEmail("");
+                            setForgotPasswordError(null);
+                            setForgotPasswordSuccess(false);
+                          }}
+                          className="flex-1"
+                        >
+                          {text.auth.forgotPassword.backToLogin}
+                        </Button>
+                        <Button
+                          type="submit"
+                          disabled={forgotPasswordLoading}
+                          className="flex-1 bg-emerald text-white hover:bg-emerald-dark"
+                        >
+                          {forgotPasswordLoading
+                            ? text.auth.forgotPassword.submitting
+                            : text.auth.forgotPassword.submitButton}
+                        </Button>
+                      </div>
+                    </form>
+                  )}
+                </DialogContent>
+              </Dialog>
+            </div>
             <Input
               type="password"
               id="password"

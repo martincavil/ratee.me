@@ -559,3 +559,167 @@ ${t.footer.poweredBy} ratee.me - https://ratee.me
 
   return { subject: t.subject, html, text };
 }
+
+/**
+ * Admin notification email when a new user registers
+ */
+export function getNewUserRegistrationNotificationEmailContent(params: {
+  language: Language;
+  userEmail: string;
+  userName: string;
+  companyName?: string;
+}) {
+  const { language, userEmail, userName, companyName } = params;
+
+  const content = {
+    fr: {
+      subject: `Nouvel inscrit : ${userName}`,
+      greeting: 'Nouvelle inscription ! 🎉',
+      intro: `Un nouvel utilisateur vient de s'inscrire sur Ratee.me.`,
+      userInfoTitle: 'Informations de l\'utilisateur',
+      nameLabel: 'Nom',
+      emailLabel: 'Email',
+      companyLabel: 'Entreprise',
+      noCompany: 'Non spécifiée',
+      footer: {
+        poweredBy: 'Notification automatique de',
+      },
+    },
+    en: {
+      subject: `New registration: ${userName}`,
+      greeting: 'New registration! 🎉',
+      intro: `A new user just signed up on Ratee.me.`,
+      userInfoTitle: 'User information',
+      nameLabel: 'Name',
+      emailLabel: 'Email',
+      companyLabel: 'Company',
+      noCompany: 'Not specified',
+      footer: {
+        poweredBy: 'Automated notification from',
+      },
+    },
+  };
+
+  const t = content[language];
+
+  // HTML Email Template
+  const html = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${t.subject}</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  </style>
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f9fafb;">
+
+  <!-- Container -->
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f9fafb; padding: 40px 20px;">
+    <tr>
+      <td align="center">
+        <!-- Main Content -->
+        <table width="600" cellpadding="0" cellspacing="0" style="max-width: 600px; background-color: #ffffff; border-radius: 16px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); overflow: hidden;">
+
+          <!-- Header -->
+          <tr>
+            <td style="background: linear-gradient(135deg, #10B981 0%, #059669 100%); padding: 40px; text-align: center;">
+              <div style="background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px); color: white; padding: 12px 24px; border-radius: 24px; display: inline-block; font-weight: 700; font-size: 16px; letter-spacing: 0.5px;">
+                ratee.me
+              </div>
+            </td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
+            <td style="padding: 48px 40px;">
+              <h1 style="color: #111827; font-size: 28px; margin: 0 0 24px 0; font-weight: 700; line-height: 1.2;">
+                ${t.greeting}
+              </h1>
+
+              <p style="color: #4b5563; font-size: 17px; line-height: 1.6; margin: 0 0 36px 0;">
+                ${t.intro}
+              </p>
+            </td>
+          </tr>
+
+          <!-- User Info -->
+          <tr>
+            <td style="padding: 0 40px 48px 40px;">
+              <div style="background: #f3f4f6; border-radius: 12px; padding: 28px;">
+                <h2 style="color: #111827; font-size: 18px; margin: 0 0 20px 0; font-weight: 600;">
+                  ${t.userInfoTitle}
+                </h2>
+                <table width="100%" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td style="padding-bottom: 12px;">
+                      <p style="color: #6b7280; font-size: 14px; margin: 0 0 4px 0; font-weight: 600;">
+                        ${t.nameLabel}
+                      </p>
+                      <p style="color: #111827; font-size: 16px; margin: 0;">
+                        ${userName}
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding-bottom: 12px;">
+                      <p style="color: #6b7280; font-size: 14px; margin: 0 0 4px 0; font-weight: 600;">
+                        ${t.emailLabel}
+                      </p>
+                      <p style="color: #111827; font-size: 16px; margin: 0;">
+                        <a href="mailto:${userEmail}" style="color: #10B981; text-decoration: none;">${userEmail}</a>
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p style="color: #6b7280; font-size: 14px; margin: 0 0 4px 0; font-weight: 600;">
+                        ${t.companyLabel}
+                      </p>
+                      <p style="color: #111827; font-size: 16px; margin: 0;">
+                        ${companyName || t.noCompany}
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="background-color: #f9fafb; padding: 32px 40px; border-top: 1px solid #e5e7eb;">
+              <p style="color: #9ca3af; font-size: 13px; text-align: center; margin: 0;">
+                ${t.footer.poweredBy} <a href="https://ratee.me" style="color: #10B981; text-decoration: none; font-weight: 600;">ratee.me</a>
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>
+  `.trim();
+
+  // Plain text version
+  const text = `
+${t.greeting}
+
+${t.intro}
+
+${t.userInfoTitle}
+${t.nameLabel}: ${userName}
+${t.emailLabel}: ${userEmail}
+${t.companyLabel}: ${companyName || t.noCompany}
+
+---
+${t.footer.poweredBy} ratee.me - https://ratee.me
+  `.trim();
+
+  return { subject: t.subject, html, text };
+}
