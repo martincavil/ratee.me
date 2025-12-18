@@ -13,7 +13,7 @@ export default function AuthLayout({
 }) {
   return (
     <LanguageProvider>
-      <div className="h-screen flex items-center justify-center bg-linear-to-br from-blue-50 to-emerald-200">
+      <div className="max-h-screen flex items-center justify-center bg-linear-to-br from-blue-50 to-emerald-200">
         <div className="w-full max-w-3xl px-4">
           {/* Logo */}
           <div className="text-center mb-6">
