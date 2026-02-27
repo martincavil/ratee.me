@@ -42,6 +42,7 @@ export async function sendFeedbackRequestEmail({
     // En production, utiliser votre domaine vérifié
     const fromEmail = process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev";
 
+    console.log("📧 Sending feedback email:", {
       from: fromEmail,
       to,
       subject,
@@ -56,6 +57,7 @@ export async function sendFeedbackRequestEmail({
       text,
     });
 
+    console.log("✅ Email sent successfully:", {
       to,
       subject,
       from: fromEmail,
@@ -93,6 +95,7 @@ export async function sendWaitlistConfirmationEmail({
   try {
     const fromEmail = process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev";
 
+    console.log("📧 Sending waitlist confirmation email:", {
       from: fromEmail,
       to,
       subject,
@@ -106,6 +109,7 @@ export async function sendWaitlistConfirmationEmail({
       text,
     });
 
+    console.log("✅ Waitlist email sent successfully:", {
       to,
       subject,
       from: fromEmail,
@@ -160,6 +164,7 @@ export async function sendFreelancerFeedbackNotification({
   try {
     const fromEmail = process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev";
 
+    console.log("📧 Sending freelancer notification:", {
       from: fromEmail,
       to,
       subject,
@@ -173,6 +178,7 @@ export async function sendFreelancerFeedbackNotification({
       text,
     });
 
+    console.log("✅ Freelancer notification sent successfully:", {
       to,
       subject,
       from: fromEmail,
@@ -224,6 +230,7 @@ export async function sendNewUserRegistrationNotification({
   try {
     const fromEmail = process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev";
 
+    console.log("📧 Sending new user registration notification:", {
       from: fromEmail,
       to: adminEmail,
       subject,
@@ -237,6 +244,7 @@ export async function sendNewUserRegistrationNotification({
       text,
     });
 
+    console.log("✅ Registration notification sent successfully:", {
       to: adminEmail,
       subject,
       from: fromEmail,
