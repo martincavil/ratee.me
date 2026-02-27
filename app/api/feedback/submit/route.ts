@@ -155,7 +155,6 @@ export async function POST(request: Request) {
         language: 'fr', // TODO: Detect user language from profile
       });
 
-      console.log('✅ Freelancer notification email sent');
     } catch (emailError) {
       // Log error but don't fail the feedback submission
       console.error('⚠️ Failed to send freelancer notification email:', emailError);

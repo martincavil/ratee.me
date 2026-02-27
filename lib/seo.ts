@@ -164,13 +164,6 @@ export const jsonLd = {
       availability: 'https://schema.org/InStock',
       priceValidUntil: '2025-12-31',
     },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.9',
-      bestRating: '5',
-      worstRating: '1',
-      ratingCount: '127',
-    },
     featureList: [
       'Collecte automatique de feedback NPS',
       'Témoignages clients authentiques',
@@ -196,13 +189,6 @@ export const jsonLd = {
       priceCurrency: 'USD',
       availability: 'https://schema.org/InStock',
       priceValidUntil: '2025-12-31',
-    },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.9',
-      bestRating: '5',
-      worstRating: '1',
-      ratingCount: '127',
     },
     featureList: [
       'Automatic NPS feedback collection',

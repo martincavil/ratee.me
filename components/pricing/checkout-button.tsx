@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useLanguage } from "@/lib/i18n";
 
 interface CheckoutButtonProps {
   tierName: string;
@@ -11,6 +12,7 @@ interface CheckoutButtonProps {
 
 export function CheckoutButton({ tierName, isPopular, cta }: CheckoutButtonProps) {
   const [loading, setLoading] = useState(false);
+  const { lang } = useLanguage();
 
   const handleCheckout = async (interval: 'monthly' | 'yearly' = 'monthly') => {
     setLoading(true);
@@ -18,7 +20,7 @@ export function CheckoutButton({ tierName, isPopular, cta }: CheckoutButtonProps
       const response = await fetch('/api/payment/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ interval }),
+        body: JSON.stringify({ interval, language: lang }),
       });
 
       const data = await response.json();

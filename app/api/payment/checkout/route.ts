@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { interval = 'monthly' } = await request.json();
+    const { interval = 'monthly', language = 'fr' } = await request.json();
 
     // Get or create Stripe customer
     const adminClient = createAdminClient();
@@ -56,10 +56,20 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Determine price based on interval
-    const stripePriceId = interval === 'yearly'
-      ? STRIPE_PRICES.PRO_YEARLY
-      : STRIPE_PRICES.PRO_MONTHLY;
+    // Determine price based on interval and language
+    let stripePriceId: string | undefined;
+
+    if (language === 'en') {
+      // Use USD prices for English users
+      stripePriceId = interval === 'yearly'
+        ? STRIPE_PRICES.PRO_YEARLY_USD
+        : STRIPE_PRICES.PRO_MONTHLY_USD;
+    } else {
+      // Use EUR prices for French users (default)
+      stripePriceId = interval === 'yearly'
+        ? STRIPE_PRICES.PRO_YEARLY
+        : STRIPE_PRICES.PRO_MONTHLY;
+    }
 
     if (!stripePriceId) {
       throw new Error('Stripe price ID is not configured');
